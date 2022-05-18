@@ -1,0 +1,52 @@
+/* main color */
+/* hover & active highlighter */
+/* inverted color of font */
+:root {
+  scroll-behavior: smooth;
+  background-color: transparent;
+  font-family: "Georgia", serif;
+}
+
+html body {
+  margin: 0;
+  padding: 0;
+}
+html body header {
+  position: sticky;
+  top: 0;
+  padding: 1rem 0;
+}
+html body header nav {
+  display: flex;
+  justify-content: flex-end;
+}
+html body header nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+html body header nav ul li {
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  transition-duration: 350ms;
+}
+html body header nav ul li:active, html body header nav ul li:hover {
+  background-color: #0a4a65;
+  box-shadow: 0 1px 5px rgba(51, 51, 51, 0.3);
+  padding: 0.5rem 2rem;
+  transition-duration: 350ms;
+}
+html body header nav ul li:active a, html body header nav ul li:hover a {
+  color: #c1e3f3;
+}
+html body header nav ul li a {
+  text-decoration: none;
+  color: #0a4a65;
+}
+html body main section {
+  min-height: 50vh;
+}
+
+/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,74 @@
+$mainColor: #ffffff;
+/* main color */
+$secondaryColor: #0a4a65;
+/* hover & active highlighter */
+$tertiaryColor: #c1e3f3;
+/* inverted color of font */
+
+:root {
+  scroll-behavior: smooth;
+  background-color: transparent;
+  font-family: "Georgia", serif;
+}
+
+html {
+  body {
+    margin: 0;
+    padding: 0;
+
+    header {
+      position: sticky;
+      top: 0;
+      padding: 1rem 0;
+
+      nav {
+        display: flex;
+        justify-content: flex-end;
+
+        ul {
+          display: flex;
+          list-style: none;
+          margin: 0; padding: 0;
+
+          li {
+            border-radius: 1rem;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+
+            transition-duration: 350ms;
+
+            &:active, &:hover {
+              background-color: $secondaryColor;
+              box-shadow: 0 1px 5px rgba(51, 51, 51, 0.3);
+
+              padding: 0.5rem 2rem;
+              transition-duration: 350ms;
+
+              a {
+                color: $tertiaryColor;
+              }
+            }
+
+            a {
+              text-decoration: none;
+              color: $secondaryColor;
+            }
+          }
+        }
+      }
+    }
+
+    main {
+
+      section {
+        min-height: 50vh;
+
+      }
+    }
+
+    footer {
+
+
+    }
+  }
+}
