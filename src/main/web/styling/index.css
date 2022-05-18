@@ -11,43 +11,70 @@ html body {
   margin: 0;
   padding: 0;
 }
-html body header {
+html body nav {
   position: sticky;
   top: 0;
-  padding: 1rem 0;
-}
-html body header nav {
+  padding: 0 1rem;
   display: flex;
   justify-content: flex-end;
 }
-html body header nav ul {
+html body nav ul {
   display: flex;
   list-style: none;
-  margin: 0;
-  padding: 0;
 }
-html body header nav ul li {
+html body nav ul li {
   border-radius: 1rem;
   padding: 0.5rem 1rem;
   margin: 0 0.5rem;
   transition-duration: 400ms;
 }
-html body header nav ul li:active, html body header nav ul li:hover {
+html body nav ul li:active, html body nav ul li:hover {
   background-color: #0a4a65;
   box-shadow: 0 1px 5px rgba(50, 50, 50, 0.3);
   padding: 0.5rem 2rem;
   transition-duration: 400ms;
 }
-html body header nav ul li:active a, html body header nav ul li:hover a {
+html body nav ul li:active a, html body nav ul li:hover a {
   color: #c1e3f3;
 }
-html body header nav ul li a {
+html body nav ul li a {
   text-decoration: none;
   color: #0a4a65;
 }
 html body main section {
+  border-style: solid;
+  border-color: red;
+  border-width: 1px;
   min-width: 100%;
-  min-height: 100%;
+  min-height: 50vh;
+}
+html body footer {
+  position: static;
+  bottom: 0;
+  background-color: #0a4a65;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: "c1 c1 c1" "c2 c2 c2" "c3 c3 c3" "c4 c4 c4";
+}
+
+#containerHeader {
+  grid-area: c1;
+}
+
+#containerNav {
+  grid-area: c2;
+}
+
+#containerContent {
+  grid-area: c3;
+}
+
+#containerFooter {
+  grid-area: c4;
 }
 
 /*# sourceMappingURL=index.css.map */
