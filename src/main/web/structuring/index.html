@@ -8,19 +8,20 @@
 
     <link rel="stylesheet" href="/styling/index.css">
     <script src="/scripting/index.js"></script>
-
 </head>
 
-<body id="goToTop">
+<body id="top" class="container">
 
-
-<header>
+<header class="containerHeader" style="background-image: url('/resources/titleWheelchair.png')">
+    <div class="slogan">
+        <h2>Travel the world</h2>
+        <p>There are no obstacles anymore</p>
+    </div>
 </header>
 
-<nav>
-    <!--<button class="menuButton" onclick="this.classList.toggle('showMenu')">Menu</button>-->
+<nav class="nav">
     <ul>
-        <li><a href="#goToTop">Home</a></li>
+        <li><a href="#top">Home</a></li>
         <li><a href="shop.html">Shop</a></li>
         <li><a href="#goToAbout">About</a></li>
         <li><a href="#goToContact">Contact</a></li>
@@ -28,30 +29,123 @@
     </ul>
 </nav>
 
-<main>
+
+<main class="containerContent">
 
     <!-- section for best-selling -->
-    <section>
-        Top Products
+    <section class="topProducts">
+
+        <div>
+            <article>
+                <p>Model XII</p>
+                <p>Price 12€/day</p>
+                <button>Select Product</button>
+            </article>
+            <img src="/resources/wheelchair1.png">
+        </div>
+
+        <div>
+            <article>
+                <p>Model XII</p>
+                <p>Price 12€/day</p>
+                <button>Select Product</button>
+            </article>
+            <img src="/resources/wheelchair2.png">
+        </div>
+
+        <div>
+            <article>
+                <p>Model XII</p>
+                <p>Price 12€/day</p>
+                <button>Select Product</button>
+            </article>
+            <img src="/resources/wheelchair2.png">
+        </div>
+
+        <div>
+            <article>
+                <p>Model XII</p>
+                <p>Price 12€/day</p>
+                <button>Select Product</button>
+            </article>
+            <img src="/resources/wheelchair1.png">
+        </div>
+
+        <div>
+            <article>
+                <p>Model XII</p>
+                <p>Price 12€/day</p>
+                <button>Select Product</button>
+            </article>
+            <img src="/resources/wheelchair2.png">
+        </div>
+
+        <div>
+            <article>
+                <p>Model XII</p>
+                <p>Price 12€/day</p>
+                <button>Select Product</button>
+            </article>
+            <img src="/resources/wheelchair2.png">
+        </div>
+
+
     </section>
 
     <!-- section for ESP and USP -->
-    <section id="goToAbout">
-        Story
+    <section id="goToAbout" class="about">
+        <p>Hello, we are H-cubed!</p>
+        <p>Our team consists of three students who tried to make a better life for everyone.</p>
+        <p>
+            Max, our backend genius,
+            Kilian, our frontend expert and
+            Oliver, their friendly coordinator.
+        </p>
+
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+
     </section>
 
     <!-- section for best-selling -->
-    <section id="goToContact">
+    <section id="goToContact" class="contact">
         Contact
+
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
+        <br> <br> <br>
     </section>
 
 </main>
 
-</body>
-
-<footer>
-hallo
-    gallo
+<footer class="containerFooter">
+    <aside>
+        <h2>Shopping Cart</h2>
+        <p>Sum: 0 &euro;</p>
+        <p><a href="#top">Go to top</a></p>
+    </aside>
+    <address>
+        Written by <a href="mailto:janedoe@example.com?subject=Email">Oliver Hieke</a><br>
+        Visit us at: FH Campus Vienna<br>
+        1100 Vienna, Austria
+    </address>
 </footer>
-
+</body>
 </html>

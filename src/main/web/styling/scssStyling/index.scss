@@ -1,102 +1,290 @@
 $mainColor: #ffffff;
-/* main color */
 $secondaryColor: #0a4a65;
-/* hover & active highlighter */
 $tertiaryColor: #c1e3f3;
-/* inverted color of font */
+
+$textFontSize: 20px;
+
+
+$media: (
+        sm: 640px,
+        md: 768px,
+        lg: 1024px,
+        xl: 1280px,
+        2 xl: 1536px,
+        3 xl: 1920px,
+);
+
+@mixin md($breakpoint) {
+  @each $breakpoints, $size in $media {
+    @if $breakpoint==$breakpoints {
+      @media screen and (min-width: $size) {
+        @content;
+      }
+    }
+  }
+}
+
+
+@mixin paddingContent {
+  padding: 1rem 2rem;
+}
+
+@mixin shadow($type) {
+  @if ($type == "outside") {
+    // offset-x | offset-y | blur-radius | spread-radius | color
+    box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+  } @else {
+    box-shadow: inset 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+  }
+}
+
 
 :root {
   scroll-behavior: smooth;
   background-color: transparent;
-  font-family: "Georgia", serif;
+  font-family: Arial, serif;
 }
+
 
 html {
   body {
+    height: 100%;
+    width: 100%;
+
     margin: 0;
     padding: 0;
 
-    nav {
-      position: sticky;
-      top: 0;
-      padding: 0 1rem;
+    header {
       display: flex;
-      justify-content: flex-end;
+
+      background-repeat: no-repeat;
+      background-size: contain;
+      aspect-ratio: 16 / 9;
+
+      .slogan {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        @include paddingContent;
+        color: $secondaryColor;
+        width: 100%;
+
+        h2 {
+          font-family: Tahoma, sans-serif;
+        }
+
+        p {
+          font-family: Sathu, sans-serif;
+          font-style: italic;
+        }
+      }
+
+      @include md(md) {
+        * {
+          transition-duration: 500ms;
+        }
+        .slogan h2 {
+          font-size: 2.0rem;
+        }
+        .slogan p {
+          font-size: 1.0rem;
+        }
+      }
+
+      @include md(lg) {
+        * {
+          transition-duration: 500ms;
+        }
+        .slogan h2 {
+          font-size: 2.5rem;
+        }
+        .slogan p {
+          font-size: 1.5rem;
+        }
+      }
+
+      @include md(xl) {
+        * {
+          transition-duration: 500ms;
+        }
+        .slogan h2 {
+          font-size: 3.0rem;
+        }
+        .slogan p {
+          font-size: 2.0rem;
+        }
+      }
+
+      @include md(2 xl) {
+        * {
+          transition-duration: 500ms;
+        }
+        .slogan h2 {
+          font-size: 3.5rem;
+        }
+        .slogan p {
+          font-size: 2.5rem;
+        }
+      }
+
+      @include md(3 xl) {
+        * {
+          transition-duration: 500ms;
+        }
+        .slogan h2 {
+          font-size: 4.0rem;
+        }
+        .slogan p {
+          font-size: 3.0rem;
+        }
+      }
+    }
+
+    nav {
+      position: fixed;
+      z-index: 999;
+      width: 100%;
+      top: 0;
 
       ul {
         display: flex;
+        justify-content: right;
         list-style: none;
 
         li {
-          border-radius: 1rem;
-          padding: 0.5rem 1rem;
-          margin: 0 0.5rem;
+          border-radius: 3rem;
+          padding: 1rem 1rem;
+          margin-right: 1rem;
 
           transition-duration: 400ms;
 
+          a {
+            font-size: $textFontSize;
+            text-decoration: none;
+            color: rgb(3, 51, 70);
+          }
+
           &:active, &:hover {
             background-color: $secondaryColor;
-            box-shadow: 0 1px 5px rgba(50, 50, 50, 0.3);
-            padding: 0.5rem 2rem;
+            @include shadow(outside);
 
+            padding: 1rem 1.5rem;
             transition-duration: 400ms;
 
             a {
               color: $tertiaryColor;
             }
           }
-
-          a {
-            text-decoration: none;
-            color: $secondaryColor;
-          }
         }
       }
     }
 
+
     main {
-      section {
-        border-style: solid;
-        border-color: red;
-        border-width: 1px;
 
-        min-width: 100%;
-        min-height: 50vh;
+      .topProducts {
 
+        -ms-overflow-style: none; /* for Internet Explorer, Edge */
+        scrollbar-width: none; /* for Firefox */
+
+        &::-webkit-scrollbar {
+          display: none; /* for Chrome, Safari, and Opera */
+        }
+
+        display: flex;
+        overflow-y: hidden;
+        padding: 6rem 2rem;
+        column-gap: 2rem;
+
+        aspect-ratio: 100 / 25;
+
+        background-color: $tertiaryColor;
+        @include shadow(inside);
+
+        div {
+          aspect-ratio: 20 / 25;
+
+          img {
+            z-index: 5;
+            position: relative;
+            top: 50%;
+          }
+
+          article {
+            position: relative;
+            aspect-ratio: 20 / 25;
+            right: 0;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            align-items: center;
+
+            background-color: #eee;
+            border-radius: 1.5rem;
+
+            @include shadow(inside);
+          }
+        }
+      }
+
+      .about {
+        @include paddingContent;
+      }
+
+      .contact {
+        @include paddingContent;
       }
     }
 
     footer {
-      position: static;
-      bottom: 0;
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+
+      color: $tertiaryColor;
       background-color: $secondaryColor;
+
+      padding: 1rem 2rem;
+      aspect-ratio: 100 / 10;
+
+      @include shadow(outside);
+
+      aside {
+        display: block;
+        align-self: center;
+        text-align: right;
+      }
+
+      address {
+        display: block;
+        align-self: center;
+        text-align: left;
+      }
     }
   }
 }
 
-.container {
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto auto auto;
-  grid-template-areas:
-    "c1 c1 c1"
-    "c2 c2 c2"
-    "c3 c3 c3"
-    "c4 c4 c4";
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
 }
 
-#containerHeader {
-  grid-area: c1;
+footer a {
+  color: $tertiaryColor;
+  text-decoration: none;
 }
 
-#containerNav {
-  grid-area: c2;
-}
 
-#containerContent {
-  grid-area: c3;
-}
 
-#containerFooter {
-  grid-area: c4;
-}
+
+
+
+
+
+
+
+
+
