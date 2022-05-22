@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebProject</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/styling/index.css">
-    <script src="/scripting/index.js"></script>
 </head>
 
 <body id="top" class="container">
@@ -20,7 +20,7 @@
 </header>
 
 <nav class="nav">
-    <ul>
+    <ul class="menuList">
         <li><a href="#top">Home</a></li>
         <li><a href="shop.html">Shop</a></li>
         <li><a href="#goToAbout">About</a></li>
@@ -28,6 +28,11 @@
         <li><a href="login.html">Login</a></li>
     </ul>
 </nav>
+
+<div class="menuBars">
+    <label for="collapsible" id="barLabel"><i class="fa-solid fa-bars bars"></i></label>
+    <input type="checkbox" id="collapsible" autocomplete="off">
+</div>
 
 
 <main class="containerContent">
@@ -164,5 +169,8 @@
         1100 Vienna, Austria
     </address>
 </footer>
+
+
+<script src="/scripting/index.js"></script>
 </body>
 </html>

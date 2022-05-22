@@ -36,7 +36,7 @@ $mainColor: #ffffff;
 $secondaryColor: #0a4a65;
 $tertiaryColor: #c1e3f3;
 
-$textFontSize: 16px;
+$textFontSize: 18px;
 
 
 *,
@@ -47,6 +47,53 @@ $textFontSize: 16px;
   margin: 0;
 }
 
+
+@media screen {
+
+  .menuBars {
+    visibility: hidden;
+
+  }
+  .menuList {
+    display: flex;
+    visibility: visible;
+
+    li {
+      transition-duration: 400ms;
+      padding: 1rem 1rem;
+      margin: 0 0.5rem;
+
+      &:active, &:hover {
+
+        padding: 1rem 1.5rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1080px) {
+
+  .menuBars {
+    visibility: visible;
+  }
+
+  .menuList {
+    visibility: hidden;
+    display: block;
+    text-align: right;
+
+    margin-top: 1.6rem;
+    padding: 2.5rem 1rem 1rem 1rem;
+
+    li {
+      transition-duration: 0ms;
+
+      margin-top: 0.5rem;
+      margin-left: 2.5rem;
+
+    }
+  }
+}
 
 :root {
   scroll-behavior: smooth;
@@ -106,17 +153,16 @@ html {
 
     nav {
       position: fixed;
-      z-index: 999;
+      text-align: right;
+      z-index: 2;
       top: 1rem;
       right: 1rem;
-
 
       ul {
         padding: 0.5rem 1rem;
         border-radius: 3rem;
 
         display: flex;
-        justify-content: right;
         list-style: none;
 
         background-color: white;
@@ -124,10 +170,6 @@ html {
 
         li {
           border-radius: 3rem;
-          padding: 1rem 1rem;
-          margin: 0 0.5rem;
-
-          transition-duration: 400ms;
 
           a {
             font-size: $textFontSize;
@@ -139,15 +181,36 @@ html {
             background-color: $secondaryColor;
             @include shadow(outside);
 
-            padding: 1rem 1.5rem;
-            transition-duration: 400ms;
-
             a {
               color: $tertiaryColor;
             }
           }
         }
       }
+    }
+
+    .menuBars {
+      position: fixed;
+      z-index: 3;
+
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 0.5rem;
+
+      label {
+
+        font-size: 220%;
+        color: #0a4a65;
+
+        border-radius: 1rem;
+        padding: 0.6rem 1rem;
+
+        transition: background-color .4s;
+        cursor: pointer;
+      }
+    }
+    #collapsible {
+      display: none;
     }
 
 
