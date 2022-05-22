@@ -33,7 +33,101 @@ window.onload = function () {
     setInterval(changeImage, 5000);
 }
 
+//--------------------------------------------------------------------------------------------------\\
 
 
+document.getElementById("collapsible").addEventListener("click", boxClicked);
+document.getElementById("barLabel").addEventListener("mouseover", mouseOver);
+document.getElementById("barLabel").addEventListener("mouseleave", mouseLeave);
+document.querySelector(".containerHeader").addEventListener("mouseover", toggleLabelHover);
+window.addEventListener("resize", showMenuContent);
+
+let isVisible;
+let allowDeactivation;
+
+function showMenuContent() {
+
+    let elements = document.getElementsByTagName("li");
+
+    if (innerWidth >= 1080) {
+        document.querySelector(".menuList").style.visibility = "visible";
+
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].style.transitionDuration = "400ms";
+        }
+
+    } else if (innerWidth < 1080 && !isVisible ) {
+        document.querySelector(".menuList").style.visibility = "hidden";
+
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].style.transitionDuration = "0ms";
+        }
+    }
+}
+
+function toggleMenu() {
+
+    if (!isVisible) {
+        isVisible = false;
+        document.querySelector(".menuList").style.visibility = "hidden";
+        document.querySelector(".bars").style.transform = "rotate(0deg)";
+        document.querySelector(".nav").style.height = "0";
 
 
+        document.querySelector("#barLabel").style.backgroundColor = "#fff";
+        document.querySelector("#barLabel").style.color = "#0a4a65";
+
+    } else {
+        isVisible = true;
+        allowDeactivation = true;
+        document.querySelector(".menuList").style.visibility = "visible";
+        document.querySelector(".bars").style.transform = "rotate(90deg)";
+        document.querySelector(".nav").style.height = "fit-content";
+
+        document.querySelector("#barLabel").style.backgroundColor = "#0a4a65";
+        document.querySelector("#barLabel").style.color = "#c1e3f3";
+
+        toggleLabelHover();
+    }
+}
+
+function boxClicked() {
+
+    isVisible = document.getElementById("collapsible").checked;
+    let elements = document.getElementsByTagName("li");
+
+    if (isVisible) {
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].style.transitionDuration = "400ms";
+        }
+    } else {
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].style.transitionDuration = "0ms";
+        }
+    }
+    toggleMenu();
+}
+
+function mouseOver() {
+
+    document.querySelector("#barLabel").style.backgroundColor = "#0a4a65";
+    document.querySelector("#barLabel").style.color = "#c1e3f3";
+
+}
+function mouseLeave() {
+
+    if (!isVisible) {
+        document.querySelector("#barLabel").style.backgroundColor = "#fff";
+        document.querySelector("#barLabel").style.color = "#0a4a65";
+    }
+}
+
+function toggleLabelHover() {
+
+    if (allowDeactivation) {
+        document.getElementById("barLabel").removeEventListener("mouseover", mouseOver);
+        allowDeactivation = false;
+    } else {
+        document.getElementById("barLabel").addEventListener("mouseover", mouseOver);
+    }
+}
