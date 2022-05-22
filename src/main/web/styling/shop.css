@@ -154,4 +154,10 @@ html body main .ProductsShop article ul li button:active, html body main .Produc
   text-align: center;
 }
 
+.filterList {
+  box-shadow: inset 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 /*# sourceMappingURL=shop.css.map */
