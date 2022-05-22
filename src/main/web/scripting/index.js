@@ -32,8 +32,3 @@ window.onload = function () {
 
     setInterval(changeImage, 5000);
 }
-
-
-
-
-

@@ -60,6 +60,7 @@ $textFontSize: 16px;
   --fs-subHeading: clamp(1rem, 3vw, 4rem);
 
   --fc-white: white;
+  --fc-black: black;
 }
 
 
@@ -110,7 +111,6 @@ html {
       top: 1rem;
       right: 1rem;
 
-
       ul {
         padding: 0.5rem 1rem;
         border-radius: 3rem;
@@ -123,6 +123,7 @@ html {
         @include shadow(outside);
 
         li {
+          display: flex;
           border-radius: 3rem;
           padding: 1rem 1rem;
           margin: 0 0.5rem;
@@ -132,7 +133,15 @@ html {
           a {
             font-size: $textFontSize;
             text-decoration: none;
-            color: rgb(3, 51, 70);
+            color: var(--fc-black);
+
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            svg {
+              width: 1.5rem;
+            }
           }
 
           &:active, &:hover {
@@ -142,6 +151,9 @@ html {
             padding: 1rem 1.5rem;
             transition-duration: 400ms;
 
+            svg {
+              fill: $tertiaryColor;
+            }
             a {
               color: $tertiaryColor;
             }
@@ -175,7 +187,7 @@ html {
           padding-right: 4rem;
         }
 
-        background-color:white;
+        background-color: white;
         @include shadow(inside);
 
 
@@ -246,10 +258,12 @@ html {
 
     .about {
       @include paddingContent;
+      background-color: $tertiaryColor;
     }
 
     .contact {
       @include paddingContent;
+      background-color: $secondaryColor;
     }
   }
 
@@ -258,13 +272,21 @@ html {
     flex-direction: row-reverse;
     justify-content: space-between;
 
-    color: $tertiaryColor;
-    background-color: $secondaryColor;
+    @include shadow(inside);
+    color: $secondaryColor;
+    background-color: var(--fc-white);
 
     padding: 1rem 2rem;
     aspect-ratio: 100 / 10;
 
-    @include shadow(outside);
+    * {
+      color: var(--fc-black);
+      padding: 0.5rem 0;
+    }
+
+    a {
+      text-decoration: none;
+    }
 
     aside {
       display: block;
@@ -285,7 +307,6 @@ ol[role="list"] {
   list-style: none;
 }
 
-footer a {
-  color: $tertiaryColor;
-  text-decoration: none;
-}
+
+
+
