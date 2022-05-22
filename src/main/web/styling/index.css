@@ -104,7 +104,6 @@ html body nav ul {
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
 }
 html body nav ul li {
-  display: flex;
   border-radius: 3rem;
 }
 html body nav ul li a {
@@ -121,6 +120,8 @@ html body nav ul li a svg {
 html body nav ul li:active, html body nav ul li:hover {
   background-color: #0a4a65;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+  padding: 1rem 1.5rem;
+  transition-duration: 400ms;
 }
 html body nav ul li:active svg, html body nav ul li:hover svg {
   fill: #c1e3f3;
