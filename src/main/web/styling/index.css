@@ -18,11 +18,15 @@
   }
   .menuList li {
     transition-duration: 400ms;
-    padding: 1rem 1rem;
+    padding: 1rem 0 1rem 1rem;
     margin: 0 0.5rem;
   }
   .menuList li:active, .menuList li:hover {
     padding: 1rem 1.5rem;
+  }
+  .menuList li * {
+    text-align: center;
+    justify-content: right;
   }
 }
 @media screen and (max-width: 1080px) {
@@ -38,9 +42,11 @@
     padding: 2.5rem 1rem 1rem 1rem;
   }
   .menuList li {
-    transition-duration: 0ms;
-    margin-top: 0.5rem;
-    margin-left: 2.5rem;
+    transition-duration: 400ms;
+  }
+  .menuList li * {
+    text-align: center;
+    justify-content: right;
   }
 }
 :root {
@@ -136,11 +142,10 @@ html body .menuBars {
 }
 html body .menuBars label {
   font-size: 220%;
-  background-color: white;
   color: #0a4a65;
   border-radius: 1rem;
   padding: 0.6rem 1rem;
-  transition: background-color 0.4s;
+  transition: background-color 0.7s;
   cursor: pointer;
 }
 html body #collapsible {

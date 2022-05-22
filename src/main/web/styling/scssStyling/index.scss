@@ -60,12 +60,16 @@ $textFontSize: 18px;
 
     li {
       transition-duration: 400ms;
-      padding: 1rem 1rem;
+
+      padding: 1rem 0 1rem 1rem;
       margin: 0 0.5rem;
 
       &:active, &:hover {
-
         padding: 1rem 1.5rem;
+      }
+      * {
+        text-align: center;
+        justify-content: right;
       }
     }
   }
@@ -86,11 +90,11 @@ $textFontSize: 18px;
     padding: 2.5rem 1rem 1rem 1rem;
 
     li {
-      transition-duration: 0ms;
-
-      margin-top: 0.5rem;
-      margin-left: 2.5rem;
-
+      transition-duration: 400ms;
+      * {
+        text-align: center;
+        justify-content: right;
+      }
     }
   }
 }
@@ -213,20 +217,19 @@ html {
       label {
 
         font-size: 220%;
-        background-color: white;
         color: #0a4a65;
 
         border-radius: 1rem;
         padding: 0.6rem 1rem;
 
-        transition: background-color .4s;
+        transition: background-color 0.7s;
         cursor: pointer;
       }
     }
+
     #collapsible {
       display: none;
     }
-
 
     main {
 
