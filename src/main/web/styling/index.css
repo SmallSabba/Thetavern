@@ -90,7 +90,6 @@ html body header .slogan p {
 }
 html body nav {
   position: fixed;
-  text-align: right;
   z-index: 2;
   top: 1rem;
   right: 1rem;
@@ -111,7 +110,6 @@ html body nav ul li a {
   text-decoration: none;
   color: var(--fc-black);
   display: flex;
-  align-items: center;
   gap: 0.5rem;
 }
 html body nav ul li a svg {
@@ -138,6 +136,7 @@ html body .menuBars {
 }
 html body .menuBars label {
   font-size: 220%;
+  background-color: white;
   color: #0a4a65;
   border-radius: 1rem;
   padding: 0.6rem 1rem;

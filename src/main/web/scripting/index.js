@@ -74,7 +74,7 @@ function toggleMenu() {
         document.querySelector(".nav").style.height = "0";
 
 
-        document.querySelector("#barLabel").style.backgroundColor = "transparent";
+        document.querySelector("#barLabel").style.backgroundColor = "#fff";
         document.querySelector("#barLabel").style.color = "#0a4a65";
 
     } else {
@@ -117,7 +117,7 @@ function mouseOver() {
 function mouseLeave() {
 
     if (!isVisible) {
-        document.querySelector("#barLabel").style.backgroundColor = "transparent";
+        document.querySelector("#barLabel").style.backgroundColor = "#fff";
         document.querySelector("#barLabel").style.color = "#0a4a65";
     }
 }

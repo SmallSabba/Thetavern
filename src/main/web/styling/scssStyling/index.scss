@@ -154,7 +154,6 @@ html {
 
     nav {
       position: fixed;
-      text-align: right;
       z-index: 2;
       top: 1rem;
       right: 1rem;
@@ -178,7 +177,6 @@ html {
             color: var(--fc-black);
 
             display: flex;
-            align-items: center;
             gap: 0.5rem;
 
             svg {
@@ -215,6 +213,7 @@ html {
       label {
 
         font-size: 220%;
+        background-color: white;
         color: #0a4a65;
 
         border-radius: 1rem;
