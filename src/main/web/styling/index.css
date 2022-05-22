@@ -235,7 +235,8 @@ html footer {
   color: #0a4a65;
   background-color: var(--fc-white);
   padding: 1rem 2rem;
-  aspect-ratio: 100/10;
+  min-height: 120px;
+  max-height: 120px;
 }
 html footer * {
   color: var(--fc-black);
