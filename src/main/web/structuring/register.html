@@ -13,13 +13,20 @@
 <body>
 <main>
     <div class="styleForm">
-        <form action="index.html" class="loginForm">
-            <input type="text" placeholder="name" required/>
-            <input type="password" placeholder="password" required/>
-            <button title="Sign Up" type="submit" value="send">Register</button>
+        <form action="index.html" id="loginForm" class="loginForm">
+            <input id="usernameInput" type="text" placeholder="username" required/>
+            <input id="passwordInput" type="password" placeholder="password" required/>
+            <input id="emailInput" type="email" placeholder="max@gmail.com" required/>
+
+            <div class="buttonFlex">
+                <button id="submitButton" class="submitButton" title="create" type="submit" value="send">Create</button>
+                <button id="resetButton" class="resetButton" title="reset" type="reset" >Reset</button>
+            </div>
+
             <p>Already registered?<a title="Login to Account" href="login.html">Sign In</a></p>
         </form>
     </div>
+
 </main>
 </body>
 <script src="/scripting/register.js"></script>
