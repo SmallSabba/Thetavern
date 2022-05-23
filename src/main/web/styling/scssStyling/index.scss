@@ -293,7 +293,6 @@ html {
             height: 100%;
             padding: 1rem 0;
             margin: 1rem 0;
-
             text-align: center;
             list-style: none;
 
@@ -306,6 +305,7 @@ html {
                 background-color: #97c9de;
                 border-radius: 1.75rem;
                 transition-duration: 500ms;
+
 
                 &:active, &:hover {
                   background-color: $secondaryColor;
@@ -375,6 +375,7 @@ ul[role="list"],
 ol[role="list"] {
   list-style: none;
 }
+
 
 
 
