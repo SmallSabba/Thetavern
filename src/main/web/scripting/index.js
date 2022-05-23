@@ -1,38 +1,45 @@
-window.onload = function () {
+const backgroundImg =
+    [
+        "/resources/1.jpg",
+        "/resources/3.jpg",
+        "/resources/4.jpg",
+        "/resources/5.jpg",
+    ];
+
+/*
     const backgroundImg =
         [
-            "/resources/1.jpg",
-            "/resources/3.jpg",
-            "/resources/4.jpg",
-            "/resources/5.jpg",
+            "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+            "https://images.unsplash.com/photo-1517057011470-8f36d636e6ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+            "https://images.unsplash.com/flagged/photo-1552035791-b3cc1632e933?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80",
+            "https://images.unsplash.com/photo-1574700273608-7962d3602a9f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+            "https://images.unsplash.com/photo-1605045544284-d13c6d6a60a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
         ];
+ */
 
-    /*
-        const backgroundImg =
-            [
-                "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-                "https://images.unsplash.com/photo-1517057011470-8f36d636e6ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-                "https://images.unsplash.com/flagged/photo-1552035791-b3cc1632e933?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80",
-                "https://images.unsplash.com/photo-1574700273608-7962d3602a9f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-                "https://images.unsplash.com/photo-1605045544284-d13c6d6a60a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-            ];
-     */
+const headerHeading =
+    [
+        "Travel the World",
+        "No Restrictions",
+        "Enjoy life to the fullest",
+        "Retake freedom"
+    ];
 
-    const headerHeading =
-        [
-            "Travel the World",
-            "No Restrictions",
-            "Enjoy life to the fullest",
-            "Retake freedom"
-        ];
+const headerSubheading =
+    [
+        "There are no obstacles anymore",
+        "Roam like you want",
+        "That's your company's motto",
+        "It's in your hands"
+    ];
 
-    const headerSubheading =
-        [
-            "There are no obstacles anymore",
-            "Roam like you want",
-            "That's your company's motto",
-            "It's in your hands"
-        ];
+window.onload = function () {
+
+    if (innerWidth > 1080) {
+        document.querySelector(".collapsible-menu").style.transition = "400ms";
+    } else {
+        document.querySelector(".collapsible-menu").style.transition = "0ms";
+    }
 
     function changeImage() {
         const i = Math.floor((Math.random() * 3) + 1);
@@ -49,10 +56,22 @@ window.onload = function () {
 
 
 document.getElementById("collapsible").addEventListener("click", boxClicked);
-document.getElementById("barLabel").addEventListener("mouseover", mouseOver);
-document.getElementById("barLabel").addEventListener("mouseleave", mouseLeave);
 document.querySelector(".containerHeader").addEventListener("mouseover", toggleLabelHover);
 window.addEventListener("resize", showMenuContent);
+
+
+let barLabel = document.getElementById("barLabel");
+barLabel.addEventListener("mouseover", mouseOver);
+barLabel.addEventListener("mouseleave", mouseLeave);
+
+let menuIcon1 = document.getElementById("icon1");
+menuIcon1.addEventListener("mouseover", mouseOver);
+menuIcon1.addEventListener("mouseleave", mouseLeave);
+
+let menuIcon2 = document.getElementById("icon2");
+menuIcon2.addEventListener("mouseover", mouseOver);
+menuIcon2.addEventListener("mouseleave", mouseLeave);
+
 
 let isVisible;
 let allowDeactivation;
@@ -60,19 +79,34 @@ let allowDeactivation;
 function showMenuContent() {
 
     let elements = document.getElementsByTagName("li");
+    let collapsibleMenu = document.querySelector(".collapsible-menu");
 
-    if (innerWidth >= 1080) {
+
+    if (innerWidth > 1080) {
+        collapsibleMenu.style.transition = "400ms";
+    }
+    if (innerWidth <= 1080) {
+        collapsibleMenu.style.transition = "0ms";
+    }
+
+    if (innerWidth > 1080) {
         document.querySelector(".menuList").style.visibility = "visible";
+        collapsibleMenu.style.visibility = "hidden";
 
         for (let i = 0; i < elements.length; i++) {
-            elements[i].style.transitionDuration = "400ms";
+            elements[i].style.transition = "400ms";
         }
+    }
 
-    } else if (innerWidth < 1080 && !isVisible) {
-        document.querySelector(".menuList").style.visibility = "hidden";
+    if (innerWidth <= 1080) {
+        collapsibleMenu.style.visibility = "visible";
 
-        for (let i = 0; i < elements.length; i++) {
-            elements[i].style.transitionDuration = "0ms";
+        if (!isVisible) {
+            document.querySelector(".menuList").style.visibility = "hidden";
+
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].style.transition = "0ms";
+            }
         }
     }
 }
@@ -86,7 +120,7 @@ function toggleMenu() {
         document.querySelector(".nav").style.height = "0";
 
 
-        document.querySelector("#barLabel").style.backgroundColor = "#fff";
+        document.querySelector("#barLabel").style.backgroundColor = "transparent";
         document.querySelector("#barLabel").style.color = "#0a4a65";
 
     } else {
@@ -122,16 +156,18 @@ function boxClicked() {
 
 function mouseOver() {
 
-    document.querySelector("#barLabel").style.backgroundColor = "#0a4a65";
-    document.querySelector("#barLabel").style.color = "#c1e3f3";
-
+    this.style.backgroundColor = "#0a4a65";
+    this.style.color = "#c1e3f3";
 }
 
 function mouseLeave() {
 
-    if (!isVisible) {
-        document.querySelector("#barLabel").style.backgroundColor = "transparent";
-        document.querySelector("#barLabel").style.color = "#0a4a65";
+    if (this.id === "barLabel" && !isVisible) {
+        this.style.backgroundColor = "transparent";
+        this.style.color = "#0a4a65";
+    } else if (this.id !== "barLabel") {
+        this.style.backgroundColor = "transparent";
+        this.style.color = "#0a4a65";
     }
 }
 

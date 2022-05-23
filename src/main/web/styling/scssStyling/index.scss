@@ -50,10 +50,15 @@ $textFontSize: 18px;
 
 @media screen {
 
-  .menuBars {
+  .collapsible-menu {
     visibility: hidden;
+    width: 50%;
 
   }
+  .nav {
+    z-index: 3;
+  }
+
   .menuList {
     display: flex;
     visibility: visible;
@@ -67,8 +72,8 @@ $textFontSize: 18px;
       &:active, &:hover {
         padding: 1rem 1.5rem;
       }
+
       * {
-        text-align: center;
         justify-content: right;
       }
     }
@@ -77,8 +82,12 @@ $textFontSize: 18px;
 
 @media screen and (max-width: 1080px) {
 
-  .menuBars {
+  .collapsible-menu {
     visibility: visible;
+    width: 30%;
+  }
+  .nav {
+    z-index: 2;
   }
 
   .menuList {
@@ -86,15 +95,21 @@ $textFontSize: 18px;
     display: block;
     text-align: right;
 
-    margin-top: 1.6rem;
-    padding: 2.5rem 1rem 1rem 1rem;
+    padding: 2rem 1rem 1rem 1rem;
 
-    li {
-      transition-duration: 400ms;
-      * {
-        text-align: center;
-        justify-content: right;
-      }
+
+      li {
+        transition-duration: 400ms;
+        margin: 0.5rem 0;
+
+        * {
+          justify-content: right;
+        }
+
+        &:first-child {
+          margin-top: 3.5rem;
+
+        }
     }
   }
 }
@@ -125,7 +140,7 @@ html {
     header {
       display: flex;
 
-      transition: all .6s ease-in-out;
+      transition: .6s;
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
@@ -158,7 +173,6 @@ html {
 
     nav {
       position: fixed;
-      z-index: 2;
       top: 1rem;
       right: 1rem;
 
@@ -186,6 +200,11 @@ html {
             svg {
               width: 1.5rem;
             }
+
+            .beside-icon {
+              font-size: 110%;
+              margin-top: 0.1rem;
+            }
           }
 
           &:active, &:hover {
@@ -198,6 +217,7 @@ html {
             svg {
               fill: $tertiaryColor;
             }
+
             a {
               color: $tertiaryColor;
             }
@@ -206,26 +226,48 @@ html {
       }
     }
 
-    .menuBars {
+    .collapsible-menu {
+      background-color: white;
       position: fixed;
-      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
+
+      z-index: 2;
+      min-width: fit-content;
+      padding: 0.4rem 1rem;
+      border-radius: 3rem;
       top: 1rem;
       right: 1rem;
-      padding: 0.5rem 0.5rem;
 
-      label {
-
-        font-size: 220%;
-        color: #0a4a65;
-
-        border-radius: 1rem;
-        padding: 0.6rem 1rem;
-
-        transition: background-color 0.7s;
-        cursor: pointer;
-      }
+      @include shadow(outside);
     }
+
+    .menu-icons {
+      font-size: 220%;
+      color: #0a4a65;
+
+      border-radius: 1rem;
+      padding: 0.5rem 1rem;
+
+      transition: background-color 0.4s;
+      cursor: pointer;
+    }
+
+
+    #barLabel {
+
+      font-size: 220%;
+      color: #0a4a65;
+
+      border-radius: 1rem;
+      padding: 0.5rem 1rem;
+
+      transition: background-color 0.4s;
+      cursor: pointer;
+    }
+
 
     #collapsible {
       display: none;

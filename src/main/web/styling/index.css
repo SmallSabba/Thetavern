@@ -8,8 +8,13 @@
 }
 
 @media screen {
-  .menuBars {
+  .collapsible-menu {
     visibility: hidden;
+    width: 50%;
+  }
+
+  .nav {
+    z-index: 3;
   }
 
   .menuList {
@@ -25,28 +30,34 @@
     padding: 1rem 1.5rem;
   }
   .menuList li * {
-    text-align: center;
     justify-content: right;
   }
 }
 @media screen and (max-width: 1080px) {
-  .menuBars {
+  .collapsible-menu {
     visibility: visible;
+    width: 30%;
+  }
+
+  .nav {
+    z-index: 2;
   }
 
   .menuList {
     visibility: hidden;
     display: block;
     text-align: right;
-    margin-top: 1.6rem;
-    padding: 2.5rem 1rem 1rem 1rem;
+    padding: 2rem 1rem 1rem 1rem;
   }
   .menuList li {
     transition-duration: 400ms;
+    margin: 0.5rem 0;
   }
   .menuList li * {
-    text-align: center;
     justify-content: right;
+  }
+  .menuList li:first-child {
+    margin-top: 3.5rem;
   }
 }
 :root {
@@ -68,7 +79,7 @@ html body {
 }
 html body header {
   display: flex;
-  transition: all 0.6s ease-in-out;
+  transition: 0.6s;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -96,7 +107,6 @@ html body header .slogan p {
 }
 html body nav {
   position: fixed;
-  z-index: 2;
   top: 1rem;
   right: 1rem;
 }
@@ -121,6 +131,10 @@ html body nav ul li a {
 html body nav ul li a svg {
   width: 1.5rem;
 }
+html body nav ul li a .beside-icon {
+  font-size: 110%;
+  margin-top: 0.1rem;
+}
 html body nav ul li:active, html body nav ul li:hover {
   background-color: #0a4a65;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
@@ -133,19 +147,34 @@ html body nav ul li:active svg, html body nav ul li:hover svg {
 html body nav ul li:active a, html body nav ul li:hover a {
   color: #c1e3f3;
 }
-html body .menuBars {
+html body .collapsible-menu {
+  background-color: white;
   position: fixed;
-  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2;
+  min-width: fit-content;
+  padding: 0.4rem 1rem;
+  border-radius: 3rem;
   top: 1rem;
   right: 1rem;
-  padding: 0.5rem 0.5rem;
+  box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
 }
-html body .menuBars label {
+html body .menu-icons {
   font-size: 220%;
   color: #0a4a65;
   border-radius: 1rem;
-  padding: 0.6rem 1rem;
-  transition: background-color 0.7s;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.4s;
+  cursor: pointer;
+}
+html body #barLabel {
+  font-size: 220%;
+  color: #0a4a65;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.4s;
   cursor: pointer;
 }
 html body #collapsible {
