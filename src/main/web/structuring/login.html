@@ -13,10 +13,15 @@
 <body>
 <main>
     <div class="styleForm">
-        <form action="index.html" class="loginForm">
-            <input type="text" placeholder="name" required/>
-            <input type="password" placeholder="password" required/>
-            <button title="Sign In" type="submit" value="send">Login</button>
+        <form action="index.html" id="loginForm" class="loginForm">
+            <input id="usernameInput" type="text" placeholder="username / e-mail" required/>
+            <input id="passwordInput" type="password" placeholder="password" required/>
+
+            <div class="buttonFlex">
+                <button id="submitButton" class="submitButton" title="Sign In" type="submit" value="send">Login</button>
+                <button id="resetButton" class="resetButton" title="reset" type="reset">Reset</button>
+            </div>
+
             <p>Not yet registered?<a title="Create new account" href="register.html">Sign Up</a></p>
         </form>
     </div>
