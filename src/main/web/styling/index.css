@@ -184,7 +184,7 @@ html body main .topProducts {
   -ms-overflow-style: none;
   scrollbar-width: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   overflow-y: hidden;
   padding: 6rem 4rem;
   column-gap: 4rem;
