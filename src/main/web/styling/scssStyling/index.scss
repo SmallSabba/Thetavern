@@ -364,6 +364,8 @@ html {
               button {
                 font-family: var(--ff-body);
                 font-weight: bold;
+                cursor: pointer;
+
                 font-size: 1rem;
 
                 padding: 1rem;
@@ -371,17 +373,16 @@ html {
                 background-color: #71a4c2;
                 color: white;
                 border-radius: 1.75rem;
-                transition-duration: 500ms;
-
+                transition-duration: 400ms;
 
                 &:active, &:hover {
                   border-radius: 1.75rem;
 
+                  background-color: #084057;
                   color: white;
                   @include shadow(outside);
 
                   padding: 1rem 2rem;
-                  transition-duration: 500ms;
                 }
               }
             }
@@ -434,17 +435,17 @@ html {
     align-items: center;
 
     @include shadow(inside);
-    color: $secondaryColor;
-    background-color: var(--fc-white);
+    background-color: $secondaryColor;
 
     padding: 1rem 2rem;
     min-height: 120px;
     max-height: 120px;
 
     * {
-      color: var(--fc-black);
+      font-size: 18px;
+      color: $tertiaryColor;
       text-decoration: none;
-      line-height: 1.5rem;
+      line-height: 1.6rem;
     }
 
   }

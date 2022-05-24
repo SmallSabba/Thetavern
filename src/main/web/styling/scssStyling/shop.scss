@@ -6,8 +6,23 @@ $media: (
         lg: 1024px, xl: 1280px,
         2 xl: 1536px, 3 xl: 1920px,
 );
-:root{
-scroll-behavior: smooth;}
+
+:root {
+  scroll-behavior: smooth;
+  background-color: transparent;
+
+  --ff-heading: "Poppins", sans-serif;
+  --ff-subHeading: "Sathu", sans-serif;
+  --ff-body: "Arial", serif;
+
+  --fs-heading: clamp(1.5rem, 7vw, 7rem);
+  --fs-subHeading: clamp(1rem, 3vw, 4rem);
+
+  --fc-white: white;
+  --fc-black: black;
+}
+
+
 @mixin md($breakpoint) {
   @each $breakpoints, $size in $media {
     @if $breakpoint==$breakpoints {
@@ -281,25 +296,45 @@ html body main .ProductsShop article ul {
 
 html body main .ProductsShop article ul li {
   display: block;
+
+  &:first-child p {
+    font-family: var(--ff-heading);
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  &:nth-child(2) p {
+    font-family: var(--ff-body);
+    font-weight: lighter;
+    font-size: 1rem;
+  }
 }
 
 html body main .ProductsShop article ul li button {
+  font-family: var(--ff-body);
+  font-weight: bold;
+  cursor: pointer;
+
+  font-size: 1rem;
+
   padding: 1rem;
   border-style: none;
-  background-color: #97c9de;
-  border-radius: 1.75rem;
-  transition-duration: 500ms;
-}
-
-html body main .ProductsShop article ul li button:active, html body main .ProductsShop article ul li button:hover {
-  background-color: #0a4a65;
-  border-radius: 1.75rem;
+  background-color: #71a4c2;
   color: white;
-  box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
-  padding: 1rem 3rem;
-  transition-duration: 500ms;
+  border-radius: 1.75rem;
+  transition-duration: 400ms;
 
+  &:active, &:hover {
+    border-radius: 1.75rem;
+
+    background-color: #084057;
+    color: white;
+    @include shadow(outside);
+
+    padding: 1rem 2rem;
+  }
 }
+
 
 .ProductsShop{
   @media screen and (max-width: 2100px){
@@ -323,8 +358,10 @@ html body main .ProductsShop article ul li button:active, html body main .Produc
   list-style: none;
   color: #97c9de;
   margin-top: 2rem;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1.5rem;
+
   li{
+    font-size: 20px;
     text-align: center;
   }
 }

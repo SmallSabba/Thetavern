@@ -58,38 +58,31 @@ window.onload = function () {
 
 
 document.getElementById("collapsible").addEventListener("click", boxClicked);
-document.querySelector(".containerHeader").addEventListener("mouseover", toggleLabelHover);
+//document.querySelector(".containerHeader").addEventListener("mouseover", toggleLabelHover);
 window.addEventListener("resize", showMenuContent);
 window.addEventListener("scroll", toggleToTopButton);
 
+document.getElementById("barLabel").addEventListener("mouseover", mouseOver);
+document.getElementById("barLabel").addEventListener("mouseleave", mouseLeave);
 
-let barLabel = document.getElementById("barLabel");
-barLabel.addEventListener("mouseover", mouseOver);
-barLabel.addEventListener("mouseleave", mouseLeave);
+document.getElementById("icon1").addEventListener("mouseover", mouseOver);
+document.getElementById("icon1").addEventListener("mouseleave", mouseLeave);
 
-let menuIcon1 = document.getElementById("icon1");
-menuIcon1.addEventListener("mouseover", mouseOver);
-menuIcon1.addEventListener("mouseleave", mouseLeave);
-
-let menuIcon2 = document.getElementById("icon2");
-menuIcon2.addEventListener("mouseover", mouseOver);
-menuIcon2.addEventListener("mouseleave", mouseLeave);
-
+document.getElementById("icon2").addEventListener("mouseover", mouseOver);
+document.getElementById("icon2").addEventListener("mouseleave", mouseLeave);
 
 let isVisible;
 let allowDeactivation;
-
-let button = document.querySelector(".toTop");
 
 
 function toggleToTopButton() {
 
 
     if (window.scrollY >= innerHeight / 4 * 3) {
-        button.style.opacity = "1";
+        document.querySelector(".toTop").style.opacity = "1";
 
     } else {
-        button.style.opacity = "0";
+        document.querySelector(".toTop").style.opacity = "0";
 
     }
     /*
@@ -175,7 +168,7 @@ function toggleMenu() {
         document.querySelector("#barLabel").style.backgroundColor = "#0a4a65";
         document.querySelector("#barLabel").style.color = "#c1e3f3";
 
-        toggleLabelHover();
+        //toggleLabelHover();
     }
 }
 
