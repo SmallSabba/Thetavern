@@ -184,7 +184,7 @@ html body main .topProducts {
   -ms-overflow-style: none;
   scrollbar-width: none;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   overflow-y: hidden;
   padding: 6rem 4rem;
   column-gap: 4rem;
@@ -200,6 +200,18 @@ html body main .topProducts:first-child {
 html body main .topProducts:last-child {
   padding-right: 4rem;
 }
+html body main .topProducts article:nth-child(1) button {
+  background-color: #6e8a68;
+}
+html body main .topProducts article:nth-child(2) button {
+  background-color: #94836a;
+}
+html body main .topProducts article:nth-child(3) button {
+  background-color: #71a4c2;
+}
+html body main .topProducts article:nth-child(4) button {
+  background-color: #fbcf66;
+}
 html body main .topProducts article {
   background-repeat: no-repeat;
   background-position: center;
@@ -214,7 +226,6 @@ html body main .topProducts article {
   background-color: #eee;
   border-radius: 1.75rem;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
-  justify-items: flex-start;
 }
 html body main .topProducts article img {
   position: relative;
@@ -254,7 +265,6 @@ html body main .topProducts article ul li button {
   font-size: 1rem;
   padding: 1rem;
   border-style: none;
-  background-color: #71a4c2;
   color: white;
   border-radius: 1.75rem;
   transition-duration: 500ms;
