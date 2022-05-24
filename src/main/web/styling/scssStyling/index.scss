@@ -32,7 +32,7 @@ $media: (
 }
 
 
-$mainColor: #ffffff;
+$mainColor: #fff;
 $secondaryColor: #0a4a65;
 $tertiaryColor: #c1e3f3;
 
@@ -57,6 +57,7 @@ $textFontSize: 18px;
   }
   .nav {
     z-index: 3;
+
   }
 
   .menuList {
@@ -177,6 +178,7 @@ html {
       right: 1rem;
 
       ul {
+
         padding: 0.5rem 1rem;
         border-radius: 3rem;
 
