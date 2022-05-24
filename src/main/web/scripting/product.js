@@ -11,13 +11,33 @@ document.getElementById("cartButton").addEventListener("mouseleave", mouseLeave)
 document.getElementById("purchaseButton").addEventListener("mouseover", mouseOver);
 document.getElementById("purchaseButton").addEventListener("mouseleave", mouseLeave);
 
+window.addEventListener("scroll", toggleToTopButton);
+
+
+window.onload = function () {
+
+    toggleToTopButton();
+}
+
 let infoButtons = true;
+
+
+function toggleToTopButton() {
+
+    if (window.scrollY >= innerHeight / 2) {
+        document.querySelector(".toTop").style.opacity = "1";
+
+    } else {
+        document.querySelector(".toTop").style.opacity = "0";
+    }
+}
 
 function mouseClicked() {
 
-    if (document.getElementById("techInf").checked) {
+
+    if (document.getElementById("techInf").checked && this.id !== "technicalInformationLabel") {
         infoButtons = false;
-    } else {
+    } else if (document.getElementById("prodDesc").checked && this.id !== "productDescriptionLabel") {
         infoButtons = true;
     }
 

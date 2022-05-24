@@ -192,6 +192,7 @@ html {
           border-radius: 3rem;
 
           a {
+
             font-size: $textFontSize;
             text-decoration: none;
             color: var(--fc-black);
@@ -344,12 +345,12 @@ html {
               display: block;
 
               button {
+                cursor: pointer;
                 padding: 1rem;
                 border-style: none;
                 background-color: #97c9de;
                 border-radius: 1.75rem;
                 transition-duration: 500ms;
-
 
                 &:active, &:hover {
                   background-color: $secondaryColor;
@@ -359,7 +360,6 @@ html {
                   @include shadow(outside);
 
                   padding: 1rem 3rem;
-                  transition-duration: 500ms;
                 }
               }
             }
@@ -379,10 +379,37 @@ html {
     }
   }
 
+  .toTop {
+    position: fixed;
+    right: 3rem;
+    bottom: 10rem;
+
+    opacity: 0;
+    transition: .8s;
+  }
+
+  .toTopIcon {
+    background-color: rgb(186, 219, 234);
+    color: #084057;
+
+    border-radius: 2rem;
+    padding: 20px;
+    rotate: 90deg;
+    font-size: 160%;
+
+    transition: .25s;
+  }
+
+  .toTopIcon:hover {
+    background-color: rgb(8, 64, 87);
+    color: rgb(186, 219, 234);
+  }
+
+
   footer {
+
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
+    align-items: center;
 
     @include shadow(inside);
     color: $secondaryColor;
@@ -394,24 +421,10 @@ html {
 
     * {
       color: var(--fc-black);
-      padding: 0.5rem 0;
-    }
-
-    a {
       text-decoration: none;
+      line-height: 1.5rem;
     }
 
-    aside {
-      display: block;
-      align-self: center;
-      text-align: right;
-    }
-
-    address {
-      display: block;
-      align-self: center;
-      text-align: left;
-    }
   }
 }
 
