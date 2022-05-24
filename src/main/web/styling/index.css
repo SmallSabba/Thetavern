@@ -201,6 +201,10 @@ html body main .topProducts:last-child {
   padding-right: 4rem;
 }
 html body main .topProducts article {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
   display: inline-block;
   flex-direction: row;
   min-width: 250px;
@@ -249,6 +253,7 @@ html body main .topProducts article ul li button {
   font-size: 1rem;
   padding: 1rem;
   border-style: none;
+  background-color: #71a4c2;
   color: white;
   border-radius: 1.75rem;
   transition-duration: 500ms;
@@ -257,8 +262,8 @@ html body main .topProducts article ul li button:active, html body main .topProd
   border-radius: 1.75rem;
   color: white;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+  padding: 1rem 2rem;
   transition-duration: 500ms;
-  padding: 1rem 3rem;
 }
 html body .about {
   padding: 1rem 2rem;

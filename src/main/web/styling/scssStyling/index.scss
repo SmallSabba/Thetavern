@@ -304,30 +304,6 @@ html {
 
         @include shadow(inside);
 
-        article:nth-child(1) {
-          button {
-            background-color: #6e8a68;
-          }
-        }
-
-        article:nth-child(2) {
-          button {
-            background-color: #94836a;
-          }
-        }
-
-        article:nth-child(3) {
-          button {
-            background-color: #71a4c2;
-          }
-        }
-
-        article:nth-child(4) {
-          button {
-            background-color: #fbcf66;
-          }
-        }
-
         article {
           background-repeat: no-repeat;
           background-position: center;
@@ -392,15 +368,13 @@ html {
 
                 padding: 1rem;
                 border-style: none;
-                //background-color: #71a4c2;
-                //background-color: #6e8a68;
+                background-color: #71a4c2;
                 color: white;
                 border-radius: 1.75rem;
                 transition-duration: 500ms;
 
 
                 &:active, &:hover {
-                  //background-color: $secondaryColor;
                   border-radius: 1.75rem;
 
                   color: white;
