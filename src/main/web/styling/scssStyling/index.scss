@@ -99,18 +99,18 @@ $textFontSize: 18px;
     padding: 2rem 1rem 1rem 1rem;
 
 
-      li {
-        transition-duration: 400ms;
-        margin: 0.5rem 0;
+    li {
+      transition-duration: 400ms;
+      margin: 0.5rem 0;
 
-        * {
-          justify-content: right;
-        }
+      * {
+        justify-content: right;
+      }
 
-        &:first-child {
-          margin-top: 3.5rem;
+      &:first-child {
+        margin-top: 3.5rem;
 
-        }
+      }
     }
   }
 }
@@ -287,6 +287,7 @@ html {
         }
 
         display: flex;
+        justify-content: space-evenly;
         overflow-y: hidden;
         padding: 6rem 4rem;
         column-gap: 4rem;
@@ -304,6 +305,11 @@ html {
 
 
         article {
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          object-fit: cover;
+
           display: inline-block;
           flex-direction: row;
           min-width: 250px;
@@ -314,7 +320,7 @@ html {
           background-color: #eee;
           border-radius: 1.75rem;
 
-          @include shadow(inside);
+          @include shadow(outside);
 
           justify-items: flex-start;
 
@@ -343,22 +349,40 @@ html {
             li {
               display: block;
 
+              &:first-child p {
+                font-family: var(--ff-heading);
+                font-weight: bold;
+                font-size: 1.5rem;
+              }
+
+              &:nth-child(2) p {
+                font-family: var(--ff-body);
+                font-weight: lighter;
+                font-size: 1rem;
+              }
+
               button {
+                font-family: var(--ff-body);
+                font-weight: bold;
+                font-size: 1rem;
+
                 padding: 1rem;
                 border-style: none;
-                background-color: #97c9de;
+                background-color: #71a4c2;
+                //background-color: #6e8a68;
+                color: white;
                 border-radius: 1.75rem;
                 transition-duration: 500ms;
 
 
                 &:active, &:hover {
-                  background-color: $secondaryColor;
+                  //background-color: $secondaryColor;
                   border-radius: 1.75rem;
 
                   color: white;
                   @include shadow(outside);
 
-                  padding: 1rem 3rem;
+                  padding: 1rem 2rem;
                   transition-duration: 500ms;
                 }
               }

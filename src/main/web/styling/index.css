@@ -184,6 +184,7 @@ html body main .topProducts {
   -ms-overflow-style: none;
   scrollbar-width: none;
   display: flex;
+  justify-content: space-evenly;
   overflow-y: hidden;
   padding: 6rem 4rem;
   column-gap: 4rem;
@@ -200,6 +201,10 @@ html body main .topProducts:last-child {
   padding-right: 4rem;
 }
 html body main .topProducts article {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
   display: inline-block;
   flex-direction: row;
   min-width: 250px;
@@ -208,7 +213,7 @@ html body main .topProducts article {
   max-height: 300px;
   background-color: #eee;
   border-radius: 1.75rem;
-  box-shadow: inset 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+  box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
   justify-items: flex-start;
 }
 html body main .topProducts article img {
@@ -233,19 +238,32 @@ html body main .topProducts article ul {
 html body main .topProducts article ul li {
   display: block;
 }
+html body main .topProducts article ul li:first-child p {
+  font-family: var(--ff-heading);
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+html body main .topProducts article ul li:nth-child(2) p {
+  font-family: var(--ff-body);
+  font-weight: lighter;
+  font-size: 1rem;
+}
 html body main .topProducts article ul li button {
+  font-family: var(--ff-body);
+  font-weight: bold;
+  font-size: 1rem;
   padding: 1rem;
   border-style: none;
-  background-color: #97c9de;
+  background-color: #71a4c2;
+  color: white;
   border-radius: 1.75rem;
   transition-duration: 500ms;
 }
 html body main .topProducts article ul li button:active, html body main .topProducts article ul li button:hover {
-  background-color: #0a4a65;
   border-radius: 1.75rem;
   color: white;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
   transition-duration: 500ms;
 }
 html body .about {
