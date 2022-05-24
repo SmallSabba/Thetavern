@@ -35,6 +35,8 @@ const headerSubheading =
 
 window.onload = function () {
 
+    toggleToTopButton();
+
     if (innerWidth > 1080) {
         document.querySelector(".collapsible-menu").style.transition = "400ms";
     } else {
@@ -58,6 +60,7 @@ window.onload = function () {
 document.getElementById("collapsible").addEventListener("click", boxClicked);
 document.querySelector(".containerHeader").addEventListener("mouseover", toggleLabelHover);
 window.addEventListener("resize", showMenuContent);
+window.addEventListener("scroll", toggleToTopButton);
 
 
 let barLabel = document.getElementById("barLabel");
@@ -75,6 +78,45 @@ menuIcon2.addEventListener("mouseleave", mouseLeave);
 
 let isVisible;
 let allowDeactivation;
+
+let button = document.querySelector(".toTop");
+
+
+function toggleToTopButton() {
+
+
+    if (window.scrollY >= innerHeight / 4 * 3) {
+        button.style.opacity = "1";
+
+    } else {
+        button.style.opacity = "0";
+
+    }
+    /*
+    if (button.style.opacity === "0" && window.scrollY < innerHeight / 4 * 3) {
+        setTimeout(display, 2000);
+
+    } else if (button.style.opacity === "1") {
+
+        setTimeout(display2, 3000);
+    }
+     */
+
+}
+
+/*
+function display() {
+
+    if (button.style.opacity === "0") button.style.display = "none";
+
+}
+function display2() {
+
+    if (button.style.opacity === "1") button.style.display = "block";
+}
+
+ */
+
 
 function showMenuContent() {
 

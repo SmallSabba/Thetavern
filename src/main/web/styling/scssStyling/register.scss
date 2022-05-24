@@ -35,22 +35,39 @@ html {
       width: 100vw;
 
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+
+      .logo {
+        display: flex;
+        justify-content: center;
+        width: 50%;
+        padding: 1rem;
+
+        a {
+          width: 30%;
+
+          img {
+            width: 100%;
+
+          }
+        }
+      }
 
       .styleForm {
         background-color: white;
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5), 0 5px 5px 0 rgba(0, 0, 0, 0.5);
         border-radius: 1rem;
 
-        width: 300px;
-        height: 200px;
+        width: 50%;
+        height: 50%;
 
-        padding: 1rem 2rem 0.5rem 2rem;
-
+        padding: 2rem;
 
         .loginForm {
           height: 100%;
+          font-size: 18px;
 
           display: flex;
           flex-direction: column;
@@ -64,12 +81,15 @@ html {
 
             .resetButton {
               width: 25%;
-              height: 30px;
               transition-duration: 0.4s;
               background-color: $tertiaryColor;
               color: $secondaryColor;
               border-style: none;
               letter-spacing: 1px;
+
+              font-size: inherit;
+              padding: 10px;
+
               cursor: pointer;
               border-radius: 0.3rem;
               box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.3);
@@ -82,18 +102,21 @@ html {
 
             .submitButton {
               width: 50%;
-              height: 30px;
               transition-duration: 0.4s;
               background-color: $tertiaryColor;
               color: $secondaryColor;
               border-style: none;
               letter-spacing: 1px;
+
+              font-size: inherit;
+              padding: 10px;
+
               cursor: pointer;
               border-radius: 0.3rem;
               box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.3);
 
               &:hover, &:active {
-                width: 70%;
+                width: 55%;
                 transition-duration: 0.4s;
               }
             }
@@ -102,23 +125,22 @@ html {
 
           & > input {
             width: 100%;
-            height: 25px;
-            padding: 10px;
+            padding: 14px;
             letter-spacing: 0.5px;
-            font-size: 10px;
+            font-size: 18px;
             outline: 0;
             border: none;
             background-color: #f2f2f2;
           }
 
           & > p {
-            font-size: 10px;
+            font-size: inherit;
             text-decoration: none;
             color: lightgray;
           }
 
           & > p > a {
-            font-size: 10px;
+            font-size: inherit;
             text-decoration: none;
             padding-left: 0.5rem;
             color: var(--fc-black);

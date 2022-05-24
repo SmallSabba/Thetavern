@@ -3,6 +3,10 @@
   margin: 0;
 }
 
+:root {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Arial", serif;
 }
@@ -167,11 +171,11 @@ nav ul li:active a, nav ul li:hover a {
 }
 
 .itemContainer {
-  border-radius: 8px;
+  border-radius: 1rem;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.6);
   display: flex;
   align-items: stretch;
-  margin: 150px 30px 10px 30px;
+  margin: 120px 2rem 10px 2rem;
 }
 .itemContainer .productImage {
   text-align: center;
@@ -190,11 +194,11 @@ nav ul li:active a, nav ul li:hover a {
   font-size: 32px;
 }
 .itemContainer .productInfo #manufacturerName {
-  margin: 10px 30px;
+  margin: 60px 30px;
   font-size: 18px;
 }
 .itemContainer .productInfo .productPrice {
-  margin: 20px 30px;
+  margin: 60px 30px;
   color: #084057;
   font-size: 190%;
 }
@@ -254,7 +258,7 @@ nav ul li:active a, nav ul li:hover a {
   border-top: none;
   border-left: 2px solid #084057;
   border-bottom: 3px solid #084057;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   padding: 4px 14px 4px 8px;
   margin-left: 8px;
   margin-right: 10px;
@@ -267,13 +271,13 @@ nav ul li:active a, nav ul li:hover a {
 }
 .itemContainer .productSelection .buttons #cartButton, .itemContainer .productSelection .buttons #purchaseButton {
   cursor: pointer;
-  border: none;
+  box-shadow: 0 0 1px 0 rgba(8, 64, 87, 0.5);
   background-color: rgb(146, 194, 214);
   color: #084057;
   width: 200px;
   margin: 20px;
   padding: 10px;
-  border-radius: 20px;
+  border-radius: 1.5rem;
   font-size: 120%;
   transition: 0.3s;
 }
@@ -305,12 +309,13 @@ nav ul li:active a, nav ul li:hover a {
 }
 .infoButtons ul #technicalInformationLabel, .infoButtons ul #productDescriptionLabel {
   cursor: pointer;
-  border-radius: 20px;
+  border-radius: 1.5rem;
   transition: background-color 0.3s;
   max-width: 250px;
   background-color: #084057;
   color: #c1e3f3;
   padding: 25px;
+  box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
 }
 .infoButtons ul #productDescriptionLabel {
   background-color: rgba(206, 232, 248, 0.8);
@@ -322,11 +327,10 @@ nav ul li:active a, nav ul li:hover a {
 
 .technicalInfoContainer, .productDescriptionContainer {
   display: block;
-  border-radius: 12px;
-  border-left: 3px solid #084057;
-  border-bottom: 3px solid #084057;
+  box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+  border-radius: 1rem;
   padding: 30px;
-  margin: 0 30px 400px 30px;
+  margin: 0 2rem 0 2rem;
 }
 .technicalInfoContainer table, .productDescriptionContainer table {
   width: 100%;
@@ -343,6 +347,9 @@ nav ul li:active a, nav ul li:hover a {
   border-bottom: 3px solid #f2f2f2;
   padding: 20px;
   text-align: center;
+}
+.technicalInfoContainer table tr:last-child th, .technicalInfoContainer table tr:last-child td, .productDescriptionContainer table tr:last-child th, .productDescriptionContainer table tr:last-child td {
+  border: none;
 }
 
 .productDescriptionContainer {
@@ -362,6 +369,137 @@ nav ul li:active a, nav ul li:hover a {
 .productDescriptionContainer .sectionText {
   font-size: 20px;
   line-height: 32px;
+}
+
+.relatedProducts {
+  box-shadow: 0 0 4px 1px rgba(50, 50, 50, 0.6);
+  padding: 1.5rem 1rem;
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+}
+.relatedProducts .moreProductsHeading {
+  margin-top: 1rem;
+  margin-left: 3rem;
+}
+.relatedProducts .moreProductsHeading #moreProductsHeading {
+  width: fit-content;
+  color: #073b4d;
+  font-size: 1.8rem;
+  padding: 1.2rem 2rem 1.2rem 1rem;
+  margin: 0.5rem 0 1.5rem 0;
+  border-radius: 1rem;
+  box-shadow: inset 1px -2px 2px 0 rgba(50, 50, 50, 0.3);
+}
+.relatedProducts .articles {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  overflow-y: hidden;
+  padding: 4rem 2rem 2rem 4rem;
+  column-gap: 5rem;
+  row-gap: 6rem;
+  background-color: white;
+}
+.relatedProducts .articles::-webkit-scrollbar {
+  display: none;
+}
+.relatedProducts .articles:first-child {
+  padding-left: 4rem;
+}
+.relatedProducts .articles:last-child {
+  padding-right: 4rem;
+}
+.relatedProducts .articles article {
+  display: inline-block;
+  flex-direction: row;
+  min-width: 250px;
+  min-height: 300px;
+  max-width: 250px;
+  max-height: 300px;
+  background-color: #eee;
+  border-radius: 1.75rem;
+  box-shadow: inset 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+  justify-items: center;
+}
+.relatedProducts .articles article img {
+  position: relative;
+  left: -25%;
+  top: -20%;
+  width: 45%;
+}
+.relatedProducts .articles article ul {
+  position: relative;
+  top: -140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+  padding: 1rem 0;
+  margin: 1rem 0;
+  text-align: center;
+  list-style: none;
+}
+.relatedProducts .articles article ul li {
+  display: block;
+}
+.relatedProducts .articles article ul li button {
+  cursor: pointer;
+  padding: 1rem;
+  border-style: none;
+  background-color: #97c9de;
+  border-radius: 1.75rem;
+  transition-duration: 500ms;
+}
+.relatedProducts .articles article ul li button:active, .relatedProducts .articles article ul li button:hover {
+  background-color: #0a4a65;
+  border-radius: 1.75rem;
+  color: white;
+  box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.6);
+  padding: 1rem 3rem;
+}
+
+.toTop {
+  position: fixed;
+  right: 3rem;
+  bottom: 10rem;
+  opacity: 0;
+  transition: 0.8s;
+}
+
+.toTopIcon {
+  background-color: rgb(186, 219, 234);
+  box-shadow: 0 0 2px 1px rgba(8, 64, 87, 0.3);
+  color: #084057;
+  border-radius: 2rem;
+  padding: 20px;
+  rotate: 90deg;
+  font-size: 160%;
+  transition: 0.25s;
+}
+
+.toTopIcon:hover {
+  background-color: rgb(8, 64, 87);
+  color: rgb(186, 219, 234);
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 2px 5px 0 rgba(50, 50, 50, 0.2);
+  color: #c1e3f3;
+  background-color: #0a4a65;
+  padding: 1rem 2rem;
+  min-height: 120px;
+  max-height: 120px;
+}
+footer * {
+  color: var(--fc-black);
+  text-decoration: none;
+  line-height: 1.5rem;
 }
 
 /*# sourceMappingURL=product.css.map */
