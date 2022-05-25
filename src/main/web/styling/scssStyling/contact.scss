@@ -270,25 +270,23 @@ nav {
 
 footer {
 
-    display: flex;
-    align-items: center;
-    margin: 1rem;
-    background-color: #0a4a65;
+  display: flex;
+  align-items: center;
 
-    @include shadow(inside);
-    color: $secondaryColor;
+  @include shadow(inside);
+  background-color: $secondaryColor;
 
+  padding: 1rem 2rem;
+  min-height: 120px;
+  max-height: 120px;
 
-    padding: 1rem 2rem;
-    min-height: 120px;
-    max-height: 120px;
-
-    * {
-      color: $mainColor;
-      text-decoration: none;
-      line-height: 1.5rem;
-    }
-
+  * {
+    font-size: 18px;
+    color: $tertiaryColor;
+    text-decoration: none;
+    line-height: 1.6rem;
   }
+
+}
 
 

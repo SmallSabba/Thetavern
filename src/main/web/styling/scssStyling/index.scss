@@ -309,9 +309,9 @@ html {
           background-position: center;
           background-size: cover;
           object-fit: cover;
-
           display: inline-block;
           flex-direction: row;
+
           min-width: 250px;
           min-height: 300px;
           max-width: 250px;
@@ -321,8 +321,6 @@ html {
           border-radius: 1.75rem;
 
           @include shadow(outside);
-
-          //justify-items: flex-start;
 
           img {
             position: relative;

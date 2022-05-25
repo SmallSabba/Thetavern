@@ -370,27 +370,52 @@ html body main .ProductsShop article ul li button {
   margin-left: 1rem;
   margin-right: 1rem;
 }
+
+.toTop {
+  position: fixed;
+  right: 3rem;
+  bottom: 10rem;
+
+  opacity: 0;
+  transition: .8s;
+}
+
+.toTopIcon {
+  background-color: rgb(186, 219, 234);
+  color: #084057;
+
+  border-radius: 2rem;
+  padding: 20px;
+  rotate: 90deg;
+  font-size: 160%;
+
+  transition: .25s;
+}
+
+.toTopIcon:hover {
+  background-color: rgb(8, 64, 87);
+  color: rgb(186, 219, 234);
+}
+
 footer {
 
-    display: flex;
-    align-items: center;
-    margin: 1rem;
-    background-color: #0a4a65;
+  display: flex;
+  align-items: center;
 
-    @include shadow(inside);
-    color: $secondaryColor;
+  @include shadow(inside);
+  background-color: $secondaryColor;
 
+  padding: 1rem 2rem;
+  min-height: 120px;
+  max-height: 120px;
 
-    padding: 1rem 2rem;
-    min-height: 120px;
-    max-height: 120px;
-
-    * {
-      color: $mainColor;
-      text-decoration: none;
-      line-height: 1.5rem;
-    }
-
+  * {
+    font-size: 18px;
+    color: $tertiaryColor;
+    text-decoration: none;
+    line-height: 1.6rem;
   }
+
+}
 
 
