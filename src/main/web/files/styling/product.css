@@ -308,7 +308,7 @@ nav ul li:active a, nav ul li:hover a {
 }
 .itemContainer .productSelection .quantity .quantitySelector {
   cursor: pointer;
-  background-image: url("/resources/downArrow.png");
+  background-image: url("/downArrow.png");
   background-size: 30%;
   background-position: right;
   background-color: transparent;

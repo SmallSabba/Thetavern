@@ -83,7 +83,6 @@ function toggleToTopButton() {
 
     } else {
         document.querySelector(".toTop").style.opacity = "0";
-
     }
     /*
     if (button.style.opacity === "0" && window.scrollY < innerHeight / 4 * 3) {
