@@ -1,16 +1,16 @@
 const { Router } = require("express");
 const controller = require("../controllers/wheelchair-controller");
 
-const routes = Router();
+const router = Router();
 
-routes.get("/categories", controller.getCategories);
-routes.get("/categories/:category/books", controller.getCategoryWheelchairs);
-routes.get("wheelchairs/:id", controller.getWheelchair);
+router.get("/categories", controller.getCategories);
+router.get("/categories/:category/wheelchairs", controller.getCategoryWheelchairs);
+router.get("/wheelchairs/:id", controller.getWheelchair);
 
-routes.post("/categories/:category/books", controller.createWheelchair);
+router.post("/categories/:category/wheelchairs", controller.createWheelchair);
 
-routes.put("/books/:id", controller.updateWheelchair);
+router.put("/wheelchairs/:id", controller.updateWheelchair);
 
-routes.delete("/books/:id", controller.deleteWheelchair);
+router.delete("/wheelchairs/:id", controller.deleteWheelchair);
 
-module.exports = routes;
+module.exports = router;

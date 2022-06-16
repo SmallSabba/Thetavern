@@ -1,8 +1,7 @@
-const path = require("path");
+const path = require('path');
 const bodyParser = require('body-parser');
 const express = require('express');
 
-const wheelchairRouter = require('./api/routes/wheelchair-router');
 
 const app = express();
 const port = process.env.PORT ?? 3000;
@@ -14,8 +13,11 @@ app.use(express.static(path.join(__dirname, "files/scripting")));
 app.use(express.static(path.join(__dirname, "files/resources")));
 
 
+const wheelchairRouter = require('./api/routes/wheelchair-router');
+
+
 // Parse urlencoded bodies (for form data)
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 
 // Parse JSON bodies (from requests)
 app.use(bodyParser.json());

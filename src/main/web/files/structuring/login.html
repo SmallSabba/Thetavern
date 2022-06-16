@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebProject</title>
 
-    <link rel="stylesheet" href="/files/styling/login.css">
+    <link rel="stylesheet" href="login.css">
 
 </head>
 
 <body>
 <main>
     <div class="logo">
-        <a href="index.html"><img src="/hCubedLogo.png"></a>
+        <a href="index.html"><img src="hCubedLogo.png"></a>
     </div>
     <div class="styleForm">
-        <form action="index.html" id="loginForm" class="loginForm">
+        <form action="/api/authenticate" method="post" id="loginForm" class="loginForm">
             <input id="usernameInput" type="text" placeholder="username / e-mail" required/>
             <input id="passwordInput" type="password" placeholder="password" required/>
 
@@ -30,5 +30,5 @@
     </div>
 </main>
 </body>
-<script src="/files/scripting/login.js"></script>
+<script src="login.js"></script>
 </html>

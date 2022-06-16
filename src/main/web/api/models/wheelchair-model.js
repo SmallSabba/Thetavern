@@ -1,6 +1,6 @@
 class Category {
 
-    constructor(name, title) {
+    constructor(title, name) {
 
         this.name = name;
         this.title = title;
@@ -123,20 +123,20 @@ const model = new WheelchairModel();
 const electrical = new Category("Electrical Wheelchairs", "electric");
 model.addCategory(electrical);
 model.addWheelchair(electrical, new Wheelchair("iCHAIR MC2 1.611", "Some guy", 14,
-    ".../resources/wheelchairs/electric/iCHAIR_MC2.png",
+    "/wheelchairs/electric/iCHAIR_MC2.png",
     "Some information, some more information, additional information."));
 model.addWheelchair(electrical, new Wheelchair("Optimus_2__Optimus_2_S", "Some other guy", 11,
-    ".../resources/wheelchairs/electric/Optimus_2__Optimus_2_S.png",
+    "/wheelchairs/electric/Optimus_2__Optimus_2_S.png",
     "Some information, some more information, additional information."));
 
 
-const manual = new Category("Electrical Wheelchairs", "electric");
+const manual = new Category("Electrical Wheelchairs", "manual");
 model.addCategory(manual);
 model.addWheelchair(manual, new Wheelchair("Format", "Third guy", 7,
-    ".../resources/wheelchairs/manual/Format.png",
+    "/wheelchairs/manual/Format.png",
     "Some information, some more information, additional information."));
 model.addWheelchair(manual, new Wheelchair("MWstone", "Fourth guy", 6,
-    ".../resources/wheelchairs/manual/MWstone.png",
+    "/wheelchairs/manual/MWstone.png",
     "Some information, some more information, additional information."));
 
 module.exports = model;

@@ -1,9 +1,9 @@
 const backgroundImg =
     [
-        "/resources/1.jpg",
-        "/resources/3.jpg",
-        "/resources/4.jpg",
-        "/resources/5.jpg",
+        "1.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
     ];
 
 /*
