@@ -15,14 +15,14 @@
         <a href="index.html"><img src="hCubedLogo.png"></a>
     </div>
     <div class="styleForm">
-        <form action="/api/authenticate" method="post" id="loginForm" class="loginForm">
-            <input id="usernameInput" type="text" placeholder="username" required/>
-            <input id="passwordInput" type="password" placeholder="password" required/>
-            <input id="emailInput" type="email" placeholder="max@kilian.oliver" required/>
+        <form action="/api/register" method="post" id="loginForm" class="loginForm">
+            <input type="text" name="username" placeholder="username" required/>
+            <input type="password" name="password" placeholder="password" required/>
+            <input  type="email" name="email" placeholder="max@kilian.oliver" required/>
 
             <div class="buttonFlex">
-                <button id="submitButton" class="submitButton" title="create" type="submit" value="send">Create</button>
-                <button id="resetButton" class="resetButton" title="reset" type="reset" >Reset</button>
+                <button class="submitButton" title="create" type="submit" value="send">Create</button>
+                <button class="resetButton" title="reset" type="reset" >Reset</button>
             </div>
 
             <p>Already registered?<a title="Login to Account" href="login.html">Sign In</a></p>

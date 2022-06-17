@@ -116,5 +116,8 @@ html body main .styleForm .loginForm > p > a {
   padding-left: 0.5rem;
   color: var(--fc-black);
 }
+html body main .styleForm .loginForm .errorMsg {
+  color: red;
+}
 
 /*# sourceMappingURL=login.css.map */

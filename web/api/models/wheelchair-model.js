@@ -16,6 +16,7 @@ class Wheelchair {
         this.image = image;
         this.price = price;
         this.description = description;
+        //this.terrain = terrain;
     }
 }
 

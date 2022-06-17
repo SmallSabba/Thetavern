@@ -143,6 +143,12 @@ html {
             padding-left: 0.5rem;
             color: var(--fc-black);
           }
+
+          .errorMsg {
+
+            //display: none;
+            color: red;
+          }
         }
       }
     }

@@ -16,15 +16,15 @@
         <a href="index.html"><img src="hCubedLogo.png"></a>
     </div>
     <div class="styleForm">
-        <form action="/api/authenticate" method="post" id="loginForm" class="loginForm">
-            <input id="usernameInput" type="text" placeholder="username / e-mail" required/>
-            <input id="passwordInput" type="password" placeholder="password" required/>
+        <form action="/api/login" method="post" id="loginForm" class="loginForm">
+            <input type="text" name="username" placeholder="username / e-mail" required/>
+            <input type="password" name="password" placeholder="password" required/>
 
             <div class="buttonFlex">
-                <button id="submitButton" class="submitButton" title="Sign In" type="submit" value="send">Login</button>
-                <button id="resetButton" class="resetButton" title="reset" type="reset">Reset</button>
+                <button class="submitButton" title="Sign In" type="submit" value="send">Login</button>
+                <button class="resetButton" title="reset" type="reset">Reset</button>
             </div>
-
+            <p class="errorMsg">Username or password invalid!</p>   <!-- style display none -->
             <p>Not yet registered?<a title="Create new account" href="register.html">Sign Up</a></p>
         </form>
     </div>
