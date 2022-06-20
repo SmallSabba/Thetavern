@@ -119,13 +119,14 @@ class AccountController {
                             session.userid = username;
                             console.log(req.session);
 
-                            //res.redirect('/index.html');
+                            //window.parent.alertLogin(req, res, username);
 
                             res.send(`Hey, ${username}! <a href=\'/api/logout'>Click to logout</a>`);
                         }
                     }
                     if (session === null) {
 
+                        alert("hallo");
                         console.log("Invalid username or password.")
                         res.redirect('/login.html');
                     }
