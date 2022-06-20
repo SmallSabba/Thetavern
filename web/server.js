@@ -20,7 +20,9 @@ const oneHour = 1000 * 60 * 60;
 app.use(sessions({
     secret: "thisisjustarandomstring2022preferablyratherlongG2usedtoauthenticateasessionTXandwhichisnotexposedtothepublic",
     saveUninitialized: true,
-    cookie: { maxAge: oneHour },
+    cookie: {
+        maxAge: oneHour
+    },
     resave: false
 }));
 

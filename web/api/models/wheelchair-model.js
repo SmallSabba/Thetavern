@@ -123,21 +123,27 @@ const model = new WheelchairModel();
 
 const electrical = new Category("Electrical Wheelchairs", "electric");
 model.addCategory(electrical);
-model.addWheelchair(electrical, new Wheelchair("iCHAIR MC2 1.611", "Some guy", 14,
-    "/wheelchairs/electric/iCHAIR_MC2.png",
-    "Some information, some more information, additional information."));
-model.addWheelchair(electrical, new Wheelchair("Optimus_2__Optimus_2_S", "Some other guy", 11,
-    "/wheelchairs/electric/Optimus_2__Optimus_2_S.png",
-    "Some information, some more information, additional information."));
+model.addWheelchair(electrical,
+    new Wheelchair( "iCHAIR MC2 1.611", "Some guy", 14,
+                    "/wheelchairs/electric/iCHAIR_MC2.png",
+                    "Some information, some more information, additional information."));
+
+model.addWheelchair(electrical,
+    new Wheelchair( "Optimus_2__Optimus_2_S", "Some other guy", 11,
+                    "/wheelchairs/electric/Optimus_2__Optimus_2_S.png",
+                    "Some information, some more information, additional information."));
 
 
 const manual = new Category("Electrical Wheelchairs", "manual");
 model.addCategory(manual);
-model.addWheelchair(manual, new Wheelchair("Format", "Third guy", 7,
-    "/wheelchairs/manual/Format.png",
-    "Some information, some more information, additional information."));
-model.addWheelchair(manual, new Wheelchair("MWstone", "Fourth guy", 6,
-    "/wheelchairs/manual/MWstone.png",
-    "Some information, some more information, additional information."));
+model.addWheelchair(manual,
+    new Wheelchair( "Format", "Third guy", 7,
+                    "/wheelchairs/manual/Format.png",
+                    "Some information, some more information, additional information."));
+
+model.addWheelchair(manual,
+    new Wheelchair( "MWstone", "Fourth guy", 6,
+                    "/wheelchairs/manual/MWstone.png",
+                    "Some information, some more information, additional information."));
 
 module.exports = model;
