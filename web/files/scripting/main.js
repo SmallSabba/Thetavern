@@ -4,6 +4,7 @@ class ElementCreator {
     }
 
     id(id) {
+        console.log(id);
         this.element.id = id;
         return this;
     }
@@ -51,8 +52,10 @@ class ElementCreator {
 
 function addWheelchairToDOM(category, wheelchair) {
 
+    let background = wheelchair.terrain;
+
     new ElementCreator("article")
-        .with("style", `background-image: url('${wheelchair.backgroundImage}')`)
+        .with("style", `background-image: url('${background}')`)
         .append(new ElementCreator("img")
             .with("src", wheelchair.image)
         )
@@ -74,6 +77,7 @@ function addWheelchairToDOM(category, wheelchair) {
                     .append(new ElementCreator("button")
                         .with("title", "go to shop")
                         .text("Select Product")
+                        .id(`wheelchair${wheelchair.id}`)
                     )
                 )
             )
@@ -104,4 +108,5 @@ document.addEventListener("DOMContentLoaded", function (event) {
             })
         currentCategory = "manual";
     }
+
 });
