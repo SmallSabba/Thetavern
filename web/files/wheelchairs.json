@@ -99,5 +99,15 @@
     "image": "/wheelchairs/manual/WaterWheels.png",
     "terrain": "/wheelchairs/background/BGbeach.png",
     "description": "Some information"
+  },
+  {
+    "id": 11,
+    "name": "WaterWheels",
+    "category": "manual",
+    "manufacturer": "Some guy",
+    "price": 10,
+    "image": "/wheelchairs/manual/WaterWheels.png",
+    "terrain": "/wheelchairs/background/BGbeach.png",
+    "description": "Some information"
   }
 ]
