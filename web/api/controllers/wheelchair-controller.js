@@ -7,6 +7,10 @@ class WheelchairController {
         res.send(model.getCategories());
     }
 
+    getAllWheelchairs(req, res) {
+        res.send(model.getAllWheelchairs());
+    }
+
     getCategoryWheelchairs(req, res) {
         res.send(model.getWheelchairs(req.params.category));
     }

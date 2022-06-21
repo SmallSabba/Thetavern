@@ -48,3 +48,60 @@ class ElementCreator {
         return this.element;
     }
 }
+
+function addWheelchairToDOM(category, wheelchair) {
+
+    new ElementCreator("article")
+        .with("style", `background-image: url('${wheelchair.backgroundImage}')`)
+        .append(new ElementCreator("img")
+            .with("src", wheelchair.image)
+        )
+        .append(new ElementCreator("ul")
+            .append(new ElementCreator("li")
+                .append(new ElementCreator("p")
+                    .text(wheelchair.name)
+                )
+            )
+            .append(new ElementCreator("li")
+                .append(new ElementCreator("p")
+                    .text(wheelchair.price + "€ / day")
+                )
+            )
+            .append(new ElementCreator("li")
+                .append(new ElementCreator("a")
+                    .with("href", "product.html")
+
+                    .append(new ElementCreator("button")
+                        .with("title", "go to shop")
+                        .text("Select Product")
+                    )
+                )
+            )
+        )
+        .appendTo(document.querySelector(".topProducts"))
+}
+
+document.addEventListener("DOMContentLoaded", function (event) {
+
+    let currentCategory = "electric";
+
+    for (let i = 0; i < 2; i++) {
+
+        fetch(`api/categories/${currentCategory}/wheelchairs`)
+            .then(response => response.json())
+            .then(wheelchairs => {
+
+                console.log(wheelchairs);
+
+                let topProduct = wheelchairs[0];
+                for (let i = 1; i < wheelchairs.length; i++) {
+
+                    if (topProduct.sold < wheelchairs[i].sold) {
+                        topProduct = wheelchairs[i]
+                    }
+                }
+                addWheelchairToDOM(currentCategory, topProduct);
+            })
+        currentCategory = "manual";
+    }
+});

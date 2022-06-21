@@ -5,6 +5,7 @@ const router = Router();
 
 router.get("/categories", controller.getCategories);
 router.get("/categories/:category/wheelchairs", controller.getCategoryWheelchairs);
+router.get("/categories/wheelchairs", controller.getAllWheelchairs);
 router.get("/wheelchairs/:id", controller.getWheelchair);
 
 router.post("/categories/:category/wheelchairs", controller.createWheelchair);

@@ -1,3 +1,22 @@
+const fs = require('fs');
+
+function jsonReader(filePath, cb) {
+
+    fs.readFile(filePath, (err, jsonFile) => {
+
+        if (err) {
+            return cb && cb(err);
+        }
+        try {
+            const object = JSON.parse(jsonFile);
+            return cb && cb(null, object);
+        } catch (err) {
+            return cb && cb(err);
+        }
+    });
+}
+
+
 class Category {
 
     constructor(title, name) {
@@ -9,14 +28,17 @@ class Category {
 
 class Wheelchair {
 
-    constructor(name, manufacturer, price, image, description) {
+    constructor(id, name, category, manufacturer, price, image, terrain, description) {
 
+        this.sold = 0;
+        this.id = id;
         this.name = name;
+        this.category = category;
         this.manufacturer = manufacturer;
-        this.image = image;
         this.price = price;
+        this.image = image;
+        this.terrain = terrain;
         this.description = description;
-        //this.terrain = terrain;
     }
 }
 
@@ -28,31 +50,57 @@ class WheelchairModel {
         this.wheelchairs = new Map();
     }
 
+    readWheelchairs() {
+
+        try {
+            jsonReader("././files/wheelchairs.json", (err, wheelchairs) => {
+
+                if (err) {
+                    console.log(err);
+
+                } else {
+
+                    for (let i = 0; i < wheelchairs.length; i++) {
+
+                        this.addWheelchair(wheelchairs[i].category,
+                            new Wheelchair(wheelchairs[i].id, wheelchairs[i].name, wheelchairs[i].category,
+                                wheelchairs[i].manufacturer, wheelchairs[i].price, wheelchairs[i].image,
+                                wheelchairs[i].terrain, wheelchairs[i].description)
+                        );
+                    }
+                }
+            })
+        } catch (err) {
+            console.log("An error occurred, try again later.");
+
+        }
+    }
+
     addCategory(category) {
         if (!this.wheelchairs.get(category)) {
-            category.id = WheelchairModel.CATEGORY_ID++;
+
             this.wheelchairs.set(category, new Map())
         }
     }
 
     addWheelchair(category, wheelchair) {
+
         if (!this.wheelchairs.get(category)) {
 
-            console.log(this.wheelchairs.get(category));
-            console.log(category);
-
-            throw new Error(`Unknown wheelchair category ${category.name}`)
+            throw new Error(`Unknown wheelchair category ${category}`)
         }
         wheelchair.id = WheelchairModel.WHEELCHAIR_ID++;
 
         this.getWheelchairsAsMap(category).set(wheelchair.id, wheelchair);
+
+        //console.log(this.getWheelchairsAsMap(category));
     }
 
     resolveCategory(category) {
         if (typeof category === "string") {
             for (const [_category, wheelchairs] of this.wheelchairs.entries()) {
 
-                if (_category.name === category) {
+                if (_category === category) {
                     return _category;
                 }
             }
@@ -66,7 +114,7 @@ class WheelchairModel {
     }
 
     getCategory(id) {
-        for (const [ category, wheelchairsAsMap] of this.wheelchairs.entries()) {
+        for (const [category, wheelchairsAsMap] of this.wheelchairs.entries()) {
             const wheelchairs = Array.from(wheelchairsAsMap.values());
             if (wheelchairs.find(wheelchair => wheelchair.id === id)) {
                 return category;
@@ -77,6 +125,11 @@ class WheelchairModel {
 
     getWheelchairsAsMap(category) {
         return this.wheelchairs.get(this.resolveCategory(category));
+    }
+
+    getAllWheelchairs() {
+
+        return this.getWheelchairs("electric").concat(this.getWheelchairs("manual"));
     }
 
     getWheelchairs(category) {
@@ -121,29 +174,12 @@ class WheelchairModel {
 
 const model = new WheelchairModel();
 
-const electrical = new Category("Electrical Wheelchairs", "electric");
-model.addCategory(electrical);
-model.addWheelchair(electrical,
-    new Wheelchair( "iCHAIR MC2 1.611", "Some guy", 14,
-                    "/wheelchairs/electric/iCHAIR_MC2.png",
-                    "Some information, some more information, additional information."));
+//const electrical = new Category("Electrical Wheelchairs", "electric");
+//const manual = new Category("Manual Wheelchairs", "manual");
 
-model.addWheelchair(electrical,
-    new Wheelchair( "Optimus_2__Optimus_2_S", "Some other guy", 11,
-                    "/wheelchairs/electric/Optimus_2__Optimus_2_S.png",
-                    "Some information, some more information, additional information."));
+model.addCategory("electric");
+model.addCategory("manual");
 
-
-const manual = new Category("Electrical Wheelchairs", "manual");
-model.addCategory(manual);
-model.addWheelchair(manual,
-    new Wheelchair( "Format", "Third guy", 7,
-                    "/wheelchairs/manual/Format.png",
-                    "Some information, some more information, additional information."));
-
-model.addWheelchair(manual,
-    new Wheelchair( "MWstone", "Fourth guy", 6,
-                    "/wheelchairs/manual/MWstone.png",
-                    "Some information, some more information, additional information."));
+model.readWheelchairs();
 
 module.exports = model;

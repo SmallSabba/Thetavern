@@ -18,34 +18,6 @@ function jsonReader(filePath, cb) {
 
 class AccountController {
 
-    //returns true if a user was found,
-    //false if not
-    /*
-    findUser(username, password) {
-
-        jsonReader("././files/users.json", (err, users) => {
-
-
-            if (err) {
-                console.log(err);
-                //throw new Error(err);
-
-            } else {
-                for (let i = 0; i < users.length; i++) {
-
-
-                    if (username === users[i].username && password === users[i]
-                        || username === users[i].email && password === users[i]) {
-                        return true;
-                    }
-                }
-            }
-        })
-        return false;
-    }
-
-     */
-
     register(req, res) {
 
         let username = req.body.username;
@@ -119,14 +91,13 @@ class AccountController {
                             session.userid = username;
                             console.log(req.session);
 
-                            //window.parent.alertLogin(req, res, username);
 
-                            res.send(`Hey, ${username}! <a href=\'/api/logout'>Click to logout</a>`);
+                            //res.send("<script language='javascript'>window.alert('Your Message');window.location.href='/index.html';</script>");
+                            //res.send(`Hey, ${username}! <a href=\'/api/logout'>Click to logout</a>`);
                         }
                     }
                     if (session === null) {
 
-                        alert("hallo");
                         console.log("Invalid username or password.")
                         res.redirect('/login.html');
                     }

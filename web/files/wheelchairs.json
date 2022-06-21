@@ -1,0 +1,103 @@
+[
+  {
+    "id": 1,
+    "name": "iCHAIR MC2 1.611",
+    "category": "electric",
+    "manufacturer": "Some guy",
+    "price": 14,
+    "image": "/wheelchairs/electric/iCHAIR_MC2.png",
+    "terrain": "/wheelchairs/background/BGgrass.png",
+    "description": "Some information"
+  },
+  {
+    "id": 2,
+    "name": "MEYRA_iCHAIR_MC2_1.611",
+    "category": "electric",
+    "manufacturer": "Some other guy",
+    "price": 15,
+    "image": "/wheelchairs/electric/MEYRA_iCHAIR_MC2_1.611.png",
+    "terrain": "/wheelchairs/background/BGstone.png",
+    "description": "Some information"
+  },
+  {
+    "id": 3,
+    "name": "Optimus_2_S",
+    "category": "electric",
+    "manufacturer": "Some new guy",
+    "price": 12,
+    "image": "/wheelchairs/electric/Optimus_2_S.png",
+    "terrain": "/wheelchairs/background/BGstone.png",
+    "description": "Some information"
+  },
+
+  {
+    "id": 4,
+    "name": "CRI",
+    "category": "manual",
+    "manufacturer": "Some handsome guy",
+    "price": 8,
+    "image": "/wheelchairs/manual/CRI.png",
+    "terrain": "/wheelchairs/background/BGsnow.png",
+    "description": "Some awesome information"
+  },
+  {
+    "id": 5,
+    "name": "Format",
+    "category": "manual",
+    "manufacturer": "Another guy",
+    "price": 9,
+    "image": "/wheelchairs/manual/MO_951B_60.png",
+    "terrain": "/wheelchairs/background/BGgrass.png",
+    "description": "Some information"
+  },
+  {
+    "id": 6,
+    "name": "MO_951B_60",
+    "category": "manual",
+    "manufacturer": "Some guy",
+    "price": 8,
+    "image": "/wheelchairs/manual/MO_951B_60.png",
+    "terrain": "/wheelchairs/background/BGgrass.png",
+    "description": "Some information"
+  },
+  {
+    "id": 7,
+    "name": "Mountain_eTrike_Green",
+    "category": "manual",
+    "manufacturer": "Some guy",
+    "price": 7,
+    "image": "/wheelchairs/manual/Mountain_eTrike_Green.png",
+    "terrain": "/wheelchairs/background/BGmountain.png",
+    "description": "Some information"
+  },
+  {
+    "id": 8,
+    "name": "MWstone",
+    "category": "manual",
+    "manufacturer": "Some guy",
+    "price": 7,
+    "image": "/wheelchairs/manual/MWstone.png",
+    "terrain": "/wheelchairs/background/BGstone.png",
+    "description": "Some information"
+  },
+  {
+    "id": 9,
+    "name": "Tempo_Uniski_2",
+    "category": "manual",
+    "manufacturer": "Some guy",
+    "price": 9,
+    "image": "/wheelchairs/manual/Tempo_Uniski_2.png",
+    "terrain": "/wheelchairs/background/BGsnow.png",
+    "description": "Some information"
+  },
+  {
+    "id": 10,
+    "name": "WaterWheels",
+    "category": "manual",
+    "manufacturer": "Some guy",
+    "price": 10,
+    "image": "/wheelchairs/manual/WaterWheels.png",
+    "terrain": "/wheelchairs/background/BGbeach.png",
+    "description": "Some information"
+  }
+]
