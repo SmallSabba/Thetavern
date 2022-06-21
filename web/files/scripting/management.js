@@ -93,7 +93,7 @@ createFormDomDelete = function () {
 
     new ElementCreator("form")
         .with("class", "delete")
-        .with("action", `/api/wheelchairs/:id`)
+        //.with("action", `/api/wheelchairs/:id`)
 
         .append(new ElementCreator("p")
             .append(new ElementCreator("label")
@@ -199,8 +199,8 @@ createFormDomPost = function () {
 
     new ElementCreator("form")
         .with("class", "post")
-        .with("method", "post")
-        .with("action", `/api/categories/:category/wheelchairs`)
+        //.with("method", "post")
+        //.with("action", `/api/categories/:category/wheelchairs`)
 
         .append(new ElementCreator("p")
             .append(new ElementCreator("label")
@@ -306,8 +306,8 @@ createFormDomPut = function () {
 
     new ElementCreator("form")
         .with("class", "put")
-        .with("method", "put")
-        .with("action", `/api/wheelchairs/:id`)
+        //.with("method", "put")
+        //.with("action", `/api/wheelchairs/:id`)
 
         .append(new ElementCreator("p")
             .append(new ElementCreator("label")
@@ -384,7 +384,6 @@ createFormDomPut = function () {
         .append(new ElementCreator("p")
             .append(new ElementCreator("button")
                 .text("Send")
-                .with("type", "submit")
             )
         )
         .appendTo(document.querySelector(".form"))
