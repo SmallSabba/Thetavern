@@ -16,11 +16,9 @@ body {
     visibility: hidden;
     width: 50%;
   }
-
   .nav {
     z-index: 3;
   }
-
   .menuList {
     display: flex;
     visibility: visible;
@@ -36,7 +34,6 @@ body {
   .menuList li * {
     justify-content: right;
   }
-
   .itemContainer {
     justify-content: space-evenly;
   }
@@ -52,18 +49,15 @@ body {
     min-width: 280px;
     max-width: 30%;
   }
-
   .firstRow, .secondRow {
     flex-direction: row;
     padding-bottom: 25px;
   }
-
   .leftContainer, .rightContainer {
     width: 50%;
     margin-right: 20px;
     padding: 20px;
   }
-
   .rightContainer {
     margin-right: 0;
     margin-left: 20px;
@@ -74,7 +68,6 @@ body {
     flex-direction: column;
     padding-bottom: 0;
   }
-
   .leftContainer, .rightContainer {
     padding: 20px 0 20px 0;
     width: 100%;
@@ -126,11 +119,9 @@ body {
     visibility: visible;
     width: 30%;
   }
-
   .nav {
     z-index: 2;
   }
-
   .menuList {
     visibility: hidden;
     display: block;

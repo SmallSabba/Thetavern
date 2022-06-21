@@ -72,12 +72,15 @@ function addWheelchairToDOM(category, wheelchair) {
             )
             .append(new ElementCreator("li")
                 .append(new ElementCreator("a")
-                    .with("href", "product.html")
-
                     .append(new ElementCreator("button")
                         .with("title", "go to shop")
                         .text("Select Product")
                         .id(`wheelchair${wheelchair.id}`)
+                        .listener('click', () => {
+                            localStorage.setItem("id", wheelchair.id);
+                            console.log(parseInt(wheelchair.id));
+                            window.location.href = 'product.html';
+                        })
                     )
                 )
             )

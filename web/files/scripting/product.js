@@ -1,6 +1,59 @@
+class ElementCreator {
+    constructor(tag) {
+        this.element = document.createElement(tag);
+    }
+
+    id(id) {
+        console.log(id);
+        this.element.id = id;
+        return this;
+    }
+
+    class(clazz) {
+        this.element.class = clazz;
+        return this;
+    }
+
+    text(content) {
+        this.element.innerHTML = content;
+        return this;
+    }
+
+    with(name, value) {
+        this.element.setAttribute(name, value)
+        return this;
+    }
+
+    listener(name, listener) {
+        this.element.addEventListener(name, listener)
+        return this;
+    }
+
+    append(child) {
+        child.appendTo(this.element);
+        return this;
+    }
+
+    prependTo(parent) {
+        parent.prepend(this.element);
+        return this.element;
+    }
+
+    appendTo(parent) {
+        parent.append(this.element);
+        return this.element;
+    }
+
+    insertBefore(parent, sibling) {
+        parent.insertBefore(this.element, sibling);
+        return this.element;
+    }
+}
+
+
 window.onload = function () {
 
-    toggleToTopButton();
+ toggleToTopButton();
 
     if (innerWidth > 1080) {
         document.querySelector(".collapsible-menu").style.transition = "400ms";
@@ -198,4 +251,91 @@ function showMenuContent() {
             }
         }
     }
+}
+
+document.addEventListener("DOMContentLoaded", function (event) {
+
+    let id = localStorage.getItem("id");
+
+    fetch(`api/wheelchairs/${id}`)
+        .then(response => response.json())
+        .then(wheelchairs => {
+            console.log(wheelchairs);
+
+            new ElementCreator("img")
+                .with("src", wheelchairs.image)
+                .appendTo(document.querySelector(".productImage"))
+
+            new ElementCreator("h2")
+                .text(wheelchairs.name)
+                .with("class", "productName")
+                .appendTo(document.querySelector(".productInfo"))
+
+
+            new ElementCreator("p")
+                .text(wheelchairs.manufacturer)
+                .with("id", "manufacturerName")
+                .appendTo(document.querySelector(".productInfo"))
+
+            new ElementCreator("p")
+                .text(wheelchairs.price + "€ / day")
+                .with("class", "productPrice")
+                .appendTo(document.querySelector(".productInfo"))
+
+            new ElementCreator("p")
+                .text(wheelchairs.price + "€ / day")
+                .with("class", "productPrice")
+                .appendTo(document.querySelector(".priceInfo"))
+        })
+
+    for(let num = 0; num < 3; num++) {
+
+        let random = Math.floor(Math.random() * 9) + 1;
+
+        fetch(`api/wheelchairs/${random}`)
+            .then(response => response.json())
+            .then(wheelchairs => {
+                console.log(wheelchairs);
+                addWheelchairToDOM(wheelchairs);
+            })
+    }
+});
+
+
+function addWheelchairToDOM(wheelchair) {
+
+    let background = wheelchair.terrain;
+
+    new ElementCreator("article")
+        .with("style", `background-image: url('${background}')`)
+        .append(new ElementCreator("img")
+            .with("src", wheelchair.image)
+        )
+        .append(new ElementCreator("ul")
+            .append(new ElementCreator("li")
+                .append(new ElementCreator("p")
+                    .text(wheelchair.name)
+                )
+            )
+            .append(new ElementCreator("li")
+                .append(new ElementCreator("p")
+                    .text(wheelchair.price + "€ / day")
+                )
+            )
+            .append(new ElementCreator("li")
+                .append(new ElementCreator("a")
+                    .append(new ElementCreator("button")
+                        .with("title", "go to shop")
+                        .text("Select Product")
+                        .id(`wheelchair${wheelchair.id}`)
+                        .listener('click', () => {
+                            localStorage.setItem("id", wheelchair.id);
+                            console.log(parseInt(wheelchair.id));
+                            window.location.href = 'product.html';
+                        })
+                    )
+                )
+            )
+        )
+        .appendTo(document.querySelector(".articles"))
 }

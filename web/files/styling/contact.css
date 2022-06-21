@@ -24,11 +24,9 @@
     visibility: hidden;
     width: 50%;
   }
-
   .nav {
     z-index: 3;
   }
-
   .menuList {
     display: flex;
     visibility: visible;
@@ -50,11 +48,9 @@
     visibility: visible;
     width: 30%;
   }
-
   .nav {
     z-index: 2;
   }
-
   .menuList {
     visibility: hidden;
     display: block;

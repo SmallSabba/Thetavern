@@ -261,6 +261,7 @@ html {
     #barLabel {
 
       font-size: 220%;
+
       color: #0a4a65;
 
       border-radius: 1rem;
@@ -284,6 +285,10 @@ html {
 
         &::-webkit-scrollbar {
           display: none;
+        }
+
+        @media screen and (max-width: 660px) {
+          justify-content: space-between;
         }
 
         display: flex;

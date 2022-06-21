@@ -11,7 +11,7 @@
   },
   {
     "id": 2,
-    "name": "MEYRA_iCHAIR_MC2_1.611",
+    "name": "MC2_1.611",
     "category": "electric",
     "manufacturer": "Some other guy",
     "price": 15,
@@ -62,7 +62,7 @@
   },
   {
     "id": 7,
-    "name": "Mountain_eTrike_Green",
+    "name": "eTrike_Green",
     "category": "manual",
     "manufacturer": "Some guy",
     "price": 7,

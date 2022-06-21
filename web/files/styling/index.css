@@ -12,11 +12,9 @@
     visibility: hidden;
     width: 50%;
   }
-
   .nav {
     z-index: 3;
   }
-
   .menuList {
     display: flex;
     visibility: visible;
@@ -33,20 +31,14 @@
     justify-content: right;
   }
 }
-
-
-
-
 @media screen and (max-width: 1080px) {
   .collapsible-menu {
     visibility: visible;
     width: 30%;
   }
-
   .nav {
     z-index: 2;
   }
-
   .menuList {
     visibility: hidden;
     display: block;
@@ -188,21 +180,20 @@ html body main .topProducts {
   -ms-overflow-style: none;
   scrollbar-width: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   overflow-y: hidden;
   padding: 6rem 4rem;
   column-gap: 4rem;
   background-color: white;
   box-shadow: inset 0 2px 5px 0 rgba(50, 50, 50, 0.3);
 }
-@media screen and (min-width: 660px) {
-  html body main .topProducts {
-    justify-content: space-evenly;
-  }
-}
-
 html body main .topProducts::-webkit-scrollbar {
   display: none;
+}
+@media screen and (max-width: 660px) {
+  html body main .topProducts {
+    justify-content: space-between;
+  }
 }
 html body main .topProducts:first-child {
   padding-left: 4rem;

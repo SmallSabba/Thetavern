@@ -76,24 +76,18 @@ class WheelchairModel {
         }
     }
 
-    addCategory(category) {
+    addCategory = async (category) => {
         if (!this.wheelchairs.get(category)) {
-
-            this.wheelchairs.set(category, new Map())
+            await this.wheelchairs.set(category, new Map())
         }
     }
 
     addWheelchair(category, wheelchair) {
-
         if (!this.wheelchairs.get(category)) {
-
             throw new Error(`Unknown wheelchair category ${category}`)
         }
         wheelchair.id = WheelchairModel.WHEELCHAIR_ID++;
-
         this.getWheelchairsAsMap(category).set(wheelchair.id, wheelchair);
-
-        //console.log(this.getWheelchairsAsMap(category));
     }
 
     resolveCategory(category) {
@@ -128,7 +122,6 @@ class WheelchairModel {
     }
 
     getAllWheelchairs() {
-
         return this.getWheelchairs("electric").concat(this.getWheelchairs("manual"));
     }
 
@@ -136,46 +129,36 @@ class WheelchairModel {
         return Array.from(this.getWheelchairsAsMap(category).values());
     }
 
-    getWheelchair(id) {
+    getWheelchair = async (id) => {
         if (typeof id !== "number") {
             throw new Error(`Given id must be a number, but is a ${typeof id}`);
         }
-
-        let book = null;
-
-        const category = this.getCategory(id);
+        let wheelchair = null;
+        const category = await this.getCategory(id);
         if (category) {
-            book = this.wheelchairs.get(category).get(id);
+            wheelchair = await this.wheelchairs.get(category).get(id);
         }
-        return book;
+        return wheelchair;
     }
 
-
-    createWheelchair(category, wheelchair) {
-
-        this.addWheelchair(category, wheelchair);
-
-        return this.getWheelchair(WheelchairModel.WHEELCHAIR_ID - 1);
+    createWheelchair = async (category, wheelchair) => {
+        await this.addWheelchair(category, wheelchair);
+        return await this.getWheelchair(WheelchairModel.WHEELCHAIR_ID - 1);
     }
 
-    updateWheelchair(id, wheelchair) {
-
+    updateWheelchair = async (id, wheelchair) => {
         wheelchair.id = parseInt(wheelchair.id);
         wheelchair.price = parseInt(wheelchair.price);
-
-        Object.assign(this.getWheelchair(id), wheelchair);      /** changes all params not only differences */
+        Object.assign(await this.getWheelchair(id), wheelchair);      /** changes all params not only differences */
     }
 
     deleteWheelchair(id) {
-
+        // for delete async is not necessary
         this.getWheelchairsAsMap(this.getCategory(id)).delete(id);
     }
 }
 
 const model = new WheelchairModel();
-
-//const electrical = new Category("Electrical Wheelchairs", "electric");
-//const manual = new Category("Manual Wheelchairs", "manual");
 
 model.addCategory("electric");
 model.addCategory("manual");

@@ -18,7 +18,7 @@ function jsonReader(filePath, cb) {
 
 class AccountController {
 
-    register(req, res) {
+    register = async (req, res) => {
 
         let username = req.body.username;
         let password = req.body.password;
@@ -67,7 +67,7 @@ class AccountController {
         }
     }
 
-    login(req, res) {
+    login = async (req, res) => {
 
         let session = null;
         let username = req.body.username.toLowerCase();
@@ -110,7 +110,7 @@ class AccountController {
         }
     }
 
-    logout(req, res) {
+    logout = async (req, res) => {
 
         req.session.destroy();
         res.redirect('/index.html');
