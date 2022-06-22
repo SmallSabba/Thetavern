@@ -4,6 +4,7 @@ const controller = require("../controllers/account-controller");
 const router = new Router();
 
 // Accept the register form
+router.get('/user', controller.user);
 router.post('/register', controller.register);
 router.post('/login', controller.login);
 router.get('/logout', controller.logout);

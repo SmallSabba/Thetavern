@@ -76,6 +76,8 @@ class WheelchairController {
             //console.log(e);
             res.status(400).send(req.params.category + " does not exist. Wheelchair cannot be created.")
         }
+
+        file.write = jsonEdi
     }
 
     updateWheelchair = async (req, res) => {

@@ -24,10 +24,6 @@ const headerSubheading =
 
 window.onload = function () {
 
-    if (sessionStorage.getItem()) {
-        console.log("There is an item");
-    }
-
     toggleToTopButton();
 
     if (innerWidth > 1080) {

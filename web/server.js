@@ -26,13 +26,11 @@ app.use(sessions({
     resave: false
 }));
 
-console.log(__dirname);
 // Serving static files from folder 'files'
 app.use(express.static(path.join(__dirname, "files/structuring")));
 app.use(express.static(path.join(__dirname, "files/styling")));
 app.use(express.static(path.join(__dirname, "files/scripting")));
 app.use(express.static(path.join(__dirname, "files/resources")));
-
 
 // Parse urlencoded bodies (for form data)
 app.use(bodyParser.urlencoded({extended: true}));
@@ -46,7 +44,6 @@ app.use(cookieParser());
 // Enables all requests specified in wheelchair and account-router
 app.use('/api', wheelchairRouter);
 app.use('/api', accountRouter);
-
 
 app.listen(port, (error) => {
     if (error) {

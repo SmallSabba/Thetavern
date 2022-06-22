@@ -154,7 +154,9 @@ class WheelchairModel {
 
     deleteWheelchair(id) {
         // for delete async is not necessary
+        console.log("manual");
         this.getWheelchairsAsMap(this.getCategory(id)).delete(id);
+        console.log(this.getWheelchairs("manual"));
     }
 }
 

@@ -18,6 +18,18 @@ function jsonReader(filePath, cb) {
 
 class AccountController {
 
+    user = async (req, res) => {
+
+        console.log("user1");
+
+        if (!req.session.user) {
+            console.log("user2");
+            return
+        }
+
+    return res.send({user: req.session.user});
+    }
+
     register = async (req, res) => {
 
         let username = req.body.username;
@@ -69,15 +81,12 @@ class AccountController {
 
     login = async (req, res) => {
 
-        let session = null;
         let username = req.body.username.toLowerCase();
         let password = req.body.password;
 
         try {
 
             jsonReader("././files/users.json", (err, users) => {
-
-                console.log(users);
 
                 if (err) {
                     console.log(err);
@@ -87,20 +96,18 @@ class AccountController {
 
                         if (username === users[i].username.toLowerCase() && password === users[i].password) {
 
-                            session = req.session;
-                            session.userid = username;
-                            console.log(req.session);
-
-
-                            //res.send("<script language='javascript'>window.alert('Your Message');window.location.href='/index.html';</script>");
-                            //res.send(`Hey, ${username}! <a href=\'/api/logout'>Click to logout</a>`);
+                            req.session.user = users[i].username;
+                            req.session.save();
+                            //console.log(req.session);
+                            //console.log(req.session.user);
+                            res.redirect('/index.html');
+                            return;
                         }
                     }
-                    if (session === null) {
 
-                        console.log("Invalid username or password.")
-                        res.redirect('/login.html');
-                    }
+                    console.log("Invalid username or password.")
+                    res.redirect('/login.html');
+
                 }
             })
         } catch (err) {

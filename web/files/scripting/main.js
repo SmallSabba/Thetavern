@@ -88,7 +88,24 @@ function addWheelchairToDOM(category, wheelchair) {
         .appendTo(document.querySelector(".topProducts"))
 }
 
+let currentUser = null;
+
 document.addEventListener("DOMContentLoaded", function (event) {
+
+    console.log("here");
+
+    fetch(`/api/user`)
+
+        .then(res => {
+            
+            return res.json();
+        })
+            .then(res => {
+            currentUser = res.user;
+            console.log("test2" + currentUser);
+
+        }).catch(e => console.log(e))
+
 
     let currentCategory = "electric";
 
@@ -97,8 +114,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
         fetch(`api/categories/${currentCategory}/wheelchairs`)
             .then(response => response.json())
             .then(wheelchairs => {
-
-                console.log(wheelchairs);
 
                 let topProduct = wheelchairs[0];
                 for (let i = 1; i < wheelchairs.length; i++) {
@@ -111,5 +126,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
             })
         currentCategory = "manual";
     }
-
 });

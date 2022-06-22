@@ -1,3 +1,5 @@
+
+
 class ElementCreator {
     constructor(tag) {
         this.element = document.createElement(tag);
@@ -91,9 +93,9 @@ createFormDomDelete = function () {
         putMethod.remove();
     });
 
-    new ElementCreator("form")
+    new ElementCreator("div")
         .with("class", "delete")
-        //.with("action", `/api/wheelchairs/:id`)
+        //.with("action", `/api/wheelchairs/11`)
 
         .append(new ElementCreator("p")
             .append(new ElementCreator("label")
@@ -104,6 +106,7 @@ createFormDomDelete = function () {
                 )
             )
         )
+        /*
         .append(new ElementCreator("p")
             .append(new ElementCreator("label")
                 .text("Name")
@@ -167,11 +170,33 @@ createFormDomDelete = function () {
                 )
             )
         )
+        */
+
 
         .append(new ElementCreator("p")
             .append(new ElementCreator("button")
                 .text("Send")
                 .with("type", "submit")
+                .listener('click', (e) => {
+
+                    const form = {
+                        id: document.getElementsByName("id"),
+                        name: document.getElementsByName("name"),
+                        category: document.getElementsByName("category"),
+                        manufacturer: document.getElementsByName("manufacturer"),
+                        price: document.getElementsByName("price"),
+                        image: document.getElementsByName("image"),
+                        terrain: document.getElementsByName("terrain"),
+                        description: document.getElementsByName("description"),
+                    }
+
+                        let id = 11;
+                        fetch(`/api/wheelchairs/${id}`, {
+                            method: 'delete'
+                        }).then(response => response.json())
+
+                    }
+                )
             )
         )
         .appendTo(document.querySelector(".form"))
@@ -197,7 +222,8 @@ createFormDomPost = function () {
         putMethod.remove();
     });
 
-    new ElementCreator("form")
+
+    new ElementCreator("div")
         .with("class", "post")
         //.with("method", "post")
         //.with("action", `/api/categories/:category/wheelchairs`)
@@ -277,8 +303,39 @@ createFormDomPost = function () {
 
         .append(new ElementCreator("p")
             .append(new ElementCreator("button")
-                .text("Send")
-                .with("type", "submit")
+                    .text("Send")
+                    .listener('click', (e) => {
+
+                        const form = {
+                            id: document.getElementsByName("id"),
+                            name: document.getElementsByName("name"),
+                            category: document.getElementsByName("category"),
+                            manufacturer: document.getElementsByName("manufacturer"),
+                            price: document.getElementsByName("price"),
+                            image: document.getElementsByName("image"),
+                            terrain: document.getElementsByName("terrain"),
+                            description: document.getElementsByName("description"),
+                        }
+
+                            const category = "manual";
+                            fetch(`/api/categories/${category}/wheelchairs`, {
+                                method: 'POST',
+                                headers: {'Content-Type': 'application/json'},
+                                body: JSON.stringify({
+                                    id: form.id.value,
+                                    name: form.name.value,
+                                    category: form.category.value,
+                                    manufacturer: form.manufacturer.value,
+                                    price: form.price.value,
+                                    image: form.image.value,
+                                    terrain: form.terrain.value,
+                                    description: form.description.value,
+                                })
+                            })
+                        }
+                    )
+
+                //.with("type", "submit")
             )
         )
         .appendTo(document.querySelector(".form"))
@@ -304,7 +361,7 @@ createFormDomPut = function () {
         putMethod.remove();
     });
 
-    new ElementCreator("form")
+    new ElementCreator("div")
         .with("class", "put")
         //.with("method", "put")
         //.with("action", `/api/wheelchairs/:id`)
@@ -384,6 +441,34 @@ createFormDomPut = function () {
         .append(new ElementCreator("p")
             .append(new ElementCreator("button")
                 .text("Send")
+                .listener('click', (e) => {
+
+                    const form = {
+                        id: document.getElementsByName("id"),
+                        name: document.getElementsByName("name"),
+                        category: document.getElementsByName("category"),
+                        manufacturer: document.getElementsByName("manufacturer"),
+                        price: document.getElementsByName("price"),
+                        image: document.getElementsByName("image"),
+                        terrain: document.getElementsByName("terrain"),
+                        description: document.getElementsByName("description"),
+                    }
+
+                    fetch(`/api/wheelchairs/:id`, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            id: form.id.value,
+                            name: form.name.value,
+                            category: form.category.value,
+                            manufacturer: form.manufacturer.value,
+                            price: form.price.value,
+                            image: form.image.value,
+                            terrain: form.terrain.value,
+                            description: form.description.value,
+                        })
+                    })
+                })
             )
         )
         .appendTo(document.querySelector(".form"))
