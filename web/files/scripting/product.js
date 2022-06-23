@@ -268,13 +268,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             new ElementCreator("h2")
                 .text(wheelchairs.name)
-                .with("class", "productName")
+                .with("id", "productName")
                 .appendTo(document.querySelector(".productInfo"))
-
 
             new ElementCreator("p")
                 .text(wheelchairs.manufacturer)
                 .with("id", "manufacturerName")
+                .appendTo(document.querySelector(".productInfo"))
+
+            new ElementCreator("p")
+                .text(wheelchairs.description)
+                .with("id", "shortDescription")
                 .appendTo(document.querySelector(".productInfo"))
 
             new ElementCreator("p")

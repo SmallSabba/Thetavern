@@ -7,7 +7,7 @@
     "price": 14,
     "image": "/wheelchairs/electric/iCHAIR_MC2.png",
     "terrain": "/wheelchairs/background/BGgrass.png",
-    "description": "Some information"
+    "description": "The iCHAIR MC2 1.611 wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
   },
   {
     "id": 2,
@@ -17,7 +17,7 @@
     "price": 15,
     "image": "/wheelchairs/electric/MEYRA_iCHAIR_MC2_1.611.png",
     "terrain": "/wheelchairs/background/BGstone.png",
-    "description": "Some information"
+    "description": "The MC2_1.611 wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
   },
   {
     "id": 3,
@@ -27,7 +27,7 @@
     "price": 12,
     "image": "/wheelchairs/electric/Optimus_2_S.png",
     "terrain": "/wheelchairs/background/BGstone.png",
-    "description": "Some information"
+    "description": "The Optimus_2_S wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
   },
 
   {
@@ -38,7 +38,7 @@
     "price": 8,
     "image": "/wheelchairs/manual/CRI.png",
     "terrain": "/wheelchairs/background/BGsnow.png",
-    "description": "Some awesome information"
+    "description": "The CRI wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
   },
   {
     "id": 5,
@@ -48,7 +48,7 @@
     "price": 9,
     "image": "/wheelchairs/manual/MO_951B_60.png",
     "terrain": "/wheelchairs/background/BGgrass.png",
-    "description": "Some information"
+    "description": "The Format wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
   },
   {
     "id": 6,
@@ -58,7 +58,7 @@
     "price": 8,
     "image": "/wheelchairs/manual/MO_951B_60.png",
     "terrain": "/wheelchairs/background/BGgrass.png",
-    "description": "Some information"
+    "description": "The MO_951B_60 wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
   },
   {
     "id": 7,
@@ -68,7 +68,7 @@
     "price": 7,
     "image": "/wheelchairs/manual/Mountain_eTrike_Green.png",
     "terrain": "/wheelchairs/background/BGmountain.png",
-    "description": "Some information"
+    "description": "The eTrike_Green wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
   },
   {
     "id": 8,
@@ -78,7 +78,7 @@
     "price": 7,
     "image": "/wheelchairs/manual/MWstone.png",
     "terrain": "/wheelchairs/background/BGstone.png",
-    "description": "Some information"
+    "description": "The MWstone wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
   },
   {
     "id": 9,
@@ -88,7 +88,7 @@
     "price": 9,
     "image": "/wheelchairs/manual/Tempo_Uniski_2.png",
     "terrain": "/wheelchairs/background/BGsnow.png",
-    "description": "Some information"
+    "description": "The Tempo_Uniski_2 wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
   },
   {
     "id": 10,
@@ -98,16 +98,6 @@
     "price": 10,
     "image": "/wheelchairs/manual/WaterWheels.png",
     "terrain": "/wheelchairs/background/BGbeach.png",
-    "description": "Some information"
-  },
-  {
-    "id": 11,
-    "name": "WaterWheels",
-    "category": "manual",
-    "manufacturer": "Some guy",
-    "price": 10,
-    "image": "/wheelchairs/manual/WaterWheels.png",
-    "terrain": "/wheelchairs/background/BGbeach.png",
-    "description": "Some information"
+    "description": "The WaterWheels wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
   }
 ]

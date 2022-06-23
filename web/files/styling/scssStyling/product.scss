@@ -269,7 +269,6 @@ nav {
   align-items: center;
   justify-content: space-between;
 
-
   z-index: 2;
   min-width: fit-content;
   padding: 0.4rem 1rem;
@@ -321,7 +320,6 @@ nav {
   column-gap: 0.5rem;
   margin: 120px 2rem 10px 2rem;
 
-
   .productImage {
     text-align: center;
 
@@ -334,26 +332,34 @@ nav {
   }
 
   .productInfo {
+    //border: 1px solid red;
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
 
-    #productName {
+    * {
       padding: 1rem;
+    }
+
+    #productName {
+      //border: 1px solid blue;
       font-size: 32px;
     }
 
     #manufacturerName {
-      padding: 1rem;
-      font-size: 18px;
+      font-size: 1.5rem;
+
+    }
+
+    #shortDescription {
+      font-size: 1.1rem;
+
     }
 
     .productPrice {
-      padding: 1rem;
 
       color: #084057;
       font-size: 190%;
-
     }
   }
 
@@ -367,7 +373,6 @@ nav {
 
     row-gap: 1.5rem;
     margin: 1rem 0;
-
 
     .priceInfo {
       width: 100%;
@@ -391,7 +396,7 @@ nav {
       row-gap: 1rem;
 
       p {
-        font-size: 110%;
+        font-size: 1rem;
         padding: 0 1rem;
       }
 
@@ -469,7 +474,6 @@ nav {
 
     #returnProduct {
 
-      font-size: 120%;
       padding: 0.5rem 1rem 1rem 1rem;
     }
   }

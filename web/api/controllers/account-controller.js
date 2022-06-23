@@ -20,14 +20,11 @@ class AccountController {
 
     user = async (req, res) => {
 
-        console.log("user1");
-
-        if (!req.session.user) {
-            console.log("user2");
-            return
+        if (req.session.user === undefined) {
+            return res.send({user: null});
         }
 
-    return res.send({user: req.session.user});
+        return res.send({user: req.session.user});
     }
 
     register = async (req, res) => {
@@ -98,8 +95,8 @@ class AccountController {
 
                             req.session.user = users[i].username;
                             req.session.save();
-                            //console.log(req.session);
-                            //console.log(req.session.user);
+
+                            console.log("did it" + req.session.user);
                             res.redirect('/index.html');
                             return;
                         }
@@ -119,8 +116,8 @@ class AccountController {
 
     logout = async (req, res) => {
 
-        req.session.destroy();
-        res.redirect('/index.html');
+            req.session.destroy();
+            res.redirect('/index.html');
     }
 }
 

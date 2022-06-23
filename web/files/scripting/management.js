@@ -473,3 +473,11 @@ createFormDomPut = function () {
         )
         .appendTo(document.querySelector(".form"))
 }
+
+function testMethod() {
+
+    let id = 11;
+    fetch(`/api/wheelchairs/${id}`, {
+        method: 'delete'
+    }).then()
+}

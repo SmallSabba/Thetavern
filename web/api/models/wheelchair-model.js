@@ -43,7 +43,6 @@ class Wheelchair {
 }
 
 class WheelchairModel {
-    static CATEGORY_ID = 1;
     static WHEELCHAIR_ID = 1;
 
     constructor() {
@@ -76,9 +75,9 @@ class WheelchairModel {
         }
     }
 
-    addCategory = async (category) => {
+    addCategory(category)  {
         if (!this.wheelchairs.get(category)) {
-            await this.wheelchairs.set(category, new Map())
+            this.wheelchairs.set(category, new Map())
         }
     }
 
@@ -154,9 +153,7 @@ class WheelchairModel {
 
     deleteWheelchair(id) {
         // for delete async is not necessary
-        console.log("manual");
         this.getWheelchairsAsMap(this.getCategory(id)).delete(id);
-        console.log(this.getWheelchairs("manual"));
     }
 }
 

@@ -79,7 +79,6 @@ window.onload = function () {
 
 
 document.getElementById("collapsible").addEventListener("click", boxClicked);
-//document.querySelector(".containerHeader").addEventListener("mouseover", toggleLabelHover);
 window.addEventListener("resize", showMenuContent);
 window.addEventListener("scroll", toggleToTopButton);
 
@@ -98,7 +97,6 @@ let allowDeactivation;
 
 function toggleToTopButton() {
 
-
     if (window.scrollY >= innerHeight / 4 * 3) {
         document.querySelector(".toTop").style.opacity = "1";
 
@@ -106,31 +104,7 @@ function toggleToTopButton() {
         document.querySelector(".toTop").style.opacity = "0";
 
     }
-    /*
-    if (button.style.opacity === "0" && window.scrollY < innerHeight / 4 * 3) {
-        setTimeout(display, 2000);
-
-    } else if (button.style.opacity === "1") {
-
-        setTimeout(display2, 3000);
-    }
-     */
-
 }
-
-/*
-function display() {
-
-    if (button.style.opacity === "0") button.style.display = "none";
-
-}
-function display2() {
-
-    if (button.style.opacity === "1") button.style.display = "block";
-}
-
- */
-
 
 function showMenuContent() {
 
@@ -237,97 +211,56 @@ function toggleLabelHover() {
     }
 }
 
+function addWheelchairToDOM(wheelchair, category) {
+
+    let background = wheelchair.terrain;
+
+    new ElementCreator("article")
+        .with("style", `background-image: url('${background}')`)
+        .append(new ElementCreator("img")
+            .with("src", wheelchair.image)
+        )
+
+        .append(new ElementCreator("ul")
+            .append(new ElementCreator("li")
+                .append(new ElementCreator("p")
+                    .text(wheelchair.name)
+                )
+            )
+            .append(new ElementCreator("li")
+                .append(new ElementCreator("p")
+                    .text(wheelchair.price + "€ / day")
+                )
+            )
+            .append(new ElementCreator("li")
+                .append(new ElementCreator("a")
+                    .append(new ElementCreator("button")
+                        .with("title", "go to shop")
+                        .text("Select Product")
+                        .id(`wheelchair${wheelchair.id}`)
+                        .listener('click', () => {
+                            localStorage.setItem("id", wheelchair.id);
+                            console.log(parseInt(wheelchair.id));
+                            window.location.href = 'product.html';
+                        })
+                    )
+                )
+            )
+        )
+        .appendTo(document.querySelector(`#${category}`));
+}
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    fetch("/api/categories/wheelchairs")
+    fetch("/api/wheelchairs")
         .then(response => response.json())
         .then(wheelchairs => {
-            for(let i = 1; i < wheelchairs.length; i++) {
-                if(wheelchairs[i].category === "manual")
-                addWheelchairToDOMManual(wheelchairs[i]);
+            for (let i = 0; i < wheelchairs.length; i++) {
+                if (wheelchairs[i].category === "manual")
+                    addWheelchairToDOM(wheelchairs[i], "manual");
                 else {
-                    addWheelchairToDOMElectric(wheelchairs[i]);
+                    addWheelchairToDOM(wheelchairs[i], "electric");
                 }
             }
         })
-});
-
-
-function addWheelchairToDOMManual(wheelchair) {
-
-    let background = wheelchair.terrain;
-
-    new ElementCreator("article")
-        .with("style", `background-image: url('${background}')`)
-        .append(new ElementCreator("img")
-            .with("src", wheelchair.image)
-        )
-        .append(new ElementCreator("ul")
-            .append(new ElementCreator("li")
-                .append(new ElementCreator("p")
-                    .text(wheelchair.name)
-                )
-            )
-            .append(new ElementCreator("li")
-                .append(new ElementCreator("p")
-                    .text(wheelchair.price + "€ / day")
-                )
-            )
-            .append(new ElementCreator("li")
-                .append(new ElementCreator("a")
-                    .append(new ElementCreator("button")
-                        .with("title", "go to shop")
-                        .text("Select Product")
-                        .id(`wheelchair${wheelchair.id}`)
-                        .listener('click', () => {
-                            localStorage.setItem("id", wheelchair.id);
-                            console.log(parseInt(wheelchair.id));
-                            window.location.href = 'product.html';
-                        })
-                    )
-                )
-            )
-        )
-        .appendTo(document.querySelector("#manual"));
-}
-
-
-function addWheelchairToDOMElectric(wheelchair) {
-
-    let background = wheelchair.terrain;
-
-    new ElementCreator("article")
-        .with("style", `background-image: url('${background}')`)
-        .append(new ElementCreator("img")
-            .with("src", wheelchair.image)
-        )
-        .append(new ElementCreator("ul")
-            .append(new ElementCreator("li")
-                .append(new ElementCreator("p")
-                    .text(wheelchair.name)
-                )
-            )
-            .append(new ElementCreator("li")
-                .append(new ElementCreator("p")
-                    .text(wheelchair.price + "€ / day")
-                )
-            )
-            .append(new ElementCreator("li")
-                .append(new ElementCreator("a")
-                    .append(new ElementCreator("button")
-                        .with("title", "go to shop")
-                        .text("Select Product")
-                        .id(`wheelchair${wheelchair.id}`)
-                        .listener('click', () => {
-                            localStorage.setItem("id", wheelchair.id);
-                            console.log(parseInt(wheelchair.id));
-                            window.location.href = 'product.html';
-                        })
-                    )
-                )
-            )
-        )
-        .appendTo(document.querySelector("#electric"));
-}
-
+})

@@ -1,4 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap");
+@keyframes appearEdit {
+  from {
+    transform: translateX(0) translateY(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(160%) translateY(-30%);
+    opacity: 1;
+  }
+}
+@keyframes appearRemove {
+  from {
+    transform: translateX(0) translateY(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(50%) translateY(-120%);
+    opacity: 1;
+  }
+}
 *,
 *::before,
 *::after {
@@ -12,9 +32,11 @@
     visibility: hidden;
     width: 50%;
   }
+
   .nav {
-    z-index: 3;
+    z-index: 12;
   }
+
   .menuList {
     display: flex;
     visibility: visible;
@@ -36,9 +58,11 @@
     visibility: visible;
     width: 30%;
   }
+
   .nav {
-    z-index: 2;
+    z-index: 8;
   }
+
   .menuList {
     visibility: hidden;
     display: block;
@@ -119,16 +143,18 @@ html body nav ul li {
 }
 html body nav ul li a {
   font-size: 18px;
+  color: #0a4a65;
   text-decoration: none;
-  color: var(--fc-black);
   display: flex;
   gap: 0.5rem;
+  cursor: pointer;
 }
 html body nav ul li a svg {
+  fill: #0a4a65;
   width: 1.5rem;
 }
-html body nav ul li a .beside-icon {
-  font-size: 110%;
+html body nav ul li a i {
+  font-size: 100%;
   margin-top: 0.1rem;
 }
 html body nav ul li:active, html body nav ul li:hover {
@@ -149,7 +175,7 @@ html body .collapsible-menu {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 2;
+  z-index: 10;
   min-width: fit-content;
   padding: 0.4rem 1rem;
   border-radius: 3rem;
@@ -201,7 +227,16 @@ html body main .topProducts:first-child {
 html body main .topProducts:last-child {
   padding-right: 4rem;
 }
-html body main .topProducts article {
+html body main .topProducts .articleContainer1, html body main .topProducts .articleContainer2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  min-width: 340px;
+  height: 400px;
+}
+html body main .topProducts .articleContainer1 article, html body main .topProducts .articleContainer2 article {
+  position: relative;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -216,39 +251,68 @@ html body main .topProducts article {
   border-radius: 1.75rem;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
 }
-html body main .topProducts article img {
-  position: relative;
+html body main .topProducts .articleContainer1 article img, html body main .topProducts .articleContainer2 article img {
+  position: absolute;
   left: -25%;
   top: -20%;
   width: 45%;
 }
-html body main .topProducts article ul {
-  position: relative;
-  top: -140px;
+html body main .topProducts .articleContainer1 article .editIconelectric, html body main .topProducts .articleContainer1 article .editIconmanual, html body main .topProducts .articleContainer1 article .removeIconelectric, html body main .topProducts .articleContainer1 article .removeIconmanual, html body main .topProducts .articleContainer2 article .editIconelectric, html body main .topProducts .articleContainer2 article .editIconmanual, html body main .topProducts .articleContainer2 article .removeIconelectric, html body main .topProducts .articleContainer2 article .removeIconmanual {
+  animation-timing-function: cubic-bezier(0.75, 0, 0.14, 0.57);
+  animation-fill-mode: forwards;
+  color: rgb(2, 121, 115);
+  position: absolute;
+  display: none;
+  z-index: 1;
+  margin: 0.8rem;
+  transition-duration: 0.3s;
+}
+html body main .topProducts .articleContainer1 article .removeIconelectric, html body main .topProducts .articleContainer1 article .removeIconmanual, html body main .topProducts .articleContainer2 article .removeIconelectric, html body main .topProducts .articleContainer2 article .removeIconmanual {
+  animation-name: appearRemove;
+  animation-duration: 1.2s;
+  padding: 0.4rem 0.8rem;
+  font-size: 2rem;
+  top: 0;
+  right: 5%;
+}
+html body main .topProducts .articleContainer1 article .removeIconelectric:hover, html body main .topProducts .articleContainer1 article .removeIconmanual:hover, html body main .topProducts .articleContainer2 article .removeIconelectric:hover, html body main .topProducts .articleContainer2 article .removeIconmanual:hover {
+  color: #0a4a65;
+  font-size: 2.3rem;
+}
+html body main .topProducts .articleContainer1 article .editIconelectric, html body main .topProducts .articleContainer1 article .editIconmanual, html body main .topProducts .articleContainer2 article .editIconelectric, html body main .topProducts .articleContainer2 article .editIconmanual {
+  animation-name: appearEdit;
+  animation-duration: 1.2s;
+  padding: 0.5rem 0.7rem;
+  font-size: 1.8rem;
+  top: 0;
+  right: 5%;
+}
+html body main .topProducts .articleContainer1 article .editIconelectric:hover, html body main .topProducts .articleContainer1 article .editIconmanual:hover, html body main .topProducts .articleContainer2 article .editIconelectric:hover, html body main .topProducts .articleContainer2 article .editIconmanual:hover {
+  color: #0a4a65;
+  font-size: 2.2rem;
+}
+html body main .topProducts .articleContainer1 article ul, html body main .topProducts .articleContainer2 article ul {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: 100%;
-  height: 100%;
-  padding: 1rem 0;
-  margin: 1rem 0;
+  min-height: inherit;
   text-align: center;
   list-style: none;
 }
-html body main .topProducts article ul li {
+html body main .topProducts .articleContainer1 article ul li, html body main .topProducts .articleContainer2 article ul li {
   display: block;
 }
-html body main .topProducts article ul li:first-child p {
+html body main .topProducts .articleContainer1 article ul li:first-child p, html body main .topProducts .articleContainer2 article ul li:first-child p {
   font-family: var(--ff-heading);
   font-weight: bold;
   font-size: 1.5rem;
 }
-html body main .topProducts article ul li:nth-child(2) p {
+html body main .topProducts .articleContainer1 article ul li:nth-child(2) p, html body main .topProducts .articleContainer2 article ul li:nth-child(2) p {
   font-family: var(--ff-body);
   font-weight: lighter;
   font-size: 1rem;
 }
-html body main .topProducts article ul li button {
+html body main .topProducts .articleContainer1 article ul li button, html body main .topProducts .articleContainer2 article ul li button {
   font-family: var(--ff-body);
   font-weight: bold;
   cursor: pointer;
@@ -260,7 +324,7 @@ html body main .topProducts article ul li button {
   border-radius: 1.75rem;
   transition-duration: 400ms;
 }
-html body main .topProducts article ul li button:active, html body main .topProducts article ul li button:hover {
+html body main .topProducts .articleContainer1 article ul li button:active, html body main .topProducts .articleContainer1 article ul li button:hover, html body main .topProducts .articleContainer2 article ul li button:active, html body main .topProducts .articleContainer2 article ul li button:hover {
   border-radius: 1.75rem;
   background-color: #084057;
   color: white;

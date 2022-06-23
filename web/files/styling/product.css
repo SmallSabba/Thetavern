@@ -16,9 +16,11 @@ body {
     visibility: hidden;
     width: 50%;
   }
+
   .nav {
     z-index: 3;
   }
+
   .menuList {
     display: flex;
     visibility: visible;
@@ -34,6 +36,7 @@ body {
   .menuList li * {
     justify-content: right;
   }
+
   .itemContainer {
     justify-content: space-evenly;
   }
@@ -49,15 +52,18 @@ body {
     min-width: 280px;
     max-width: 30%;
   }
+
   .firstRow, .secondRow {
     flex-direction: row;
     padding-bottom: 25px;
   }
+
   .leftContainer, .rightContainer {
     width: 50%;
     margin-right: 20px;
     padding: 20px;
   }
+
   .rightContainer {
     margin-right: 0;
     margin-left: 20px;
@@ -68,6 +74,7 @@ body {
     flex-direction: column;
     padding-bottom: 0;
   }
+
   .leftContainer, .rightContainer {
     padding: 20px 0 20px 0;
     width: 100%;
@@ -119,9 +126,11 @@ body {
     visibility: visible;
     width: 30%;
   }
+
   .nav {
     z-index: 2;
   }
+
   .menuList {
     visibility: hidden;
     display: block;
@@ -242,16 +251,19 @@ nav ul li:active a, nav ul li:hover a {
   flex-direction: column;
   row-gap: 1rem;
 }
-.itemContainer .productInfo #productName {
+.itemContainer .productInfo * {
   padding: 1rem;
+}
+.itemContainer .productInfo #productName {
   font-size: 32px;
 }
 .itemContainer .productInfo #manufacturerName {
-  padding: 1rem;
-  font-size: 18px;
+  font-size: 1.5rem;
+}
+.itemContainer .productInfo #shortDescription {
+  font-size: 1.1rem;
 }
 .itemContainer .productInfo .productPrice {
-  padding: 1rem;
   color: #084057;
   font-size: 190%;
 }
@@ -281,7 +293,7 @@ nav ul li:active a, nav ul li:hover a {
   row-gap: 1rem;
 }
 .itemContainer .productSelection .additionalInformation p {
-  font-size: 110%;
+  font-size: 1rem;
   padding: 0 1rem;
 }
 .itemContainer .productSelection .additionalInformation #available {
@@ -337,7 +349,6 @@ nav ul li:active a, nav ul li:hover a {
   transition: 0.3s;
 }
 .itemContainer .productSelection #returnProduct {
-  font-size: 120%;
   padding: 0.5rem 1rem 1rem 1rem;
 }
 
