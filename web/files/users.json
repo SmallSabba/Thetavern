@@ -1,6 +1,6 @@
 [
   {
-    "username": "Kilian",
+    "username": "kilian",
     "password": "pw1",
     "email": "kilian@h3.com"
   },
@@ -15,8 +15,8 @@
     "email": "max@h3.com"
   },
   {
-    "username": "niklas",
-    "password": "pw4",
-    "email": "max@kilian.oliver"
+    "username": "test",
+    "password": "testtest",
+    "email": "test@test.test"
   }
 ]

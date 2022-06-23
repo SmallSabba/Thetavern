@@ -1,5 +1,3 @@
-
-
 class ElementCreator {
     constructor(tag) {
         this.element = document.createElement(tag);
@@ -53,431 +51,153 @@ class ElementCreator {
 }
 
 
-checkMethodCall = function () {
-    const methodCallType = document.getElementsByName('method');
-    for (let i = 0; i < methodCallType.length; i++) {
-        if (methodCallType[i].checked === true) {
-            if (methodCallType[i].value === "delete") {
-                createFormDomDelete();
-                window.MethodType = methodCallType[i].value;
-                console.log(methodCallType[i].value);
-            } else if (methodCallType[i].value === "post") {
-                createFormDomPost();
-                window.MethodType = methodCallType[i].value;
-                console.log(methodCallType[i].value);
-            } else {
-                createFormDomPut();
-                window.MethodType = methodCallType[i].value;
-                console.log(methodCallType[i].value);
-            }
-        }
-    }
-}
-
-createFormDomDelete = function () {
-    const deleteMethod = document.querySelectorAll('.delete');
-
-    deleteMethod.forEach(deleteMethod => {
-        deleteMethod.remove();
+generateChangePassword = function () {
+    const removePasswordContainer = document.querySelectorAll('.changePassword');
+    removePasswordContainer.forEach(removePasswordContainer => {
+        removePasswordContainer.remove();
     })
 
-    const postMethod = document.querySelectorAll('.post');
 
-    postMethod.forEach(postMethod => {
-        postMethod.remove();
-    });
-
-    const putMethod = document.querySelectorAll('.put');
-
-    putMethod.forEach(putMethod => {
-        putMethod.remove();
-    });
-
-    new ElementCreator("div")
-        .with("class", "delete")
-        //.with("action", `/api/wheelchairs/11`)
-
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("ID")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "id")
-                )
-            )
-        )
-        /*
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Name")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "name")
-                )
-            )
-        )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Category")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "category")
-                )
-            )
-        )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Manufacturer")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "manufacturer")
-                )
-            )
-        )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Price")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "price")
-                )
-            )
-        )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Image")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "image")
-                )
-            )
-        )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Terrain")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "terrain")
-                )
-            )
-        )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Description")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "description")
-                )
-            )
-        )
-        */
-
-
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("button")
-                .text("Send")
-                .with("type", "submit")
-                .listener('click', (e) => {
-
-                    const form = {
-                        id: document.getElementsByName("id"),
-                        name: document.getElementsByName("name"),
-                        category: document.getElementsByName("category"),
-                        manufacturer: document.getElementsByName("manufacturer"),
-                        price: document.getElementsByName("price"),
-                        image: document.getElementsByName("image"),
-                        terrain: document.getElementsByName("terrain"),
-                        description: document.getElementsByName("description"),
-                    }
-
-                        let id = 11;
-                        fetch(`/api/wheelchairs/${id}`, {
-                            method: 'delete'
-                        }).then(response => response.json())
-
-                    }
-                )
-            )
-        )
-        .appendTo(document.querySelector(".form"))
-}
-
-
-createFormDomPost = function () {
-    const deleteMethod = document.querySelectorAll('.delete');
-
-    deleteMethod.forEach(deleteMethod => {
-        deleteMethod.remove();
+    const removeUsernameContainer = document.querySelectorAll('.changeUsername');
+    removeUsernameContainer.forEach(removeUsernameContainer => {
+        removeUsernameContainer.remove();
     })
-
-    const postMethod = document.querySelectorAll('.post');
-
-    postMethod.forEach(postMethod => {
-        postMethod.remove();
-    });
-
-    const putMethod = document.querySelectorAll('.put');
-
-    putMethod.forEach(putMethod => {
-        putMethod.remove();
-    });
 
 
     new ElementCreator("div")
-        .with("class", "post")
-        //.with("method", "post")
-        //.with("action", `/api/categories/:category/wheelchairs`)
+        .with("class", "changePassword")
 
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("ID")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "id")
-                )
-            )
+        .append(new ElementCreator("input")
+            .with("type", "text")
+            .with("class", "oldPassword")
+            .with("placeholder","Old password")
         )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Name")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "name")
-                )
-            )
+        .append(new ElementCreator("input")
+            .with("type", "text")
+            .with("class", "newPassword")
+            .with("placeholder","New password")
         )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Category")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "category")
-                )
-            )
-        )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Manufacturer")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "manufacturer")
-                )
-            )
-        )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Price")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "price")
-                )
-            )
-        )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Image")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "image")
-                )
-            )
-        )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Terrain")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "terrain")
-                )
-            )
-        )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Description")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "description")
-                )
-            )
+        .append(new ElementCreator("button")
+            .text("Click to save")
+            .listener('click', () => changePassword())
         )
 
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("button")
-                    .text("Send")
-                    .listener('click', (e) => {
-
-                        const form = {
-                            id: document.getElementsByName("id"),
-                            name: document.getElementsByName("name"),
-                            category: document.getElementsByName("category"),
-                            manufacturer: document.getElementsByName("manufacturer"),
-                            price: document.getElementsByName("price"),
-                            image: document.getElementsByName("image"),
-                            terrain: document.getElementsByName("terrain"),
-                            description: document.getElementsByName("description"),
-                        }
-
-                            const category = "manual";
-                            fetch(`/api/categories/${category}/wheelchairs`, {
-                                method: 'POST',
-                                headers: {'Content-Type': 'application/json'},
-                                body: JSON.stringify({
-                                    id: form.id.value,
-                                    name: form.name.value,
-                                    category: form.category.value,
-                                    manufacturer: form.manufacturer.value,
-                                    price: form.price.value,
-                                    image: form.image.value,
-                                    terrain: form.terrain.value,
-                                    description: form.description.value,
-                                })
-                            })
-                        }
-                    )
-
-                //.with("type", "submit")
-            )
-        )
-        .appendTo(document.querySelector(".form"))
+        .appendTo(document.querySelector(".account"))
 }
 
 
-createFormDomPut = function () {
-    const deleteMethod = document.querySelectorAll('.delete');
-
-    deleteMethod.forEach(deleteMethod => {
-        deleteMethod.remove();
+generateChangeUsername = function () {
+    const removePasswordContainer = document.querySelectorAll('.changePassword');
+    removePasswordContainer.forEach(removePasswordContainer => {
+        removePasswordContainer.remove();
     })
 
-    const postMethod = document.querySelectorAll('.post');
 
-    postMethod.forEach(postMethod => {
-        postMethod.remove();
-    });
-
-    const putMethod = document.querySelectorAll('.put');
-
-    putMethod.forEach(putMethod => {
-        putMethod.remove();
-    });
+    const removeUsernameContainer = document.querySelectorAll('.changeUsername');
+    removeUsernameContainer.forEach(removeUsernameContainer => {
+        removeUsernameContainer.remove();
+    })
 
     new ElementCreator("div")
-        .with("class", "put")
-        //.with("method", "put")
-        //.with("action", `/api/wheelchairs/:id`)
+        .with("class","changeUsername")
 
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("ID")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "id")
-                )
-            )
+        .append(new ElementCreator("input")
+            .with("type", "text")
+            .with("class", "oldUsername")
+            .with("placeholder","Old username")
         )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Name")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "name")
-                )
-            )
+        .append(new ElementCreator("input")
+            .with("type", "text")
+            .with("class", "newUsername")
+            .with("placeholder", "New username")
         )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Category")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "category")
-                )
-            )
+        .append(new ElementCreator("button")
+            .text("Click to save")
+            .listener('click', () => changeUsername())
         )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Manufacturer")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "manufacturer")
-                )
-            )
-        )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Price")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "price")
-                )
-            )
-        )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Image")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "image")
-                )
-            )
-        )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Terrain")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "terrain")
-                )
-            )
-        )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("label")
-                .text("Description")
-                .append(new ElementCreator("input")
-                    .with("type", "text")
-                    .with("name", "description")
-                )
-            )
-        )
-        .append(new ElementCreator("p")
-            .append(new ElementCreator("button")
-                .text("Send")
-                .listener('click', (e) => {
 
-                    const form = {
-                        id: document.getElementsByName("id"),
-                        name: document.getElementsByName("name"),
-                        category: document.getElementsByName("category"),
-                        manufacturer: document.getElementsByName("manufacturer"),
-                        price: document.getElementsByName("price"),
-                        image: document.getElementsByName("image"),
-                        terrain: document.getElementsByName("terrain"),
-                        description: document.getElementsByName("description"),
-                    }
-
-                    fetch(`/api/wheelchairs/:id`, {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({
-                            id: form.id.value,
-                            name: form.name.value,
-                            category: form.category.value,
-                            manufacturer: form.manufacturer.value,
-                            price: form.price.value,
-                            image: form.image.value,
-                            terrain: form.terrain.value,
-                            description: form.description.value,
-                        })
-                    })
-                })
-            )
-        )
-        .appendTo(document.querySelector(".form"))
+        .appendTo(document.querySelector(".account"))
 }
 
-function testMethod() {
 
-    let id = 11;
-    fetch(`/api/wheelchairs/${id}`, {
+deleteAccount = async (req, res) => {
+
+    fetch('/api/user/delete', {
         method: 'delete'
-    }).then()
+    }).then(() => {
+        console.log("finished");
+        window.location.href = 'index.html';
+    })
+}
+
+changePassword = async (req, res) => {
+
+    let oldPassword = document.querySelector(".oldPassword").value;
+    let newPassword = document.querySelector(".newPassword").value;
+
+    fetch('/api/user/verifyPassword', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            oldPassword: oldPassword,
+            newPassword: newPassword,
+        }),
+    }).then(res => res.json())
+        .then(data => {
+            console.log(data.bo)
+            if (data.bo) {
+            fetch('/api/user/changePassword', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    oldPassword: oldPassword,
+                    newPassword: newPassword,
+                }),
+            }).then(() => {
+                console.log("finished");
+                window.location.href = 'index.html';
+            })
+        } else {
+            console.log("Your password is not correct.")
+            alert("Your password is not correct.")
+        }
+    })
+}
+
+changeUsername = async (req, res) => {
+
+
+
+    let oldUsername = document.querySelector(".oldUsername").value;
+    let newUsername = document.querySelector(".newUsername").value;
+
+    console.log(oldUsername + "    " + newUsername);
+
+
+    fetch('/api/user/verifyUsername', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            oldUsername: oldUsername,
+            newUsername: newUsername,
+        }),
+    }).then(res => res.json())
+        .then(data => {
+        if (data.bo) {
+            fetch('/api/user/changeUsername', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    oldUsername: oldUsername,
+                    newUsername: newUsername,
+                }),
+            }).then(() => {
+                console.log("finished");
+                window.location.href = 'index.html';
+            })
+        } else {
+            console.log("Your username is not correct.")
+            alert("Your username is not correct.")
+        }
+    })
 }
