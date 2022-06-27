@@ -21,10 +21,12 @@ class AccountController {
     getUser = async (req, res) => {
 
         if (req.session.user === undefined) {
-            return res.send({user: null});
+            return res.send({user: null, admin: null});
         }
-
-        return res.send({user: req.session.user});
+        if (req.session.authorized) {
+            return res.send({user: req.session.user, admin: true});
+        }
+        return res.send({user: req.session.user, admin: false});
     }
 
     register = async (req, res) => {
@@ -52,7 +54,8 @@ class AccountController {
                     const newUser = {
                         username: username,
                         password: password,
-                        email: email
+                        email: email,
+                        authorized: false
                     }
                     users.push(newUser);
                     console.log(users);
@@ -94,8 +97,8 @@ class AccountController {
                         if (username === users[i].username.toLowerCase() && password === users[i].password) {
 
                             req.session.user = users[i].username;
+                            req.session.authorized = users[i].authorized;
                             req.session.save();
-
 
                             console.log("did it" + req.session.user);
                             res.redirect('/index.html');

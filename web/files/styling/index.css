@@ -27,17 +27,28 @@
   margin: 0;
 }
 
+svg {
+  fill: #0a4a65;
+  width: 1.8rem;
+}
+
 @media screen {
   .collapsible-menu {
     visibility: hidden;
     width: 50%;
   }
+  .collapsible-menu ul {
+    box-shadow: 0 0 0 0 rgba(50, 50, 50, 0.3);
+  }
+
   .nav {
     z-index: 12;
   }
+
   .menuList {
     display: flex;
     visibility: visible;
+    max-height: 70px;
   }
   .menuList li {
     transition-duration: 400ms;
@@ -54,15 +65,23 @@
 @media screen and (max-width: 1080px) {
   .collapsible-menu {
     visibility: visible;
+    min-width: fit-content;
+    z-index: 10;
     width: 30%;
   }
+  .collapsible-menu ul {
+    box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+  }
+
   .nav {
     z-index: 8;
   }
+
   .menuList {
     visibility: hidden;
     display: block;
     text-align: right;
+    max-height: fit-content;
     padding: 2rem 1rem 1rem 1rem;
   }
   .menuList li {
@@ -73,7 +92,10 @@
     justify-content: right;
   }
   .menuList li:first-child {
-    margin-top: 3.5rem;
+    margin-top: 5rem;
+  }
+  .menuList li:last-child {
+    display: none;
   }
 }
 :root {
@@ -121,23 +143,21 @@ html body header .slogan p {
   font-size: var(--fs-subHeading);
   color: var(--fc-white);
 }
-html body nav {
+html body .nav, html body .collapsible-menu {
   position: fixed;
   top: 1rem;
   right: 1rem;
 }
-html body nav ul {
+html body .nav ul, html body .collapsible-menu ul {
   padding: 0.5rem 1rem;
   border-radius: 3rem;
-  display: flex;
   list-style: none;
   background-color: white;
-  box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
 }
-html body nav ul li {
+html body .nav ul li, html body .collapsible-menu ul li {
   border-radius: 3rem;
 }
-html body nav ul li a {
+html body .nav ul li a, html body .collapsible-menu ul li a {
   font-size: 18px;
   color: #0a4a65;
   text-decoration: none;
@@ -145,60 +165,117 @@ html body nav ul li a {
   gap: 0.5rem;
   cursor: pointer;
 }
-html body nav ul li a svg {
-  fill: #0a4a65;
-  width: 1.5rem;
+html body .nav ul {
+  box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
 }
-html body nav ul li a i {
-  font-size: 100%;
-  margin-top: 0.1rem;
-}
-html body nav ul li:active, html body nav ul li:hover {
+html body .nav li:active, html body .nav li:hover {
   background-color: #0a4a65;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
   padding: 1rem 1.5rem;
   transition-duration: 400ms;
 }
-html body nav ul li:active svg, html body nav ul li:hover svg {
+html body .nav li:active svg, html body .nav li:hover svg {
   fill: #c1e3f3;
 }
-html body nav ul li:active a, html body nav ul li:hover a {
+html body .nav li:active a, html body .nav li:hover a {
   color: #c1e3f3;
 }
-html body .collapsible-menu {
-  background-color: white;
-  position: fixed;
+html body .collapsible-menu ul {
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  z-index: 10;
-  min-width: fit-content;
-  padding: 0.4rem 1rem;
-  border-radius: 3rem;
-  top: 1rem;
-  right: 1rem;
+  column-gap: 0.5rem;
+  max-height: 70px;
+}
+html body .collapsible-menu ul .menuBars {
+  color: #0a4a65;
+  border-radius: 2rem;
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+}
+html body .collapsible-menu ul li {
+  padding: 1rem 1rem;
+  transition-duration: 400ms;
+}
+html body .collapsible-menu ul li label {
+  font-size: 200%;
+  cursor: pointer;
+}
+html body .collapsible-menu ul li:hover:not(.menuBars) {
+  background-color: #0a4a65;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+  padding: 1rem 1.5rem;
 }
-html body .menu-icons {
-  font-size: 220%;
-  color: #0a4a65;
-  border-radius: 1rem;
-  padding: 0.5rem 1rem;
-  transition: background-color 0.4s;
-  cursor: pointer;
+html body .collapsible-menu ul li:hover:not(.menuBars) svg {
+  fill: #c1e3f3;
 }
-html body #barLabel {
-  font-size: 220%;
-  color: #0a4a65;
-  border-radius: 1rem;
-  padding: 0.5rem 1rem;
-  transition: background-color 0.4s;
-  cursor: pointer;
+html body .collapsible-menu ul li:hover:not(.menuBars) a {
+  color: #c1e3f3;
 }
-html body #collapsible {
+html #collapsible {
   display: none;
 }
-html body main .topProducts {
+html .deleteConfirmMessage {
+  background-color: rgba(7, 59, 77, 0.94);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  row-gap: 2.5rem;
+  z-index: 5;
+  padding: 4rem 2rem 3rem 2rem;
+  border-radius: 2rem;
+}
+html .deleteConfirmMessage p {
+  text-align: center;
+  max-width: 350px;
+  color: #c1e3f3;
+  font-size: 22px;
+}
+html .deleteConfirmMessage i {
+  color: #c1e3f3;
+  position: absolute;
+  cursor: pointer;
+  padding: 0.1rem 0.4rem;
+  font-size: 1.8rem;
+  top: 3%;
+  right: 2%;
+  transition-duration: 0.3s;
+}
+html .deleteConfirmMessage i:hover {
+  color: red;
+}
+html .deleteConfirmMessage .buttonContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  column-gap: 2rem;
+}
+html .deleteConfirmMessage .buttonContainer button {
+  color: #c1e3f3;
+  cursor: pointer;
+  border: none;
+  transition-duration: 0.3s;
+  border-radius: 2rem;
+  min-width: 110px;
+  padding: 0.8rem;
+  font-size: 16px;
+}
+html .deleteConfirmMessage .buttonContainer #cancelButton {
+  background-color: mediumseagreen;
+}
+html .deleteConfirmMessage .buttonContainer #cancelButton:hover {
+  background-color: #24804e;
+}
+html .deleteConfirmMessage .buttonContainer #confirmButton {
+  background-color: #962c2c;
+}
+html .deleteConfirmMessage .buttonContainer #confirmButton:hover {
+  background-color: #7c2222;
+}
+html main .topProducts {
   -ms-overflow-style: none;
   scrollbar-width: none;
   display: flex;
@@ -209,21 +286,21 @@ html body main .topProducts {
   background-color: white;
   box-shadow: inset 0 2px 5px 0 rgba(50, 50, 50, 0.3);
 }
-html body main .topProducts::-webkit-scrollbar {
+html main .topProducts::-webkit-scrollbar {
   display: none;
 }
 @media screen and (max-width: 660px) {
-  html body main .topProducts {
+  html main .topProducts {
     justify-content: space-between;
   }
 }
-html body main .topProducts:first-child {
+html main .topProducts:first-child {
   padding-left: 4rem;
 }
-html body main .topProducts:last-child {
+html main .topProducts:last-child {
   padding-right: 4rem;
 }
-html body main .topProducts .articleContainer1, html body main .topProducts .articleContainer2 {
+html main .topProducts .articleContainer1, html main .topProducts .articleContainer2 {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -231,7 +308,7 @@ html body main .topProducts .articleContainer1, html body main .topProducts .art
   min-width: 340px;
   height: 400px;
 }
-html body main .topProducts .articleContainer1 article, html body main .topProducts .articleContainer2 article {
+html main .topProducts .articleContainer1 article, html main .topProducts .articleContainer2 article {
   position: relative;
   background-repeat: no-repeat;
   background-position: center;
@@ -247,13 +324,13 @@ html body main .topProducts .articleContainer1 article, html body main .topProdu
   border-radius: 1.75rem;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
 }
-html body main .topProducts .articleContainer1 article img, html body main .topProducts .articleContainer2 article img {
+html main .topProducts .articleContainer1 article img, html main .topProducts .articleContainer2 article img {
   position: absolute;
   left: -25%;
   top: -20%;
   width: 45%;
 }
-html body main .topProducts .articleContainer1 article .editIconelectric, html body main .topProducts .articleContainer1 article .editIconmanual, html body main .topProducts .articleContainer1 article .removeIconelectric, html body main .topProducts .articleContainer1 article .removeIconmanual, html body main .topProducts .articleContainer2 article .editIconelectric, html body main .topProducts .articleContainer2 article .editIconmanual, html body main .topProducts .articleContainer2 article .removeIconelectric, html body main .topProducts .articleContainer2 article .removeIconmanual {
+html main .topProducts .articleContainer1 article .editIconelectric, html main .topProducts .articleContainer1 article .editIconmanual, html main .topProducts .articleContainer1 article .removeIconelectric, html main .topProducts .articleContainer1 article .removeIconmanual, html main .topProducts .articleContainer2 article .editIconelectric, html main .topProducts .articleContainer2 article .editIconmanual, html main .topProducts .articleContainer2 article .removeIconelectric, html main .topProducts .articleContainer2 article .removeIconmanual {
   animation-timing-function: cubic-bezier(0.75, 0, 0.14, 0.57);
   animation-fill-mode: forwards;
   color: rgb(2, 121, 115);
@@ -263,7 +340,7 @@ html body main .topProducts .articleContainer1 article .editIconelectric, html b
   margin: 0.8rem;
   transition-duration: 0.3s;
 }
-html body main .topProducts .articleContainer1 article .removeIconelectric, html body main .topProducts .articleContainer1 article .removeIconmanual, html body main .topProducts .articleContainer2 article .removeIconelectric, html body main .topProducts .articleContainer2 article .removeIconmanual {
+html main .topProducts .articleContainer1 article .removeIconelectric, html main .topProducts .articleContainer1 article .removeIconmanual, html main .topProducts .articleContainer2 article .removeIconelectric, html main .topProducts .articleContainer2 article .removeIconmanual {
   animation-name: appearRemove;
   animation-duration: 1.2s;
   padding: 0.4rem 0.8rem;
@@ -271,11 +348,11 @@ html body main .topProducts .articleContainer1 article .removeIconelectric, html
   top: 0;
   right: 5%;
 }
-html body main .topProducts .articleContainer1 article .removeIconelectric:hover, html body main .topProducts .articleContainer1 article .removeIconmanual:hover, html body main .topProducts .articleContainer2 article .removeIconelectric:hover, html body main .topProducts .articleContainer2 article .removeIconmanual:hover {
+html main .topProducts .articleContainer1 article .removeIconelectric:hover, html main .topProducts .articleContainer1 article .removeIconmanual:hover, html main .topProducts .articleContainer2 article .removeIconelectric:hover, html main .topProducts .articleContainer2 article .removeIconmanual:hover {
   color: #0a4a65;
   font-size: 2.3rem;
 }
-html body main .topProducts .articleContainer1 article .editIconelectric, html body main .topProducts .articleContainer1 article .editIconmanual, html body main .topProducts .articleContainer2 article .editIconelectric, html body main .topProducts .articleContainer2 article .editIconmanual {
+html main .topProducts .articleContainer1 article .editIconelectric, html main .topProducts .articleContainer1 article .editIconmanual, html main .topProducts .articleContainer2 article .editIconelectric, html main .topProducts .articleContainer2 article .editIconmanual {
   animation-name: appearEdit;
   animation-duration: 1.2s;
   padding: 0.5rem 0.7rem;
@@ -283,11 +360,11 @@ html body main .topProducts .articleContainer1 article .editIconelectric, html b
   top: 0;
   right: 5%;
 }
-html body main .topProducts .articleContainer1 article .editIconelectric:hover, html body main .topProducts .articleContainer1 article .editIconmanual:hover, html body main .topProducts .articleContainer2 article .editIconelectric:hover, html body main .topProducts .articleContainer2 article .editIconmanual:hover {
+html main .topProducts .articleContainer1 article .editIconelectric:hover, html main .topProducts .articleContainer1 article .editIconmanual:hover, html main .topProducts .articleContainer2 article .editIconelectric:hover, html main .topProducts .articleContainer2 article .editIconmanual:hover {
   color: #0a4a65;
   font-size: 2.2rem;
 }
-html body main .topProducts .articleContainer1 article ul, html body main .topProducts .articleContainer2 article ul {
+html main .topProducts .articleContainer1 article ul, html main .topProducts .articleContainer2 article ul {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -295,20 +372,20 @@ html body main .topProducts .articleContainer1 article ul, html body main .topPr
   text-align: center;
   list-style: none;
 }
-html body main .topProducts .articleContainer1 article ul li, html body main .topProducts .articleContainer2 article ul li {
+html main .topProducts .articleContainer1 article ul li, html main .topProducts .articleContainer2 article ul li {
   display: block;
 }
-html body main .topProducts .articleContainer1 article ul li:first-child p, html body main .topProducts .articleContainer2 article ul li:first-child p {
+html main .topProducts .articleContainer1 article ul li:first-child p, html main .topProducts .articleContainer2 article ul li:first-child p {
   font-family: var(--ff-heading);
   font-weight: bold;
   font-size: 1.5rem;
 }
-html body main .topProducts .articleContainer1 article ul li:nth-child(2) p, html body main .topProducts .articleContainer2 article ul li:nth-child(2) p {
+html main .topProducts .articleContainer1 article ul li:nth-child(2) p, html main .topProducts .articleContainer2 article ul li:nth-child(2) p {
   font-family: var(--ff-body);
   font-weight: lighter;
   font-size: 1rem;
 }
-html body main .topProducts .articleContainer1 article ul li button, html body main .topProducts .articleContainer2 article ul li button {
+html main .topProducts .articleContainer1 article ul li button, html main .topProducts .articleContainer2 article ul li button {
   font-family: var(--ff-body);
   font-weight: bold;
   cursor: pointer;
@@ -320,29 +397,31 @@ html body main .topProducts .articleContainer1 article ul li button, html body m
   border-radius: 1.75rem;
   transition-duration: 400ms;
 }
-html body main .topProducts .articleContainer1 article ul li button:active, html body main .topProducts .articleContainer1 article ul li button:hover, html body main .topProducts .articleContainer2 article ul li button:active, html body main .topProducts .articleContainer2 article ul li button:hover {
+html main .topProducts .articleContainer1 article ul li button:active, html main .topProducts .articleContainer1 article ul li button:hover, html main .topProducts .articleContainer2 article ul li button:active, html main .topProducts .articleContainer2 article ul li button:hover {
   border-radius: 1.75rem;
   background-color: #084057;
   color: white;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
   padding: 1rem 2rem;
 }
-html body .about {
+html .about {
   padding: 1rem 2rem;
   background-color: #c1e3f3;
 }
-html body .contact {
+html .contact {
   padding: 1rem 2rem;
   background-color: #0a4a65;
 }
-html .toTop {
+
+.toTop {
   position: fixed;
   right: 3rem;
   bottom: 10rem;
   opacity: 0;
   transition: 0.8s;
 }
-html .toTopIcon {
+
+.toTopIcon {
   background-color: rgb(186, 219, 234);
   color: #084057;
   border-radius: 2rem;
@@ -351,11 +430,13 @@ html .toTopIcon {
   font-size: 160%;
   transition: 0.25s;
 }
-html .toTopIcon:hover {
+
+.toTopIcon:hover {
   background-color: rgb(8, 64, 87);
   color: rgb(186, 219, 234);
 }
-html footer {
+
+footer {
   display: flex;
   align-items: center;
   box-shadow: inset 0 2px 5px 0 rgba(50, 50, 50, 0.3);
@@ -364,7 +445,7 @@ html footer {
   min-height: 120px;
   max-height: 120px;
 }
-html footer * {
+footer * {
   font-size: 18px;
   color: #c1e3f3;
   text-decoration: none;

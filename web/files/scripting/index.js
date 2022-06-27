@@ -47,25 +47,19 @@ window.onload = function () {
 
 
 document.getElementById("collapsible").addEventListener("click", boxClicked);
-//document.querySelector(".containerHeader").addEventListener("mouseover", toggleLabelHover);
+document.querySelector("#bars").addEventListener("click", boxClicked);
+document.querySelector(".collapsible-menu ul").addEventListener("mouseover", toggleLabelHover);
 window.addEventListener("resize", showMenuContent);
 window.addEventListener("scroll", toggleToTopButton);
 
-document.getElementById("barLabel").addEventListener("mouseover", mouseOver);
-document.getElementById("barLabel").addEventListener("mouseleave", mouseLeave);
+document.querySelector(".menuBars").addEventListener("mouseover", mouseOver);
+document.querySelector(".menuBars").addEventListener("mouseleave", mouseLeave);
 
-document.getElementById("icon1").addEventListener("mouseover", mouseOver);
-document.getElementById("icon1").addEventListener("mouseleave", mouseLeave);
-
-document.getElementById("icon2").addEventListener("mouseover", mouseOver);
-document.getElementById("icon2").addEventListener("mouseleave", mouseLeave);
-
-let isVisible;
+let isVisible = false;
 let allowDeactivation;
 
 
 function toggleToTopButton() {
-
 
     if (window.scrollY >= innerHeight / 4 * 3) {
         document.querySelector(".toTop").style.opacity = "1";
@@ -73,37 +67,12 @@ function toggleToTopButton() {
     } else {
         document.querySelector(".toTop").style.opacity = "0";
     }
-    /*
-    if (button.style.opacity === "0" && window.scrollY < innerHeight / 4 * 3) {
-        setTimeout(display, 2000);
-
-    } else if (button.style.opacity === "1") {
-
-        setTimeout(display2, 3000);
-    }
-     */
-
 }
-
-/*
-function display() {
-
-    if (button.style.opacity === "0") button.style.display = "none";
-
-}
-function display2() {
-
-    if (button.style.opacity === "1") button.style.display = "block";
-}
-
- */
-
 
 function showMenuContent() {
 
-    let elements = document.getElementsByTagName("li");
+    let elements = document.querySelector(".menuList").getElementsByTagName("li");
     let collapsibleMenu = document.querySelector(".collapsible-menu");
-
 
     if (innerWidth > 1080) {
         collapsibleMenu.style.transition = "400ms";
@@ -142,8 +111,7 @@ function toggleMenu() {
         document.querySelector(".bars").style.transform = "rotate(0deg)";
         document.querySelector(".nav").style.height = "0";
 
-
-        document.querySelector("#barLabel").style.backgroundColor = "transparent";
+        document.querySelector("#bars").style.backgroundColor = "transparent";
         document.querySelector("#barLabel").style.color = "#0a4a65";
 
     } else {
@@ -153,16 +121,17 @@ function toggleMenu() {
         document.querySelector(".bars").style.transform = "rotate(90deg)";
         document.querySelector(".nav").style.height = "fit-content";
 
-        document.querySelector("#barLabel").style.backgroundColor = "#0a4a65";
+        document.querySelector("#bars").style.backgroundColor = "#0a4a65";
         document.querySelector("#barLabel").style.color = "#c1e3f3";
 
-        //toggleLabelHover();
+        toggleLabelHover();
     }
 }
 
 function boxClicked() {
 
-    isVisible = document.getElementById("collapsible").checked;
+    isVisible = !isVisible;
+
     let elements = document.getElementsByTagName("li");
 
     if (isVisible) {
@@ -174,32 +143,30 @@ function boxClicked() {
             elements[i].style.transitionDuration = "0ms";
         }
     }
+
     toggleMenu();
 }
 
 function mouseOver() {
 
-    this.style.backgroundColor = "#0a4a65";
-    this.style.color = "#c1e3f3";
+    document.getElementById("bars").style.backgroundColor = "#0a4a65";
+    document.getElementById("barLabel").style.color = "#c1e3f3";
 }
 
 function mouseLeave() {
 
-    if (this.id === "barLabel" && !isVisible) {
-        this.style.backgroundColor = "transparent";
-        this.style.color = "#0a4a65";
-    } else if (this.id !== "barLabel") {
-        this.style.backgroundColor = "transparent";
-        this.style.color = "#0a4a65";
+    if (!isVisible) {
+        document.getElementById("bars").style.backgroundColor = "transparent";
+        document.getElementById("barLabel").style.color = "#0a4a65";
     }
 }
 
 function toggleLabelHover() {
 
     if (allowDeactivation) {
-        document.getElementById("barLabel").removeEventListener("mouseover", mouseOver);
+        document.querySelector(".menuBars").removeEventListener("mouseover", mouseOver);
         allowDeactivation = false;
     } else {
-        document.getElementById("barLabel").addEventListener("mouseover", mouseOver);
+        document.querySelector(".menuBars").addEventListener("mouseover", mouseOver);
     }
 }

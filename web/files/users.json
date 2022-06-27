@@ -1,22 +1,32 @@
 [
   {
-    "username": "kilian",
+    "username": "Kilian",
     "password": "pw1",
-    "email": "kilian@h3.com"
+    "email": "kilian@h3.com",
+    "authorized": true
   },
   {
-    "username": "olli",
+    "username": "Olli",
     "password": "pw2",
-    "email": "olli@h3.com"
+    "email": "olli@h3.com",
+    "authorized": true
   },
   {
-    "username": "max",
+    "username": "Max",
     "password": "pw3",
-    "email": "max@h3.com"
+    "email": "max@h3.com",
+    "authorized": true
+  },
+  {
+    "username": "Niklas",
+    "password": "pw4",
+    "email": "max@kilian.oliver",
+    "authorized": false
   },
   {
     "username": "test",
-    "password": "testtest",
-    "email": "test@test.test"
+    "password": "test",
+    "email": "test@test.com",
+    "authorized": false
   }
 ]

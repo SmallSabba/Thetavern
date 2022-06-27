@@ -11,6 +11,7 @@
     opacity: 1;
   }
 }
+
 @keyframes appearRemove {
 
   from {
@@ -49,19 +50,19 @@ $media: (
   @if ($type == "outside") {
     // offset-x | offset-y | blur-radius | spread-radius | color
     box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+
+  } @else if ($type == "none") {
+    box-shadow: 0 0 0 0 rgba(50, 50, 50, 0.3);
   } @else {
     box-shadow: inset 0 2px 5px 0 rgba(50, 50, 50, 0.3);
   }
 }
 
-
 $mainColor: #fff;
 $secondaryColor: #0a4a65;
 $tertiaryColor: #c1e3f3;
 
-
 $textFontSize: 18px;
-
 
 *,
 *::before,
@@ -72,22 +73,32 @@ $textFontSize: 18px;
 }
 
 
+svg {
+  fill: $secondaryColor;
+  width: 1.8rem;
+
+}
+
+
 @media screen {
 
   .collapsible-menu {
     visibility: hidden;
     width: 50%;
 
-
+    ul {
+      @include shadow(none);
+    }
   }
+
   .nav {
     z-index: 12;
-
   }
 
   .menuList {
     display: flex;
     visibility: visible;
+    max-height: 70px;
 
     li {
       transition-duration: 400ms;
@@ -109,9 +120,15 @@ $textFontSize: 18px;
 @media screen and (max-width: 1080px) {
 
   .collapsible-menu {
-
     visibility: visible;
+    min-width: fit-content;
+
+    z-index: 10;
     width: 30%;
+
+    ul {
+      @include shadow(outside);
+    }
   }
   .nav {
     z-index: 8;
@@ -122,8 +139,8 @@ $textFontSize: 18px;
     display: block;
     text-align: right;
 
+    max-height: fit-content;
     padding: 2rem 1rem 1rem 1rem;
-
 
     li {
       transition-duration: 400ms;
@@ -134,8 +151,12 @@ $textFontSize: 18px;
       }
 
       &:first-child {
-        margin-top: 3.5rem;
+        margin-top: 5rem;
 
+      }
+
+      &:last-child {
+        display: none;
       }
     }
   }
@@ -198,21 +219,18 @@ html {
       }
     }
 
-    nav {
+    .nav, .collapsible-menu {
       position: fixed;
       top: 1rem;
       right: 1rem;
 
       ul {
-
         padding: 0.5rem 1rem;
         border-radius: 3rem;
 
-        display: flex;
         list-style: none;
 
         background-color: white;
-        @include shadow(outside);
 
         li {
           border-radius: 3rem;
@@ -226,84 +244,163 @@ html {
 
             gap: 0.5rem;
             cursor: pointer;
+          }
+        }
+      }
+    }
 
-            svg {
-              fill: $secondaryColor;
-              width: 1.5rem;
+    .nav {
+      ul {
+        @include shadow(outside);
 
-            }
+      }
+      li {
+        &:active, &:hover {
+          background-color: $secondaryColor;
+          @include shadow(outside);
 
-            i {
-              font-size: 100%;
-              margin-top: 0.1rem;
-            }
+          padding: 1rem 1.5rem;
+          transition-duration: 400ms;
+
+          svg {
+            fill: $tertiaryColor;
           }
 
-          &:active, &:hover {
-            background-color: $secondaryColor;
-            @include shadow(outside);
+          a {
+            color: $tertiaryColor;
+          }
+        }
+      }
+    }
 
-            padding: 1rem 1.5rem;
+      .collapsible-menu {
+
+        ul {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          column-gap: 0.5rem;
+          max-height: 70px;
+
+          .menuBars {
+
+            color: $secondaryColor;
+            border-radius: 2rem;
+            cursor: pointer;
+            padding: 0.6rem 1rem;
+
+          }
+          li {
+            padding: 1rem 1rem;
             transition-duration: 400ms;
 
-            svg {
-              fill: $tertiaryColor;
+            label {
+              font-size: 200%;
+              cursor: pointer;
             }
 
-            a {
-              color: $tertiaryColor;
+            &:hover:not(.menuBars) {
+              background-color: $secondaryColor;
+              @include shadow(outside);
+
+              padding: 1rem 1.5rem;
+
+              svg {
+                fill: $tertiaryColor;
+              }
+
+              a {
+                color: $tertiaryColor;
+              }
             }
           }
         }
       }
     }
 
-    .collapsible-menu {
-      background-color: white;
-      position: fixed;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      z-index: 10;
-
-      min-width: fit-content;
-      padding: 0.4rem 1rem;
-      border-radius: 3rem;
-      top: 1rem;
-      right: 1rem;
-
-      @include shadow(outside);
-    }
-
-    .menu-icons {
-      font-size: 220%;
-      color: #0a4a65;
-
-      border-radius: 1rem;
-      padding: 0.5rem 1rem;
-
-      transition: background-color 0.4s;
-      cursor: pointer;
-    }
-
-
-    #barLabel {
-
-      font-size: 220%;
-
-      color: #0a4a65;
-
-      border-radius: 1rem;
-      padding: 0.5rem 1rem;
-
-      transition: background-color 0.4s;
-      cursor: pointer;
-    }
-
-
     #collapsible {
       display: none;
+    }
+
+    .deleteConfirmMessage {
+
+      background-color: rgba(7, 59, 77, 0.94);
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      max-width: fit-content;
+
+      margin-left: auto;
+      margin-right: auto;
+      row-gap: 2.5rem;
+
+      z-index: 5;
+      padding: 4rem 2rem 3rem 2rem;
+      border-radius: 2rem;
+
+      p {
+        text-align: center;
+        max-width: 350px;
+        color: $tertiaryColor;
+        font-size: 22px;
+      }
+
+      i {
+        color: $tertiaryColor;
+        position: absolute;
+        cursor: pointer;
+
+        padding: 0.1rem 0.4rem;
+        font-size: 1.8rem;
+        top: 3%;
+        right: 2%;
+        transition-duration: .3s;
+
+        &:hover {
+
+          color: red;
+        }
+      }
+
+      .buttonContainer {
+
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        column-gap: 2rem;
+
+        button {
+
+          color: $tertiaryColor;
+          cursor: pointer;
+          border: none;
+
+          transition-duration: .3s;
+          border-radius: 2rem;
+          min-width: 110px;
+          padding: .8rem;
+          font-size: 16px;
+
+        }
+
+        #cancelButton {
+
+          background-color: mediumseagreen;
+
+          &:hover {
+            background-color: #24804e;
+          }
+        }
+
+        #confirmButton {
+
+          background-color: #962c2c;
+
+          &:hover {
+            background-color: #7c2222;
+          }
+        }
+      }
     }
 
     main {
@@ -348,134 +445,134 @@ html {
           height: 400px;
 
 
-        article {
-          position: relative;
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: cover;
-          object-fit: cover;
-          display: inline-block;
-          flex-direction: row;
+          article {
+            position: relative;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            object-fit: cover;
+            display: inline-block;
+            flex-direction: row;
 
-          min-width: 250px;
-          min-height: 300px;
-          max-width: 250px;
-          max-height: 300px;
+            min-width: 250px;
+            min-height: 300px;
+            max-width: 250px;
+            max-height: 300px;
 
-          background-color: #eee;
-          border-radius: 1.75rem;
+            background-color: #eee;
+            border-radius: 1.75rem;
 
-          @include shadow(outside);
+            @include shadow(outside);
 
-          img {
-            position: absolute;
-            left: -25%;
-            top: -20%;
-            width: 45%;
-          }
-
-          .editIconelectric, .editIconmanual, .removeIconelectric, .removeIconmanual {
-
-            animation-timing-function: cubic-bezier(.75,0,.14,.57);
-            animation-fill-mode: forwards;
-
-            color: rgb(2, 121, 115);
-            position: absolute;
-            display: none;
-
-            z-index: 1;
-
-            margin: 0.8rem;
-
-            transition-duration: .3s;
-
-          }
-
-          .removeIconelectric, .removeIconmanual {
-
-            animation-name: appearRemove;
-            animation-duration: 1.2s;
-
-            padding: 0.4rem 0.8rem;
-
-            font-size: 2rem;
-            top: 0;
-            right: 5%;
-
-            &:hover {
-              color: #0a4a65;
-              font-size: 2.3rem;
+            img {
+              position: absolute;
+              left: -25%;
+              top: -20%;
+              width: 45%;
             }
-          }
 
-          .editIconelectric, .editIconmanual {
+            .editIconelectric, .editIconmanual, .removeIconelectric, .removeIconmanual {
 
-            animation-name: appearEdit;
-            animation-duration: 1.2s;
+              animation-timing-function: cubic-bezier(.75, 0, .14, .57);
+              animation-fill-mode: forwards;
 
-            padding: 0.5rem 0.7rem;
+              color: rgb(2, 121, 115);
+              position: absolute;
+              display: none;
 
-            font-size: 1.8rem;
-            top: 0;
-            right: 5%;
+              z-index: 1;
 
-            &:hover {
-              color: #0a4a65;
-              font-size: 2.2rem;
+              margin: 0.8rem;
+
+              transition-duration: .3s;
+
             }
-          }
 
-          ul {
+            .removeIconelectric, .removeIconmanual {
 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            min-height: inherit;
+              animation-name: appearRemove;
+              animation-duration: 1.2s;
 
-            text-align: center;
-            list-style: none;
+              padding: 0.4rem 0.8rem;
 
-            li {
-              display: block;
+              font-size: 2rem;
+              top: 0;
+              right: 5%;
 
-              &:first-child p {
-                font-family: var(--ff-heading);
-                font-weight: bold;
-                font-size: 1.5rem;
+              &:hover {
+                color: #0a4a65;
+                font-size: 2.3rem;
               }
+            }
 
-              &:nth-child(2) p {
-                font-family: var(--ff-body);
-                font-weight: lighter;
-                font-size: 1rem;
+            .editIconelectric, .editIconmanual {
+
+              animation-name: appearEdit;
+              animation-duration: 1.2s;
+
+              padding: 0.5rem 0.7rem;
+
+              font-size: 1.8rem;
+              top: 0;
+              right: 5%;
+
+              &:hover {
+                color: #0a4a65;
+                font-size: 2.2rem;
               }
+            }
 
-              button {
-                font-family: var(--ff-body);
-                font-weight: bold;
-                cursor: pointer;
+            ul {
 
-                font-size: 1rem;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-evenly;
+              min-height: inherit;
 
-                padding: 1rem;
-                border-style: none;
-                background-color: #71a4c2;
-                color: white;
-                border-radius: 1.75rem;
-                transition-duration: 400ms;
+              text-align: center;
+              list-style: none;
 
-                &:active, &:hover {
-                  border-radius: 1.75rem;
+              li {
+                display: block;
 
-                  background-color: #084057;
+                &:first-child p {
+                  font-family: var(--ff-heading);
+                  font-weight: bold;
+                  font-size: 1.5rem;
+                }
+
+                &:nth-child(2) p {
+                  font-family: var(--ff-body);
+                  font-weight: lighter;
+                  font-size: 1rem;
+                }
+
+                button {
+                  font-family: var(--ff-body);
+                  font-weight: bold;
+                  cursor: pointer;
+
+                  font-size: 1rem;
+
+                  padding: 1rem;
+                  border-style: none;
+                  background-color: #71a4c2;
                   color: white;
-                  @include shadow(outside);
+                  border-radius: 1.75rem;
+                  transition-duration: 400ms;
 
-                  padding: 1rem 2rem;
+                  &:active, &:hover {
+                    border-radius: 1.75rem;
+
+                    background-color: #084057;
+                    color: white;
+                    @include shadow(outside);
+
+                    padding: 1rem 2rem;
+                  }
                 }
               }
             }
-          }
           }
         }
       }
@@ -540,58 +637,61 @@ html {
     }
 
   }
-}
 
-ul[role="list"],
-ol[role="list"] {
-  list-style: none;
-}
-html body main .aboutArticles article {
-  //flex-direction: row;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  object-fit: cover;
-  min-width: 250px;
-  min-height: 300px;
-  max-width: 250px;
-  max-height: 300px;
-  background-color: #eee;
-  border-radius: 1.75rem;
-  @include shadow(outside);
-  text-shadow: 0px 0px 5px #FFFFFF;
-  //justify-items: flex-start;
-}
 
-html body main .aboutArticles article ul {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  padding: 1rem 0;
-  margin: 1rem 0;
-  text-align: center;
-  list-style: none;
-  .author{
-    margin-top: 1rem;
-    font-size: 15px;
+  ul[role="list"],
+  ol[role="list"] {
+    list-style: none;
   }
-}
 
-html body main .aboutArticles article ul .messageAbout{
-  margin-top: 2rem;
+  html body main .aboutArticles article {
+    //flex-direction: row;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+    min-width: 250px;
+    min-height: 300px;
+    max-width: 250px;
+    max-height: 300px;
+    background-color: #eee;
+    border-radius: 1.75rem;
+    @include shadow(outside);
+    text-shadow: 0px 0px 5px #FFFFFF;
+    //justify-items: flex-start;
+  }
 
-}
-.aboutArticles{
-  @media screen and (min-width: 640px){
+  html body main .aboutArticles article ul {
+    position: relative;
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
-    row-gap: 6rem;
-    column-gap: 1rem;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 1rem 0;
+    margin: 1rem 0;
+    text-align: center;
+    list-style: none;
+
+    .author {
+      margin-top: 1rem;
+      font-size: 15px;
+    }
   }
-}
+
+  html body main .aboutArticles article ul .messageAbout {
+    margin-top: 2rem;
+
+  }
+
+  .aboutArticles {
+    @media screen and (min-width: 640px) {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-evenly;
+      row-gap: 6rem;
+      column-gap: 1rem;
+    }
+  }
 
 
 
