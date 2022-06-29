@@ -332,7 +332,6 @@ nav {
   }
 
   .productInfo {
-    //border: 1px solid red;
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
@@ -342,7 +341,6 @@ nav {
     }
 
     #productName {
-      //border: 1px solid blue;
       font-size: 32px;
     }
 
@@ -458,6 +456,7 @@ nav {
         background-color: rgb(146, 194, 214);
         color: #084057;
 
+        border: none;
         width: 50%;
         min-width: 150px;
         max-width: 200px;

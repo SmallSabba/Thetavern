@@ -3,15 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 <main>
+
+    <div class="topContainer">
+        <img src="/wheelchairs/background/BGsnow.png">
+        <ul>
+            <li>
+                <h3>Olli</h3>
+            </li>
+            <li>
+                <p>Your personal account</p>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="content">
+        <div class="leftContainer">
+
+            <p class="heading"><i class="fa-solid fa-user-gear"></i> Account</p>
+            <ul class="profileOptions">
+                <li onclick="generateOneInputField('username')">
+                    <i class="fa-solid fa-signature"></i><span>Change username</span>
+                </li>
+                <li onclick="generateChangePasswordField()">
+                    <i class="fa-solid fa-key"></i><span>Change password</span>
+                </li>
+                <li onclick="generateOneInputField('email address')">
+                    <i class="fa-solid fa-at"></i><span>Change email</span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-image"></i><span>Change profile picture</span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-trash-can"></i><span>Delete account</span>
+                </li>
+            </ul>
+
+            <p id="shopHeading" class="heading"><i class="fa-solid fa-store"></i> Shop</p>
+            <ul class="shopOptions">
+                <li>
+                    <i class="fa-solid fa-dolly"></i><span>Orders</span>
+                </li>
+                <li>
+                    <i id="bookMarkIcon" class="fa-solid fa-bookmark"></i><span>Saved items</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!--
     <button onclick="deleteAccount()">Delete your account</button>
     <button onclick="generateChangePassword()">Change your password</button>
     <button onclick="generateChangeUsername()">Change your username</button>
-    
+
     <div class="account"></div>
+    -->
 </main>
 </body>
-<script src="management.js"></script>
+<script src="profile.js"></script>
 </html>

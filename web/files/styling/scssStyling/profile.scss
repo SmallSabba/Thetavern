@@ -1,0 +1,226 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+:root {
+  scroll-behavior: smooth;
+  background-color: transparent;
+
+  --ff-heading: "Poppins", sans-serif;
+  --ff-subHeading: "Sathu", sans-serif;
+  font-family: "Arial", serif;
+
+  --fs-heading: clamp(1.5rem, 7vw, 7rem);
+  --fs-subHeading: clamp(1rem, 3vw, 4rem);
+
+  --fc-white: white;
+  --fc-black: black;
+}
+
+$mainColor: #ffffff;
+$secondaryColor: #0a4a65;
+$tertiaryColor: #c1e3f3;
+
+@mixin shadow($type) {
+  @if ($type == "outside") {
+    // offset-x | offset-y | blur-radius | spread-radius | color
+    box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+  } @else {
+    box-shadow: inset 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+  }
+}
+
+html {
+  body {
+    main {
+
+      display: flex;
+      flex-direction: column;
+
+      row-gap: .5rem;
+      padding: 2rem 2rem;
+
+      * {
+        list-style: none;
+      }
+
+      .topContainer {
+
+        display: flex;
+        margin-bottom: 1rem;
+        min-width: fit-content;
+
+
+        height: 100px;
+        align-items: center;
+
+        img {
+          border-radius: 4rem;
+
+          height: 100%;
+
+        }
+
+        ul {
+
+          display: flex;
+          flex-direction: column;
+
+          justify-content: space-evenly;
+          row-gap: .1rem;
+
+          padding: 1rem;
+          min-width: 150px;
+          height: 100%;
+
+          h3 {
+            font-size: 1.3rem;
+          }
+          p {
+
+            color: gray;
+
+            font-size: .85rem;
+
+          }
+        }
+      }
+
+      .content {
+
+        display: flex;
+
+        .leftContainer {
+
+          display: flex;
+          flex-direction: column;
+
+          min-width: 240px;
+          width: 20%;
+
+          padding: 1rem;
+
+          @include shadow(outside);
+
+          .heading {
+
+            font-size: 1.1rem;
+            margin-bottom: .3rem;
+            padding: 0 .2rem 0 .2rem;
+
+            i {
+              color: gray;
+              margin-right: .4rem;
+            }
+
+          }
+
+          .profileOptions, .shopOptions {
+
+            display: flex;
+            flex-direction: column;
+            row-gap: .2rem;
+            padding-top: .2rem;
+            padding-bottom: .5rem;
+
+            font-size: .9rem;
+
+            li {
+              cursor: pointer;
+              color: gray;
+              width: 95%;
+              padding: .3rem;
+              border-radius: .5rem;
+
+              &:hover {
+                background-color: rgba(229, 229, 229, 0.52);
+                //font-weight: bold;
+              }
+
+              i {
+                width: 15px;
+                margin-right: 1rem;
+              }
+
+              #bookMarkIcon {
+
+                padding-left: 2px;
+              }
+
+            }
+          }
+
+          .profileOptions {
+
+
+            border-bottom: 1px solid rgb(201, 201, 201);
+          }
+
+
+          #shopHeading {
+            margin-top: .8rem;
+
+          }
+        }
+
+        .rightContainer {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          width: 80%;
+          margin-left: 2rem;
+
+          @include shadow(inside);
+
+          .inputFields {
+
+            display: flex;
+            flex-direction: column;
+
+            row-gap: 1rem;
+            padding: 1rem;
+            min-width: 400px;
+            height: fit-content;
+
+
+            p {
+              font-size: 1.1rem;
+            }
+            input {
+
+
+              padding: .2rem;
+            }
+            button {
+              cursor: pointer;
+              align-self: center;
+              border: none;
+
+              background-color: #124f73;
+              color: #c5ebf6;
+              border-radius: 1.5rem;
+
+              width: 100px;
+              padding: .4rem .2rem;
+
+              font-size: 1.1rem;
+              transition: .3s;
+
+              &:hover {
+                transform: scale(1.05);
+                background-color: #084057;
+
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

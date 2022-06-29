@@ -24,9 +24,9 @@
     "authorized": false
   },
   {
-    "username": "test",
+    "username": "Test",
     "password": "test",
-    "email": "test@test.com",
+    "email": "tested@test.com",
     "authorized": false
   }
 ]

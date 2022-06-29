@@ -46,8 +46,8 @@ function updateNavBarIcons() {
                 })
 
             } else {
-                //changes profile button appearance
 
+                //changes profile button appearance
                 for (let i = 1; i <= 2; i++) {
                     document.getElementById(`profilePath${i}`).setAttribute("d", svgPathsMap.get("profileUser"));
                     document.getElementById(`profileSpan${i}`).textContent = "No user";
