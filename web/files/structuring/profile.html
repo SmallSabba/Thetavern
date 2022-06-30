@@ -4,24 +4,30 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
+    <link rel="stylesheet" href="navBar.css">
     <link rel="stylesheet" href="profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script src="profile.js"></script>
+    <script src="sharedMethods.js"></script>
 </head>
 <body>
 <main>
+
+    <div id="nav-placeholder">
+    </div>
 
     <div class="topContainer">
         <img>
         <ul>
             <li>
-                <h3>Olli</h3>
+                <h3></h3>
             </li>
             <li>
                 <p>Your personal account</p>
             </li>
         </ul>
     </div>
-
 
     <div class="content">
         <div class="leftContainer">
@@ -54,19 +60,21 @@
                     <i id="bookMarkIcon" class="fa-solid fa-bookmark"></i><span>Saved items</span>
                 </li>
             </ul>
+
+            <p id="miscHeading" class="heading"><i class="fa-solid fa-store"></i> Miscellaneous</p>
+            <ul class="miscOptions">
+                <li onclick="generateAllUsersContainer()">
+                    <i class="fa-solid fa-user-group"></i><span>All users</span>
+                </li>
+                <li>
+                    <i id="test" class="fa-solid fa-bookmark"></i><span>Something else</span>
+                </li>
+            </ul>
         </div>
+
 
     </div>
 
-
-<!--
-    <button onclick="deleteAccount()">Delete your account</button>
-    <button onclick="generateChangePassword()">Change your password</button>
-    <button onclick="generateChangeUsername()">Change your username</button>
-
-    <div class="account"></div>
-    -->
 </main>
 </body>
-<script src="profile.js"></script>
 </html>

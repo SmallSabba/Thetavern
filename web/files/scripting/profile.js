@@ -1,41 +1,3 @@
-class ElementCreator {
-    constructor(tag) {
-        this.element = document.createElement(tag);
-    }
-
-    id(id) {
-        this.element.id = id;
-        return this;
-    }
-
-    text(content) {
-        this.element.innerHTML = content;
-        return this;
-    }
-
-    with(name, value) {
-        this.element.setAttribute(name, value)
-        return this;
-    }
-
-    listener(name, listener) {
-        this.element.addEventListener(name, listener)
-        return this;
-    }
-
-    append(child) {
-        child.appendTo(this.element);
-        return this;
-    }
-
-    appendTo(parent) {
-        parent.append(this.element);
-        return this.element;
-    }
-}
-
-let profilePicture;
-
 const profilePicturesMap = new Map();
 
 profilePicturesMap.set("No avatar", "/randomPictures/noAvatar.jpg");
@@ -49,15 +11,81 @@ profilePicturesMap.set("Stone", "/wheelchairs/background/BGstone.png");
 profilePicturesMap.set("iChair", "/wheelchairs/electric/iCHAIR_MC2.png");
 profilePicturesMap.set("Meyra", "/wheelchairs/electric/MEYRA_1.611.png");
 profilePicturesMap.set("Optimus", "/wheelchairs/electric/Optimus_2_S.png");
-profilePicturesMap.set("CRI", "/wheelchairs/manual/CRI.png");
 profilePicturesMap.set("Format", "/wheelchairs/manual/Format.png");
 profilePicturesMap.set("Mo", "/wheelchairs/manual/MO_951B_60.png");
+profilePicturesMap.set("CRI", "/wheelchairs/manual/CRI.png");
 profilePicturesMap.set("Water Wheels", "/wheelchairs/manual/WaterWheels.png");
+
+function generateAllUsersContainer() {
+
+    let element = document.querySelector(".rightContainer");
+    element ? element.remove() : null;
+
+    fetch("/api/user/getAll")
+        .then(res => res.json())
+        .then(data => {
+
+            const users = data.users;
+            if (users) {
+
+                new ElementCreator("div")
+                    .with("class", "rightUsersContainer rightContainer")
+                    .append(new ElementCreator("div")
+                        .with("class", "adminContainer")
+                    )
+                    .append(new ElementCreator("div")
+                        .with("class", "userContainer")
+                    )
+                    .appendTo(document.querySelector(".content")
+                    )
+
+                for (let i = 0; i < users.length; i++) {
+
+                    let container;
+                    let admin;
+                    let user = "user";
+
+                    if (i <= 2) {
+                        container = document.querySelector(".adminContainer");
+                        admin = "Admin";
+                    } else {
+                        container = document.querySelector(".userContainer");
+                        admin = "User";
+                    }
+
+                    if (currentUser === users[i].username) user = "user currentUser";
+
+                    new ElementCreator("div")
+                        .with("class", `${user}`)
+                        .append(new ElementCreator("img")
+                            .with("src", `${profilePicturesMap.get(users[i].profilePicture)}`)
+                        )
+                        .append(new ElementCreator("ul")
+                            .append(new ElementCreator("li")
+                                .append(new ElementCreator("p")
+                                    .text(`${users[i].username}`)
+                                )
+                                .append(new ElementCreator("p")
+                                    .text(`${users[i].email}`)
+                                )
+                                .append(new ElementCreator("p")
+                                    .text(`${admin}`)
+                                )
+                            )
+                        )
+                        .appendTo(container)
+                }
+
+            } else {
+                alert("An error occurred while loading user profiles.");
+            }
+        })
+}
 
 function generateImgContainer() {
 
-    let container = document.querySelector(".rightContainer");
-    if (container !== null) container.remove();
+    let element = document.querySelector(".rightContainer");
+    element ? element.remove() : null;
 
     const profileArray = Array.from(profilePicturesMap);
 
@@ -67,6 +95,7 @@ function generateImgContainer() {
             .with("class", "currentImg")
             .append(new ElementCreator("img")
                 .with("src", `${profilePicturesMap.get(profilePicture)}`)
+                .with("alt", `${profilePicture}`)
             )
             .append(new ElementCreator("p")
                 .text(`${profilePicture}`))
@@ -95,11 +124,15 @@ function generateImgContainer() {
         let img = document.createElement("img");
         img.src = `${profileArray[i][1]}`;
         img.alt = `${profileArray[i][0]}`;
-        img.setAttribute("cursor", "pointer");
         img.addEventListener("click", () => {
             changeProfilePicture(profileArray[i][0]).then();
         })
 
+        if (!isAdmin) {
+            if (profileArray[i][0] === "CRI" || profileArray[i][0] === "Water Wheels") {
+                img.style.opacity = ".5";
+            }
+        }
         if (i <= 5) terrainDiv.append(img);
         else wheelchairDiv.append(img);
     }
@@ -111,8 +144,7 @@ function generateImgContainer() {
 function generateOneInputField(message) {
 
     let type;
-    if (message === "username") type = "text";
-    else type = "email";
+    message === "username" ? type = "text" : type = "email";
 
     let container = document.querySelector(".rightContainer");
     if (container !== null) container.remove();
@@ -148,8 +180,8 @@ function generateOneInputField(message) {
 
 function generateChangePasswordField() {
 
-    let container = document.querySelector(".rightContainer");
-    if (container !== null) container.remove();
+    let element = document.querySelector(".rightContainer");
+    element ? element.remove() : null;
 
     new ElementCreator("div")
         .with("class", "rightInputContainer rightContainer")
@@ -203,7 +235,7 @@ async function deleteAccount(req, res) {
             } else {
                 alert("An error occurred while deleting your account.");
             }
-    })
+        })
 }
 
 async function changePassword(oldPassword, newPassword) {
@@ -328,23 +360,20 @@ async function changeProfilePicture(pictureKey) {
 
 function updateProfilePicture() {
 
-    document.querySelector(".topContainer img").setAttribute("src", `${profilePicturesMap.get(profilePicture)}`);
-    document.querySelector(".topContainer img").setAttribute("alt", `${profilePicture}`);
+    let img = document.querySelector(".topContainer img");
+
+    img.setAttribute("src", `${profilePicturesMap.get(profilePicture)}`);
+    img.setAttribute("alt", `${profilePicture}`);
+    img.addEventListener("click", () => changeProfilePicture(profilePicture));
+
+    document.querySelector(".topContainer h3").textContent = currentUser;
 
 }
+
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    fetch("/api/user/get")
-        .then(res => res.json())
-        .then(data => {
-            currentUser = data.user;
-            profilePicture = data.profilePicture;
-            isAdmin = data.admin;
+    currentPage = document.location.pathname.replace("/", "").replace(".html", "");
 
-            document.querySelector(".topContainer h3").textContent = currentUser;
+    importNavBar();
 
-            updateProfilePicture();
-        })
-
-    //generateOneInputField("username");
 });

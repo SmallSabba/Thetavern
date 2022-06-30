@@ -255,7 +255,7 @@ function showMenuContent() {
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    let id = localStorage.getItem("id");
+    let id = localStorage.getItem("productID");
 
     fetch(`api/wheelchairs/${id}`)
         .then(response => response.json())

@@ -22,18 +22,25 @@
   --fc-black: black;
 }
 
-$mainColor: #ffffff;
-$secondaryColor: #0a4a65;
-$tertiaryColor: #c1e3f3;
 
 @mixin shadow($type) {
   @if ($type == "outside") {
     // offset-x | offset-y | blur-radius | spread-radius | color
     box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+
+  } @else if ($type == "none") {
+    box-shadow: 0 0 0 0 rgba(50, 50, 50, 0.3);
   } @else {
     box-shadow: inset 0 2px 5px 0 rgba(50, 50, 50, 0.3);
   }
 }
+
+$mainColor: #fff;
+$secondaryColor: #0a4a65;
+$tertiaryColor: #c1e3f3;
+
+$textFontSize: 18px;
+
 
 html {
   body {
@@ -102,19 +109,28 @@ html {
           flex-direction: column;
           justify-content: center;
 
-          min-width: 240px;
-          width: 20%;
-          height: 325px;
+          width: 240px;
+          height: 433px;
 
           padding: 1rem;
 
           @include shadow(outside);
 
+          ul:not(:last-child) {
+            border-bottom: 1px solid rgb(201, 201, 201);
+            padding-bottom: .5rem;
+          }
+
           .heading {
 
+            margin-bottom: .5rem;
             font-size: 1.1rem;
-            margin-bottom: .3rem;
             padding: 0 .2rem 0 .2rem;
+
+            &:not(:first-child) {
+              margin-top: .8rem;
+            }
+
 
             i {
               color: gray;
@@ -123,13 +139,12 @@ html {
 
           }
 
-          .profileOptions, .shopOptions {
+          .profileOptions, .shopOptions, .miscOptions {
 
             display: flex;
             flex-direction: column;
             row-gap: .2rem;
             padding-top: .2rem;
-            padding-bottom: .5rem;
 
             font-size: .9rem;
 
@@ -142,7 +157,6 @@ html {
 
               &:hover {
                 background-color: rgba(229, 229, 229, 0.52);
-                //font-weight: bold;
               }
 
               i {
@@ -154,20 +168,7 @@ html {
 
                 padding-left: 2px;
               }
-
             }
-          }
-
-          .profileOptions {
-
-
-            border-bottom: 1px solid rgb(201, 201, 201);
-          }
-
-
-          #shopHeading {
-            margin-top: .8rem;
-
           }
         }
 
@@ -242,9 +243,11 @@ html {
           .currentImg {
 
             display: flex;
+            cursor: pointer;
+
+            padding-left: 1.5rem;
 
             img {
-
               width: 180px;
             }
 
@@ -265,6 +268,7 @@ html {
             box-shadow: -2px 3px 4px -1px rgba(50, 50, 50, 0.3);
 
             img {
+              cursor: pointer;
               width: 150px;
             }
 
@@ -275,9 +279,8 @@ html {
               margin-top: -1.5rem;
               border-radius: 1rem;
 
-              box-shadow:
-                      0 0 4px -4px rgba(50, 50, 50, 0.3),
-                      0 -2px 2px -1px rgba(50, 50, 50, 0.3);
+              box-shadow: 0 0 4px -4px rgba(50, 50, 50, 0.3),
+              0 -2px 2px -1px rgba(50, 50, 50, 0.3);
             }
 
             div {
@@ -289,6 +292,84 @@ html {
 
             }
           }
+        }
+
+        .rightUsersContainer {
+
+          display: flex;
+          flex-direction: column;
+
+          row-gap: 60px;
+
+          width: 80%;
+          margin-left: 2rem;
+          padding: 2rem;
+
+          @include shadow(inside);
+
+          img {
+            border-radius: 6rem;
+            max-width: 150px;
+          }
+
+          .adminContainer, .userContainer {
+
+            display: flex;
+            flex-flow: row wrap;
+
+            column-gap: 60px;
+            row-gap: 50px;
+
+            .user {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+
+              row-gap: .8rem;
+
+              ul {
+                border-radius: 1.5rem;
+                padding: .8rem 1.4rem;
+
+                @include shadow(outside);
+
+                li {
+                  line-height: 1.5rem;
+                }
+              }
+            }
+            .currentUser {
+
+              ul {
+                box-shadow: 0 2px 5px 1px rgba(178, 128, 18, .9);
+              }
+            }
+          }
+
+          .adminContainer {
+
+            column-gap: 60px;
+            justify-content: space-evenly;
+
+            img {
+              max-width: 200px;
+            }
+
+            ul {
+              width: 240px;
+            }
+          }
+
+          .userContainer {
+
+            column-gap: 75px;
+            padding: 0 2rem;
+
+            ul {
+              width: 190px;
+            }
+          }
+
         }
       }
     }

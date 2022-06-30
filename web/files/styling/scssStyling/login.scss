@@ -121,7 +121,7 @@ html {
             }
           }
 
-          & > input {
+          input {
             width: 100%;
             padding: 14px;
             letter-spacing: 0.5px;
@@ -131,18 +131,20 @@ html {
             background-color: #f2f2f2;
           }
 
-          & > p {
+          p {
             font-size: inherit;
             text-decoration: none;
             color: lightgray;
+
+            a {
+              cursor: pointer;
+              font-size: inherit;
+              text-decoration: none;
+              padding-left: 0.5rem;
+              color: var(--fc-black);
+            }
           }
 
-          & > p > a {
-            font-size: inherit;
-            text-decoration: none;
-            padding-left: 0.5rem;
-            color: var(--fc-black);
-          }
 
           .errorMsg {
 

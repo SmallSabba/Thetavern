@@ -7,17 +7,17 @@
     "authorized": true
   },
   {
-    "username": "Olli",
-    "password": "pw2",
-    "email": "olli@h3.com",
-    "profilePicture": "Snow",
-    "authorized": true
-  },
-  {
     "username": "Max",
     "password": "pw3",
     "email": "max@h3.com",
     "profilePicture": "No avatar",
+    "authorized": true
+  },
+  {
+    "username": "Olli",
+    "password": "pw2",
+    "email": "olli@h3.com",
+    "profilePicture": "Snow",
     "authorized": true
   },
   {

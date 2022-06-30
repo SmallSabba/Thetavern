@@ -61,51 +61,50 @@ html body main .content .leftContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-width: 240px;
-  width: 20%;
-  height: 325px;
+  width: 240px;
+  height: 433px;
   padding: 1rem;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
 }
+html body main .content .leftContainer ul:not(:last-child) {
+  border-bottom: 1px solid rgb(201, 201, 201);
+  padding-bottom: 0.5rem;
+}
 html body main .content .leftContainer .heading {
+  margin-bottom: 0.5rem;
   font-size: 1.1rem;
-  margin-bottom: 0.3rem;
   padding: 0 0.2rem 0 0.2rem;
+}
+html body main .content .leftContainer .heading:not(:first-child) {
+  margin-top: 0.8rem;
 }
 html body main .content .leftContainer .heading i {
   color: gray;
   margin-right: 0.4rem;
 }
-html body main .content .leftContainer .profileOptions, html body main .content .leftContainer .shopOptions {
+html body main .content .leftContainer .profileOptions, html body main .content .leftContainer .shopOptions, html body main .content .leftContainer .miscOptions {
   display: flex;
   flex-direction: column;
   row-gap: 0.2rem;
   padding-top: 0.2rem;
-  padding-bottom: 0.5rem;
   font-size: 0.9rem;
 }
-html body main .content .leftContainer .profileOptions li, html body main .content .leftContainer .shopOptions li {
+html body main .content .leftContainer .profileOptions li, html body main .content .leftContainer .shopOptions li, html body main .content .leftContainer .miscOptions li {
   cursor: pointer;
   color: gray;
   width: 95%;
   padding: 0.3rem;
   border-radius: 0.5rem;
 }
-html body main .content .leftContainer .profileOptions li:hover, html body main .content .leftContainer .shopOptions li:hover {
+html body main .content .leftContainer .profileOptions li:hover, html body main .content .leftContainer .shopOptions li:hover, html body main .content .leftContainer .miscOptions li:hover {
   background-color: rgba(229, 229, 229, 0.52);
 }
-html body main .content .leftContainer .profileOptions li i, html body main .content .leftContainer .shopOptions li i {
+html body main .content .leftContainer .profileOptions li i, html body main .content .leftContainer .shopOptions li i, html body main .content .leftContainer .miscOptions li i {
   width: 15px;
   margin-right: 1rem;
 }
-html body main .content .leftContainer .profileOptions li #bookMarkIcon, html body main .content .leftContainer .shopOptions li #bookMarkIcon {
+html body main .content .leftContainer .profileOptions li #bookMarkIcon, html body main .content .leftContainer .shopOptions li #bookMarkIcon, html body main .content .leftContainer .miscOptions li #bookMarkIcon {
   padding-left: 2px;
-}
-html body main .content .leftContainer .profileOptions {
-  border-bottom: 1px solid rgb(201, 201, 201);
-}
-html body main .content .leftContainer #shopHeading {
-  margin-top: 0.8rem;
 }
 html body main .content .rightInputContainer {
   display: flex;
@@ -156,6 +155,8 @@ html body main .content .rightImgContainer {
 }
 html body main .content .rightImgContainer .currentImg {
   display: flex;
+  cursor: pointer;
+  padding-left: 1.5rem;
 }
 html body main .content .rightImgContainer .currentImg img {
   width: 180px;
@@ -172,6 +173,7 @@ html body main .content .rightImgContainer .terrainImgContainer, html body main 
   box-shadow: -2px 3px 4px -1px rgba(50, 50, 50, 0.3);
 }
 html body main .content .rightImgContainer .terrainImgContainer img, html body main .content .rightImgContainer .wheelchairImgContainer img {
+  cursor: pointer;
   width: 150px;
 }
 html body main .content .rightImgContainer .terrainImgContainer h3, html body main .content .rightImgContainer .wheelchairImgContainer h3 {
@@ -187,6 +189,59 @@ html body main .content .rightImgContainer .terrainImgContainer div, html body m
   flex-wrap: wrap;
   column-gap: 30px;
   row-gap: 30px;
+}
+html body main .content .rightUsersContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 60px;
+  width: 80%;
+  margin-left: 2rem;
+  padding: 2rem;
+  box-shadow: inset 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+}
+html body main .content .rightUsersContainer img {
+  border-radius: 6rem;
+  max-width: 150px;
+}
+html body main .content .rightUsersContainer .adminContainer, html body main .content .rightUsersContainer .userContainer {
+  display: flex;
+  flex-flow: row wrap;
+  column-gap: 60px;
+  row-gap: 50px;
+}
+html body main .content .rightUsersContainer .adminContainer .user, html body main .content .rightUsersContainer .userContainer .user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 0.8rem;
+}
+html body main .content .rightUsersContainer .adminContainer .user ul, html body main .content .rightUsersContainer .userContainer .user ul {
+  border-radius: 1.5rem;
+  padding: 0.8rem 1.4rem;
+  box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+}
+html body main .content .rightUsersContainer .adminContainer .user ul li, html body main .content .rightUsersContainer .userContainer .user ul li {
+  line-height: 1.5rem;
+}
+html body main .content .rightUsersContainer .adminContainer .currentUser ul, html body main .content .rightUsersContainer .userContainer .currentUser ul {
+  box-shadow: 0 2px 5px 1px rgba(178, 128, 18, 0.9);
+}
+html body main .content .rightUsersContainer .adminContainer {
+  column-gap: 60px;
+  justify-content: space-evenly;
+}
+html body main .content .rightUsersContainer .adminContainer img {
+  max-width: 200px;
+}
+html body main .content .rightUsersContainer .adminContainer ul {
+  width: 240px;
+}
+html body main .content .rightUsersContainer .userContainer {
+  column-gap: 75px;
+  padding: 0 2rem;
+}
+html body main .content .rightUsersContainer .userContainer ul {
+  width: 190px;
 }
 
 /*# sourceMappingURL=profile.css.map */

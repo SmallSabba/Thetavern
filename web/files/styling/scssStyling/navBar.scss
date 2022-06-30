@@ -1,0 +1,506 @@
+$mainColor: #fff;
+$secondaryColor: #0a4a65;
+$tertiaryColor: #c1e3f3;
+
+$textFontSize: 18px;
+
+
+:root {
+  scroll-behavior: smooth;
+  background-color: transparent;
+
+  --ff-heading: "Poppins", sans-serif;
+  --ff-subHeading: "Sathu", sans-serif;
+  --ff-body: "Arial", serif;
+
+  --fs-heading: clamp(1.5rem, 7vw, 7rem);
+  --fs-subHeading: clamp(1rem, 3vw, 4rem);
+
+  --fc-white: white;
+  --fc-black: black;
+}
+
+svg {
+  fill: $secondaryColor;
+  width: 1.8rem;
+
+}
+
+
+@mixin shadow($type) {
+  @if ($type == "outside") {
+    // offset-x | offset-y | blur-radius | spread-radius | color
+    box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+
+  } @else if ($type == "none") {
+    box-shadow: 0 0 0 0 rgba(50, 50, 50, 0.3);
+  } @else {
+    box-shadow: inset 0 2px 5px 0 rgba(50, 50, 50, 0.3);
+  }
+}
+
+@keyframes appearEdit {
+
+  from {
+    transform: translateX(0) translateY(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(150%) translateY(-30%);
+    opacity: 1;
+  }
+}
+
+@keyframes appearRemove {
+
+  from {
+    transform: translateX(0) translateY(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(50%) translateY(-120%);
+    opacity: 1;
+  }
+}
+
+@media screen {
+
+  .collapsible-menu {
+    visibility: hidden;
+    width: 50%;
+
+    ul {
+      @include shadow(none);
+    }
+  }
+
+  .nav {
+    z-index: 12;
+  }
+
+  .menuList {
+    display: flex;
+    visibility: visible;
+    max-height: 70px;
+
+    li {
+      transition-duration: 400ms;
+
+      padding: 1rem 0 1rem 1rem;
+      margin: 0 0.5rem;
+
+      &:active, &:hover {
+        padding: 1rem 1.5rem;
+      }
+
+      * {
+        justify-content: right;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1080px) {
+
+  .collapsible-menu {
+    visibility: visible;
+    min-width: fit-content;
+
+    z-index: 10;
+    width: 30%;
+
+    ul {
+      @include shadow(outside);
+    }
+  }
+  .nav {
+    z-index: 8;
+  }
+
+  .menuList {
+    visibility: hidden;
+    display: block;
+    text-align: right;
+
+    max-height: fit-content;
+    padding: 2rem 1rem 1rem 1rem;
+
+    li {
+      transition-duration: 400ms;
+      margin: 0.5rem 0;
+
+      * {
+        justify-content: right;
+      }
+
+      &:first-child {
+        margin-top: 5rem;
+
+      }
+
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+}
+
+.nav, .collapsible-menu {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+
+  ul {
+    padding: 0.5rem 1rem;
+    border-radius: 3rem;
+
+    list-style: none;
+
+    background-color: white;
+
+    li {
+      border-radius: 3rem;
+
+      a {
+        font-size: $textFontSize;
+        color: $secondaryColor;
+        text-decoration: none;
+
+        display: flex;
+
+        gap: 0.5rem;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.nav {
+  ul {
+    @include shadow(outside);
+
+  }
+
+  li {
+    &:active, &:hover {
+      background-color: $secondaryColor;
+      @include shadow(outside);
+
+      padding: 1rem 1.5rem;
+      transition-duration: 400ms;
+
+      svg {
+        fill: $tertiaryColor;
+      }
+
+      a {
+        color: $tertiaryColor;
+      }
+    }
+  }
+}
+
+.collapsible-menu {
+
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.5rem;
+    max-height: 70px;
+
+    .menuBars {
+
+      color: $secondaryColor;
+      border-radius: 2rem;
+      cursor: pointer;
+      padding: 0.6rem 1rem;
+
+    }
+
+    li {
+      padding: 1rem 1rem;
+      transition-duration: 400ms;
+
+      label {
+        font-size: 200%;
+        cursor: pointer;
+      }
+
+      &:hover:not(.menuBars) {
+        background-color: $secondaryColor;
+        @include shadow(outside);
+
+        padding: 1rem 1.5rem;
+
+        svg {
+          fill: $tertiaryColor;
+        }
+
+        a {
+          color: $tertiaryColor;
+        }
+      }
+    }
+  }
+}
+
+article {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
+  display: inline-block;
+  flex-direction: row;
+
+  min-width: 250px;
+  min-height: 300px;
+  max-width: 250px;
+  max-height: 300px;
+
+  background-color: #eee;
+  border-radius: 1.75rem;
+
+  @include shadow(outside);
+
+  img {
+    position: absolute;
+    left: -25%;
+    top: -20%;
+    width: 45%;
+  }
+
+  .editIconelectric, .editIconmanual, .removeIconelectric, .removeIconmanual {
+
+    animation-timing-function: cubic-bezier(.75, 0, .14, .57);
+    animation-fill-mode: forwards;
+
+    color: rgb(2, 121, 115);
+    position: absolute;
+    display: none;
+
+    z-index: 1;
+
+    margin: 0.8rem;
+
+    transition-duration: .3s;
+
+  }
+
+  .removeIconelectric, .removeIconmanual {
+
+    animation-name: appearRemove;
+    animation-duration: 1.2s;
+
+    padding: 0.4rem 0.8rem;
+
+    font-size: 2rem;
+    top: 0;
+    right: 5%;
+
+    &:hover {
+      color: #0a4a65;
+      font-size: 2.3rem;
+    }
+  }
+
+  .editIconelectric, .editIconmanual {
+
+    animation-name: appearEdit;
+    animation-duration: 1.2s;
+
+    padding: 0.5rem 0.7rem;
+
+    font-size: 1.8rem;
+    top: 0;
+    right: 5%;
+
+    &:hover {
+      color: #0a4a65;
+      font-size: 2.2rem;
+    }
+  }
+
+  ul {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-height: inherit;
+
+    text-align: center;
+    list-style: none;
+
+    li {
+      display: block;
+
+      &:first-child p {
+        font-family: var(--ff-heading);
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+
+      &:nth-child(2) p {
+        font-family: var(--ff-body);
+        font-weight: lighter;
+        font-size: 1rem;
+      }
+
+      button {
+        font-family: var(--ff-body);
+        font-weight: bold;
+        cursor: pointer;
+
+        font-size: 1rem;
+
+        padding: 1rem;
+        border-style: none;
+        background-color: #71a4c2;
+        color: white;
+        border-radius: 1.75rem;
+        transition-duration: 400ms;
+
+        &:active, &:hover {
+          border-radius: 1.75rem;
+
+          background-color: #084057;
+          color: white;
+          @include shadow(outside);
+
+          padding: 1rem 2rem;
+        }
+      }
+    }
+  }
+}
+
+.deleteConfirmMessage {
+
+  background-color: rgba(7, 59, 77, 0.94);
+  transform: translate(-50%, -50%);
+
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  max-width: fit-content;
+
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+
+  row-gap: 2.5rem;
+  padding: 4rem 2rem 3rem 2rem;
+  border-radius: 2rem;
+
+  p {
+    text-align: center;
+    max-width: 350px;
+    color: $tertiaryColor;
+    font-size: 22px;
+  }
+
+  i {
+    color: $tertiaryColor;
+    position: absolute;
+    cursor: pointer;
+
+    padding: 0.1rem 0.4rem;
+    font-size: 1.8rem;
+    top: 3%;
+    right: 2%;
+    transition-duration: .3s;
+
+    &:hover {
+
+      color: red;
+    }
+  }
+
+  .buttonContainer {
+
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    column-gap: 2rem;
+
+    button {
+
+      color: $tertiaryColor;
+      cursor: pointer;
+      border: none;
+
+      transition-duration: .3s;
+      border-radius: 2rem;
+      min-width: 110px;
+      padding: .8rem;
+      font-size: 16px;
+
+    }
+
+    #cancelButton {
+
+      background-color: mediumseagreen;
+
+      &:hover {
+        background-color: #24804e;
+      }
+    }
+
+    #confirmButton {
+
+      background-color: #962c2c;
+
+      &:hover {
+        background-color: #7c2222;
+      }
+    }
+  }
+}
+
+.toTop {
+  position: fixed;
+  right: 3rem;
+  bottom: 10rem;
+
+  opacity: 0;
+  transition: .8s;
+}
+
+.toTopIcon {
+  background-color: rgb(186, 219, 234);
+  color: #084057;
+
+  border-radius: 2rem;
+  padding: 20px;
+  rotate: 90deg;
+  font-size: 160%;
+
+  transition: .25s;
+}
+
+.toTopIcon:hover {
+  background-color: rgb(8, 64, 87);
+  color: rgb(186, 219, 234);
+
+}
+
+footer {
+
+  display: flex;
+  align-items: center;
+
+  @include shadow(inside);
+  background-color: $secondaryColor;
+
+  padding: 1rem 2rem;
+  min-height: 120px;
+  max-height: 120px;
+
+  * {
+    font-size: 18px;
+    color: $tertiaryColor;
+    text-decoration: none;
+    line-height: 1.6rem;
+  }
+}

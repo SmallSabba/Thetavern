@@ -27,9 +27,20 @@ class AccountController {
         if (req.session.authorized) {
             return res.send({user: req.session.user, admin: true, profilePicture: req.session.profilePicture});
         }
-
-        console.log("here" + req.session.profilePicture);
         return res.send({user: req.session.user, admin: false, profilePicture: req.session.profilePicture});
+    }
+
+    getAllUsers = async (req, res) => {
+
+        jsonReader("././files/users.json", (err, users) => {
+
+            if (err) {
+                return res.status(400).send({users: null});
+
+            } else {
+                return res.status(200).send({users: users});
+            }
+        })
     }
 
     register = async (req, res) => {
@@ -38,80 +49,73 @@ class AccountController {
         let password = req.body.password;
         let email = req.body.email;
 
-        try {
-            jsonReader("././files/users.json", (err, users) => {
+        jsonReader("././files/users.json", (err, users) => {
 
-                if (err) {
-                    console.log(err);
+            if (err) {
+                return res.status(400).send({bo: null});
 
-                } else {
-                    for (let i = 0; i < users.length; i++) {
+            } else {
+                for (let i = 0; i < users.length; i++) {
 
-                        if (username === users[i].username || email === users[i].email) {
+                    if (username.toLowerCase() === users[i].username.toLowerCase()
+                        || email.toLowerCase() === users[i].email.toLowerCase()) {
 
-                            return res.status(400).send("There already is an existing account.").redirect('/register.html')
-                        }
+                        return res.status(400).send({bo: false});
                     }
-                    const newUser = {
-                        username: username,
-                        password: password,
-                        email: email,
-                        profilePicture: "No avatar",
-                        authorized: false
-                    }
-                    users.push(newUser);
-                    console.log(users);
-
-                    const usersAsString = JSON.stringify(users, null, 2);
-                    fs.writeFile('././files/users.json', usersAsString, err => {
-
-                        if (err) {
-                            return res.status(400).send("An error occurred while registration process.", err).redirect('/login.html');
-
-                        } else {
-                            return res.status(200).send("Successfully registered your account.").redirect('/login.html');
-                        }
-                    })
                 }
-            })
-        } catch (err) {
-            res.status(400).send("An error occurred, try again later.").redirect('/register.html');
-        }
+                const newUser = {
+                    username: username,
+                    password: password,
+                    email: email,
+                    profilePicture: "No avatar",
+                    authorized: false
+                }
+                users.push(newUser);
+
+                const usersAsString = JSON.stringify(users, null, 2);
+                fs.writeFile('././files/users.json', usersAsString, err => {
+
+                    if (err) {
+                        return res.status(400).send({bo: null});
+                    } else {
+                        return res.status(200).send({bo: true});
+                    }
+                })
+            }
+        })
+
     }
 
     login = async (req, res) => {
 
-        let username = req.body.username.toLowerCase();
+        let username = req.body.username;
         let password = req.body.password;
 
-        try {
 
-            jsonReader("././files/users.json", (err, users) => {
+        jsonReader("././files/users.json", (err, users) => {
 
-                if (err) {
-                    console.log(err);
+            if (err) {
+                return res.status(400).send({bo: null});
 
-                } else {
-                    for (let i = 0; i < users.length; i++) {
+            } else {
+                for (let i = 0; i < users.length; i++) {
 
-                        if (username === users[i].username.toLowerCase() && password === users[i].password) {
+                    if (username.toLowerCase() === users[i].username.toLowerCase() && password === users[i].password
+                        || username.toLowerCase() === users[i].email.toLowerCase() && password === users[i].password) {
 
-                            req.session.user = users[i].username;
-                            req.session.profilePicture = users[i].profilePicture;
-                            req.session.authorized = users[i].authorized;
-                            req.session.save();
+                        req.session.user = users[i].username;
+                        req.session.profilePicture = users[i].profilePicture;
+                        req.session.authorized = users[i].authorized;
+                        req.session.save();
 
-                            return res.status(200).redirect('/index.html');
-                        }
+                        return res.status(200).send({bo: true});
                     }
-
-                    return res.status(400).send("Invalid username or password.").redirect('/login.html');
                 }
-            })
-        } catch (err) {
 
-            res.status(400).send("An error occurred, try again later.").redirect('/login.html');
-        }
+                return res.status(400).send({bo: false});
+            }
+        })
+
     }
 
     logout = async (req, res) => {
@@ -270,7 +274,7 @@ class AccountController {
 
                     if (currentUser === users[i].username) {
 
-                            //same email as user already has
+                        //same email as user already has
                         if (newEmail.toLowerCase() === users[i].email.toLowerCase()) {
                             return res.send({bo: false});
 

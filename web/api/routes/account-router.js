@@ -8,6 +8,7 @@ router.post('/user/login', controller.login);
 router.get('/user/logout', controller.logout);
 
 router.get('/user/get', controller.getUser);
+router.get('/user/getAll', controller.getAllUsers);
 router.delete('/user/delete', controller.deleteUser);
 
 //router.post('/user/checkDuplicateUsername', controller.checkDuplicateUsername);
