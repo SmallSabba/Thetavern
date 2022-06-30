@@ -18,5 +18,7 @@ router.post('/user/changePassword', controller.changePassword);
 
 router.post('/user/changeEmail', controller.changeEmail);
 
+router.post('/user/changeProfilePicture', controller.changeProfilePicture);
+
 
 module.exports = router;

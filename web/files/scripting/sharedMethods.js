@@ -1,4 +1,5 @@
 let currentUser;
+let profilePicture;
 let isAdmin;
 const svgPathsMap = new Map();
 
@@ -15,6 +16,7 @@ function updateNavBarIcons() {
         .then(data => {
 
             currentUser = data.user;
+            profilePicture = data.profilePicture;
             isAdmin = data.admin;
 
             if (currentUser != null) {

@@ -22,12 +22,14 @@ class AccountController {
     getUser = async (req, res) => {
 
         if (req.session.user === undefined) {
-            return res.send({user: null, admin: null});
+            return res.send({user: null, admin: null, profilePicture: null});
         }
         if (req.session.authorized) {
-            return res.send({user: req.session.user, admin: true});
+            return res.send({user: req.session.user, admin: true, profilePicture: req.session.profilePicture});
         }
-        return res.send({user: req.session.user, admin: false});
+
+        console.log("here" + req.session.profilePicture);
+        return res.send({user: req.session.user, admin: false, profilePicture: req.session.profilePicture});
     }
 
     register = async (req, res) => {
@@ -54,6 +56,7 @@ class AccountController {
                         username: username,
                         password: password,
                         email: email,
+                        profilePicture: "No avatar",
                         authorized: false
                     }
                     users.push(newUser);
@@ -94,6 +97,7 @@ class AccountController {
                         if (username === users[i].username.toLowerCase() && password === users[i].password) {
 
                             req.session.user = users[i].username;
+                            req.session.profilePicture = users[i].profilePicture;
                             req.session.authorized = users[i].authorized;
                             req.session.save();
 
@@ -116,7 +120,6 @@ class AccountController {
         res.status(200).redirect('/index.html');
     }
 
-
     deleteUser = async (req, res) => {
 
         let username = req.session.user;
@@ -124,24 +127,23 @@ class AccountController {
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                console.log(err)
+                return res.status(400).send({bo: null});
 
             } else {
 
                 for (let i = 0; i < users.length; i++) {
 
                     if (username === users[i].username) {
-                        console.log("Account was found and deleted");
-                        users.splice(i, 3)
+                        users.splice(i, 5)
 
                         const usersAsString = JSON.stringify(users, null, 2);
                         fs.writeFile('././files/users.json', usersAsString, err => {
 
                             if (err) {
-                                return res.status(400).send("An error occurred while deleting your account. Don't go..", err);
+                                return res.status(400).send({bo: null});
                             } else {
                                 this.logout(req, res);
-                                return res.status(200).send("Successfully deleted your account.");
+                                return res.status(200).send({bo: true});
                             }
                         })
                     }
@@ -149,40 +151,28 @@ class AccountController {
             }
         })
     }
-    changeEmail = async (req, res) => {
+
+    //checks if the old password is correct
+    async verifyPassword(req, res) {
 
         let currentUser = req.body.currentUser;
-        let newEmail = req.body.newEmail;
-
-        console.log(currentUser);
 
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                console.log(err)
-
+                return res.status(400).send({bo: null});
             } else {
 
                 for (let i = 0; i < users.length; i++) {
 
                     if (currentUser === users[i].username) {
 
-                        if (newEmail.toLowerCase() === users[i].email.toLowerCase()) {
-                            return res.send({bo: false});
+                        if (req.body.oldPassword === users[i].password) {
+                            return res.status(200).send({bo: true});
 
                         } else {
-                            users[i].email = newEmail;
+                            return res.status(400).send({bo: false});
                         }
-
-                        const usersAsString = JSON.stringify(users, null, 2);
-                        fs.writeFile('././files/users.json', usersAsString, err => {
-
-                            if (err) {
-                                return res.status(400).send("An error occurred while changing your email.", err);
-                            } else {
-                                return res.status(200).send({bo: true});
-                            }
-                        })
                     }
                 }
             }
@@ -196,7 +186,7 @@ class AccountController {
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                console.log(err)
+                return res.status(400).send({bo: null});
 
             } else {
 
@@ -210,9 +200,9 @@ class AccountController {
                         fs.writeFile('././files/users.json', usersAsString, err => {
 
                             if (err) {
-                                return res.status(400).send("An error occurred while changing your password.", err);
+                                return res.status(400).send({bo: null});
                             } else {
-                                return res.status(200).send("Successfully changed your password.");
+                                return res.status(200).send({bo: true});
                             }
                         })
                     }
@@ -221,7 +211,7 @@ class AccountController {
         })
     }
 
-    async changeUsername(req, res)  {
+    async changeUsername(req, res) {
 
         let currentUsername = req.body.oldUsername;
         let newUsername = req.body.newUsername;
@@ -235,7 +225,8 @@ class AccountController {
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                console.log(err)
+                return res.status(400).send({bo: null});
+
             } else {
 
                 for (let i = 0; i < users.length; i++) {
@@ -254,7 +245,7 @@ class AccountController {
                 fs.writeFile('././files/users.json', usersAsString, err => {
 
                     if (err) {
-                        return res.status(400).send("An error occurred while changing your username.", err);
+                        return res.status(400).send({bo: null});
                     } else {
                         return res.status(200).send({bo: true});
                     }
@@ -263,33 +254,80 @@ class AccountController {
         })
     }
 
-    //checks if the old password is correct
-    async verifyPassword (req, res) {
+    changeEmail = async (req, res) => {
 
         let currentUser = req.body.currentUser;
+        let newEmail = req.body.newEmail;
 
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                console.log(err);
+                return res.status(400).send({bo: null});
+
             } else {
 
                 for (let i = 0; i < users.length; i++) {
 
                     if (currentUser === users[i].username) {
 
-                        if (req.body.oldPassword === users[i].password) {
-                            return res.send({bo: true});
+                            //same email as user already has
+                        if (newEmail.toLowerCase() === users[i].email.toLowerCase()) {
+                            return res.send({bo: false});
 
                         } else {
-                            return res.send({bo: false});
+                            users[i].email = newEmail;
                         }
+
+                        const usersAsString = JSON.stringify(users, null, 2);
+                        fs.writeFile('././files/users.json', usersAsString, err => {
+
+                            if (err) {
+                                return res.status(400).send({bo: null});
+                            } else {
+                                return res.status(200).send({bo: true});
+                            }
+                        })
                     }
                 }
             }
         })
     }
 
+    async changeProfilePicture(req, res) {
+
+        let currentUser = req.body.currentUser;
+        let newProfilePicture = req.body.profilePicture;
+
+        jsonReader("././files/users.json", (err, users) => {
+
+            if (err) {
+                return res.status(400).send({bo: null});
+
+            } else {
+
+                for (let i = 0; i < users.length; i++) {
+
+                    if (currentUser === users[i].username) {
+
+                        users[i].profilePicture = newProfilePicture;
+                        req.session.profilePicture = users[i].profilePicture;
+
+                        const usersAsString = JSON.stringify(users, null, 2);
+                        fs.writeFile('././files/users.json', usersAsString, err => {
+
+                            if (err) {
+                                return res.status(400).send({bo: null});
+                            } else {
+                                return res.status(200).send({bo: true});
+                            }
+                        })
+                    }
+                }
+            }
+        })
+    }
+
+    /*
     //checks if there already is a user with the requested new username
     checkDuplicateUsername = async (newUsername) => {
 
@@ -309,6 +347,7 @@ class AccountController {
             }
         })
     }
+     */
 }
 
 module.exports = new AccountController();

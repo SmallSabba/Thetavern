@@ -34,6 +34,80 @@ class ElementCreator {
     }
 }
 
+let profilePicture;
+
+const profilePicturesMap = new Map();
+
+profilePicturesMap.set("No avatar", "/randomPictures/noAvatar.jpg");
+
+profilePicturesMap.set("Beach", "/wheelchairs/background/BGbeach.png");
+profilePicturesMap.set("Grass", "/wheelchairs/background/BGgrass.png");
+profilePicturesMap.set("Mountain", "/wheelchairs/background/BGmountain.png");
+profilePicturesMap.set("Snow", "/wheelchairs/background/BGsnow.png");
+profilePicturesMap.set("Stone", "/wheelchairs/background/BGstone.png");
+
+profilePicturesMap.set("iChair", "/wheelchairs/electric/iCHAIR_MC2.png");
+profilePicturesMap.set("Meyra", "/wheelchairs/electric/MEYRA_1.611.png");
+profilePicturesMap.set("Optimus", "/wheelchairs/electric/Optimus_2_S.png");
+profilePicturesMap.set("CRI", "/wheelchairs/manual/CRI.png");
+profilePicturesMap.set("Format", "/wheelchairs/manual/Format.png");
+profilePicturesMap.set("Mo", "/wheelchairs/manual/MO_951B_60.png");
+profilePicturesMap.set("Water Wheels", "/wheelchairs/manual/WaterWheels.png");
+
+function generateImgContainer() {
+
+    let container = document.querySelector(".rightContainer");
+    if (container !== null) container.remove();
+
+    const profileArray = Array.from(profilePicturesMap);
+
+    new ElementCreator("div")
+        .with("class", "rightImgContainer rightContainer")
+        .append(new ElementCreator("div")
+            .with("class", "currentImg")
+            .append(new ElementCreator("img")
+                .with("src", `${profilePicturesMap.get(profilePicture)}`)
+            )
+            .append(new ElementCreator("p")
+                .text(`${profilePicture}`))
+        )
+        .append(new ElementCreator("div")
+            .with("class", "terrainImgContainer")
+            .append(new ElementCreator("h3")
+                .text("Terrains")
+            )
+        )
+        .append(new ElementCreator("div")
+            .with("class", "wheelchairImgContainer")
+            .append(new ElementCreator("h3")
+                .text("Wheelchairs")
+            )
+        )
+        .appendTo(document.querySelector(".content"))
+
+    let terrainDiv = document.createElement("div");
+    terrainDiv.id = "test1";
+    let wheelchairDiv = document.createElement("div");
+    wheelchairDiv.id = "test2";
+
+    for (let i = 1; i < profileArray.length; i++) {
+
+        let img = document.createElement("img");
+        img.src = `${profileArray[i][1]}`;
+        img.alt = `${profileArray[i][0]}`;
+        img.setAttribute("cursor", "pointer");
+        img.addEventListener("click", () => {
+            changeProfilePicture(profileArray[i][0]).then();
+        })
+
+        if (i <= 5) terrainDiv.append(img);
+        else wheelchairDiv.append(img);
+    }
+
+    document.querySelector(".terrainImgContainer").append(terrainDiv);
+    document.querySelector(".wheelchairImgContainer").append(wheelchairDiv);
+}
+
 function generateOneInputField(message) {
 
     let type;
@@ -44,7 +118,7 @@ function generateOneInputField(message) {
     if (container !== null) container.remove();
 
     new ElementCreator("div")
-        .with("class", "rightContainer")
+        .with("class", "rightInputContainer rightContainer")
         .append(new ElementCreator("div")
             .with("class", "inputFields")
             .append(new ElementCreator("p")
@@ -78,7 +152,7 @@ function generateChangePasswordField() {
     if (container !== null) container.remove();
 
     new ElementCreator("div")
-        .with("class", "rightContainer")
+        .with("class", "rightInputContainer rightContainer")
 
         .append(new ElementCreator("div")
             .with("class", "inputFields")
@@ -120,15 +194,19 @@ async function deleteAccount(req, res) {
 
     fetch('/api/user/delete', {
         method: 'delete'
-    }).then(() => {
-        console.log("finished");
-        window.location.href = 'index.html';
+    }).then(res => res.json())
+        .then(data => {
+
+            if (data.bo) {
+                alert("Successfully deleted your account.. Redirecting to homepage.")
+                window.location.href = 'index.html';
+            } else {
+                alert("An error occurred while deleting your account.");
+            }
     })
 }
 
 async function changePassword(oldPassword, newPassword) {
-
-    currentUser = "Test";
 
     fetch('/api/user/verifyPassword', {
         method: 'post',
@@ -148,19 +226,23 @@ async function changePassword(oldPassword, newPassword) {
                         currentUser: currentUser,
                         newPassword: newPassword
                     })
-                }).then(() => {
-                    alert("Successfully changed your password.");
-                    window.location.href = 'profile.html';
-                })
+                }).then(res => res.json())
+                    .then(data => {
+
+                        if (data.bo) {
+                            alert("Successfully changed your password.");
+                            window.location.href = 'profile.html';
+                        } else {
+                            alert("An error occurred while changing your password.");
+                        }
+                    })
             } else {
-                alert("Your password is not correct.");
+                alert("An error occurred while changing your password.");
             }
         })
 }
 
 async function changeUsername(newUsername) {
-
-    currentUser = "test";
 
     if (newUsername !== currentUser) {
 
@@ -175,11 +257,16 @@ async function changeUsername(newUsername) {
             .then(data => {
 
                 if (data.bo) {
-                    alert("Successfully changed your username.");
-                    window.location.href = 'profile.html';
+                    currentUser = newUsername;
+                    document.querySelector(".topContainer h3").textContent = currentUser;
+                    //alert("Successfully changed your username.");
+                    //window.location.href = 'profile.html';
+
+                } else if (data.bo === false) {
+                    alert("This username is already taken.");
 
                 } else {
-                    alert("This username is already taken.");
+                    alert("An error occurred while changing your username.");
                 }
             })
     } else {
@@ -204,13 +291,60 @@ async function changeEmail(newEmail) {
             if (data.bo) {
                 alert("Successfully changed your email address.");
                 window.location.href = 'profile.html';
-            } else {
+
+            } else if (data.bo === false) {
                 alert("Enter a different email address.");
+
+            } else {
+                alert("An error occurred while changing your email.");
             }
         })
 }
 
+async function changeProfilePicture(pictureKey) {
+
+    fetch("/api/user/changeProfilePicture", {
+        method: "post",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            currentUser: currentUser,
+            profilePicture: pictureKey
+        })
+    }).then(res => res.json())
+        .then(data => {
+
+            if (data.bo) {
+                profilePicture = pictureKey;
+                //alert("Successfully changed your profile picture.");
+                document.querySelector(".currentImg img").setAttribute("src", `${profilePicturesMap.get(profilePicture)}`);
+                document.querySelector(".currentImg p").textContent = profilePicture;
+                updateProfilePicture();
+
+            } else {
+                alert("An error occurred, please try again later.");
+            }
+        })
+}
+
+function updateProfilePicture() {
+
+    document.querySelector(".topContainer img").setAttribute("src", `${profilePicturesMap.get(profilePicture)}`);
+    document.querySelector(".topContainer img").setAttribute("alt", `${profilePicture}`);
+
+}
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    generateOneInputField("username");
+    fetch("/api/user/get")
+        .then(res => res.json())
+        .then(data => {
+            currentUser = data.user;
+            profilePicture = data.profilePicture;
+            isAdmin = data.admin;
+
+            document.querySelector(".topContainer h3").textContent = currentUser;
+
+            updateProfilePicture();
+        })
+
+    //generateOneInputField("username");
 });
