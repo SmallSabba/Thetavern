@@ -1,4 +1,21 @@
+function resetInputFields() {
+
+    document.querySelectorAll(".loginForm input")
+        .forEach(textField => {
+            textField.value = null;
+        });
+
+    displayIncorrectInputMessage("none");
+}
+
+function displayIncorrectInputMessage(display) {
+
+    document.getElementById("incorrectInputMessage").style.display = display;
+}
+
 function generateLoginField() {
+
+    localStorage.setItem("formType", "login");
 
     const element = document.querySelector(".loginForm");
     element ? element.remove() : null;
@@ -16,6 +33,10 @@ function generateLoginField() {
             .with("type", "password")
             .with("placeholder", "password")
             .with("required"))
+        .append(new ElementCreator("p")
+            .id("incorrectInputMessage")
+            .text("Your username or password is incorrect.")
+        )
         .append(new ElementCreator("div")
             .with("class", "buttonFlex")
             .append(new ElementCreator("button")
@@ -27,10 +48,7 @@ function generateLoginField() {
                 .with("class", "resetButton")
                 .text("Reset")
                 .listener("click", () => {
-                    document.querySelectorAll(".loginForm input")
-                        .forEach(textField => {
-                            textField.value = null;
-                        });
+                    resetInputFields();
                 })
             )
         )
@@ -45,6 +63,8 @@ function generateLoginField() {
 }
 
 function generateRegisterField() {
+
+    localStorage.setItem("formType", "register");
 
     const elem = document.querySelector(".loginForm");
     elem ? elem.remove() : null;
@@ -70,6 +90,10 @@ function generateRegisterField() {
             .with("name", "email")
             .with("placeholder", "max@kilian.oliver")
             .with("required"))
+        .append(new ElementCreator("p")
+            .id("incorrectInputMessage")
+            .text("There already is an existing account with this username or email address.")
+        )
         .append(new ElementCreator("div")
             .with("class", "buttonFlex")
             .append(new ElementCreator("button")
@@ -81,10 +105,7 @@ function generateRegisterField() {
                 .with("class", "resetButton")
                 .text("Reset")
                 .listener("click", () => {
-                    document.querySelectorAll(".loginForm input")
-                        .forEach(textField => {
-                            textField.value = null;
-                        });
+                    resetInputFields();
                 })
             )
         )
@@ -103,8 +124,6 @@ function login() {
     const user = document.getElementById("username").value;
     const pass = document.getElementById("password").value;
 
-    if (user !== "" && pass !== "") {
-
     fetch("/api/user/login", {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
@@ -116,18 +135,17 @@ function login() {
         .then(data => {
 
             if (data.bo) {
-                alert("Successfully logged in to your account.");
+                displayIncorrectInputMessage("none");
+                localStorage.removeItem("formType");
                 window.location.href = localStorage.getItem("page");
 
             } else if (data.bo === false) {
-                alert("Your username or password is incorrect.");
+                displayIncorrectInputMessage("block");
+
             } else {
-                alert("An error occurred while logging in to your account.");
+                displayPopUpInfo("An error occurred while logging in to your account.");
             }
         })
-    } else {
-        //alert("Please enter a username and a password.");
-    }
 }
 
 function register() {
@@ -144,18 +162,19 @@ function register() {
         .then(data => {
 
             if (data.bo) {
-                alert("Successfully created your account.");
+                displayPopUpInfo("Successfully created your account.");
                 generateLoginField();
             } else if (data.bo === false) {
-                alert("There already is an existing account with this username or email address.");
+                //displayIncorrectInputMessage("block");
+                displayPopUpInfo("There already is an existing account with this username or email address.")
             } else {
-                alert("An error occurred while creating your account.");
+                displayPopUpInfo("An error occurred while creating your account.");
             }
         })
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    generateLoginField();
-
+    if (localStorage.getItem("formType") === "login") generateLoginField();
+    else generateRegisterField();
 });

@@ -333,8 +333,7 @@ function addWheelchairToDOM(wheelchair) {
                         .text("Select Product")
                         .id(`wheelchair${wheelchair.id}`)
                         .listener('click', () => {
-                            localStorage.setItem("id", wheelchair.id);
-                            console.log(parseInt(wheelchair.id));
+                            localStorage.setItem("productID", wheelchair.id);
                             window.location.href = 'product.html';
                         })
                     )

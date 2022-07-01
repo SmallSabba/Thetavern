@@ -6,18 +6,6 @@
   margin: 0;
 }
 
-:root {
-  scroll-behavior: smooth;
-  background-color: transparent;
-  --ff-heading: "Poppins", sans-serif;
-  --ff-subHeading: "Sathu", sans-serif;
-  --ff-body: "Arial", serif;
-  --fs-heading: clamp(1.5rem, 7vw, 7rem);
-  --fs-subHeading: clamp(1rem, 3vw, 4rem);
-  --fc-white: white;
-  --fc-black: black;
-}
-
 html body {
   background-color: #0a4a65;
 }
@@ -33,6 +21,7 @@ html body main .logo {
   display: flex;
   justify-content: center;
   width: 50%;
+  max-width: 888px;
   padding: 1rem;
 }
 html body main .logo a {
@@ -40,12 +29,14 @@ html body main .logo a {
 }
 html body main .logo a img {
   width: 100%;
+  max-width: 250px;
 }
 html body main .styleForm {
   background-color: white;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5), 0 5px 5px 0 rgba(0, 0, 0, 0.5);
   border-radius: 1rem;
   width: 50%;
+  max-width: 740px;
   height: 50%;
   padding: 2rem;
 }
@@ -105,20 +96,23 @@ html body main .styleForm .loginForm input {
   border: none;
   background-color: #f2f2f2;
 }
-html body main .styleForm .loginForm p {
+html body main .styleForm .loginForm p:not(#incorrectInputMessage) {
   font-size: inherit;
   text-decoration: none;
   color: lightgray;
 }
-html body main .styleForm .loginForm p a {
+html body main .styleForm .loginForm p:not(#incorrectInputMessage) a {
   cursor: pointer;
   font-size: inherit;
   text-decoration: none;
   padding-left: 0.5rem;
   color: var(--fc-black);
 }
-html body main .styleForm .loginForm .errorMsg {
+html body main .styleForm .loginForm #incorrectInputMessage {
+  display: none;
   color: red;
+  font-size: inherit;
+  text-align: center;
 }
 
-/*# sourceMappingURL=login.css.map */
+/*# sourceMappingURL=loginAndRegister.css.map */

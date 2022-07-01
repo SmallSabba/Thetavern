@@ -22,12 +22,31 @@ class AccountController {
     getUser = async (req, res) => {
 
         if (req.session.user === undefined) {
-            return res.send({user: null, admin: null, profilePicture: null});
+
+            const tmpUser = {
+                username: null,
+                email: null,
+                profilePicture: null,
+                authorized: null
+            }
+            return res.status(200).send({user: tmpUser});
         }
-        if (req.session.authorized) {
-            return res.send({user: req.session.user, admin: true, profilePicture: req.session.profilePicture});
-        }
-        return res.send({user: req.session.user, admin: false, profilePicture: req.session.profilePicture});
+
+        jsonReader("././files/users.json", (err, users) => {
+
+            if (err) {
+                return res.status(400).send({user: null});
+
+            } else {
+
+                for (let i = 0; i < users.length; i++) {
+
+                    if (req.session.user === users[i].username) {
+                        return res.status(200).send({user: users[i]});
+                    }
+                }
+            }
+        })
     }
 
     getAllUsers = async (req, res) => {
@@ -104,8 +123,6 @@ class AccountController {
                         || username.toLowerCase() === users[i].email.toLowerCase() && password === users[i].password) {
 
                         req.session.user = users[i].username;
-                        req.session.profilePicture = users[i].profilePicture;
-                        req.session.authorized = users[i].authorized;
                         req.session.save();
 
                         return res.status(200).send({bo: true});

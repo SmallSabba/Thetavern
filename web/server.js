@@ -10,11 +10,6 @@ const port = process.env.PORT ?? 3000;
 const wheelchairRouter = require('./api/routes/wheelchair-router');
 const accountRouter = require('./api/routes/account-router');
 
-/**
- * short session management tutorial
- * https://www.section.io/engineering-education/session-management-in-nodejs-using-expressjs-and-express-session/
- */
-
 //const oneDay = 1000 * 60 * 60 * 24;
 const oneHour = 1000 * 60 * 60;
 app.use(sessions({
@@ -49,6 +44,7 @@ app.listen(port, (error) => {
     if (error) {
         console.log(error);
     } else {
-        console.log(`Server listening at http://localhost:${port}`)
+        //added "/index.html" at the end so that document location pathname could be used to determine what the current page is
+        console.log(`Server listening at http://localhost:${port}/index.html`)
     }
 });

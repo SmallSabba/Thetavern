@@ -33,5 +33,12 @@
     "email": "tested@test.com",
     "profilePicture": "No avatar",
     "authorized": false
+  },
+  {
+    "username": "Chrisi",
+    "password": "pw4",
+    "email": "abc@aber",
+    "profilePicture": "Beach",
+    "authorized": false
   }
 ]

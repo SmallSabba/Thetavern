@@ -11,7 +11,7 @@ $textFontSize: 18px;
 
   --ff-heading: "Poppins", sans-serif;
   --ff-subHeading: "Sathu", sans-serif;
-  --ff-body: "Arial", serif;
+  font-family: "Arial", serif;
 
   --fs-heading: clamp(1.5rem, 7vw, 7rem);
   --fs-subHeading: clamp(1rem, 3vw, 4rem);
@@ -375,7 +375,7 @@ article {
   }
 }
 
-.deleteConfirmMessage {
+.deleteConfirmMessage, .popUpMessage {
 
   background-color: rgba(7, 59, 77, 0.94);
   transform: translate(-50%, -50%);
@@ -455,6 +455,14 @@ article {
         background-color: #7c2222;
       }
     }
+  }
+}
+
+.popUpMessage {
+
+  p {
+
+    line-height: 2rem;
   }
 }
 

@@ -6,22 +6,6 @@
   margin: 0;
 }
 
-
-:root {
-  scroll-behavior: smooth;
-  background-color: transparent;
-
-  --ff-heading: "Poppins", sans-serif;
-  --ff-subHeading: "Sathu", sans-serif;
-  --ff-body: "Arial", serif;
-
-  --fs-heading: clamp(1.5rem, 7vw, 7rem);
-  --fs-subHeading: clamp(1rem, 3vw, 4rem);
-
-  --fc-white: white;
-  --fc-black: black;
-}
-
 $mainColor: #ffffff;
 $secondaryColor: #0a4a65;
 $tertiaryColor: #c1e3f3;
@@ -43,6 +27,7 @@ html {
         display: flex;
         justify-content: center;
         width: 50%;
+        max-width: 888px;
         padding: 1rem;
 
         a {
@@ -50,7 +35,7 @@ html {
 
           img {
             width: 100%;
-
+            max-width: 250px;
           }
         }
       }
@@ -61,6 +46,7 @@ html {
         border-radius: 1rem;
 
         width: 50%;
+        max-width: 740px;
         height: 50%;
 
         padding: 2rem;
@@ -122,8 +108,7 @@ html {
             }
           }
 
-
-          & > input {
+          input {
             width: 100%;
             padding: 14px;
             letter-spacing: 0.5px;
@@ -133,17 +118,27 @@ html {
             background-color: #f2f2f2;
           }
 
-          & > p {
+          p:not(#incorrectInputMessage) {
             font-size: inherit;
             text-decoration: none;
             color: lightgray;
+
+            a {
+
+              cursor: pointer;
+              font-size: inherit;
+              text-decoration: none;
+              padding-left: 0.5rem;
+              color: var(--fc-black);
+            }
           }
 
-          & > p > a {
+          #incorrectInputMessage {
+            display: none;
+            color: red;
+
             font-size: inherit;
-            text-decoration: none;
-            padding-left: 0.5rem;
-            color: var(--fc-black);
+            text-align: center;
           }
         }
       }

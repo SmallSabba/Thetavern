@@ -41,16 +41,14 @@ function generateAllUsersContainer() {
 
                 for (let i = 0; i < users.length; i++) {
 
-                    let container;
-                    let admin;
-                    let user = "user";
+                    let container, admin, user = "user";
 
-                    if (i <= 2) {
+                    container = document.querySelector(".userContainer");
+                    admin = "User";
+
+                    if (users[i].authorized) {
                         container = document.querySelector(".adminContainer");
                         admin = "Admin";
-                    } else {
-                        container = document.querySelector(".userContainer");
-                        admin = "User";
                     }
 
                     if (currentUser === users[i].username) user = "user currentUser";
@@ -77,7 +75,7 @@ function generateAllUsersContainer() {
                 }
 
             } else {
-                alert("An error occurred while loading user profiles.");
+                return displayPopUpInfo("An error occurred while loading user profiles.");
             }
         })
 }
@@ -115,22 +113,28 @@ function generateImgContainer() {
         .appendTo(document.querySelector(".content"))
 
     let terrainDiv = document.createElement("div");
-    terrainDiv.id = "test1";
     let wheelchairDiv = document.createElement("div");
-    wheelchairDiv.id = "test2";
 
     for (let i = 1; i < profileArray.length; i++) {
 
         let img = document.createElement("img");
         img.src = `${profileArray[i][1]}`;
         img.alt = `${profileArray[i][0]}`;
-        img.addEventListener("click", () => {
-            changeProfilePicture(profileArray[i][0]).then();
-        })
+
 
         if (!isAdmin) {
             if (profileArray[i][0] === "CRI" || profileArray[i][0] === "Water Wheels") {
                 img.style.opacity = ".5";
+                img.style.cursor = "not-allowed";
+
+                img.addEventListener("click", () => {
+                    displayPopUpInfo("Only premium members can use this background image.");
+                })
+
+            } else {
+                img.addEventListener("click", () => {
+                    changeProfilePicture(profileArray[i][0]).then();
+                })
             }
         }
         if (i <= 5) terrainDiv.append(img);
@@ -143,39 +147,61 @@ function generateImgContainer() {
 
 function generateOneInputField(message) {
 
-    let type;
-    message === "username" ? type = "text" : type = "email";
+    fetch("/api/user/get")
+        .then(res => res.json())
+        .then(data => {
 
-    let container = document.querySelector(".rightContainer");
-    if (container !== null) container.remove();
+            if (data.user === null) return displayPopUpInfo("An error occurred while fetching user information.");
 
-    new ElementCreator("div")
-        .with("class", "rightInputContainer rightContainer")
-        .append(new ElementCreator("div")
-            .with("class", "inputFields")
-            .append(new ElementCreator("p")
-                .text(`Enter a new ${message}:`)
-            )
-            .append(new ElementCreator("input")
-                .id("input")
-                .with("class", "inputField")
-                .with("type", `${type}`)
-                .with("placeholder", `${message}`)
-                .with("required")
-            )
-            .append(new ElementCreator("button")
-                .text("Apply")
-                .listener("click", () => {
+            let type, settingValue;
+            if (message === "username") {
+                type = "text";
+                settingValue = data.user.username;
+            } else {
+                type = "email";
+                settingValue = data.user.email;
+            }
 
-                    if (message === "username") {
-                        changeUsername(document.getElementById("input").value).then();
-                    } else {
-                        changeEmail(document.getElementById("input").value).then();
-                    }
-                })
-            )
-        )
-        .appendTo(document.querySelector(".content"))
+            let container = document.querySelector(".rightContainer");
+            if (container !== null) container.remove();
+
+            new ElementCreator("div")
+                .with("class", "rightInputContainer rightContainer")
+                .append(new ElementCreator("div")
+                    .with("class", "userSettingValue")
+                    .append(new ElementCreator("p")
+                        .text(`Current ${message}:`)
+                    )
+                    .append(new ElementCreator("p")
+                        .text(`${settingValue}`)
+                    )
+                )
+                .append(new ElementCreator("div")
+                    .with("class", "inputFields")
+                    .append(new ElementCreator("p")
+                        .text(`Enter a new ${message}:`)
+                    )
+                    .append(new ElementCreator("input")
+                        .id("input")
+                        .with("class", "inputField")
+                        .with("type", `${type}`)
+                        .with("placeholder", `${message}`)
+                        .with("required")
+                    )
+                    .append(new ElementCreator("button")
+                        .text("Save")
+                        .listener("click", () => {
+
+                            if (message === "username") {
+                                changeUsername(document.getElementById("input").value).then();
+                            } else {
+                                changeEmail(document.getElementById("input").value).then();
+                            }
+                        })
+                    )
+                )
+                .appendTo(document.querySelector(".content"))
+        })
 }
 
 function generateChangePasswordField() {
@@ -209,7 +235,7 @@ function generateChangePasswordField() {
                 .with("required")
             )
             .append(new ElementCreator("button")
-                .text("Apply")
+                .text("Save")
                 .listener('click', () => {
                         let oldPassword = document.getElementById("inputOld").value;
                         let newPassword = document.getElementById("inputNew").value;

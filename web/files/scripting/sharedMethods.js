@@ -203,15 +203,19 @@ function updateNavBarIcons() {
         .then(res => res.json())
         .then(data => {
 
-            currentUser = data.user;
-            profilePicture = data.profilePicture;
-            isAdmin = data.admin;
+            if (data.user === null) {
+                return displayPopUpInfo("An error occurred while fetching user information.");
+            }
+
+            currentUser = data.user.username;
+            profilePicture = data.user.profilePicture;
+            isAdmin = data.user.authorized;
 
             if (currentPage === "profile") updateProfilePicture();
             else if (currentPage === "shop") getAllWheelchairs();
             else if (currentPage === "index") {
                 findTopProduct("electric", 1);
-                findTopProduct("manual",2);
+                findTopProduct("manual", 2);
             }
 
 
@@ -249,7 +253,7 @@ function updateNavBarIcons() {
 
                     document.getElementById(`profileLink${i}`).addEventListener("click", () => {
                         //alert("You need to login first, in order to change your profile.");
-                        displayPopUpInfo(document.querySelector(".topProducts"), "You need to login first, in order to change your profile.");
+                        displayPopUpInfo("You need to login first, in order to change your profile.");
                     })
                 }
                 //changes login button appearance
@@ -257,8 +261,8 @@ function updateNavBarIcons() {
                 document.querySelector(".signInSignOut span").textContent = "Login";
                 document.querySelector(".signInSignOut").addEventListener("click", () => {
                     localStorage.setItem("page", document.location.pathname.replace("/", ""));
-
-                    window.location.href = 'login.html';
+                    localStorage.setItem("formType", "login");
+                    window.location.href = 'loginAndRegister.html';
                 })
             }
         })
@@ -284,7 +288,7 @@ function addWheelchairToDOM(parent, wheelchair) {
             )
             .listener('click', () => {
 
-                localStorage.setItem("id", wheelchair.id);
+                localStorage.setItem("productID", wheelchair.id);
                 window.location.href = 'product.html';
             })
         )
@@ -296,7 +300,7 @@ function addWheelchairToDOM(parent, wheelchair) {
             )
             .listener('click', () => {
 
-                displayConfirmMessage(document.querySelector("body"), wheelchair);
+                displayConfirmMessage(wheelchair);
             })
         )
         .append(new ElementCreator("ul")
@@ -344,7 +348,7 @@ function removeItem(id) {
     })
 }
 
-function displayConfirmMessage(parent, wheelchair) {
+function displayConfirmMessage(wheelchair) {
 
     let element = document.querySelector(".deleteConfirmMessage");
     element ? element.remove() : null;
@@ -382,21 +386,28 @@ function displayConfirmMessage(parent, wheelchair) {
     container.append(p);
     container.append(btnContainer);
 
-    parent.append(container);
+    document.querySelector("body").append(container);
 
 }
 
-function displayPopUpInfo(parent, info) {
+function displayPopUpInfo(info) {
 
     let element = document.querySelector(".popUpMessage");
     element ? element.remove() : null;
+
+    let icon = document.createElement("i");
+    icon.setAttribute("class", "fa-solid fa-xmark");
+    icon.addEventListener("click", () => {
+        document.querySelector(".popUpMessage").remove();
+    })
 
     let message = document.createElement("p");
     message.textContent = info;
 
     let container = document.createElement("div");
     container.setAttribute("class", "popUpMessage");
+    container.append(icon);
     container.append(message)
 
-    parent.append(container);
+    document.querySelector("body").append(container);
 }
