@@ -22,17 +22,19 @@ function generateLoginField() {
 
     new ElementCreator("form")
         .with("class", "loginForm")
-        .with("action", "javascript:login()")
+        .listener("submit", login)
         .append(new ElementCreator("input")
-            .id("username")
             .with("type", "text")
+            .with("name", "username")
             .with("placeholder", "username / e-mail")
-            .with("required"))
+            .with("required")
+        )
         .append(new ElementCreator("input")
-            .id("password")
             .with("type", "password")
+            .with("name", "password")
             .with("placeholder", "password")
-            .with("required"))
+            .with("required")
+        )
         .append(new ElementCreator("p")
             .id("incorrectInputMessage")
             .text("Your username or password is incorrect.")
@@ -42,7 +44,6 @@ function generateLoginField() {
             .append(new ElementCreator("button")
                 .with("class", "submitButton")
                 .text("Login")
-                .with("type", "submit")
             )
             .append(new ElementCreator("button")
                 .with("class", "resetButton")
@@ -71,21 +72,18 @@ function generateRegisterField() {
 
     new ElementCreator("form")
         .with("class", "loginForm")
-        .with("action", "javascript:register()")
+        .listener("submit", register)
         .append(new ElementCreator("input")
-            .id("username")
             .with("type", "text")
             .with("name", "username")
             .with("placeholder", "username / e-mail")
             .with("required"))
         .append(new ElementCreator("input")
-            .id("password")
             .with("type", "password")
             .with("name", "password")
             .with("placeholder", "password")
             .with("required"))
         .append(new ElementCreator("input")
-            .id("email")
             .with("type", "email")
             .with("name", "email")
             .with("placeholder", "max@kilian.oliver")
@@ -99,7 +97,6 @@ function generateRegisterField() {
             .append(new ElementCreator("button")
                 .with("class", "submitButton")
                 .text("Create")
-                .with("type", "submit")
             )
             .append(new ElementCreator("button")
                 .with("class", "resetButton")
@@ -119,17 +116,17 @@ function generateRegisterField() {
         .appendTo(document.querySelector(".styleForm"))
 }
 
-function login() {
+function login(event) {
 
-    const user = document.getElementById("username").value;
-    const pass = document.getElementById("password").value;
+    event.preventDefault();
+    const form = event.currentTarget;
 
     fetch("/api/user/login", {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            username: user,
-            password: pass
+            username: form.username.value,
+            password: form.password.value
         })
     }).then(res => res.json())
         .then(data => {
@@ -137,6 +134,7 @@ function login() {
             if (data.bo) {
                 displayIncorrectInputMessage("none");
                 localStorage.removeItem("formType");
+
                 window.location.href = localStorage.getItem("page");
 
             } else if (data.bo === false) {
@@ -148,15 +146,18 @@ function login() {
         })
 }
 
-function register() {
+function register(event) {
+
+    event.preventDefault();
+    const form = event.currentTarget;
 
     fetch("/api/user/register", {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            username: document.getElementById("username").value,
-            password: document.getElementById("password").value,
-            email: document.getElementById("email").value
+            username: form.username.value,
+            password: form.password.value,
+            email: form.email.value
         })
     }).then(res => res.json())
         .then(data => {
@@ -175,6 +176,11 @@ function register() {
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    if (localStorage.getItem("formType") === "login") generateLoginField();
-    else generateRegisterField();
+    if (localStorage.getItem("formType") === "login") {
+        generateLoginField();
+        //document.querySelector(".loginForm").addEventListener("submit", login);
+    } else {
+        generateRegisterField();
+        //document.querySelector(".loginForm").addEventListener("submit", register);
+    }
 });

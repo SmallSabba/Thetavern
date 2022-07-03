@@ -1,6 +1,6 @@
 const profilePicturesMap = new Map();
 
-profilePicturesMap.set("No avatar", "/randomPictures/noAvatar.jpg");
+profilePicturesMap.set("No avatar", "/randomPictures/noAvatar.png");
 
 profilePicturesMap.set("Beach", "/wheelchairs/background/BGbeach.png");
 profilePicturesMap.set("Grass", "/wheelchairs/background/BGgrass.png");
@@ -121,22 +121,19 @@ function generateImgContainer() {
         img.src = `${profileArray[i][1]}`;
         img.alt = `${profileArray[i][0]}`;
 
+        if (!isAdmin && profileArray[i][0] === "CRI" || !isAdmin && profileArray[i][0] === "Water Wheels") {
+            img.style.opacity = ".5";
+            img.style.cursor = "not-allowed";
 
-        if (!isAdmin) {
-            if (profileArray[i][0] === "CRI" || profileArray[i][0] === "Water Wheels") {
-                img.style.opacity = ".5";
-                img.style.cursor = "not-allowed";
-
-                img.addEventListener("click", () => {
-                    displayPopUpInfo("Only premium members can use this background image.");
-                })
-
-            } else {
-                img.addEventListener("click", () => {
-                    changeProfilePicture(profileArray[i][0]).then();
-                })
-            }
+            img.addEventListener("click", () => {
+                displayPopUpInfo("Only premium members can use this background image.");
+            })
+        } else {
+            img.addEventListener("click", () => {
+                changeProfilePicture(profileArray[i][0]).then();
+            })
         }
+
         if (i <= 5) terrainDiv.append(img);
         else wheelchairDiv.append(img);
     }
@@ -165,14 +162,21 @@ function generateOneInputField(message) {
             let container = document.querySelector(".rightContainer");
             if (container !== null) container.remove();
 
-            new ElementCreator("div")
+            new ElementCreator("form")
                 .with("class", "rightInputContainer rightContainer")
+                .with("action", "javascript: if (message === 'username') {changeUsername(document.getElementById('input').value).then()} else {changeEmail(document.getElementById('input'').value).then();}"
+                )
+                .append(new ElementCreator("h2")
+                    .with("class", "profileChangeHeading")
+                    .text(`Change ${message}`)
+                )
                 .append(new ElementCreator("div")
                     .with("class", "userSettingValue")
                     .append(new ElementCreator("p")
                         .text(`Current ${message}:`)
                     )
                     .append(new ElementCreator("p")
+                        .id("value")
                         .text(`${settingValue}`)
                     )
                 )
@@ -211,7 +215,10 @@ function generateChangePasswordField() {
 
     new ElementCreator("div")
         .with("class", "rightInputContainer rightContainer")
-
+        .append(new ElementCreator("h2")
+            .with("class", "profileChangeHeading")
+            .text("Change password")
+        )
         .append(new ElementCreator("div")
             .with("class", "inputFields")
             .append(new ElementCreator("p")
@@ -225,6 +232,7 @@ function generateChangePasswordField() {
                 .with("required")
             )
             .append(new ElementCreator("p")
+                .id("secondPar")
                 .text("Enter your new password:")
             )
             .append(new ElementCreator("input")
@@ -248,18 +256,50 @@ function generateChangePasswordField() {
         )
 }
 
-async function deleteAccount(req, res) {
+function generateDeleteAccountField() {
+
+    let element = document.querySelector(".rightContainer");
+    element ? element.remove() : null;
+
+    new ElementCreator("div")
+        .with("class", "rightInputContainer rightContainer")
+        .append(new ElementCreator("h2")
+            .id("deleteHeading")
+            .with("class", "profileChangeHeading")
+            .text("Delete account")
+        )
+        .append(new ElementCreator("div")
+            .with("class", "deleteItemsContainer")
+            .append(new ElementCreator("p")
+                .text("Once you delete your account, there is no going back. Please be certain.")
+            )
+            .append(new ElementCreator("button")
+                .text("Delete account")
+                .listener('click', () => {
+                        deleteAccount().then();
+                    }
+                )
+            )
+        )
+        .appendTo(document.querySelector(".content")
+        )
+}
+
+async function deleteAccount() {
 
     fetch('/api/user/delete', {
-        method: 'delete'
+        method: 'delete',
+        headers: {'Content-Type': 'application/json'}
     }).then(res => res.json())
         .then(data => {
 
             if (data.bo) {
-                alert("Successfully deleted your account.. Redirecting to homepage.")
-                window.location.href = 'index.html';
+                displayPopUpInfo("Successfully deleted your account. Redirecting to homepage..")
+
+                setTimeout(() => {window.location.href = 'index.html';}, 1500)
+
             } else {
-                alert("An error occurred while deleting your account.");
+                displayPopUpInfo("An error occurred while deleting your account.");
             }
         })
 }
@@ -288,14 +328,13 @@ async function changePassword(oldPassword, newPassword) {
                     .then(data => {
 
                         if (data.bo) {
-                            alert("Successfully changed your password.");
-                            window.location.href = 'profile.html';
+                            displayPopUpInfo("Successfully changed your password.");
                         } else {
-                            alert("An error occurred while changing your password.");
+                            displayPopUpInfo("An error occurred while changing your password.");
                         }
                     })
             } else {
-                alert("An error occurred while changing your password.");
+                displayPopUpInfo("An error occurred while changing your password.");
             }
         })
 }
@@ -316,25 +355,22 @@ async function changeUsername(newUsername) {
 
                 if (data.bo) {
                     currentUser = newUsername;
+                    document.querySelector("#value").innerHTML = currentUser;
                     document.querySelector(".topContainer h3").textContent = currentUser;
-                    //alert("Successfully changed your username.");
-                    //window.location.href = 'profile.html';
 
                 } else if (data.bo === false) {
-                    alert("This username is already taken.");
+                    displayPopUpInfo("This username is already taken.");
 
                 } else {
-                    alert("An error occurred while changing your username.");
+                    displayPopUpInfo("An error occurred while changing your username.");
                 }
             })
     } else {
-        alert("Enter a different username.");
+        displayPopUpInfo("Enter a different username.");
     }
 }
 
 async function changeEmail(newEmail) {
-
-    currentUser = "Test";
 
     fetch('/api/user/changeEmail', {
         method: 'post',
@@ -347,14 +383,14 @@ async function changeEmail(newEmail) {
         .then(data => {
 
             if (data.bo) {
-                alert("Successfully changed your email address.");
-                window.location.href = 'profile.html';
+                document.querySelector("#value").innerHTML = newEmail;
+                displayPopUpInfo("Successfully changed your email address.");
 
             } else if (data.bo === false) {
-                alert("Enter a different email address.");
+                displayPopUpInfo("Enter a different email address.");
 
             } else {
-                alert("An error occurred while changing your email.");
+                displayPopUpInfo("An error occurred while changing your email.");
             }
         })
 }
@@ -373,13 +409,13 @@ async function changeProfilePicture(pictureKey) {
 
             if (data.bo) {
                 profilePicture = pictureKey;
-                //alert("Successfully changed your profile picture.");
+
                 document.querySelector(".currentImg img").setAttribute("src", `${profilePicturesMap.get(profilePicture)}`);
                 document.querySelector(".currentImg p").textContent = profilePicture;
                 updateProfilePicture();
 
             } else {
-                alert("An error occurred, please try again later.");
+                displayPopUpInfo("An error occurred while changing your profile picture.");
             }
         })
 }

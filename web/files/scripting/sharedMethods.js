@@ -32,6 +32,11 @@ class ElementCreator {
         parent.append(this.element);
         return this.element;
     }
+
+    prependTo(parent) {
+        parent.prepend(this.element);
+        return this.element;
+    }
 }
 
 
@@ -240,9 +245,11 @@ function updateNavBarIcons() {
                 document.getElementById("signInSignOutPath").setAttribute("d", svgPathsMap.get("logout"));
                 document.querySelector(".signInSignOut span").textContent = "Logout";
                 document.querySelector(".signInSignOut").addEventListener("click", () => {
+
+                    console.log("logout clicked");
                     fetch("/api/user/logout")
                         .then(() => {
-                            window.location.href = 'index.html';
+                            window.location.href = localStorage.getItem("page");
                         })
                 })
             } else {
@@ -252,7 +259,6 @@ function updateNavBarIcons() {
                     document.getElementById(`profileSpan${i}`).textContent = "No user";
 
                     document.getElementById(`profileLink${i}`).addEventListener("click", () => {
-                        //alert("You need to login first, in order to change your profile.");
                         displayPopUpInfo("You need to login first, in order to change your profile.");
                     })
                 }
@@ -321,6 +327,7 @@ function addWheelchairToDOM(parent, wheelchair) {
                         .id(`wheelchair${wheelchair.id}`)
                         .listener('click', () => {
                             localStorage.setItem("productID", wheelchair.id);
+                            localStorage.setItem("infoButtons", "true");
                             window.location.href = 'product.html';
                         })
                     )

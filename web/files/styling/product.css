@@ -1,42 +1,4 @@
-* {
-  padding: 0;
-  margin: 0;
-}
-
-:root {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: "Arial", serif;
-}
-
 @media screen {
-  .collapsible-menu {
-    visibility: hidden;
-    width: 50%;
-  }
-
-  .nav {
-    z-index: 3;
-  }
-
-  .menuList {
-    display: flex;
-    visibility: visible;
-  }
-  .menuList li {
-    transition-duration: 400ms;
-    padding: 1rem 0 1rem 1rem;
-    margin: 0 0.5rem;
-  }
-  .menuList li:active, .menuList li:hover {
-    padding: 1rem 1.5rem;
-  }
-  .menuList li * {
-    justify-content: right;
-  }
-
   .itemContainer {
     justify-content: space-evenly;
   }
@@ -49,6 +11,7 @@ body {
     max-width: 30%;
   }
   .itemContainer .productSelection {
+    border-left: 2px solid #084057;
     min-width: 280px;
     max-width: 30%;
   }
@@ -90,6 +53,7 @@ body {
     max-width: 45%;
   }
   .itemContainer .productSelection {
+    border: none;
     max-width: 50%;
   }
 }
@@ -103,6 +67,7 @@ body {
     max-width: 45%;
   }
   .itemContainer .productSelection {
+    border-left: 2px solid #084057;
     min-width: 220px;
     max-width: 50%;
   }
@@ -117,117 +82,11 @@ body {
     width: 100%;
   }
   .itemContainer .productSelection {
+    border: none;
     min-width: 220px;
     width: 100%;
   }
 }
-@media screen and (max-width: 1080px) {
-  .collapsible-menu {
-    visibility: visible;
-    width: 30%;
-  }
-
-  .nav {
-    z-index: 2;
-  }
-
-  .menuList {
-    visibility: hidden;
-    display: block;
-    text-align: right;
-    padding: 2rem 1rem 1rem 1rem;
-  }
-  .menuList li {
-    transition-duration: 400ms;
-    margin: 0.5rem 0;
-  }
-  .menuList li * {
-    justify-content: right;
-  }
-  .menuList li:first-child {
-    margin-top: 3.5rem;
-  }
-}
-nav {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-}
-nav ul {
-  padding: 0.5rem 1rem;
-  border-radius: 3rem;
-  display: flex;
-  list-style: none;
-  background-color: white;
-  box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
-}
-nav ul li {
-  border-radius: 3rem;
-}
-nav ul li a {
-  font-size: 18px;
-  text-decoration: none;
-  color: var(--fc-black);
-  display: flex;
-  gap: 0.5rem;
-}
-nav ul li a svg {
-  width: 1.5rem;
-}
-nav ul li a .beside-icon {
-  font-size: 110%;
-  margin-top: 0.1rem;
-}
-nav ul li:active, nav ul li:hover {
-  background-color: #0a4a65;
-  box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
-  padding: 1rem 1.5rem;
-  transition-duration: 400ms;
-}
-nav ul li:active svg, nav ul li:hover svg {
-  fill: #c1e3f3;
-}
-nav ul li:active a, nav ul li:hover a {
-  color: #c1e3f3;
-}
-
-.collapsible-menu {
-  background-color: white;
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 2;
-  min-width: fit-content;
-  padding: 0.4rem 1rem;
-  border-radius: 3rem;
-  top: 1rem;
-  right: 1rem;
-  box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
-}
-
-.menu-icons {
-  font-size: 220%;
-  color: #0a4a65;
-  border-radius: 1rem;
-  padding: 0.5rem 1rem;
-  transition: background-color 0.4s;
-  cursor: pointer;
-}
-
-#barLabel {
-  font-size: 220%;
-  color: #0a4a65;
-  border-radius: 1rem;
-  padding: 0.5rem 1rem;
-  transition: background-color 0.4s;
-  cursor: pointer;
-}
-
-#collapsible {
-  display: none;
-}
-
 .itemContainer {
   border-radius: 1rem;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.6);
@@ -268,7 +127,6 @@ nav ul li:active a, nav ul li:hover a {
   font-size: 190%;
 }
 .itemContainer .productSelection {
-  border-left: 2px solid #084057;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -375,22 +233,18 @@ nav ul li:active a, nav ul li:hover a {
   cursor: pointer;
   border-radius: 1.5rem;
   transition: background-color 0.3s;
-  max-width: 250px;
+  min-width: fit-content;
   background-color: #084057;
   color: #c1e3f3;
   padding: 25px;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
-}
-.infoButtons ul #productDescriptionLabel {
-  background-color: rgba(206, 232, 248, 0.8);
-  color: #084057;
 }
 .infoButtons ul input {
   display: none;
 }
 
 .technicalInfoContainer, .productDescriptionContainer {
-  display: block;
+  display: none;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
   border-radius: 1rem;
   padding: 30px;
@@ -416,9 +270,6 @@ nav ul li:active a, nav ul li:hover a {
   border: none;
 }
 
-.productDescriptionContainer {
-  display: none;
-}
 .productDescriptionContainer .firstRow, .productDescriptionContainer .secondRow {
   display: flex;
 }

@@ -15,20 +15,7 @@ $media: (
     }
   }
 }
-:root {
-  scroll-behavior: smooth;
-  background-color: transparent;
 
-  --ff-heading: "Poppins", sans-serif;
-  --ff-subHeading: "Sathu", sans-serif;
-  font-family: "Arial", serif;
-
-  --fs-heading: clamp(1.5rem, 7vw, 7rem);
-  --fs-subHeading: clamp(1rem, 3vw, 4rem);
-
-  --fc-white: white;
-  --fc-black: black;
-}
 
 @mixin paddingContent {
   padding: 1rem 2rem;
@@ -51,221 +38,67 @@ $tertiaryColor: #c1e3f3;
 $textFontSize: 18px;
 
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+#firstSection {
+
+  margin-top: 4.5rem;
+
 }
-@media screen {
 
-  .collapsible-menu {
-    visibility: hidden;
-    width: 50%;
+.header {
+  background-color: #0a4a65;
+  min-width: 140px;
+  max-width: 140px;
+  border-radius: 3rem 3rem 0rem 0rem;
+  margin-left: 1rem;
 
-  }
-  .nav {
-    z-index: 3;
-
-  }
-
-  .menuList {
-    display: flex;
-    visibility: visible;
+  ul {
+    list-style: none;
+    color: #97c9de;
+    margin-top: 2rem;
+    padding: 0.5rem 1rem;
 
     li {
-      transition-duration: 400ms;
-
-      padding: 1rem 0 1rem 1rem;
-      margin: 0 0.5rem;
-
-      &:active, &:hover {
-        padding: 1rem 1.5rem;
-      }
-
-      * {
-        justify-content: right;
-      }
+      text-align: center;
     }
   }
 }
 
-@media screen and (max-width: 1080px) {
+.image1 {
+  width: 10vw;
+  height: 10vw;
 
-  .collapsible-menu {
-    visibility: visible;
-    width: 30%;
+  img {
+    @include shadow(outside);
   }
-  .nav {
-    z-index: 2;
-  }
-  .menuList {
-      visibility: hidden;
-      display: block;
-      text-align: right;
+}
 
-      padding: 2rem 1rem 1rem 1rem;
+.text1 {
+  width: 20%;
+  height: 10%;
+}
 
+.employeefield {
+  @include shadow(inside);
+  margin: 0 1rem;
+}
 
-        li {
-          transition-duration: 400ms;
-          margin: 0.5rem 0;
+.employee {
 
-          * {
-            justify-content: right;
-          }
+  display: flex;
+  margin: 0 1rem;
+  padding: 2rem;
+  font-family: Poppins;
+  font-size: 1vw;
 
-          &:first-child {
-            margin-top: 3.5rem;
-
-          }
-      }
-    }
-  }
-nav {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-
-      ul {
-
-        padding: 0.5rem 1rem;
-        border-radius: 3rem;
-
-        display: flex;
-        list-style: none;
-
-        background-color: white;
-        @include shadow(outside);
-
-        li {
-          border-radius: 3rem;
-
-          a {
-
-            font-size: $textFontSize;
-            text-decoration: none;
-            color: var(--fc-black);
-
-            display: flex;
-            gap: 0.5rem;
-
-            svg {
-              width: 1.5rem;
-            }
-
-            .beside-icon {
-              font-size: 110%;
-              margin-top: 0.1rem;
-            }
-          }
-
-          &:active, &:hover {
-            background-color: $secondaryColor;
-            @include shadow(outside);
-
-            padding: 1rem 1.5rem;
-            transition-duration: 400ms;
-
-            svg {
-              fill: $tertiaryColor;
-            }
-
-            a {
-              color: $tertiaryColor;
-            }
-          }
-        }
-      }
-    }
-
-    .collapsible-menu {
-      background-color: white;
-      position: fixed;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-
-      z-index: 2;
-      min-width: fit-content;
-      padding: 0.4rem 1rem;
-      border-radius: 3rem;
-      top: 1rem;
-      right: 1rem;
-
-      @include shadow(outside);
-    }
-
-    .menu-icons {
-      font-size: 220%;
-      color: #0a4a65;
-
-      border-radius: 1rem;
-      padding: 0.5rem 1rem;
-
-      transition: background-color 0.4s;
-      cursor: pointer;
-    }
-
-
-    #barLabel {
-
-      font-size: 220%;
-      color: #0a4a65;
-
-      border-radius: 1rem;
-      padding: 0.5rem 1rem;
-
-      transition: background-color 0.4s;
-      cursor: pointer;
-    }
-
-
-    #collapsible {
-        display: none;
-    }
-.header{
-    background-color: #0a4a65;
-    min-width: 140px;
-    max-width: 140px;
-    border-radius: 3rem 3rem 0rem 0rem;
+  .p2 {
     margin-left: 1rem;
-    ul{  list-style: none;
-        color: #97c9de;
-        margin-top: 2rem;
-        padding: 0.5rem 1rem;
-       li{
-          text-align: center;
-       }
+  }
+
+  .p1 {
+    margin-left: 1vw;
+    margin-top: 1vw;
   }
 }
-    .image1{
-    width:10vw;
-    height:10vw;
-    img{@include shadow(outside);}
-    }
-    .text1{
-        width:20%;
-        height:10%;
-    }
-.employeefield{    @include shadow(inside);
-    margin: 0 1rem;}
-.employee{
-
-    display:flex;
-    margin: 0 1rem;
-    padding:2rem;
-    font-family:Poppins;
-    font-size:1vw;
-    .p2{margin-left:1rem;}
-    .p1{
-        margin-left:1vw;
-        margin-top:1vw;
-    }
-}
-
 
 
 footer {

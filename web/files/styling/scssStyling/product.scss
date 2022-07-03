@@ -1,48 +1,6 @@
-* {
-  padding: 0;
-  margin: 0;
-}
-
-:root {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: "Arial", serif;
-}
 
 
 @media screen {
-
-  .collapsible-menu {
-    visibility: hidden;
-    width: 50%;
-
-  }
-  .nav {
-    z-index: 3;
-
-  }
-
-  .menuList {
-    display: flex;
-    visibility: visible;
-
-    li {
-      transition-duration: 400ms;
-
-      padding: 1rem 0 1rem 1rem;
-      margin: 0 0.5rem;
-
-      &:active, &:hover {
-        padding: 1rem 1.5rem;
-      }
-
-      * {
-        justify-content: right;
-      }
-    }
-  }
 
   .itemContainer {
 
@@ -62,6 +20,7 @@ body {
 
     .productSelection {
 
+      border-left: 2px solid #084057;
       min-width: 280px;
       max-width: 30%;
     }
@@ -121,6 +80,7 @@ body {
     }
 
     .productSelection {
+      border: none;
       max-width: 50%;
     }
   }
@@ -142,6 +102,7 @@ body {
       }
 
       .productSelection {
+        border-left: 2px solid #084057;
         min-width: 220px;
         max-width: 50%;
       }
@@ -163,149 +124,13 @@ body {
         }
 
         .productSelection {
+          border: none;
           min-width: 220px;
           width: 100%;
         }
       }
     }
   }
-}
-
-
-@media screen and (max-width: 1080px) {
-
-  .collapsible-menu {
-    visibility: visible;
-    width: 30%;
-  }
-  .nav {
-    z-index: 2;
-  }
-
-  .menuList {
-    visibility: hidden;
-    display: block;
-    text-align: right;
-
-    padding: 2rem 1rem 1rem 1rem;
-
-
-    li {
-      transition-duration: 400ms;
-      margin: 0.5rem 0;
-
-      * {
-        justify-content: right;
-      }
-
-      &:first-child {
-        margin-top: 3.5rem;
-
-      }
-    }
-  }
-}
-
-nav {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-
-  ul {
-
-    padding: 0.5rem 1rem;
-    border-radius: 3rem;
-
-    display: flex;
-    list-style: none;
-
-    background-color: white;
-    box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
-
-    li {
-      border-radius: 3rem;
-
-      a {
-        font-size: 18px;
-        text-decoration: none;
-        color: var(--fc-black);
-
-        display: flex;
-        gap: 0.5rem;
-
-        svg {
-          width: 1.5rem;
-        }
-
-        .beside-icon {
-          font-size: 110%;
-          margin-top: 0.1rem;
-        }
-      }
-
-      &:active, &:hover {
-        background-color: #0A4A65FF;
-        box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
-
-        padding: 1rem 1.5rem;
-        transition-duration: 400ms;
-
-        svg {
-          fill: #C1E3F3FF;
-        }
-
-        a {
-          color: #C1E3F3FF;
-        }
-      }
-    }
-  }
-}
-
-.collapsible-menu {
-  background-color: white;
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  z-index: 2;
-  min-width: fit-content;
-  padding: 0.4rem 1rem;
-  border-radius: 3rem;
-  top: 1rem;
-  right: 1rem;
-
-  box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
-}
-
-.menu-icons {
-  font-size: 220%;
-  color: #0a4a65;
-
-  border-radius: 1rem;
-  padding: 0.5rem 1rem;
-
-  transition: background-color 0.4s;
-  cursor: pointer;
-}
-
-
-#barLabel {
-
-  font-size: 220%;
-  color: #0a4a65;
-
-  border-radius: 1rem;
-  padding: 0.5rem 1rem;
-
-  transition: background-color 0.4s;
-  cursor: pointer;
-}
-
-
-#collapsible {
-  display: none;
 }
 
 .itemContainer {
@@ -362,7 +187,6 @@ nav {
   }
 
   .productSelection {
-    border-left: 2px solid #084057;
 
     display: flex;
     flex-direction: column;
@@ -504,21 +328,14 @@ nav {
 
     #technicalInformationLabel, #productDescriptionLabel {
       cursor: pointer;
-      //text-align: center;
 
       border-radius: 1.5rem;
       transition: background-color .3s;
-      max-width: 250px;
+      min-width: fit-content;
       background-color: #084057;
       color: #c1e3f3;
       padding: 25px;
       box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
-
-    }
-
-    #productDescriptionLabel {
-      background-color: rgba(206, 232, 248, 0.8);
-      color: #084057;
 
     }
 
@@ -530,17 +347,11 @@ nav {
 
 .technicalInfoContainer, .productDescriptionContainer {
 
-  display: block;
-
+  display: none;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
-
   border-radius: 1rem;
-  //border-left: 3px solid #084057;
-  //border-bottom: 3px solid #084057;
-
   padding: 30px;
   margin: 0 2rem 0 2rem;
-
 
   table {
 
@@ -577,22 +388,14 @@ nav {
 
 .productDescriptionContainer {
 
-  display: none;
-
   .firstRow, .secondRow {
     display: flex;
-
-  }
-
-  .leftContainer, .rightContainer {
-
 
   }
 
   .sectionHeading {
 
     font-weight: normal;
-    //font-style: italic;
     font-size: 32px;
     margin-bottom: 25px;
   }
@@ -602,7 +405,6 @@ nav {
     font-size: 20px;
     line-height: 32px;
   }
-
 }
 
 .relatedProducts {

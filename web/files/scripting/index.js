@@ -3,7 +3,7 @@ const backgroundImg =
         "/slidePictures/slidePicture1.jpg",
         "/slidePictures/slidePicture2.jpg",
         "/slidePictures/slidePicture3.jpg",
-        "/slidePictures/slidePicture4.jpg",
+        "/slidePictures/slidePicture4.jpg"
     ];
 
 const headerHeading =
@@ -18,20 +18,29 @@ const headerSubheading =
     [
         "There are no obstacles anymore",
         "Roam like you want",
-        "That's your company's motto",
+        "That's our company's motto",
         "It's in your hands"
     ];
 
 
-function changeImage() {
-    const i = Math.floor((Math.random() * 3) + 1);
+function changeImage(currentNum) {
 
-    document.getElementById("containerHeader").style.backgroundImage = "url('" + backgroundImg[i] + "')";
-    document.getElementById("headerHeading").innerText = headerHeading[i];
-    document.getElementById("headerSubheading").innerText = headerSubheading[i];
+    document.getElementById("containerHeader").style.backgroundImage = `url("${backgroundImg[currentNum]}")`;
+    document.getElementById("headerHeading").innerText = headerHeading[currentNum];
+    document.getElementById("headerSubheading").innerText = headerSubheading[currentNum];
 
 
-    setInterval(changeImage, 5000);
+    let nextNum = Math.floor((Math.random() * 3) + 1);
+
+    while (currentNum === nextNum) {
+
+        nextNum = Math.floor((Math.random() * 3) + 1);
+    }
+
+    //two equal approaches to call a function with parameters in setInterval
+
+    setInterval(changeImage, 5000, nextNum);
+    //setInterval(() => { changeImage(nextNum) }, 5000);
 }
 
 
@@ -72,5 +81,5 @@ document.addEventListener("DOMContentLoaded", function (event) {
     currentPage = document.location.pathname.replace("/", "").replace(".html", "");
 
     importNavBar();
-    changeImage();
+    changeImage(0);
 });

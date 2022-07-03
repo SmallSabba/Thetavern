@@ -1,0 +1,107 @@
+.itemContainer {
+  display: flex;
+  margin-top: 4rem;
+}
+
+.wheelchairInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  padding: 4rem 1rem;
+}
+.wheelchairInfo img {
+  min-width: 300px;
+  max-width: 500px;
+}
+.wheelchairInfo h2 {
+  align-self: start;
+  margin-left: 2rem;
+  font-size: 2rem;
+}
+
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding: 1rem;
+}
+.rightContainer .checkBox {
+  cursor: pointer;
+  width: 1rem;
+  height: 1rem;
+}
+.rightContainer .shippingContainer, .rightContainer .paymentContainer {
+  display: flex;
+  flex-direction: column;
+  min-width: 450px;
+  max-width: 900px;
+  padding: 3rem;
+  row-gap: 2rem;
+}
+.rightContainer .shippingContainer div label, .rightContainer .paymentContainer div label {
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+}
+.rightContainer .shippingContainer ul, .rightContainer .paymentContainer ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+}
+.rightContainer .shippingContainer ul li, .rightContainer .paymentContainer ul li {
+  display: flex;
+  column-gap: 1rem;
+}
+.rightContainer .shippingContainer ul li input:not(.checkBox), .rightContainer .paymentContainer ul li input:not(.checkBox) {
+  width: 100%;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+.rightContainer .shippingContainer ul li .newsletterLabelContainer, .rightContainer .paymentContainer ul li .newsletterLabelContainer {
+  justify-content: left;
+}
+.rightContainer .shippingContainer ul li div, .rightContainer .paymentContainer ul li div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.rightContainer .shippingContainer ul li div button, .rightContainer .paymentContainer ul li div button {
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.8rem 1rem;
+  border-radius: 1rem;
+  border: none;
+}
+.rightContainer .shippingContainer p, .rightContainer .paymentContainer p {
+  margin-top: 2rem;
+}
+.rightContainer .paymentContainer .paymentMethods {
+  flex-direction: row;
+  column-gap: 1rem;
+  width: fit-content;
+}
+.rightContainer .paymentContainer .paymentMethods li {
+  width: 180px;
+}
+.rightContainer .paymentContainer .paymentMethods li div {
+  display: flex;
+  justify-content: left;
+}
+.rightContainer .paymentContainer .paymentMethods li div label {
+  padding-left: 0.5rem;
+}
+.rightContainer .paymentContainer #form2 li div:last-child {
+  width: 70%;
+}
+.rightContainer .paymentContainer #form2 li div {
+  width: 100%;
+}
+.rightContainer .paymentContainer #form2 li div p {
+  margin-top: 0;
+}
+
+/*# sourceMappingURL=checkout.css.map */

@@ -56,66 +56,67 @@ html {
         list-style: none;
       }
 
-      .topContainer {
+      .leftContainer {
 
         position: fixed;
         display: flex;
-        align-items: center;
+        flex-direction: column;
 
-        width: 320px;
-        max-width: 350px;
-        height: 130px;
+        row-gap: 2rem;
 
-        background-color: white;
-        padding: 1rem;
-        border-radius: 2rem;
-        @include shadow(outside);
-
-
-        img {
-          border-radius: 4rem;
-
-          height: 100%;
-
-        }
-
-        ul {
+        .topContainer {
 
           display: flex;
-          flex-direction: column;
-          overflow: hidden;
-          justify-content: space-evenly;
-          row-gap: .1rem;
+          align-items: center;
 
+          width: 320px;
+          max-width: 350px;
+          height: 130px;
+
+          background-color: white;
           padding: 1rem;
-          min-width: 150px;
-          height: 100%;
+          border-radius: 2rem;
+          @include shadow(outside);
 
-          h3 {
-            font-size: 1.3rem;
+
+          img {
+            border-radius: 4rem;
+            height: 100%;
           }
 
-          p {
-            color: gray;
-            font-size: .85rem;
+          ul {
+
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            justify-content: space-evenly;
+            row-gap: .1rem;
+
+            padding: 1rem;
+            min-width: 150px;
+            height: 100%;
+
+            h3 {
+              font-size: 1.3rem;
+            }
+
+            p {
+              color: gray;
+              font-size: .85rem;
+            }
           }
         }
-      }
 
-      .content {
-
-        display: flex;
-
-        margin-top: 9.5rem;
-
-        .leftContainer {
+        .menuContainer {
 
           display: flex;
           flex-direction: column;
           justify-content: center;
 
-          width: 240px;
-          height: 433px;
+          min-width: 320px;
+          max-width: 320px;
+          min-height: 433px;
+          max-height: 433px;
 
           padding: 1rem;
 
@@ -176,20 +177,65 @@ html {
             }
           }
         }
+      }
+
+      .content {
+
+        display: flex;
+
+        margin-top: 9.5rem;
+        margin-left: 320px;
+
+
+        #deleteHeading {
+          color: #d50303;
+        }
 
         .rightInputContainer {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          align-items: start;
+          //align-items: start;
 
-          padding-left: 6rem;
-          row-gap: 1rem;
+          width: 100%;
+          min-height: 433px;
 
-          width: 80%;
+          padding: 0 5rem;
+
           margin-left: 2rem;
+          row-gap: .3rem;
 
-          @include shadow(inside);
+          //@include shadow(inside);
+
+          .profileChangeHeading {
+
+            padding-bottom: 1rem;
+
+            margin-bottom: 1.7rem;
+            width: 100%;
+            border-bottom: 1px solid rgb(201, 201, 201);
+          }
+
+          .deleteItemsContainer {
+
+            display: flex;
+            flex-direction: column;
+            row-gap: 2rem;
+            padding: 1rem;
+            max-width: fit-content;
+
+            button {
+              width: fit-content;
+              padding: .6rem 1rem;
+
+              background-color: darkred;
+              color: #d3d2d2;
+
+              &:hover {
+                background-color: #700303;
+              }
+            }
+          }
 
           .userSettingValue {
 
@@ -197,15 +243,16 @@ html {
             flex-direction: column;
             padding: 1rem;
             min-width: 400px;
-
+            max-width: 40%;
             row-gap: .8rem;
 
 
             p:first-child {
-              text-decoration: underline;
+              //text-decoration: underline;
               font-size: 1.1rem;
             }
           }
+
           .inputFields {
 
             display: flex;
@@ -214,8 +261,12 @@ html {
             row-gap: 1rem;
             padding: 1rem;
             min-width: 400px;
+            max-width: 40%;
             height: fit-content;
 
+            #secondPar {
+              margin-top: 1rem;
+            }
 
             p {
               font-size: 1.1rem;
@@ -223,30 +274,29 @@ html {
 
             input {
 
-
               padding: .2rem;
             }
+          }
 
-            button {
-              cursor: pointer;
-              align-self: center;
-              border: none;
+          button {
+            cursor: pointer;
+            align-self: center;
+            border: none;
 
-              background-color: #124f73;
-              color: #c5ebf6;
-              border-radius: 1.5rem;
+            background-color: #124f73;
+            color: #c5ebf6;
+            border-radius: 1.5rem;
 
-              width: 100px;
-              padding: .4rem .2rem;
+            width: 100px;
+            padding: .4rem .2rem;
 
-              font-size: 1.1rem;
-              transition: .3s;
+            font-size: 1.1rem;
+            transition: .3s;
 
-              &:hover {
-                transform: scale(1.05);
-                background-color: #084057;
+            &:hover {
+              transform: scale(1.05);
+              background-color: #084057;
 
-              }
             }
           }
         }
@@ -256,12 +306,12 @@ html {
           display: flex;
           flex-direction: column;
 
-          width: 80%;
+          width: 100%;
           margin-left: 2rem;
           padding: 2rem;
           row-gap: 2rem;
 
-          @include shadow(inside);
+          //@include shadow(inside);
 
           .currentImg {
 
@@ -322,11 +372,11 @@ html {
 
           row-gap: 60px;
 
-          width: 80%;
+          width: 100%;
           margin-left: 2rem;
           padding: 2rem;
 
-          @include shadow(inside);
+          //@include shadow(inside);
 
           img {
             border-radius: 6rem;
@@ -355,10 +405,12 @@ html {
                 @include shadow(outside);
 
                 li {
+                  overflow-x: hidden;
                   line-height: 1.5rem;
                 }
               }
             }
+
             .currentUser {
 
               ul {
@@ -387,10 +439,9 @@ html {
             padding: 0 2rem;
 
             ul {
-              width: 190px;
+              width: 220px;
             }
           }
-
         }
       }
     }

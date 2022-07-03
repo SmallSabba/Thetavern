@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hcubed</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="checkout.css">
+    <link rel="stylesheet" href="sharedStyles.css">
+
+    <script src="checkout.js"></script>
+    <script src="sharedMethods.js"></script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<div class="itemContainer">
+    <div class="wheelchairInfo">
+        <img src="/wheelchairs/electric/iCHAIR_MC2.png">
+        <h2>iChair_MC2</h2>
+    </div>
+
+    <div class="rightContainer">
+
+        <div class="shippingContainer">
+
+            <h1>1. Shipping address</h1>
+
+            <div>
+                <label for="takeAwayCheckBox">Pick up directly from store and skip this step?</label>
+                <input id="takeAwayCheckBox" class="checkBox" onclick="checkPickUpSelf()" type="checkbox"
+                       name="takeAway">
+            </div>
+            <form id="form">
+                <ul>
+                    <li>
+                        <input id="firstname" type="text" name="firstname" placeholder="First Name*" required>
+                        <input type="text" name="lastname" placeholder="Last Name*" required>
+                    </li>
+                    <li>
+                        <input type="text" name="address" placeholder="Address*" required>
+                    </li>
+                    <li>
+                        <input type="text" name="city" placeholder="City*" required>
+                        <input type="text" name="state" placeholder="State*" required>
+                        <input type="text" name="postal" placeholder="Zip/Postal Code*" required>
+                    </li>
+                    <li>
+                        <input type="email" name="email" placeholder="Email Address*" required>
+                        <input type="tel" name="phone" placeholder="Phone Number">
+                    </li>
+
+                    <li>
+                        <div class="newsletterLabelContainer">
+                            <label for="newsletterCheckBox">Send me newsletter</label>
+                            <input id="newsletterCheckBox" class="checkBox" type="checkbox" checked="checked">
+                        </div>
+                        <div>
+                            <button>Continue to payment</button>
+                        </div>
+
+                    </li>
+                </ul>
+                <p>* Required field</p>
+            </form>
+
+
+        </div>
+
+        <div class="paymentContainer">
+
+            <h1>2. Payment</h1>
+
+            <ul class="paymentMethods">
+                <li>
+                    <div>
+                        <input id="cardCheckBox" class="checkBox" type="radio" name="paymentMethod">
+                        <label for="cardCheckBox">Credit card</label>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <input id="payPalCheckBox" class="checkBox" type="radio" name="paymentMethod">
+                        <label for="payPalCheckBox">PayPal</label>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <input id="cashCheckBox" class="checkBox" type="radio" name="paymentMethod">
+                        <label for="cashCheckBox">Cash</label>
+                    </div>
+                </li>
+            </ul>
+            <form id="form2">
+                <ul>
+                    <li>
+                        <input type="text" name="creditCardNumber" placeholder="Credit Card Number*" required>
+                    </li>
+                    <li>
+                        <input type="text" name="expireMonth" placeholder="Expiration Month*" required>
+                        <input type="text" name="expireYear" placeholder="Expiration Year*" required>
+                    </li>
+                    <li>
+                        <input type="text" name="cvv" placeholder="CVV*" required>
+                    </li>
+
+                    <li>
+                        <div>
+                            <p>By clicking the "Place Order" button, you confirm that you have read,
+                                understand, and accept our Returns, Shipping & Exchanges Policy.
+                            </p>
+                        </div>
+                        <div>
+                            <button onclick="checkPayment()">Place Order</button>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

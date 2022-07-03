@@ -138,7 +138,7 @@ class AccountController {
     logout = async (req, res) => {
 
         req.session.destroy();
-        res.status(200).redirect('/index.html');
+        return res.status(200).send();
     }
 
     deleteUser = async (req, res) => {
@@ -163,7 +163,7 @@ class AccountController {
                             if (err) {
                                 return res.status(400).send({bo: null});
                             } else {
-                                this.logout(req, res);
+                                req.session.destroy();
                                 return res.status(200).send({bo: true});
                             }
                         })

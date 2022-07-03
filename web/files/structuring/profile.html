@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link rel="stylesheet" href="navBar.css">
+    <link rel="stylesheet" href="sharedStyles.css">
     <link rel="stylesheet" href="profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -17,20 +17,22 @@
     <div id="nav-placeholder">
     </div>
 
-    <div class="topContainer">
-        <img>
-        <ul>
-            <li>
-                <h3></h3>
-            </li>
-            <li>
-                <p>Your personal account</p>
-            </li>
-        </ul>
-    </div>
+    <div class="leftContainer">
 
-    <div class="content">
-        <div class="leftContainer">
+
+        <div class="topContainer">
+            <img>
+            <ul>
+                <li>
+                    <h3></h3>
+                </li>
+                <li>
+                    <p>Your personal account</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menuContainer">
 
             <p class="heading"><i class="fa-solid fa-user-gear"></i> Account</p>
             <ul class="profileOptions">
@@ -46,7 +48,7 @@
                 <li onclick="generateImgContainer()">
                     <i class="fa-solid fa-image"></i><span>Change profile picture</span>
                 </li>
-                <li>
+                <li onclick="generateDeleteAccountField()">
                     <i class="fa-solid fa-trash-can"></i><span>Delete account</span>
                 </li>
             </ul>
@@ -71,8 +73,19 @@
                 </li>
             </ul>
         </div>
+    </div>
+
+    <div class="content">
 
 
+        <!--
+        <div class="rightInputContainer">
+
+            <h2>Delete Account</h2>
+            <p>Once you delete your account, there is no going back. Please be certain.</p>
+            <button>Delete Account</button>
+        </div>
+-->
     </div>
 
 </main>

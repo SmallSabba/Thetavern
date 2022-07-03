@@ -1,3 +1,11 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 :root {
   scroll-behavior: smooth;
   background-color: transparent;
@@ -113,30 +121,55 @@ svg {
   background-color: white;
 }
 .nav ul li, .collapsible-menu ul li {
+  cursor: pointer;
   border-radius: 3rem;
+  padding: 1rem 0.6rem;
+  transition-duration: 400ms;
 }
 .nav ul li a, .collapsible-menu ul li a {
   font-size: 18px;
   color: #0a4a65;
-  text-decoration: none;
   display: flex;
   gap: 0.5rem;
-  cursor: pointer;
 }
 
-.nav ul {
+.shoppingCart {
+  position: fixed;
+  top: 1rem;
+  right: 14rem;
+}
+.shoppingCart ul {
+  padding: 5rem 1rem 0.5rem 1rem;
+  border-radius: 3rem;
+  list-style: none;
+  background-color: white;
+}
+.shoppingCart ul li {
+  cursor: pointer;
+  border-radius: 3rem;
+  padding: 1rem 0.6rem;
+  margin: 0.5rem 0;
+  transition-duration: 400ms;
+}
+.shoppingCart ul li a {
+  font-size: 18px;
+  color: #0a4a65;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav ul, .shoppingCart ul {
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
 }
-.nav li:active, .nav li:hover {
+.nav li:active, .nav li:hover, .shoppingCart li:active, .shoppingCart li:hover {
   background-color: #0a4a65;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
   padding: 1rem 1.5rem;
-  transition-duration: 400ms;
 }
-.nav li:active svg, .nav li:hover svg {
+.nav li:active svg, .nav li:hover svg, .shoppingCart li:active svg, .shoppingCart li:hover svg {
   fill: #c1e3f3;
 }
-.nav li:active a, .nav li:hover a {
+.nav li:active a, .nav li:hover a, .shoppingCart li:active a, .shoppingCart li:hover a {
   color: #c1e3f3;
 }
 
@@ -375,4 +408,4 @@ footer * {
   line-height: 1.6rem;
 }
 
-/*# sourceMappingURL=navBar.css.map */
+/*# sourceMappingURL=sharedStyles.css.map */
