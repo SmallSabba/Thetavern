@@ -3,7 +3,7 @@ const model = require("../models/wheelchair-model");
 class WheelchairController {
     static MANDATORY = ["name", "manufacturer", "image", "price"];
 
-    getCategories (req, res) {
+    getCategories(req, res) {
         // here is async not necessary
         // because it is a non-promise type
         res.send(model.getCategories());
@@ -11,14 +11,14 @@ class WheelchairController {
         // no object thus no multithreading
     }
 
-    getAllWheelchairs (req, res) {
+    getAllWheelchairs(req, res) {
         // here is async not necessary
         // because it is a non-promise type
         res.send(model.getAllWheelchairs());
         // no object thus no multithreading
     }
 
-    getCategoryWheelchairs (req, res) {
+    getCategoryWheelchairs(req, res) {
         // here is async not necessary
         // because it is a non-promise type
         res.send(model.getWheelchairs(req.params.category));
@@ -30,7 +30,7 @@ class WheelchairController {
         if (wheelchair) {
             res.send(wheelchair);
         } else {
-            res.status(404).send(`Wheelchair with id ${req.params.id} not found.`);
+            res.status(404).send(null);
         }
     }
 
@@ -77,7 +77,6 @@ class WheelchairController {
             res.status(400).send(req.params.category + " does not exist. Wheelchair cannot be created.")
         }
 
-        file.write = jsonEdi
     }
 
     updateWheelchair = async (req, res) => {
@@ -98,11 +97,17 @@ class WheelchairController {
         let wheelchairID = parseInt(req.params.id);
         if (await model.getWheelchair(wheelchairID)) {
             await model.deleteWheelchair(wheelchairID);
-            res.send(204);
+            res.status(200).send();
         } else {
             res.status(404).send(`Wheelchair with id ${wheelchairID} does not exist. Wheelchair cannot be deleted.`)
         }
     }
+
+    async buyWheelchair(req, res) {
+
+        model.buyWheelchair(req, res).then();
+    }
 }
 
-module.exports = new WheelchairController();
+module
+    .exports = new WheelchairController();

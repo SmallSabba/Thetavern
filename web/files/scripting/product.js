@@ -113,9 +113,18 @@ function generateCurrentProduct(wheelchair) {
         )
 }
 
-let infoButtons;
+function purchaseButtonClicked() {
 
-document.addEventListener("DOMContentLoaded", () => {
+    if (currentUser !== null) {
+        localStorage.setItem('checkBoxID', 'creditCardCheckBox');
+        localStorage.setItem('orderProgress', '1');
+        window.location.href = 'checkout.html';
+    } else {
+        displayPopUpInfo("You must login to purchase a product.")
+    }
+}
+
+function initProductPage() {
 
     document.getElementById("technicalInformationLabel").addEventListener("click", infoBoxClicked);
     document.getElementById("technicalInformationLabel").addEventListener("mouseover", mouseOver2);
@@ -130,31 +139,22 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("purchaseButton").addEventListener("mouseover", mouseOver2);
     document.getElementById("purchaseButton").addEventListener("mouseleave", mouseLeave2);
 
-
     if (localStorage.getItem("infoButtons") === "true") {
         document.getElementById("techInf").checked = false;
         document.getElementById("prodDesc").checked = true;
-
         document.getElementById("technicalInformationLabel").click();
 
     } else {
         document.getElementById("techInf").checked = true;
         document.getElementById("prodDesc").checked = false;
         document.getElementById("productDescriptionLabel").click();
-
     }
-
-
-    currentPage = document.location.pathname.replace("/", "").replace(".html", "");
-
-    importNavBar();
 
     fetch(`api/wheelchairs/${localStorage.getItem("productID")}`)
         .then(response => response.json())
         .then(wheelchair => {
 
             generateCurrentProduct(wheelchair);
-
         })
 
     for (let num = 0; num < 3; num++) {
@@ -167,4 +167,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 addWheelchairToDOM(document.querySelector(".articles"), wheelchair);
             })
     }
+}
+
+let infoButtons;
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    currentPage = document.location.pathname.replace("/", "").replace(".html", "");
+
+    initProductPage();
+    importNavBar();
 })

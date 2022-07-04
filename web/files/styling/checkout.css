@@ -1,6 +1,14 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+
 .itemContainer {
   display: flex;
-  margin-top: 4rem;
+  width: 100%;
+  margin-top: 6rem;
+  padding: 0 3rem;
+  column-gap: 3rem;
 }
 
 .wheelchairInfo {
@@ -8,16 +16,24 @@
   flex-direction: column;
   align-items: center;
   width: 40%;
-  padding: 4rem 1rem;
+  max-width: 640px;
+  row-gap: 2rem;
+  margin-top: 1rem;
+  padding: 2.5rem 1rem;
+  border-radius: 2rem;
+  box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
 }
 .wheelchairInfo img {
   min-width: 300px;
   max-width: 500px;
 }
-.wheelchairInfo h2 {
+.wheelchairInfo h2, .wheelchairInfo p {
   align-self: start;
   margin-left: 2rem;
   font-size: 2rem;
+}
+.wheelchairInfo p {
+  font-size: 1.6rem;
 }
 
 .rightContainer {
@@ -25,6 +41,57 @@
   flex-direction: column;
   width: 60%;
   padding: 1rem;
+}
+.rightContainer .firstForm, .rightContainer .secondForm {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(7, 59, 77, 0.4);
+  border-radius: 1rem;
+  max-width: 900px;
+  row-gap: 1.5rem;
+  margin: 2rem 0 2rem 2rem;
+}
+.rightContainer .firstForm .shippingSummaryContainer, .rightContainer .secondForm .shippingSummaryContainer {
+  flex-direction: column;
+  row-gap: 0.2rem;
+  padding: 0 2rem 1.5rem 2rem;
+}
+.rightContainer .firstForm .shippingSummaryContainer p, .rightContainer .secondForm .shippingSummaryContainer p {
+  font-size: 1.1rem;
+}
+.rightContainer .firstForm h1, .rightContainer .secondForm h1 {
+  border-radius: 1rem;
+  background-color: rgba(220, 230, 234, 0.5);
+  padding: 1rem;
+}
+.rightContainer .firstForm h1::after, .rightContainer .secondForm h1::after {
+  font-family: FontAwesome, serif;
+  content: attr(data-after);
+  float: right;
+}
+.rightContainer .firstForm h1 .editFormSpan, .rightContainer .secondForm h1 .editFormSpan {
+  cursor: pointer;
+  margin-left: 2rem;
+  font-size: 1.2rem;
+}
+.rightContainer .firstForm h1 .editFormSpan i, .rightContainer .secondForm h1 .editFormSpan i {
+  margin-left: 0.3rem;
+  font-size: 1rem;
+}
+.rightContainer button {
+  cursor: pointer;
+  border: none;
+  font-size: 1.2rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 1.5rem;
+  width: 220px;
+  background-color: #0d506c;
+  color: #d2e4ee;
+  transition-duration: 0.2s;
+}
+.rightContainer button:hover {
+  background-color: #073b4d;
+  transform: scale(1.06);
 }
 .rightContainer .checkBox {
   cursor: pointer;
@@ -35,8 +102,7 @@
   display: flex;
   flex-direction: column;
   min-width: 450px;
-  max-width: 900px;
-  padding: 3rem;
+  padding: 0 2rem 1.5rem 2rem;
   row-gap: 2rem;
 }
 .rightContainer .shippingContainer div label, .rightContainer .paymentContainer div label {
@@ -57,32 +123,30 @@
 .rightContainer .shippingContainer ul li input:not(.checkBox), .rightContainer .paymentContainer ul li input:not(.checkBox) {
   width: 100%;
   border-radius: 1rem;
-  padding: 0.5rem;
-  font-size: 1.2rem;
+  padding: 0.8rem;
+  font-size: 1.1rem;
 }
-.rightContainer .shippingContainer ul li .newsletterLabelContainer, .rightContainer .paymentContainer ul li .newsletterLabelContainer {
-  justify-content: left;
-}
-.rightContainer .shippingContainer ul li div, .rightContainer .paymentContainer ul li div {
+.rightContainer .newsletterLabelContainer {
   display: flex;
-  justify-content: center;
   align-items: center;
+}
+.rightContainer .newsletterLabelContainer label {
   width: 100%;
+  color: #073b4d;
 }
-.rightContainer .shippingContainer ul li div button, .rightContainer .paymentContainer ul li div button {
-  cursor: pointer;
-  font-size: 1.2rem;
-  padding: 0.8rem 1rem;
-  border-radius: 1rem;
-  border: none;
+.rightContainer .newsletterLabelContainer div:first-child {
+  text-align: left;
+  column-gap: 0;
+  width: 60%;
 }
-.rightContainer .shippingContainer p, .rightContainer .paymentContainer p {
-  margin-top: 2rem;
+.rightContainer .newsletterLabelContainer div {
+  text-align: center;
+  width: 40%;
 }
 .rightContainer .paymentContainer .paymentMethods {
   flex-direction: row;
-  column-gap: 1rem;
   width: fit-content;
+  column-gap: 1rem;
 }
 .rightContainer .paymentContainer .paymentMethods li {
   width: 180px;
@@ -90,18 +154,39 @@
 .rightContainer .paymentContainer .paymentMethods li div {
   display: flex;
   justify-content: left;
+  align-items: center;
 }
 .rightContainer .paymentContainer .paymentMethods li div label {
   padding-left: 0.5rem;
 }
-.rightContainer .paymentContainer #form2 li div:last-child {
-  width: 70%;
+.rightContainer .paymentContainer #form2 {
+  display: none;
 }
-.rightContainer .paymentContainer #form2 li div {
-  width: 100%;
+.rightContainer .paymentContainer #payPalContainer, .rightContainer .paymentContainer #cashContainer {
+  display: none;
 }
-.rightContainer .paymentContainer #form2 li div p {
-  margin-top: 0;
+.rightContainer .paymentContainer #payPalContainer p, .rightContainer .paymentContainer #cashContainer p {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+}
+.rightContainer .paymentContainer .orderButtonContainer {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  margin-top: 1rem;
+}
+.rightContainer .paymentContainer .orderButtonContainer div:first-child {
+  width: 60%;
+}
+.rightContainer .paymentContainer .orderButtonContainer div:first-child p {
+  color: #073b4d;
+}
+.rightContainer .paymentContainer .orderButtonContainer div:not(:first-child) {
+  width: 40%;
+  text-align: center;
+}
+.rightContainer .paymentContainer .orderButtonContainer div:not(:first-child) button {
+  width: 160px;
 }
 
 /*# sourceMappingURL=checkout.css.map */

@@ -6,8 +6,6 @@ function getAllWheelchairs() {
 
             document.querySelectorAll("main article")
                 .forEach(a => a.remove())
-            //document.querySelectorAll("#electric article")
-               // .forEach(a => a.remove())
 
             for (let i = 0; i < wheelchairs.length; i++) {
 
@@ -23,7 +21,7 @@ function getAllWheelchairs() {
 document.addEventListener("DOMContentLoaded", function (event) {
 
     currentPage = document.location.pathname.replace("/", "").replace(".html", "");
+    localStorage.setItem("page", document.location.pathname.replace("/", ""));
 
     importNavBar();
-
 });

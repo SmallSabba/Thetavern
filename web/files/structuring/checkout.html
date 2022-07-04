@@ -18,108 +18,137 @@
 <div id="nav-placeholder"></div>
 
 <div class="itemContainer">
+
     <div class="wheelchairInfo">
         <img src="/wheelchairs/electric/iCHAIR_MC2.png">
         <h2>iChair_MC2</h2>
+        <p>7€ / day</p>
     </div>
 
     <div class="rightContainer">
 
-        <div class="shippingContainer">
-
-            <h1>1. Shipping address</h1>
-
-            <div>
-                <label for="takeAwayCheckBox">Pick up directly from store and skip this step?</label>
-                <input id="takeAwayCheckBox" class="checkBox" onclick="checkPickUpSelf()" type="checkbox"
-                       name="takeAway">
+        <div class="firstForm">
+            <h1>1. Shipping address<span class="editFormSpan" onclick="editFormClicked()">edit<i class="fa-solid fa-pencil"></i></span></h1>
+            <div class="shippingContainer">
+                <div>
+                    <label for="takeAwayCheckBox">Pick up directly from store and skip this step?</label>
+                    <input id="takeAwayCheckBox" class="checkBox" onclick="checkPickUpSelf()" type="checkbox"
+                           name="takeAway">
+                </div>
+                <form id="form">
+                    <ul>
+                        <li>
+                            <input id="firstname" type="text" name="firstname" placeholder="First Name*" required>
+                            <input type="text" name="lastname" placeholder="Last Name*" required>
+                        </li>
+                        <li>
+                            <input type="text" name="street" placeholder="Address*" required>
+                        </li>
+                        <li>
+                            <input type="text" name="city" placeholder="City*" required>
+                            <input type="text" name="state" placeholder="State*" required>
+                            <input type="text" name="postal" placeholder="Zip/Postal Code*" required>
+                        </li>
+                        <li>
+                            <input type="email" name="email" placeholder="Email Address*" required>
+                            <input type="tel" name="phone" placeholder="Phone Number">
+                        </li>
+                        <li>
+                            <p>* Required field</p>
+                            <button id="hiddenButton1" style="display: none"></button>
+                        </li>
+                    </ul>
+                </form>
+                <div class="newsletterLabelContainer">
+                    <div>
+                        <label for="newsletterCheckBox">Send me newsletter</label>
+                        <input id="newsletterCheckBox" class="checkBox" type="checkbox" checked="checked">
+                    </div>
+                    <div>
+                        <button onclick="paymentButtonClicked()">Continue to payment</button>
+                    </div>
+                </div>
             </div>
-            <form id="form">
-                <ul>
-                    <li>
-                        <input id="firstname" type="text" name="firstname" placeholder="First Name*" required>
-                        <input type="text" name="lastname" placeholder="Last Name*" required>
-                    </li>
-                    <li>
-                        <input type="text" name="address" placeholder="Address*" required>
-                    </li>
-                    <li>
-                        <input type="text" name="city" placeholder="City*" required>
-                        <input type="text" name="state" placeholder="State*" required>
-                        <input type="text" name="postal" placeholder="Zip/Postal Code*" required>
-                    </li>
-                    <li>
-                        <input type="email" name="email" placeholder="Email Address*" required>
-                        <input type="tel" name="phone" placeholder="Phone Number">
-                    </li>
-
-                    <li>
-                        <div class="newsletterLabelContainer">
-                            <label for="newsletterCheckBox">Send me newsletter</label>
-                            <input id="newsletterCheckBox" class="checkBox" type="checkbox" checked="checked">
-                        </div>
-                        <div>
-                            <button>Continue to payment</button>
-                        </div>
-
-                    </li>
-                </ul>
-                <p>* Required field</p>
-            </form>
-
-
+            <div class="shippingSummaryContainer">
+                <p id="name">
+                </p>
+                <p id="street">
+                </p>
+                <p id="address">
+                </p>
+                <p id="state">
+                </p>
+                <p id="phone">
+                </p>
+            </div>
         </div>
 
-        <div class="paymentContainer">
+        <div class="secondForm">
+            <h1 id="test">2. Payment</h1>
 
-            <h1>2. Payment</h1>
+            <div class="paymentContainer">
 
-            <ul class="paymentMethods">
-                <li>
-                    <div>
-                        <input id="cardCheckBox" class="checkBox" type="radio" name="paymentMethod">
-                        <label for="cardCheckBox">Credit card</label>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <input id="payPalCheckBox" class="checkBox" type="radio" name="paymentMethod">
-                        <label for="payPalCheckBox">PayPal</label>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <input id="cashCheckBox" class="checkBox" type="radio" name="paymentMethod">
-                        <label for="cashCheckBox">Cash</label>
-                    </div>
-                </li>
-            </ul>
-            <form id="form2">
-                <ul>
-                    <li>
-                        <input type="text" name="creditCardNumber" placeholder="Credit Card Number*" required>
-                    </li>
-                    <li>
-                        <input type="text" name="expireMonth" placeholder="Expiration Month*" required>
-                        <input type="text" name="expireYear" placeholder="Expiration Year*" required>
-                    </li>
-                    <li>
-                        <input type="text" name="cvv" placeholder="CVV*" required>
-                    </li>
-
+                <ul class="paymentMethods">
                     <li>
                         <div>
-                            <p>By clicking the "Place Order" button, you confirm that you have read,
-                                understand, and accept our Returns, Shipping & Exchanges Policy.
-                            </p>
+                            <input id="creditCardCheckBox" class="checkBox" type="radio" name="paymentMethod" checked
+                                   onclick="checkPayment(this)" autocomplete="off">
+                            <label for="creditCardCheckBox">Credit card</label>
                         </div>
+                    </li>
+                    <li>
                         <div>
-                            <button onclick="checkPayment()">Place Order</button>
+                            <input id="payPalCheckBox" class="checkBox" type="radio" name="paymentMethod"
+                                   onclick="checkPayment(this)" autocomplete="off">
+                            <label for="payPalCheckBox">PayPal</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <input id="cashCheckBox" class="checkBox" type="radio" name="paymentMethod"
+                                   onclick="checkPayment(this)" autocomplete="off">
+                            <label for="cashCheckBox">Cash</label>
                         </div>
                     </li>
                 </ul>
-            </form>
+                <form id="form2">
+                    <ul>
+                        <li>
+                            <input type="text" name="creditCardNumber" placeholder="Credit Card Number*" required>
+                        </li>
+                        <li>
+                            <input type="text" name="expireMonth" placeholder="Expiration Month*" required>
+                            <input type="text" name="expireYear" placeholder="Expiration Year*" required>
+                        </li>
+                        <li>
+                            <input type="text" name="cvv" placeholder="CVV*" required>
+                        </li>
+                        <li>
+                            <button id="hiddenButton2" style="display: none"></button>
+                        </li>
+                    </ul>
+                </form>
 
+                <div id="payPalContainer">
+                    <p>PayPal is currently not available. Sorry!</p>
+                </div>
+
+                <div id="cashContainer">
+                    <p>The payment process will take place during the takeover.</p>
+                </div>
+
+                <div class="orderButtonContainer">
+                    <div>
+                        <p>By clicking the "Place Order" button, you confirm that you have read,
+                            understand, and accept our Returns, Shipping & Exchanges Policy.
+                        </p>
+                    </div>
+                    <div>
+                        <button onclick="placeOrderButtonClicked()">Place Order</button>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>

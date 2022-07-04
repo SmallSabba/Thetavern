@@ -28,9 +28,9 @@ class Category {
 
 class Wheelchair {
 
-    constructor(id, name, category, manufacturer, price, image, terrain, description) {
+    constructor(id, name, category, manufacturer, price, sold, image, terrain, description) {
 
-        this.sold = 0;
+        this.sold = sold;
         this.id = id;
         this.name = name;
         this.category = category;
@@ -51,31 +51,26 @@ class WheelchairModel {
 
     readWheelchairs() {
 
-        try {
-            jsonReader("././files/wheelchairs.json", (err, wheelchairs) => {
+        jsonReader("././files/wheelchairs.json", (err, wheelchairs) => {
 
-                if (err) {
-                    console.log(err);
+            if (err) {
+                console.log(err);
 
-                } else {
+            } else {
 
-                    for (let i = 0; i < wheelchairs.length; i++) {
+                for (let i = 0; i < wheelchairs.length; i++) {
 
-                        this.addWheelchair(wheelchairs[i].category,
-                            new Wheelchair(wheelchairs[i].id, wheelchairs[i].name, wheelchairs[i].category,
-                                wheelchairs[i].manufacturer, wheelchairs[i].price, wheelchairs[i].image,
-                                wheelchairs[i].terrain, wheelchairs[i].description)
-                        );
-                    }
+                    this.addWheelchair(wheelchairs[i].category,
+                        new Wheelchair(wheelchairs[i].id, wheelchairs[i].name, wheelchairs[i].category,
+                            wheelchairs[i].manufacturer, wheelchairs[i].price, wheelchairs[i].sold, wheelchairs[i].image,
+                            wheelchairs[i].terrain, wheelchairs[i].description)
+                    );
                 }
-            })
-        } catch (err) {
-            console.log("An error occurred, try again later.");
-
-        }
+            }
+        })
     }
 
-    addCategory(category)  {
+    addCategory(category) {
         if (!this.wheelchairs.get(category)) {
             this.wheelchairs.set(category, new Map())
         }
@@ -154,6 +149,38 @@ class WheelchairModel {
     deleteWheelchair(id) {
         // for delete async is not necessary
         this.getWheelchairsAsMap(this.getCategory(id)).delete(id);
+    }
+
+    async buyWheelchair(req, res) {
+
+        let wheelchairID = parseInt(req.params.id);
+
+        jsonReader("././files/wheelchairs.json", (err, wheelchairs) => {
+
+            if (err) {
+                console.log(err)
+                res.status(400).send({bo: null});
+            } else {
+
+                for (let i = 0; i < wheelchairs.length; i++) {
+
+                    if (wheelchairs[i].id === wheelchairID) {
+
+                        wheelchairs[i].sold++;
+
+                        const wheelchairsAsString = JSON.stringify(wheelchairs, null, 2);
+                        fs.writeFile('././files/wheelchairs.json', wheelchairsAsString, err => {
+
+                            if (err) {
+                                res.status(400).send({bo: null});
+                            } else {
+                                res.status(200).send({bo: true});
+                            }
+                        })
+                    }
+                }
+            }
+        })
     }
 }
 

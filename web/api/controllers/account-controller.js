@@ -35,7 +35,7 @@ class AccountController {
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                return res.status(400).send({user: null});
+                return res.status(500).send({user: null});
 
             } else {
 
@@ -54,7 +54,7 @@ class AccountController {
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                return res.status(400).send({users: null});
+                return res.status(500).send({users: null});
 
             } else {
                 return res.status(200).send({users: users});
@@ -71,7 +71,7 @@ class AccountController {
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                return res.status(400).send({bo: null});
+                return res.status(500).send({bo: null});
 
             } else {
                 for (let i = 0; i < users.length; i++) {
@@ -95,7 +95,7 @@ class AccountController {
                 fs.writeFile('././files/users.json', usersAsString, err => {
 
                     if (err) {
-                        return res.status(400).send({bo: null});
+                        return res.status(500).send({bo: null});
                     } else {
                         return res.status(200).send({bo: true});
                     }
@@ -114,7 +114,7 @@ class AccountController {
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                return res.status(400).send({bo: null});
+                return res.status(500).send({bo: null});
 
             } else {
                 for (let i = 0; i < users.length; i++) {
@@ -148,7 +148,7 @@ class AccountController {
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                return res.status(400).send({bo: null});
+                return res.status(500).send({bo: null});
 
             } else {
 
@@ -161,7 +161,7 @@ class AccountController {
                         fs.writeFile('././files/users.json', usersAsString, err => {
 
                             if (err) {
-                                return res.status(400).send({bo: null});
+                                return res.status(500).send({bo: null});
                             } else {
                                 req.session.destroy();
                                 return res.status(200).send({bo: true});
@@ -181,7 +181,7 @@ class AccountController {
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                return res.status(400).send({bo: null});
+                return res.status(500).send({bo: null});
             } else {
 
                 for (let i = 0; i < users.length; i++) {
@@ -207,7 +207,7 @@ class AccountController {
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                return res.status(400).send({bo: null});
+                return res.status(500).send({bo: null});
 
             } else {
 
@@ -221,7 +221,7 @@ class AccountController {
                         fs.writeFile('././files/users.json', usersAsString, err => {
 
                             if (err) {
-                                return res.status(400).send({bo: null});
+                                return res.status(500).send({bo: null});
                             } else {
                                 return res.status(200).send({bo: true});
                             }
@@ -246,7 +246,7 @@ class AccountController {
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                return res.status(400).send({bo: null});
+                return res.status(500).send({bo: null});
 
             } else {
 
@@ -266,7 +266,7 @@ class AccountController {
                 fs.writeFile('././files/users.json', usersAsString, err => {
 
                     if (err) {
-                        return res.status(400).send({bo: null});
+                        return res.status(500).send({bo: null});
                     } else {
                         return res.status(200).send({bo: true});
                     }
@@ -283,7 +283,7 @@ class AccountController {
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                return res.status(400).send({bo: null});
+                return res.status(500).send({bo: null});
 
             } else {
 
@@ -303,7 +303,7 @@ class AccountController {
                         fs.writeFile('././files/users.json', usersAsString, err => {
 
                             if (err) {
-                                return res.status(400).send({bo: null});
+                                return res.status(500).send({bo: null});
                             } else {
                                 return res.status(200).send({bo: true});
                             }
@@ -322,7 +322,7 @@ class AccountController {
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                return res.status(400).send({bo: null});
+                return res.status(500).send({bo: null});
 
             } else {
 
@@ -337,7 +337,7 @@ class AccountController {
                         fs.writeFile('././files/users.json', usersAsString, err => {
 
                             if (err) {
-                                return res.status(400).send({bo: null});
+                                return res.status(500).send({bo: null});
                             } else {
                                 return res.status(200).send({bo: true});
                             }

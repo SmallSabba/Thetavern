@@ -223,6 +223,7 @@ function updateNavBarIcons() {
                 findTopProduct("manual", 2);
             }
 
+            console.log(localStorage)
 
             if (currentUser != null) {
 
@@ -259,7 +260,7 @@ function updateNavBarIcons() {
                     document.getElementById(`profileSpan${i}`).textContent = "No user";
 
                     document.getElementById(`profileLink${i}`).addEventListener("click", () => {
-                        displayPopUpInfo("You need to login first, in order to change your profile.");
+                        displayPopUpInfo("You need to login first, in order to view your profile.");
                     })
                 }
                 //changes login button appearance
