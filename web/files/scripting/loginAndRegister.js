@@ -178,9 +178,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     if (localStorage.getItem("formType") === "login") {
         generateLoginField();
-        //document.querySelector(".loginForm").addEventListener("submit", login);
     } else {
         generateRegisterField();
-        //document.querySelector(".loginForm").addEventListener("submit", register);
     }
 });

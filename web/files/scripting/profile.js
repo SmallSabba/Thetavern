@@ -310,7 +310,6 @@ async function changePassword(oldPassword, newPassword) {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            currentUser: currentUser,
             oldPassword: oldPassword
         })
     }).then(res => res.json())
@@ -321,7 +320,6 @@ async function changePassword(oldPassword, newPassword) {
                     method: 'post',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
-                        currentUser: currentUser,
                         newPassword: newPassword
                     })
                 }).then(res => res.json())
@@ -333,6 +331,8 @@ async function changePassword(oldPassword, newPassword) {
                             displayPopUpInfo("An error occurred while changing your password.");
                         }
                     })
+            } else if (data.bo === false) {
+                displayPopUpInfo("Incorrect password.");
             } else {
                 displayPopUpInfo("An error occurred while changing your password.");
             }
@@ -347,7 +347,6 @@ async function changeUsername(newUsername) {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                oldUsername: currentUser,
                 newUsername: newUsername
             })
         }).then(res => res.json())
@@ -376,7 +375,6 @@ async function changeEmail(newEmail) {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            currentUser: currentUser,
             newEmail: newEmail
         })
     }).then(res => res.json())
@@ -401,7 +399,6 @@ async function changeProfilePicture(pictureKey) {
         method: "post",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            currentUser: currentUser,
             profilePicture: pictureKey
         })
     }).then(res => res.json())

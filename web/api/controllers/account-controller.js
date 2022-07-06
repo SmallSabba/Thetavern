@@ -27,7 +27,9 @@ class AccountController {
                 username: null,
                 email: null,
                 profilePicture: null,
-                authorized: null
+                authorized: null,
+                orderedItems: [],
+                savedItems: []
             }
             return res.status(200).send({user: tmpUser});
         }
@@ -87,7 +89,9 @@ class AccountController {
                     password: password,
                     email: email,
                     profilePicture: "No avatar",
-                    authorized: false
+                    authorized: false,
+                    orderedItems: [],
+                    savedItems: []
                 }
                 users.push(newUser);
 
@@ -110,7 +114,6 @@ class AccountController {
         let username = req.body.username;
         let password = req.body.password;
 
-
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
@@ -128,7 +131,6 @@ class AccountController {
                         return res.status(200).send({bo: true});
                     }
                 }
-
                 return res.status(400).send({bo: false});
             }
         })
@@ -143,7 +145,7 @@ class AccountController {
 
     deleteUser = async (req, res) => {
 
-        let username = req.session.user;
+        let currentUser = req.session.user;
 
         jsonReader("././files/users.json", (err, users) => {
 
@@ -154,7 +156,7 @@ class AccountController {
 
                 for (let i = 0; i < users.length; i++) {
 
-                    if (username === users[i].username) {
+                    if (currentUser === users[i].username) {
                         users.splice(i, 5)
 
                         const usersAsString = JSON.stringify(users, null, 2);
@@ -176,7 +178,7 @@ class AccountController {
     //checks if the old password is correct
     async verifyPassword(req, res) {
 
-        let currentUser = req.body.currentUser;
+        let currentUser = req.session.user;
 
         jsonReader("././files/users.json", (err, users) => {
 
@@ -202,7 +204,7 @@ class AccountController {
 
     changePassword = async (req, res) => {
 
-        let currentUser = req.body.currentUser;
+        let currentUser = req.session.user;
 
         jsonReader("././files/users.json", (err, users) => {
 
@@ -234,7 +236,7 @@ class AccountController {
 
     async changeUsername(req, res) {
 
-        let currentUsername = req.body.oldUsername;
+        let currentUsername = req.session.user;
         let newUsername = req.body.newUsername;
 
         //just for now till method call is fixed
@@ -252,7 +254,7 @@ class AccountController {
 
                 for (let i = 0; i < users.length; i++) {
 
-                    if (currentUsername.toLowerCase() === users[i].username.toLowerCase()) index = i;
+                    if (currentUsername === users[i].username) index = i;
 
                     if (newUsername.toLowerCase() === users[i].username.toLowerCase()) {
 
@@ -277,7 +279,7 @@ class AccountController {
 
     changeEmail = async (req, res) => {
 
-        let currentUser = req.body.currentUser;
+        let currentUser = req.session.user;
         let newEmail = req.body.newEmail;
 
         jsonReader("././files/users.json", (err, users) => {
@@ -316,7 +318,9 @@ class AccountController {
 
     async changeProfilePicture(req, res) {
 
-        let currentUser = req.body.currentUser;
+        console.log("in change pp");
+
+        let currentUser = req.session.user;
         let newProfilePicture = req.body.profilePicture;
 
         jsonReader("././files/users.json", (err, users) => {
@@ -348,27 +352,204 @@ class AccountController {
         })
     }
 
-    /*
-    //checks if there already is a user with the requested new username
-    checkDuplicateUsername = async (newUsername) => {
+    async getOrders(req, res) {
+
+        let currentUser = req.session.user;
 
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                console.log(err)
+                return res.status(500).send({orderedItems: null});
+
             } else {
 
                 for (let i = 0; i < users.length; i++) {
 
-                    if (newUsername.toLowerCase() === users[i].username.toLowerCase()) {
-                        return false;
+                    if (currentUser === users[i].username) {
+                        return res.status(200).send({orderedItems: users[i].orderedItems});
                     }
                 }
-                return true;
+                return res.status(400).send({orderedItems: false});
             }
         })
     }
-     */
+
+    async addOrder(req, res) {
+
+        let currentUser = req.session.user;
+        let productID = parseInt(req.params.productID);
+
+        jsonReader("././files/users.json", (err, users) => {
+
+            if (err) {
+                return res.status(500).send({bo: null});
+
+            } else {
+
+                for (let i = 0; i < users.length; i++) {
+
+                    if (currentUser === users[i].username) {
+
+                        users[i].orderedItems.push(productID);
+
+                        const usersAsString = JSON.stringify(users, null, 2);
+                        fs.writeFile('././files/users.json', usersAsString, err => {
+
+                            if (err) {
+                                return res.status(500).send({bo: null});
+                            } else {
+                                return res.status(200).send({bo: true});
+                            }
+                        })
+                    }
+                }
+            }
+        })
+    }
+
+    async removeOrder(req, res) {
+
+        let currentUser = req.session.user;
+        let productID = parseInt(req.params.productID);
+
+        jsonReader("././files/users.json", (err, users) => {
+
+            if (err) {
+                return res.status(500).send({bo: null});
+
+            } else {
+
+                for (let i = 0; i < users.length; i++) {
+
+                    if (currentUser === users[i].username) {
+
+                        for (let j = 0; j < users[i].orderedItems.length; j++) {
+
+                            if (users[i].orderedItems[j] === productID) {
+                                users[i].orderedItems.splice(j, 1);
+                            }
+                        }
+
+                        const usersAsString = JSON.stringify(users, null, 2);
+                        fs.writeFile('././files/users.json', usersAsString, err => {
+
+                            if (err) {
+                                return res.status(500).send({bo: null});
+                            } else {
+                                return res.status(200).send({bo: true});
+                            }
+                        })
+                    }
+                }
+            }
+        })
+    }
+
+    async getSavedItems(req, res) {
+
+        let currentUser = req.session.user;
+
+        jsonReader("././files/users.json", (err, users) => {
+
+            if (err) {
+                return res.status(500).send({savedItems: null});
+
+            } else {
+
+                for (let i = 0; i < users.length; i++) {
+
+                    if (currentUser === users[i].username) {
+                        return res.status(200).send({savedItems: users[i].savedItems});
+                    }
+                }
+                return res.status(400).send({savedItems: false});
+            }
+        })
+    }
+
+    async addSavedItem(req, res) {
+
+        console.log("in add saved item")
+        let currentUser = req.session.user;
+        let productID = parseInt(req.params.productID);
+
+        if (currentUser === undefined) {
+            return res.status(200).send({bo: true});
+        }
+
+        jsonReader("././files/users.json", (err, users) => {
+
+            if (err) {
+                return res.status(500).send({bo: null});
+
+            } else {
+
+                for (let i = 0; i < users.length; i++) {
+
+                    if (currentUser === users[i].username) {
+
+                        for (let j = 0; j < users[i].savedItems.length; j++) {
+
+                            if (productID === users[i].savedItems[j]) {
+                                return res.status(200).send({bo: true});
+                            }
+                        }
+                        console.log("saving item")
+                        users[i].savedItems.push(productID);
+
+                        const usersAsString = JSON.stringify(users, null, 2);
+                        fs.writeFile('././files/users.json', usersAsString, err => {
+
+                            if (err) {
+                                return res.status(500).send({bo: null});
+                            } else {
+                                return res.status(200).send({bo: true});
+                            }
+                        })
+                    }
+                }
+            }
+        })
+    }
+
+    async removeSavedItem(req, res) {
+
+        let currentUser = req.session.user;
+        let productID = parseInt(req.params.productID);
+
+        jsonReader("././files/users.json", (err, users) => {
+
+            if (err) {
+                return res.status(500).send({bo: null});
+
+            } else {
+
+                for (let i = 0; i < users.length; i++) {
+
+                    if (currentUser === users[i].username) {
+
+                        for (let j = 0; j < users[i].savedItems.length; j++) {
+
+                            if (users[i].savedItems[j] === productID) {
+
+                                users[i].savedItems.splice(j, 1);
+                            }
+                        }
+
+                        const usersAsString = JSON.stringify(users, null, 2);
+                        fs.writeFile('././files/users.json', usersAsString, err => {
+
+                            if (err) {
+                                return res.status(500).send({bo: null});
+                            } else {
+                                return res.status(200).send({bo: true});
+                            }
+                        })
+                    }
+                }
+            }
+        })
+    }
 }
 
 module.exports = new AccountController();

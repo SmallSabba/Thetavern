@@ -10,7 +10,7 @@ router.get("/wheelchairs/:id", controller.getWheelchair);
 
 router.post("/categories/:category/wheelchairs", controller.createWheelchair);
 router.put("/wheelchairs/:id", controller.updateWheelchair);
-router.put("/wheelchairs/:id/buy", controller.buyWheelchair);
+router.post("/wheelchairs/:id/buy", controller.buyWheelchair);
 router.delete("/wheelchairs/:id", controller.deleteWheelchair);
 
 module.exports = router;

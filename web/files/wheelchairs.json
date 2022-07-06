@@ -5,7 +5,7 @@
     "category": "electric",
     "manufacturer": "Some guy",
     "price": 14,
-    "sold": 2,
+    "sold": 3,
     "image": "/wheelchairs/electric/iCHAIR_MC2.png",
     "terrain": "/wheelchairs/background/BGgrass.png",
     "description": "The iCHAIR MC2 1.611 wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
@@ -27,7 +27,7 @@
     "category": "electric",
     "manufacturer": "Some new guy",
     "price": 12,
-    "sold": 1,
+    "sold": 2,
     "image": "/wheelchairs/electric/Optimus_2_S.png",
     "terrain": "/wheelchairs/background/BGstone.png",
     "description": "The Optimus_2_S wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
@@ -38,7 +38,7 @@
     "category": "manual",
     "manufacturer": "Some handsome guy",
     "price": 8,
-    "sold": 1,
+    "sold": 2,
     "image": "/wheelchairs/manual/CRI.png",
     "terrain": "/wheelchairs/background/BGsnow.png",
     "description": "The CRI wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "

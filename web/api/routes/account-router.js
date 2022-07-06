@@ -14,12 +14,18 @@ router.delete('/user/delete', controller.deleteUser);
 //router.post('/user/checkDuplicateUsername', controller.checkDuplicateUsername);
 router.post('/user/changeUsername', controller.changeUsername);
 
-router.post('/user/verifyPassword', controller.verifyPassword);
 router.post('/user/changePassword', controller.changePassword);
+router.post('/user/verifyPassword', controller.verifyPassword);
 
 router.post('/user/changeEmail', controller.changeEmail);
-
 router.post('/user/changeProfilePicture', controller.changeProfilePicture);
 
+router.get('/user/orders/get', controller.getOrders);
+router.post('/user/orders/:productID/add', controller.addOrder);
+router.post('/user/orders/:productID/remove', controller.removeOrder);
+
+router.get('/user/saves/get', controller.getSavedItems);
+router.post('/user/saves/:productID/add', controller.addSavedItem);
+router.post('/user/saves/:productID/remove', controller.removeSavedItem);
 
 module.exports = router;

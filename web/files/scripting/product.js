@@ -1,5 +1,3 @@
-
-
 function mouseOver2() {
 
     this.style.backgroundColor = "#084057"
@@ -39,11 +37,9 @@ function mouseLeave2() {
 function infoBoxClicked() {
 
     if (document.getElementById("techInf").checked && this.id !== "technicalInformationLabel") {
-        console.log("in here");
         infoButtons = false;
         localStorage.setItem("infoButtons", "false");
     } else if (document.getElementById("prodDesc").checked && this.id !== "productDescriptionLabel") {
-        console.log("down here")
         infoButtons = true;
         localStorage.setItem("infoButtons", "true");
     }
@@ -56,7 +52,6 @@ function infoBoxClicked() {
         document.querySelector(".technicalInfoContainer").style.display = "block";
 
     } else {
-        console.log("in here 2")
         document.getElementById("technicalInformationLabel").style.backgroundColor = "#CEE8F8CC";
         document.getElementById("technicalInformationLabel").style.color = "#084057";
 
@@ -101,16 +96,71 @@ function generateCurrentProduct(wheelchair) {
 
     //product selection field
 
-    //new ElementCreator("div")
-    //  .with("class", "productSelection")
     new ElementCreator("div")
         .with("class", "priceInfo")
         .append(new ElementCreator("p")
             .text(wheelchair.price + "€ / day")
             .with("class", "productPrice")
         )
+        .append(new ElementCreator("i")
+            .id("saveProductIcon")
+            .with("class", "fa-solid fa-bookmark")
+            .listener("click", saveItemClicked)
+            .listener("mouseover", saveItemHovered)
+            .listener("mouseleave", saveItemLeft)
+        )
         .prependTo(document.querySelector(".productSelection")
         )
+}
+
+function checkProductIsSaved() {
+
+    productIsSaved = false;
+
+    fetch("/api/user/get")
+        .then(res => res.json())
+        .then(data => {
+
+            if (data.user) {
+                for (const index in data.user.savedItems) {
+                    if (data.user.savedItems[index] === parseInt(localStorage.getItem("productID"))) {
+
+                        productIsSaved = true;
+                    }
+                }
+            } else {
+                displayPopUpInfo("An error occurred while fetching user information.");
+            }
+            initProductPage();
+        })
+}
+
+function saveItemHovered() {
+
+    this.style.color = "#084057";
+}
+
+function saveItemLeft() {
+
+    if (!saveProduct) this.style.color = "#277db0";
+}
+
+function saveItemClicked() {
+
+    if (currentUser !== null) {
+
+        if (saveProduct) {
+            this.style.color = "#277db0";
+            localStorage.setItem("saveProduct", "false");
+        } else {
+            this.style.color = "#084057";
+            localStorage.setItem("saveProduct", "true");
+        }
+        saveProduct = !saveProduct;
+
+    } else {
+        displayPopUpInfo("You must login to save a product.");
+    }
 }
 
 function purchaseButtonClicked() {
@@ -134,10 +184,10 @@ function initProductPage() {
     document.getElementById("productDescriptionLabel").addEventListener("mouseover", mouseOver2);
     document.getElementById("productDescriptionLabel").addEventListener("mouseleave", mouseLeave2);
 
-    document.getElementById("cartButton").addEventListener("mouseover", mouseOver2);
-    document.getElementById("cartButton").addEventListener("mouseleave", mouseLeave2);
     document.getElementById("purchaseButton").addEventListener("mouseover", mouseOver2);
     document.getElementById("purchaseButton").addEventListener("mouseleave", mouseLeave2);
+
+    saveProduct = productIsSaved;
 
     if (localStorage.getItem("infoButtons") === "true") {
         document.getElementById("techInf").checked = false;
@@ -155,6 +205,12 @@ function initProductPage() {
         .then(wheelchair => {
 
             generateCurrentProduct(wheelchair);
+
+            if (productIsSaved) {
+                document.getElementById("saveProductIcon").style.color = "#084057";
+            } else {
+                document.getElementById("saveProductIcon").style.color = "#277db0";
+            }
         })
 
     for (let num = 0; num < 3; num++) {
@@ -170,11 +226,12 @@ function initProductPage() {
 }
 
 let infoButtons;
+let productIsSaved;
+let saveProduct;
 
 document.addEventListener("DOMContentLoaded", () => {
 
     currentPage = document.location.pathname.replace("/", "").replace(".html", "");
 
-    initProductPage();
     importNavBar();
 })

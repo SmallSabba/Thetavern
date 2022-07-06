@@ -39,7 +39,6 @@ class ElementCreator {
     }
 }
 
-
 let currentPage;
 let currentUser;
 let profilePicture;
@@ -86,7 +85,6 @@ function initElements() {
     }
 
     updateNavBarIcons();
-
     toggleToTopButton();
 }
 
@@ -201,20 +199,27 @@ function toggleLabelHover() {
     }
 }
 
-
 function updateNavBarIcons() {
 
     fetch("/api/user/get")
         .then(res => res.json())
         .then(data => {
 
-            if (data.user === null) {
+            currentUser = null;
+            isAdmin = false;
+            profilePicture = "noAvatar";
+
+            if (data.user) {
+                currentUser = data.user.username;
+                profilePicture = data.user.profilePicture;
+                isAdmin = data.user.authorized;
+
+            } else {
                 return displayPopUpInfo("An error occurred while fetching user information.");
             }
 
-            currentUser = data.user.username;
-            profilePicture = data.user.profilePicture;
-            isAdmin = data.user.authorized;
+            console.log(localStorage)
+            updateSavedProducts();
 
             if (currentPage === "profile") updateProfilePicture();
             else if (currentPage === "shop") getAllWheelchairs();
@@ -223,7 +228,12 @@ function updateNavBarIcons() {
                 findTopProduct("manual", 2);
             }
 
-            console.log(localStorage)
+            for (const item in data.user.orderedItems) {
+                console.log(data.user.orderedItems[item])
+            }
+            for (const item in data.user.savedItems) {
+                console.log(item)
+            }
 
             if (currentUser != null) {
 
@@ -247,7 +257,8 @@ function updateNavBarIcons() {
                 document.querySelector(".signInSignOut span").textContent = "Logout";
                 document.querySelector(".signInSignOut").addEventListener("click", () => {
 
-                    console.log("logout clicked");
+                    updateSavedProducts();
+
                     fetch("/api/user/logout")
                         .then(() => {
                             window.location.href = localStorage.getItem("page");
@@ -340,6 +351,46 @@ function addWheelchairToDOM(parent, wheelchair) {
     if (isAdmin) {
         document.querySelectorAll(`.editIcon${wheelchair.category}`).forEach(i => i.style.display = "inline");
         document.querySelectorAll(`.removeIcon${wheelchair.category}`).forEach(i => i.style.display = "inline");
+    }
+}
+
+function updateSavedProducts() {
+
+    console.log("in here")
+    let path;
+
+    if (localStorage.getItem("saveProduct") === "true") {
+        path = "add"
+
+    } else if (localStorage.getItem("saveProduct") === "false") {
+        path = "remove";
+    }
+
+    if (path !== undefined) {
+
+        console.log(currentPage)
+
+        fetch(`/api/user/saves/${localStorage.getItem("productID")}/${path}`, {
+            method: "post",
+            headers: {'Content-Type': 'application/json'}
+        }).then(res => res.json())
+            .then(data => {
+
+                if (data.bo) {
+                    console.log("did it")
+                    localStorage.removeItem("saveProduct");
+                } else {
+                    displayPopUpInfo("An error occurred during the purchase process.")
+                }
+
+                console.log("even here")
+                if (currentPage === "product") checkProductIsSaved();
+            })
+    } else {
+        if (currentPage === "product") {
+            console.log("down here");
+            checkProductIsSaved();
+        }
     }
 }
 

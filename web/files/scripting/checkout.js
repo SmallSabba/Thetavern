@@ -148,19 +148,32 @@ function processOrder(event) {
     }
 
     fetch(`/api/wheelchairs/${localStorage.getItem("productID")}/buy`, {
-        method: 'put',
+        method: 'post',
         headers: {'Content-Type': 'application/json'}
     }).then(res => res.json())
         .then(data => {
 
             if (data.bo) {
-                localStorage.clear();
-                displayPopUpInfo(`Successfully ordered ${wheelchairName}. Redirecting to shop page..`)
-                setTimeout(() => {window.location.href = "shop.html"}, 1500)
+
+                fetch(`/api/user/orders/${localStorage.getItem("productID")}/add`, {
+                    method: 'post',
+                    headers: {'Content-Type': 'application/json'}
+                }).then(res => res.json())
+                    .then(data => {
+
+                        if (data.bo) {
+                            localStorage.clear();
+                            displayPopUpInfo(`Successfully ordered ${wheelchairName}. Redirecting to shop page..`)
+                            setTimeout(() => {
+                                window.location.href = "shop.html"
+                            }, 1500)
+                        } else {
+                            displayPopUpInfo("An error occurred during the purchase process.")
+                        }
+                    })
             } else {
                 displayPopUpInfo("An error occurred during the purchase process.")
             }
-
         })
 }
 
