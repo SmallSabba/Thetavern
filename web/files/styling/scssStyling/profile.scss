@@ -191,6 +191,20 @@ html {
           color: #d50303;
         }
 
+        .profileChangeHeading {
+
+          padding-bottom: 1rem;
+
+          margin-bottom: 1.7rem;
+          width: 100%;
+          border-bottom: 1px solid rgb(201, 201, 201);
+        }
+
+        .rightContainer {
+
+          margin-left: 2rem;
+        }
+
         .rightInputContainer {
           display: flex;
           flex-direction: column;
@@ -201,20 +215,9 @@ html {
           min-height: 433px;
 
           padding: 0 5rem;
-
-          margin-left: 2rem;
           row-gap: .3rem;
 
           //@include shadow(inside);
-
-          .profileChangeHeading {
-
-            padding-bottom: 1rem;
-
-            margin-bottom: 1.7rem;
-            width: 100%;
-            border-bottom: 1px solid rgb(201, 201, 201);
-          }
 
           .deleteItemsContainer {
 
@@ -307,7 +310,7 @@ html {
           flex-direction: column;
 
           width: 100%;
-          margin-left: 2rem;
+          margin-left: 5rem;
           padding: 2rem;
           row-gap: 2rem;
 
@@ -370,11 +373,10 @@ html {
           display: flex;
           flex-direction: column;
 
-          row-gap: 60px;
-
           width: 100%;
-          margin-left: 2rem;
+          margin-left: 3rem;
           padding: 2rem;
+          row-gap: 60px;
 
           //@include shadow(inside);
 
@@ -388,6 +390,7 @@ html {
             display: flex;
             flex-flow: row wrap;
 
+            padding: 0 2rem;
             column-gap: 60px;
             row-gap: 50px;
 
@@ -440,6 +443,67 @@ html {
 
             ul {
               width: 220px;
+            }
+          }
+        }
+
+        .rightProductsContainer {
+
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 0 5rem;
+          width: 100%;
+          min-height: 433px;
+          row-gap: 2rem;
+
+          article {
+
+            display: flex;
+            align-items: center;
+            column-gap: 2rem;
+
+            img {
+
+              width: 120px;
+            }
+
+            .wheelchairInfo {
+
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              row-gap: .3rem;
+
+              h3 {
+                font-size: 1.3rem;
+
+              }
+              :nth-child(even) {
+                margin-top: .6rem;
+                font-size: 1.1rem;
+              }
+              .deliveredParagraph {
+
+              }
+            }
+          }
+
+          .noSavesMessage {
+
+            display: flex;
+            flex-direction: column;
+            row-gap: .8rem;
+            font-size: 1.1rem;
+
+            :first-child {
+              font-size: 1.25rem;
+              margin-bottom: 2rem;
+            }
+
+            a {
+              color: black;
+              width: fit-content;
             }
           }
         }

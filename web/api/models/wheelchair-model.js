@@ -123,27 +123,28 @@ class WheelchairModel {
         return Array.from(this.getWheelchairsAsMap(category).values());
     }
 
-    getWheelchair = async (id) => {
+    getWheelchair(id) {
+
         if (typeof id !== "number") {
             throw new Error(`Given id must be a number, but is a ${typeof id}`);
         }
         let wheelchair = null;
-        const category = await this.getCategory(id);
+        const category = this.getCategory(id);
         if (category) {
-            wheelchair = await this.wheelchairs.get(category).get(id);
+            wheelchair = this.wheelchairs.get(category).get(id);
         }
         return wheelchair;
     }
 
-    createWheelchair = async (category, wheelchair) => {
-        await this.addWheelchair(category, wheelchair);
-        return await this.getWheelchair(WheelchairModel.WHEELCHAIR_ID - 1);
+    createWheelchair(category, wheelchair) {
+        this.addWheelchair(category, wheelchair);
+        return this.getWheelchair(WheelchairModel.WHEELCHAIR_ID - 1);
     }
 
-    updateWheelchair = async (id, wheelchair) => {
+    updateWheelchair(id, wheelchair) {
         wheelchair.id = parseInt(wheelchair.id);
         wheelchair.price = parseInt(wheelchair.price);
-        Object.assign(await this.getWheelchair(id), wheelchair);      /** changes all params not only differences */
+        Object.assign(this.getWheelchair(id), wheelchair);      /** changes all params not only differences */
     }
 
     deleteWheelchair(id) {

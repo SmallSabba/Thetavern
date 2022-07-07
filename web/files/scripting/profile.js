@@ -142,6 +142,120 @@ function generateImgContainer() {
     document.querySelector(".wheelchairImgContainer").append(wheelchairDiv);
 }
 
+function generateSavedItems(wheelchair) {
+
+    new ElementCreator("article")
+        .append(new ElementCreator("img")
+            .with("src", `${wheelchair.image}`)
+        )
+        .append(new ElementCreator("div")
+            .with("class", "wheelchairInfo")
+            .append(new ElementCreator("h3")
+                .text(`${wheelchair.name}`)
+            )
+            .append(new ElementCreator("p")
+                .text(`${wheelchair.manufacturer}`)
+            )
+            .append(new ElementCreator("p")
+                .text(`${wheelchair.price}€ / day`)
+            )
+        )
+        .appendTo(document.querySelector(".rightContainer")
+        )
+}
+
+function generateOrderedItems(wheelchair) {
+
+    let shift = Math.floor((Math.random() * 3) + 1);
+    const day = new Date().setDate(new Date().getDate() + shift);
+    const deliveryDate = new Date(day).toLocaleDateString("en-GB");
+    console.log(deliveryDate)
+
+    new ElementCreator("article")
+        .append(new ElementCreator("img")
+            .with("src", `${wheelchair.image}`)
+        )
+        .append(new ElementCreator("div")
+            .with("class", "wheelchairInfo")
+            .append(new ElementCreator("h3")
+                .text(`${wheelchair.name}`)
+            )
+            .append(new ElementCreator("p")
+                .with("class", "deliveredParagraph")
+                .text("Delivered by:")
+            )
+            .append(new ElementCreator("p")
+                .text(`${deliveryDate}`)
+            )
+            .append(new ElementCreator("p")
+                .with("class", "deliveredParagraph")
+                .text("Delivered to:")
+            )
+            .append(new ElementCreator("p")
+                .text("Your address")
+            )
+        )
+        .appendTo(document.querySelector(".rightContainer")
+        )
+}
+
+function generateProductsContainer(type) {
+
+    let message, heading;
+
+    if (type === "orders") {
+        heading = "Orders";
+        message = "Looks like you have not ordered anything yet.";
+    } else {
+        heading = "Saved items";
+        message = "Looks like you have not saved any items yet.";
+    }
+
+    fetch(`/api/user/${type}/get`)
+        .then(res => res.json())
+        .then(data => {
+
+            if (data.items === null) {
+                return displayPopUpInfo("An error occurred while displaying your orders.");
+            }
+
+            let element = document.querySelector(".rightContainer");
+            element ? element.remove() : null;
+
+            let container = document.createElement("div");
+            container.setAttribute("class", "rightProductsContainer rightContainer");
+
+            let h = document.createElement("h2");
+            h.setAttribute("class", "profileChangeHeading")
+            h.textContent = `${heading}`;
+
+            container.append(h);
+            document.querySelector(".content").append(container);
+
+            if (data.items) {
+                for (const wheelchair of data.items) {
+                    type === "orders" ?
+                        generateOrderedItems(wheelchair)
+                        : generateSavedItems(wheelchair);
+                }
+            } else {
+                new ElementCreator("div")
+                    .with("class", "noSavesMessage")
+                    .append(new ElementCreator("p")
+                        .text("Oops!")
+                    )
+                    .append(new ElementCreator("p")
+                        .text(`${message}`)
+                    )
+                    .append(new ElementCreator("a")
+                        .with("href", "shop.html")
+                        .text("Rummage in the shop")
+                    )
+                    .appendTo(container)
+            }
+        })
+}
+
 function generateOneInputField(message) {
 
     fetch("/api/user/get")
@@ -296,7 +410,9 @@ async function deleteAccount() {
             if (data.bo) {
                 displayPopUpInfo("Successfully deleted your account. Redirecting to homepage..")
 
-                setTimeout(() => {window.location.href = 'index.html';}, 1500)
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500)
 
             } else {
                 displayPopUpInfo("An error occurred while deleting your account.");
@@ -418,6 +534,8 @@ async function changeProfilePicture(pictureKey) {
 }
 
 function updateProfilePicture() {
+
+    console.log(localStorage.getItem("page"));
 
     let img = document.querySelector(".topContainer img");
 

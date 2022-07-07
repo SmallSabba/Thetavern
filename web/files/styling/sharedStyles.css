@@ -206,7 +206,7 @@ svg {
   color: #c1e3f3;
 }
 
-article {
+.article {
   position: relative;
   background-repeat: no-repeat;
   background-position: center;
@@ -222,13 +222,13 @@ article {
   border-radius: 1.75rem;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
 }
-article img {
+.article img {
   position: absolute;
   left: -25%;
   top: -20%;
   width: 45%;
 }
-article .editIconelectric, article .editIconmanual, article .removeIconelectric, article .removeIconmanual {
+.article .editIconelectric, .article .editIconmanual, .article .removeIconelectric, .article .removeIconmanual {
   animation-timing-function: cubic-bezier(0.75, 0, 0.14, 0.57);
   animation-fill-mode: forwards;
   color: rgb(2, 121, 115);
@@ -238,7 +238,7 @@ article .editIconelectric, article .editIconmanual, article .removeIconelectric,
   margin: 0.8rem;
   transition-duration: 0.3s;
 }
-article .removeIconelectric, article .removeIconmanual {
+.article .removeIconelectric, .article .removeIconmanual {
   animation-name: appearRemove;
   animation-duration: 1.2s;
   padding: 0.4rem 0.8rem;
@@ -246,11 +246,11 @@ article .removeIconelectric, article .removeIconmanual {
   top: 0;
   right: 5%;
 }
-article .removeIconelectric:hover, article .removeIconmanual:hover {
+.article .removeIconelectric:hover, .article .removeIconmanual:hover {
   color: #0a4a65;
   font-size: 2.3rem;
 }
-article .editIconelectric, article .editIconmanual {
+.article .editIconelectric, .article .editIconmanual {
   animation-name: appearEdit;
   animation-duration: 1.2s;
   padding: 0.5rem 0.7rem;
@@ -258,11 +258,11 @@ article .editIconelectric, article .editIconmanual {
   top: 0;
   right: 5%;
 }
-article .editIconelectric:hover, article .editIconmanual:hover {
+.article .editIconelectric:hover, .article .editIconmanual:hover {
   color: #0a4a65;
   font-size: 2.2rem;
 }
-article ul {
+.article ul {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -270,20 +270,20 @@ article ul {
   text-align: center;
   list-style: none;
 }
-article ul li {
+.article ul li {
   display: block;
 }
-article ul li:first-child p {
+.article ul li:first-child p {
   font-family: var(--ff-heading);
   font-weight: bold;
   font-size: 1.5rem;
 }
-article ul li:nth-child(2) p {
+.article ul li:nth-child(2) p {
   font-family: var(--ff-body);
   font-weight: lighter;
   font-size: 1rem;
 }
-article ul li button {
+.article ul li button {
   font-family: var(--ff-body);
   font-weight: bold;
   cursor: pointer;
@@ -295,7 +295,7 @@ article ul li button {
   border-radius: 1.75rem;
   transition-duration: 400ms;
 }
-article ul li button:active, article ul li button:hover {
+.article ul li button:active, .article ul li button:hover {
   border-radius: 1.75rem;
   background-color: #084057;
   color: white;

@@ -82,6 +82,7 @@ function initElements() {
         document.querySelector(".collapsible-menu").style.transition = "400ms";
     } else {
         document.querySelector(".collapsible-menu").style.transition = "0ms";
+        document.querySelector(".nav").style.height = "0";
     }
 
     updateNavBarIcons();
@@ -145,7 +146,6 @@ function toggleMenu() {
         document.querySelector("#barLabel").style.color = "#0a4a65";
 
     } else {
-        allowDeactivation = true;
         document.querySelector(".menuList").style.visibility = "visible";
         document.querySelector(".bars").style.transform = "rotate(90deg)";
         document.querySelector(".nav").style.height = "fit-content";
@@ -153,6 +153,7 @@ function toggleMenu() {
         document.querySelector("#bars").style.backgroundColor = "#0a4a65";
         document.querySelector("#barLabel").style.color = "#c1e3f3";
 
+        allowDeactivation = true;
         toggleLabelHover();
     }
 }
@@ -294,6 +295,7 @@ function addWheelchairToDOM(parent, wheelchair) {
     }
 
     new ElementCreator("article")
+        .with("class", "article")
         .with("style", `background-image: url('${wheelchair.terrain}')`)
         .append(new ElementCreator("img")
             .with("src", wheelchair.image)

@@ -1,3 +1,4 @@
+const wheelmodel = require("../models/wheelchair-model")
 const fs = require('fs');
 const {toJSON} = require("express-session/session/cookie");
 
@@ -359,17 +360,26 @@ class AccountController {
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                return res.status(500).send({orderedItems: null});
+                return res.status(500).send({items: null});
 
             } else {
 
                 for (let i = 0; i < users.length; i++) {
 
                     if (currentUser === users[i].username) {
-                        return res.status(200).send({orderedItems: users[i].orderedItems});
+
+                        let orderedWheelchairs = [];
+
+                        for (const wheelchair of users[i].orderedItems) {
+
+                            orderedWheelchairs.push(wheelmodel.getWheelchair(wheelchair));
+                        }
+                        if (orderedWheelchairs.length === 0) {
+                            return res.status(200).send({items: false});
+                        }
+                        return res.status(200).send({items: orderedWheelchairs});
                     }
                 }
-                return res.status(400).send({orderedItems: false});
             }
         })
     }
@@ -452,24 +462,33 @@ class AccountController {
         jsonReader("././files/users.json", (err, users) => {
 
             if (err) {
-                return res.status(500).send({savedItems: null});
+                return res.status(500).send({items: null});
 
             } else {
 
                 for (let i = 0; i < users.length; i++) {
 
                     if (currentUser === users[i].username) {
-                        return res.status(200).send({savedItems: users[i].savedItems});
+
+                        let savedWheelchairs = [];
+
+                        for (const wheelchair of users[i].savedItems) {
+
+                            savedWheelchairs.push(wheelmodel.getWheelchair(wheelchair));
+                        }
+
+                        if (savedWheelchairs.length === 0) {
+                            return res.status(200).send({items: false});
+                        }
+                        return res.status(200).send({items: savedWheelchairs});
                     }
                 }
-                return res.status(400).send({savedItems: false});
             }
         })
     }
 
     async addSavedItem(req, res) {
 
-        console.log("in add saved item")
         let currentUser = req.session.user;
         let productID = parseInt(req.params.productID);
 
@@ -494,7 +513,6 @@ class AccountController {
                                 return res.status(200).send({bo: true});
                             }
                         }
-                        console.log("saving item")
                         users[i].savedItems.push(productID);
 
                         const usersAsString = JSON.stringify(users, null, 2);

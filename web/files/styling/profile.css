@@ -124,6 +124,15 @@ html body main .content {
 html body main .content #deleteHeading {
   color: #d50303;
 }
+html body main .content .profileChangeHeading {
+  padding-bottom: 1rem;
+  margin-bottom: 1.7rem;
+  width: 100%;
+  border-bottom: 1px solid rgb(201, 201, 201);
+}
+html body main .content .rightContainer {
+  margin-left: 2rem;
+}
 html body main .content .rightInputContainer {
   display: flex;
   flex-direction: column;
@@ -131,14 +140,7 @@ html body main .content .rightInputContainer {
   width: 100%;
   min-height: 433px;
   padding: 0 5rem;
-  margin-left: 2rem;
   row-gap: 0.3rem;
-}
-html body main .content .rightInputContainer .profileChangeHeading {
-  padding-bottom: 1rem;
-  margin-bottom: 1.7rem;
-  width: 100%;
-  border-bottom: 1px solid rgb(201, 201, 201);
 }
 html body main .content .rightInputContainer .deleteItemsContainer {
   display: flex;
@@ -205,7 +207,7 @@ html body main .content .rightImgContainer {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-left: 2rem;
+  margin-left: 5rem;
   padding: 2rem;
   row-gap: 2rem;
 }
@@ -248,10 +250,10 @@ html body main .content .rightImgContainer .terrainImgContainer div, html body m
 html body main .content .rightUsersContainer {
   display: flex;
   flex-direction: column;
-  row-gap: 60px;
   width: 100%;
-  margin-left: 2rem;
+  margin-left: 3rem;
   padding: 2rem;
+  row-gap: 60px;
 }
 html body main .content .rightUsersContainer img {
   border-radius: 6rem;
@@ -260,6 +262,7 @@ html body main .content .rightUsersContainer img {
 html body main .content .rightUsersContainer .adminContainer, html body main .content .rightUsersContainer .userContainer {
   display: flex;
   flex-flow: row wrap;
+  padding: 0 2rem;
   column-gap: 60px;
   row-gap: 50px;
 }
@@ -297,6 +300,50 @@ html body main .content .rightUsersContainer .userContainer {
 }
 html body main .content .rightUsersContainer .userContainer ul {
   width: 220px;
+}
+html body main .content .rightProductsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 5rem;
+  width: 100%;
+  min-height: 433px;
+  row-gap: 2rem;
+}
+html body main .content .rightProductsContainer article {
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+}
+html body main .content .rightProductsContainer article img {
+  width: 120px;
+}
+html body main .content .rightProductsContainer article .wheelchairInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 0.3rem;
+}
+html body main .content .rightProductsContainer article .wheelchairInfo h3 {
+  font-size: 1.3rem;
+}
+html body main .content .rightProductsContainer article .wheelchairInfo :nth-child(even) {
+  margin-top: 0.6rem;
+  font-size: 1.1rem;
+}
+html body main .content .rightProductsContainer .noSavesMessage {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.8rem;
+  font-size: 1.1rem;
+}
+html body main .content .rightProductsContainer .noSavesMessage :first-child {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+html body main .content .rightProductsContainer .noSavesMessage a {
+  color: black;
+  width: fit-content;
 }
 
 /*# sourceMappingURL=profile.css.map */
