@@ -81,7 +81,8 @@ html {
 
           img {
             border-radius: 4rem;
-            height: 100%;
+            width: 98px;
+            height: 98px;
           }
 
           ul {
@@ -314,15 +315,15 @@ html {
           padding: 2rem;
           row-gap: 2rem;
 
-          //@include shadow(inside);
-
           .currentImg {
 
+            position: relative;
             display: flex;
             padding-left: 1.5rem;
 
             img {
               width: 180px;
+              height: 180px;
             }
 
             p {
@@ -331,6 +332,72 @@ html {
               width: 30%;
               margin-top: 2rem;
               padding: 1.5rem;
+            }
+
+            .editIconContainer {
+
+              position: absolute;
+              left: 0;
+              bottom: -.2rem;
+
+              i {
+                font-size: 1.5rem;
+                color: #7a7a7a;
+
+                margin-left: .4rem;
+                margin-bottom: -.9rem;
+                padding: 0.5rem 0.7rem;
+                transition-duration: .2s;
+
+                &:hover {
+                  color: #5e5e5e;
+                }
+              }
+
+              .bubble {
+                position: absolute;
+                display: none;
+                column-gap: .5rem;
+
+                background-color: #F2F2F2;
+                border-radius: 5px;
+                box-shadow: 0 0 6px #B2B2B2;
+                font-size: .9rem;
+                margin-top: 1rem;
+                padding: .5rem;
+
+                &:after {
+
+                  background-color: #F2F2F2;
+                  box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
+                  content: "\00a0";
+                  width:  15px;
+                  height: 15px;
+                  left: 20px;
+                  position: absolute;
+                  top: -5px;
+                  transform: rotate( 135deg );
+                }
+
+                input {
+
+                  display: none;
+                }
+
+                a {
+                  z-index: 2;
+                  cursor: pointer;
+                  width: max-content;
+                  padding: .6rem;
+                  border-radius: .3rem;
+                  transition-duration: .2s;
+
+                  &:hover {
+                    background-color: #0d506c;
+                    color: #c1e3f3;
+                  }
+                }
+              }
             }
           }
 
@@ -344,6 +411,7 @@ html {
             img {
               cursor: pointer;
               width: 150px;
+              height: 150px;
             }
 
             h3 {
@@ -358,12 +426,10 @@ html {
             }
 
             div {
-
               display: flex;
               flex-wrap: wrap;
               column-gap: 30px;
               row-gap: 30px;
-
             }
           }
         }

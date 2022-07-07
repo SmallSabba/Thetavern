@@ -1,8 +1,28 @@
+const fs = require("fs");
 const path = require('path');
 const bodyParser = require('body-parser');
 const express = require('express');
 const sessions = require('express-session');
 const cookieParser = require('cookie-parser');
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        clearDirectory();
+        cb(null, 'files/resources/uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
+    }
+})
+const upload = multer(
+    {
+        limits: {
+            fieldNameSize: 100,
+            fileSize: 60000000
+        },
+        storage: storage
+    });
 
 const app = express();
 const port = process.env.PORT ?? 3000;
@@ -40,6 +60,8 @@ app.use(cookieParser());
 app.use('/api', wheelchairRouter);
 app.use('/api', accountRouter);
 
+app.post("/uploadFiles", upload.single("file"), sendFileUrl);
+
 app.listen(port, (error) => {
     if (error) {
         console.log(error);
@@ -48,3 +70,23 @@ app.listen(port, (error) => {
         console.log(`Server listening at http://localhost:${port}/index.html`)
     }
 });
+
+function clearDirectory() {
+
+    const directory = "files/resources/uploads";
+    fs.readdir(directory, (err, files) => {
+        if (err) throw err;
+
+        for (const file of files) {
+
+            fs.unlink(path.join(directory, file), err => {
+                if (err) throw err;
+            });
+        }
+    });
+}
+function sendFileUrl(req, res) {
+
+    let url = req.file.path.split("resources").pop();
+    res.status(200).send({url: url});
+}

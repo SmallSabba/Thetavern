@@ -1,3 +1,4 @@
+@charset "UTF-8";
 *,
 *::before,
 *::after {
@@ -46,7 +47,8 @@ html body main .leftContainer .topContainer {
 }
 html body main .leftContainer .topContainer img {
   border-radius: 4rem;
-  height: 100%;
+  width: 98px;
+  height: 98px;
 }
 html body main .leftContainer .topContainer ul {
   display: flex;
@@ -212,17 +214,72 @@ html body main .content .rightImgContainer {
   row-gap: 2rem;
 }
 html body main .content .rightImgContainer .currentImg {
+  position: relative;
   display: flex;
   padding-left: 1.5rem;
 }
 html body main .content .rightImgContainer .currentImg img {
   width: 180px;
+  height: 180px;
 }
 html body main .content .rightImgContainer .currentImg p {
   font-size: 1.1rem;
   width: 30%;
   margin-top: 2rem;
   padding: 1.5rem;
+}
+html body main .content .rightImgContainer .currentImg .editIconContainer {
+  position: absolute;
+  left: 0;
+  bottom: -0.2rem;
+}
+html body main .content .rightImgContainer .currentImg .editIconContainer i {
+  font-size: 1.5rem;
+  color: #7a7a7a;
+  margin-left: 0.4rem;
+  margin-bottom: -0.9rem;
+  padding: 0.5rem 0.7rem;
+  transition-duration: 0.2s;
+}
+html body main .content .rightImgContainer .currentImg .editIconContainer i:hover {
+  color: #5e5e5e;
+}
+html body main .content .rightImgContainer .currentImg .editIconContainer .bubble {
+  position: absolute;
+  display: none;
+  column-gap: 0.5rem;
+  background-color: #F2F2F2;
+  border-radius: 5px;
+  box-shadow: 0 0 6px #B2B2B2;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  padding: 0.5rem;
+}
+html body main .content .rightImgContainer .currentImg .editIconContainer .bubble:after {
+  background-color: #F2F2F2;
+  box-shadow: -2px 2px 2px 0 rgba(178, 178, 178, 0.4);
+  content: " ";
+  width: 15px;
+  height: 15px;
+  left: 20px;
+  position: absolute;
+  top: -5px;
+  transform: rotate(135deg);
+}
+html body main .content .rightImgContainer .currentImg .editIconContainer .bubble input {
+  display: none;
+}
+html body main .content .rightImgContainer .currentImg .editIconContainer .bubble a {
+  z-index: 2;
+  cursor: pointer;
+  width: max-content;
+  padding: 0.6rem;
+  border-radius: 0.3rem;
+  transition-duration: 0.2s;
+}
+html body main .content .rightImgContainer .currentImg .editIconContainer .bubble a:hover {
+  background-color: #0d506c;
+  color: #c1e3f3;
 }
 html body main .content .rightImgContainer .terrainImgContainer, html body main .content .rightImgContainer .wheelchairImgContainer {
   border-radius: 1rem;
@@ -232,6 +289,7 @@ html body main .content .rightImgContainer .terrainImgContainer, html body main 
 html body main .content .rightImgContainer .terrainImgContainer img, html body main .content .rightImgContainer .wheelchairImgContainer img {
   cursor: pointer;
   width: 150px;
+  height: 150px;
 }
 html body main .content .rightImgContainer .terrainImgContainer h3, html body main .content .rightImgContainer .wheelchairImgContainer h3 {
   width: 200px;

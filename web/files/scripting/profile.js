@@ -96,7 +96,47 @@ function generateImgContainer() {
                 .with("alt", `${profilePicture}`)
             )
             .append(new ElementCreator("p")
-                .text(`${profilePicture}`))
+                .text(`${profilePicture}`)
+            )
+            .append(new ElementCreator("div")
+                .with("class", "editIconContainer")
+                .append(new ElementCreator("a")
+                    .id("editIcon")
+                    .with("style", "cursor: pointer")
+                    .listener('click', () => {
+
+                        toggleEditContainer("pencil");
+                    })
+                    .append(new ElementCreator("i")
+                        .with("class", "fa-solid fa-pencil")
+                    )
+                )
+                .append(new ElementCreator("div")
+                    .with("class", "bubble")
+                    .append(new ElementCreator("a")
+                        .id("removePhoto")
+                        .text("Remove photo")
+                        .listener("click", () => {
+                            changeProfilePicture("No avatar").then();
+                        })
+                    )
+                    .append(new ElementCreator("a")
+                        .text("Select a file...")
+                        .listener("click", () => {
+                            document.getElementById("uploadPhoto").click();
+                        })
+                    )
+                    .append(new ElementCreator("input")
+                        .id("uploadPhoto")
+                        .with("type", "file")
+                        .listener("change", () => {
+
+                            uploadPhoto();
+                            document.getElementById("editIcon").click();
+                        })
+                    )
+                )
+            )
         )
         .append(new ElementCreator("div")
             .with("class", "terrainImgContainer")
@@ -117,25 +157,28 @@ function generateImgContainer() {
 
     for (let i = 1; i < profileArray.length; i++) {
 
-        let img = document.createElement("img");
-        img.src = `${profileArray[i][1]}`;
-        img.alt = `${profileArray[i][0]}`;
+        if (profileArray[i][0] !== "upload") {
 
-        if (!isAdmin && profileArray[i][0] === "CRI" || !isAdmin && profileArray[i][0] === "Water Wheels") {
-            img.style.opacity = ".5";
-            img.style.cursor = "not-allowed";
+            let img = document.createElement("img");
+            img.src = `${profileArray[i][1]}`;
+            img.alt = `${profileArray[i][0]}`;
 
-            img.addEventListener("click", () => {
-                displayPopUpInfo("Only premium members can use this background image.");
-            })
-        } else {
-            img.addEventListener("click", () => {
-                changeProfilePicture(profileArray[i][0]).then();
-            })
+            if (!isAdmin && profileArray[i][0] === "CRI" || !isAdmin && profileArray[i][0] === "Water Wheels") {
+                img.style.opacity = ".5";
+                img.style.cursor = "not-allowed";
+
+                img.addEventListener("click", () => {
+                    displayPopUpInfo("Only premium members can use this background image.");
+                })
+            } else {
+                img.addEventListener("click", () => {
+                    changeProfilePicture(profileArray[i][0]).then();
+                })
+            }
+
+            if (i <= 5) terrainDiv.append(img);
+            else wheelchairDiv.append(img);
         }
-
-        if (i <= 5) terrainDiv.append(img);
-        else wheelchairDiv.append(img);
     }
 
     document.querySelector(".terrainImgContainer").append(terrainDiv);
@@ -169,7 +212,6 @@ function generateOrderedItems(wheelchair) {
     let shift = Math.floor((Math.random() * 3) + 1);
     const day = new Date().setDate(new Date().getDate() + shift);
     const deliveryDate = new Date(day).toLocaleDateString("en-GB");
-    console.log(deliveryDate)
 
     new ElementCreator("article")
         .append(new ElementCreator("img")
@@ -535,8 +577,6 @@ async function changeProfilePicture(pictureKey) {
 
 function updateProfilePicture() {
 
-    console.log(localStorage.getItem("page"));
-
     let img = document.querySelector(".topContainer img");
 
     img.setAttribute("src", `${profilePicturesMap.get(profilePicture)}`);
@@ -547,10 +587,52 @@ function updateProfilePicture() {
 
 }
 
+function toggleEditContainer(source) {
+
+    if (allowToggle || source === "pencil") {
+
+        if (source === "pencil" && allowToggle) allowToggle = !allowToggle;
+        else setTimeout(() => allowToggle = !allowToggle, 50);
+
+        let element = document.querySelector(".bubble");
+        element.style.display === "flex" ? element.style.display = "none" : element.style.display = "flex";
+    }
+}
+
+function uploadPhoto() {
+
+    const file = document.getElementById("uploadPhoto");
+
+    if (file.files[0].name !== lastPhoto) {
+
+        const formData = new FormData();
+        formData.append("file", file.files[0]);
+        lastPhoto = file.files[0].name;
+
+        fetch("/uploadFiles", {
+            method: "post",
+            body: formData
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                localStorage.setItem("upload", data.url);
+                profilePicturesMap.set("Your picture", data.url);
+                changeProfilePicture("Your picture").then();
+            })
+    }
+}
+
+let allowToggle;
+let lastPhoto;
+
 document.addEventListener("DOMContentLoaded", function (event) {
 
     currentPage = document.location.pathname.replace("/", "").replace(".html", "");
+    document.querySelector("body").addEventListener("click", () => toggleEditContainer("body"));
 
+    if (localStorage.getItem("upload")) {
+        profilePicturesMap.set("Your picture", localStorage.getItem("upload"));
+    }
     importNavBar();
-
 });

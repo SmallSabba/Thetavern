@@ -319,8 +319,6 @@ class AccountController {
 
     async changeProfilePicture(req, res) {
 
-        console.log("in change pp");
-
         let currentUser = req.session.user;
         let newProfilePicture = req.body.profilePicture;
 
