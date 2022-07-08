@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMContentLoaded", () => {
 
     currentPage = document.location.pathname.replace("/", "").replace(".html", "");
 

@@ -27,7 +27,7 @@
     "category": "electric",
     "manufacturer": "Some new guy",
     "price": 12,
-    "sold": 2,
+    "sold": 3,
     "image": "/wheelchairs/electric/Optimus_2_S.png",
     "terrain": "/wheelchairs/background/BGstone.png",
     "description": "The Optimus_2_S wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
@@ -49,7 +49,7 @@
     "category": "manual",
     "manufacturer": "Another guy",
     "price": 9,
-    "sold": 4,
+    "sold": 5,
     "image": "/wheelchairs/manual/MO_951B_60.png",
     "terrain": "/wheelchairs/background/BGgrass.png",
     "description": "The Format wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
@@ -71,7 +71,7 @@
     "category": "manual",
     "manufacturer": "Some guy",
     "price": 7,
-    "sold": 0,
+    "sold": 1,
     "image": "/wheelchairs/manual/Mountain_eTrike_Green.png",
     "terrain": "/wheelchairs/background/BGmountain.png",
     "description": "The eTrike_Green wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
@@ -82,7 +82,7 @@
     "category": "manual",
     "manufacturer": "Some guy",
     "price": 7,
-    "sold": 1,
+    "sold": 2,
     "image": "/wheelchairs/manual/MWstone.png",
     "terrain": "/wheelchairs/background/BGstone.png",
     "description": "The MWstone wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
@@ -93,7 +93,7 @@
     "category": "manual",
     "manufacturer": "Some guy",
     "price": 9,
-    "sold": 1,
+    "sold": 4,
     "image": "/wheelchairs/manual/Tempo_Uniski_2.png",
     "terrain": "/wheelchairs/background/BGsnow.png",
     "description": "The Tempo_Uniski_2 wheelchair offers the pediatric user versatility, functionality and maneuverability.These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "

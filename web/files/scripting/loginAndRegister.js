@@ -76,7 +76,7 @@ function generateRegisterField() {
         .append(new ElementCreator("input")
             .with("type", "text")
             .with("name", "username")
-            .with("placeholder", "username / e-mail")
+            .with("placeholder", "username")
             .with("required"))
         .append(new ElementCreator("input")
             .with("type", "password")
@@ -101,9 +101,7 @@ function generateRegisterField() {
             .append(new ElementCreator("button")
                 .with("class", "resetButton")
                 .text("Reset")
-                .listener("click", () => {
-                    resetInputFields();
-                })
+                .listener("click", () => resetInputFields())
             )
         )
         .append(new ElementCreator("p")
@@ -174,7 +172,7 @@ function register(event) {
         })
 }
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMContentLoaded", () => {
 
     if (localStorage.getItem("formType") === "login") {
         generateLoginField();

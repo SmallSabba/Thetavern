@@ -6,7 +6,22 @@
     "profilePicture": "No avatar",
     "authorized": true,
     "orderedItems": [],
-    "savedItems": []
+    "savedItems": [],
+    "shippingInfo": {
+      "firstname": null,
+      "lastname": null,
+      "street": null,
+      "city": null,
+      "state": null,
+      "postal": null,
+      "phone": null
+    },
+    "paymentInfo": {
+      "cardNumber": null,
+      "expireMonth": null,
+      "expireYear": null,
+      "cvv": null
+    }
   },
   {
     "username": "Max",
@@ -14,8 +29,26 @@
     "email": "max@h3.com",
     "profilePicture": "No avatar",
     "authorized": true,
-    "orderedItems": [],
-    "savedItems": []
+    "orderedItems": [
+      8,
+      3
+    ],
+    "savedItems": [],
+    "shippingInfo": {
+      "firstname": null,
+      "lastname": null,
+      "street": null,
+      "city": null,
+      "state": null,
+      "postal": null,
+      "phone": null
+    },
+    "paymentInfo": {
+      "cardNumber": null,
+      "expireMonth": null,
+      "expireYear": null,
+      "cvv": null
+    }
   },
   {
     "username": "Olli",
@@ -26,7 +59,22 @@
     "orderedItems": [],
     "savedItems": [
       10
-    ]
+    ],
+    "shippingInfo": {
+      "firstname": null,
+      "lastname": null,
+      "street": null,
+      "city": null,
+      "state": null,
+      "postal": null,
+      "phone": null
+    },
+    "paymentInfo": {
+      "cardNumber": null,
+      "expireMonth": null,
+      "expireYear": null,
+      "cvv": null
+    }
   },
   {
     "username": "Niklas",
@@ -35,7 +83,22 @@
     "profilePicture": "No avatar",
     "authorized": false,
     "orderedItems": [],
-    "savedItems": []
+    "savedItems": [],
+    "shippingInfo": {
+      "firstname": null,
+      "lastname": null,
+      "street": null,
+      "city": null,
+      "state": null,
+      "postal": null,
+      "phone": null
+    },
+    "paymentInfo": {
+      "cardNumber": null,
+      "expireMonth": null,
+      "expireYear": null,
+      "cvv": null
+    }
   },
   {
     "username": "Test",
@@ -43,8 +106,25 @@
     "email": "tested@test.com",
     "profilePicture": "No avatar",
     "authorized": false,
-    "orderedItems": [],
-    "savedItems": []
+    "orderedItems": [
+      9
+    ],
+    "savedItems": [],
+    "shippingInfo": {
+      "firstname": "Gandalf",
+      "lastname": "Gurt",
+      "street": "Wasserweg 32",
+      "city": "Vienna",
+      "state": "Austria",
+      "postal": "1040",
+      "phone": "05100510581"
+    },
+    "paymentInfo": {
+      "cardNumber": "1234567890004321",
+      "expireMonth": "April",
+      "expireYear": "2000",
+      "cvv": "543"
+    }
   },
   {
     "username": "Chrisi",
@@ -60,6 +140,49 @@
       9,
       7,
       8
-    ]
+    ],
+    "shippingInfo": {
+      "firstname": null,
+      "lastname": null,
+      "street": null,
+      "city": null,
+      "state": null,
+      "postal": null,
+      "phone": null
+    },
+    "paymentInfo": {
+      "cardNumber": null,
+      "expireMonth": null,
+      "expireYear": null,
+      "cvv": null
+    }
+  },
+  {
+    "username": "Domi",
+    "password": "ww",
+    "email": "tested@tested.com",
+    "profilePicture": "Your picture",
+    "authorized": false,
+    "orderedItems": [
+      9
+    ],
+    "savedItems": [
+      3
+    ],
+    "shippingInfo": {
+      "firstname": "Dominik",
+      "lastname": "H",
+      "street": "Gansgasse 41",
+      "city": "Wien",
+      "state": "Österreich",
+      "postal": "1150",
+      "phone": "066075418951"
+    },
+    "paymentInfo": {
+      "cardNumber": "1234567890004312",
+      "expireMonth": "April",
+      "expireYear": "2024",
+      "cvv": "531"
+    }
   }
 ]

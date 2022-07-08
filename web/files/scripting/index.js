@@ -32,10 +32,10 @@ function changeImage(currentNum) {
 
     let nextNum = Math.floor((Math.random() * 3) + 1);
 
-    while (currentNum === nextNum) {
+    //while (currentNum === nextNum) {
 
-        nextNum = Math.floor((Math.random() * 3) + 1);
-    }
+    //    nextNum = Math.floor((Math.random() * 3) + 1);
+    //}
 
     //two equal approaches to call a function with parameters in setInterval
 
@@ -76,7 +76,7 @@ function findTopProduct(category, number) {
         })
 }
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMContentLoaded",  () => {
 
     currentPage = document.location.pathname.replace("/", "").replace(".html", "");
     localStorage.setItem("page", document.location.pathname.replace("/", ""));

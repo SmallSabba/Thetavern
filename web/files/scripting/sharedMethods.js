@@ -230,10 +230,10 @@ function updateNavBarIcons() {
             }
 
             for (const item in data.user.orderedItems) {
-                console.log(data.user.orderedItems[item])
+                //console.log(data.user.orderedItems[item])
             }
             for (const item in data.user.savedItems) {
-                console.log(item)
+                //console.log(item)
             }
 
             if (currentUser != null) {
@@ -358,7 +358,6 @@ function addWheelchairToDOM(parent, wheelchair) {
 
 function updateSavedProducts() {
 
-    console.log("in here")
     let path;
 
     if (localStorage.getItem("saveProduct") === "true") {

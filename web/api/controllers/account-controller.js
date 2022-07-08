@@ -30,7 +30,9 @@ class AccountController {
                 profilePicture: null,
                 authorized: null,
                 orderedItems: [],
-                savedItems: []
+                savedItems: [],
+                shippingInfo: null,
+                paymentInfo: null
             }
             return res.status(200).send({user: tmpUser});
         }
@@ -92,7 +94,22 @@ class AccountController {
                     profilePicture: "No avatar",
                     authorized: false,
                     orderedItems: [],
-                    savedItems: []
+                    savedItems: [],
+                    shippingInfo: {
+                        firstname: null,
+                        lastname: null,
+                        street: null,
+                        city: null,
+                        state: null,
+                        postal: null,
+                        phone: null
+                    },
+                    paymentInfo: {
+                        cardNumber: null,
+                        expireMonth: null,
+                        expireYear: null,
+                        cvv: null
+                    }
                 }
                 users.push(newUser);
 
@@ -551,6 +568,79 @@ class AccountController {
                                 users[i].savedItems.splice(j, 1);
                             }
                         }
+
+                        const usersAsString = JSON.stringify(users, null, 2);
+                        fs.writeFile('././files/users.json', usersAsString, err => {
+
+                            if (err) {
+                                return res.status(500).send({bo: null});
+                            } else {
+                                return res.status(200).send({bo: true});
+                            }
+                        })
+                    }
+                }
+            }
+        })
+    }
+
+    async setShippingAddress(req, res) {
+
+        let currentUser = req.session.user;
+        let form = req.body;
+
+        jsonReader("././files/users.json", (err, users) => {
+
+            if (err) {
+                return res.status(500).send({bo: null});
+
+            } else {
+                for (let i = 0; i < users.length; i++) {
+
+                    if (currentUser === users[i].username) {
+
+                        users[i].shippingInfo.firstname = form.firstname.replaceAll(" ", "");
+                        users[i].shippingInfo.lastname = form.lastname.replaceAll(" ", "");
+                        users[i].shippingInfo.street = form.street;
+                        users[i].shippingInfo.city = form.city.replaceAll(" ", "");
+                        users[i].shippingInfo.state = form.state.replaceAll(" ", "");
+                        users[i].shippingInfo.postal = form.postal.replaceAll(" ", "");
+                        users[i].shippingInfo.phone = form.phone.replaceAll(" ", "");
+
+                        const usersAsString = JSON.stringify(users, null, 2);
+                        fs.writeFile('././files/users.json', usersAsString, err => {
+
+                            if (err) {
+                                return res.status(500).send({bo: null});
+                            } else {
+                                return res.status(200).send({bo: true});
+                            }
+                        })
+                    }
+                }
+            }
+        })
+    }
+
+    async setPaymentMethod(req, res) {
+
+        let currentUser = req.session.user;
+        let form = req.body;
+
+        jsonReader("././files/users.json", (err, users) => {
+
+            if (err) {
+                return res.status(500).send({bo: null});
+
+            } else {
+                for (let i = 0; i < users.length; i++) {
+
+                    if (currentUser === users[i].username) {
+
+                        users[i].paymentInfo.cardNumber = form.cardNumber.replaceAll(" ", "");
+                        users[i].paymentInfo.expireMonth = form.expireMonth.replaceAll(" ", "");
+                        users[i].paymentInfo.expireYear = form.expireYear.replaceAll(" ", "");
+                        users[i].paymentInfo.cvv = form.cvv.replaceAll(" ", "");
 
                         const usersAsString = JSON.stringify(users, null, 2);
                         fs.writeFile('././files/users.json', usersAsString, err => {

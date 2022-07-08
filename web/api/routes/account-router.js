@@ -28,4 +28,7 @@ router.get('/user/saves/get', controller.getSavedItems);
 router.post('/user/saves/:productID/add', controller.addSavedItem);
 router.post('/user/saves/:productID/remove', controller.removeSavedItem);
 
+router.post('/user/shipping/setAddress', controller.setShippingAddress);
+router.post('/user/payment/setPayment', controller.setPaymentMethod);
+
 module.exports = router;

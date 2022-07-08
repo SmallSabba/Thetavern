@@ -18,9 +18,6 @@ profilePicturesMap.set("Water Wheels", "/wheelchairs/manual/WaterWheels.png");
 
 function generateAllUsersContainer() {
 
-    let element = document.querySelector(".rightContainer");
-    element ? element.remove() : null;
-
     fetch("/api/user/getAll")
         .then(res => res.json())
         .then(data => {
@@ -28,161 +25,171 @@ function generateAllUsersContainer() {
             const users = data.users;
             if (users) {
 
-                new ElementCreator("div")
-                    .with("class", "rightUsersContainer rightContainer")
-                    .append(new ElementCreator("div")
-                        .with("class", "adminContainer")
-                    )
-                    .append(new ElementCreator("div")
-                        .with("class", "userContainer")
-                    )
-                    .appendTo(document.querySelector(".content")
-                    )
+                let element = document.querySelector(".rightContainer");
 
-                for (let i = 0; i < users.length; i++) {
-
-                    let container, admin, user = "user";
-
-                    container = document.querySelector(".userContainer");
-                    admin = "User";
-
-                    if (users[i].authorized) {
-                        container = document.querySelector(".adminContainer");
-                        admin = "Admin";
-                    }
-
-                    if (currentUser === users[i].username) user = "user currentUser";
+                if (!element.className.includes("rightUsersContainer")) {
+                    element ? element.remove() : null;
 
                     new ElementCreator("div")
-                        .with("class", `${user}`)
-                        .append(new ElementCreator("img")
-                            .with("src", `${profilePicturesMap.get(users[i].profilePicture)}`)
+                        .with("class", "rightUsersContainer rightContainer")
+                        .append(new ElementCreator("div")
+                            .with("class", "adminContainer")
                         )
-                        .append(new ElementCreator("ul")
-                            .append(new ElementCreator("li")
-                                .append(new ElementCreator("p")
-                                    .text(`${users[i].username}`)
-                                )
-                                .append(new ElementCreator("p")
-                                    .text(`${users[i].email}`)
-                                )
-                                .append(new ElementCreator("p")
-                                    .text(`${admin}`)
+                        .append(new ElementCreator("div")
+                            .with("class", "userContainer")
+                        )
+                        .appendTo(document.querySelector(".content")
+                        )
+
+                    for (let i = 0; i < users.length; i++) {
+
+                        let container, admin, user = "user";
+
+                        container = document.querySelector(".userContainer");
+                        admin = "User";
+
+                        if (users[i].authorized) {
+                            container = document.querySelector(".adminContainer");
+                            admin = "Admin";
+                        }
+
+                        if (currentUser === users[i].username) user = "user currentUser";
+
+                        new ElementCreator("div")
+                            .with("class", `${user}`)
+                            .append(new ElementCreator("img")
+                                .with("src", `${profilePicturesMap.get(users[i].profilePicture)}`)
+                            )
+                            .append(new ElementCreator("ul")
+                                .append(new ElementCreator("li")
+                                    .append(new ElementCreator("p")
+                                        .text(`${users[i].username}`)
+                                    )
+                                    .append(new ElementCreator("p")
+                                        .text(`${users[i].email}`)
+                                    )
+                                    .append(new ElementCreator("p")
+                                        .text(`${admin}`)
+                                    )
                                 )
                             )
-                        )
-                        .appendTo(container)
-                }
+                            .appendTo(container)
+                    }
 
+                }
             } else {
                 return displayPopUpInfo("An error occurred while loading user profiles.");
             }
+
         })
 }
 
 function generateImgContainer() {
 
     let element = document.querySelector(".rightContainer");
-    element ? element.remove() : null;
 
-    const profileArray = Array.from(profilePicturesMap);
+    if (!element.className.includes("rightImgContainer")) {
+        element ? element.remove() : null;
 
-    new ElementCreator("div")
-        .with("class", "rightImgContainer rightContainer")
-        .append(new ElementCreator("div")
-            .with("class", "currentImg")
-            .append(new ElementCreator("img")
-                .with("src", `${profilePicturesMap.get(profilePicture)}`)
-                .with("alt", `${profilePicture}`)
-            )
-            .append(new ElementCreator("p")
-                .text(`${profilePicture}`)
-            )
+        const profileArray = Array.from(profilePicturesMap);
+
+        new ElementCreator("div")
+            .with("class", "rightImgContainer rightContainer")
             .append(new ElementCreator("div")
-                .with("class", "editIconContainer")
-                .append(new ElementCreator("a")
-                    .id("editIcon")
-                    .with("style", "cursor: pointer")
-                    .listener('click', () => {
-
-                        toggleEditContainer("pencil");
-                    })
-                    .append(new ElementCreator("i")
-                        .with("class", "fa-solid fa-pencil")
-                    )
+                .with("class", "currentImg")
+                .append(new ElementCreator("img")
+                    .with("src", `${profilePicturesMap.get(profilePicture)}`)
+                    .with("alt", `${profilePicture}`)
+                )
+                .append(new ElementCreator("p")
+                    .text(`${profilePicture}`)
                 )
                 .append(new ElementCreator("div")
-                    .with("class", "bubble")
+                    .with("class", "editIconContainer")
                     .append(new ElementCreator("a")
-                        .id("removePhoto")
-                        .text("Remove photo")
-                        .listener("click", () => {
-                            changeProfilePicture("No avatar").then();
-                        })
-                    )
-                    .append(new ElementCreator("a")
-                        .text("Select a file...")
-                        .listener("click", () => {
-                            document.getElementById("uploadPhoto").click();
-                        })
-                    )
-                    .append(new ElementCreator("input")
-                        .id("uploadPhoto")
-                        .with("type", "file")
-                        .listener("change", () => {
+                        .id("editIcon")
+                        .with("style", "cursor: pointer")
+                        .listener('click', () => {
 
-                            uploadPhoto();
-                            document.getElementById("editIcon").click();
+                            toggleEditContainer("pencil");
                         })
+                        .append(new ElementCreator("i")
+                            .with("class", "fa-solid fa-pencil")
+                        )
+                    )
+                    .append(new ElementCreator("div")
+                        .with("class", "bubble")
+                        .append(new ElementCreator("a")
+                            .id("removePhoto")
+                            .text("Remove photo")
+                            .listener("click", () => {
+                                changeProfilePicture("No avatar").then();
+                            })
+                        )
+                        .append(new ElementCreator("a")
+                            .text("Select a file...")
+                            .listener("click", () => {
+                                document.getElementById("uploadPhoto").click();
+                            })
+                        )
+                        .append(new ElementCreator("input")
+                            .id("uploadPhoto")
+                            .with("type", "file")
+                            .listener("change", () => {
+
+                                uploadPhoto();
+                                document.getElementById("editIcon").click();
+                            })
+                        )
                     )
                 )
             )
-        )
-        .append(new ElementCreator("div")
-            .with("class", "terrainImgContainer")
-            .append(new ElementCreator("h3")
-                .text("Terrains")
+            .append(new ElementCreator("div")
+                .with("class", "terrainImgContainer")
+                .append(new ElementCreator("h3")
+                    .text("Terrains")
+                )
             )
-        )
-        .append(new ElementCreator("div")
-            .with("class", "wheelchairImgContainer")
-            .append(new ElementCreator("h3")
-                .text("Wheelchairs")
+            .append(new ElementCreator("div")
+                .with("class", "wheelchairImgContainer")
+                .append(new ElementCreator("h3")
+                    .text("Wheelchairs")
+                )
             )
-        )
-        .appendTo(document.querySelector(".content"))
+            .appendTo(document.querySelector(".content"))
 
-    let terrainDiv = document.createElement("div");
-    let wheelchairDiv = document.createElement("div");
+        let terrainDiv = document.createElement("div");
+        let wheelchairDiv = document.createElement("div");
 
-    for (let i = 1; i < profileArray.length; i++) {
+        for (let i = 1; i < profileArray.length; i++) {
 
-        if (profileArray[i][0] !== "upload") {
+            if (profileArray[i][0] !== "Your picture") {
 
-            let img = document.createElement("img");
-            img.src = `${profileArray[i][1]}`;
-            img.alt = `${profileArray[i][0]}`;
+                let img = document.createElement("img");
+                img.src = `${profileArray[i][1]}`;
+                img.alt = `${profileArray[i][0]}`;
 
-            if (!isAdmin && profileArray[i][0] === "CRI" || !isAdmin && profileArray[i][0] === "Water Wheels") {
-                img.style.opacity = ".5";
-                img.style.cursor = "not-allowed";
+                if (!isAdmin && profileArray[i][0] === "CRI" || !isAdmin && profileArray[i][0] === "Water Wheels") {
+                    img.style.opacity = ".5";
+                    img.style.cursor = "not-allowed";
 
-                img.addEventListener("click", () => {
-                    displayPopUpInfo("Only premium members can use this background image.");
-                })
-            } else {
-                img.addEventListener("click", () => {
-                    changeProfilePicture(profileArray[i][0]).then();
-                })
+                    img.addEventListener("click", () => {
+                        displayPopUpInfo("Only premium members can use this background image.");
+                    })
+                } else {
+                    img.addEventListener("click", () => {
+                        changeProfilePicture(profileArray[i][0]).then();
+                    })
+                }
+
+                if (i <= 5) terrainDiv.append(img);
+                else wheelchairDiv.append(img);
             }
-
-            if (i <= 5) terrainDiv.append(img);
-            else wheelchairDiv.append(img);
         }
-    }
 
-    document.querySelector(".terrainImgContainer").append(terrainDiv);
-    document.querySelector(".wheelchairImgContainer").append(wheelchairDiv);
+        document.querySelector(".terrainImgContainer").append(terrainDiv);
+        document.querySelector(".wheelchairImgContainer").append(wheelchairDiv);
+    }
 }
 
 function generateSavedItems(wheelchair) {
@@ -262,38 +269,41 @@ function generateProductsContainer(type) {
             }
 
             let element = document.querySelector(".rightContainer");
-            element ? element.remove() : null;
 
-            let container = document.createElement("div");
-            container.setAttribute("class", "rightProductsContainer rightContainer");
+            if (!element.className.includes(`${type}`)) {
+                element ? element.remove() : null;
 
-            let h = document.createElement("h2");
-            h.setAttribute("class", "profileChangeHeading")
-            h.textContent = `${heading}`;
+                let container = document.createElement("div");
+                container.setAttribute("class", `rightProductsContainer rightContainer ${type}`);
 
-            container.append(h);
-            document.querySelector(".content").append(container);
+                let h = document.createElement("h2");
+                h.setAttribute("class", "profileChangeHeading")
+                h.textContent = `${heading}`;
 
-            if (data.items) {
-                for (const wheelchair of data.items) {
-                    type === "orders" ?
-                        generateOrderedItems(wheelchair)
-                        : generateSavedItems(wheelchair);
+                container.append(h);
+                document.querySelector(".content").append(container);
+
+                if (data.items) {
+                    for (const wheelchair of data.items) {
+                        type === "orders" ?
+                            generateOrderedItems(wheelchair)
+                            : generateSavedItems(wheelchair);
+                    }
+                } else {
+                    new ElementCreator("div")
+                        .with("class", "noSavesMessage")
+                        .append(new ElementCreator("p")
+                            .text("Oops!")
+                        )
+                        .append(new ElementCreator("p")
+                            .text(`${message}`)
+                        )
+                        .append(new ElementCreator("a")
+                            .with("href", "shop.html")
+                            .text("Rummage in the shop")
+                        )
+                        .appendTo(container)
                 }
-            } else {
-                new ElementCreator("div")
-                    .with("class", "noSavesMessage")
-                    .append(new ElementCreator("p")
-                        .text("Oops!")
-                    )
-                    .append(new ElementCreator("p")
-                        .text(`${message}`)
-                    )
-                    .append(new ElementCreator("a")
-                        .with("href", "shop.html")
-                        .text("Rummage in the shop")
-                    )
-                    .appendTo(container)
             }
         })
 }
@@ -315,130 +325,139 @@ function generateOneInputField(message) {
                 settingValue = data.user.email;
             }
 
-            let container = document.querySelector(".rightContainer");
-            if (container !== null) container.remove();
+            let element = document.querySelector(".rightContainer");
 
-            new ElementCreator("form")
-                .with("class", "rightInputContainer rightContainer")
-                .with("action", "javascript: if (message === 'username') {changeUsername(document.getElementById('input').value).then()} else {changeEmail(document.getElementById('input'').value).then();}"
-                )
-                .append(new ElementCreator("h2")
-                    .with("class", "profileChangeHeading")
-                    .text(`Change ${message}`)
-                )
-                .append(new ElementCreator("div")
-                    .with("class", "userSettingValue")
-                    .append(new ElementCreator("p")
-                        .text(`Current ${message}:`)
-                    )
-                    .append(new ElementCreator("p")
-                        .id("value")
-                        .text(`${settingValue}`)
-                    )
-                )
-                .append(new ElementCreator("div")
-                    .with("class", "inputFields")
-                    .append(new ElementCreator("p")
-                        .text(`Enter a new ${message}:`)
-                    )
-                    .append(new ElementCreator("input")
-                        .id("input")
-                        .with("class", "inputField")
-                        .with("type", `${type}`)
-                        .with("placeholder", `${message}`)
-                        .with("required")
-                    )
-                    .append(new ElementCreator("button")
-                        .text("Save")
-                        .listener("click", () => {
+            if (!element.className.includes(`right${message}Container`)) {
+                element ? element.remove() : null;
 
-                            if (message === "username") {
-                                changeUsername(document.getElementById("input").value).then();
-                            } else {
-                                changeEmail(document.getElementById("input").value).then();
-                            }
-                        })
+                new ElementCreator("form")
+                    .with("class", `rightInputContainer rightContainer right${message}Container`)
+                    .with("action", "javascript: if (message === 'username') {changeUsername(document.getElementById('input').value).then()} else {changeEmail(document.getElementById('input'').value).then();}"
                     )
-                )
-                .appendTo(document.querySelector(".content"))
+                    .append(new ElementCreator("h2")
+                        .with("class", "profileChangeHeading")
+                        .text(`Change ${message}`)
+                    )
+                    .append(new ElementCreator("div")
+                        .with("class", "userSettingValue")
+                        .append(new ElementCreator("p")
+                            .text(`Current ${message}:`)
+                        )
+                        .append(new ElementCreator("p")
+                            .id("value")
+                            .text(`${settingValue}`)
+                        )
+                    )
+                    .append(new ElementCreator("div")
+                        .with("class", "inputFields")
+                        .append(new ElementCreator("p")
+                            .text(`Enter a new ${message}:`)
+                        )
+                        .append(new ElementCreator("input")
+                            .id("input")
+                            .with("class", "inputField")
+                            .with("type", `${type}`)
+                            .with("placeholder", `${message}`)
+                            .with("required")
+                        )
+                        .append(new ElementCreator("button")
+                            .text("Save")
+                            .listener("click", () => {
+
+                                if (message === "username") {
+                                    changeUsername(document.getElementById("input").value).then();
+                                } else {
+                                    changeEmail(document.getElementById("input").value).then();
+                                }
+                            })
+                        )
+                    )
+                    .appendTo(document.querySelector(".content"))
+            }
         })
 }
 
 function generateChangePasswordField() {
 
     let element = document.querySelector(".rightContainer");
-    element ? element.remove() : null;
 
-    new ElementCreator("div")
-        .with("class", "rightInputContainer rightContainer")
-        .append(new ElementCreator("h2")
-            .with("class", "profileChangeHeading")
-            .text("Change password")
-        )
-        .append(new ElementCreator("div")
-            .with("class", "inputFields")
-            .append(new ElementCreator("p")
-                .text("Enter your old password:")
+    if (!element.className.includes("rightPasswordContainer")) {
+        element ? element.remove() : null;
+
+        new ElementCreator("div")
+            .with("class", "rightInputContainer rightContainer rightPasswordContainer")
+            .append(new ElementCreator("h2")
+                .with("class", "profileChangeHeading")
+                .text("Change password")
             )
-            .append(new ElementCreator("input")
-                .id("inputOld")
-                .with("class", "inputField")
-                .with("type", "password")
-                .with("placeholder", "old password")
-                .with("required")
-            )
-            .append(new ElementCreator("p")
-                .id("secondPar")
-                .text("Enter your new password:")
-            )
-            .append(new ElementCreator("input")
-                .id("inputNew")
-                .with("class", "inputField")
-                .with("type", "password")
-                .with("placeholder", "new password")
-                .with("required")
-            )
-            .append(new ElementCreator("button")
-                .text("Save")
-                .listener('click', () => {
-                        let oldPassword = document.getElementById("inputOld").value;
-                        let newPassword = document.getElementById("inputNew").value;
-                        changePassword(oldPassword, newPassword).then();
-                    }
+            .append(new ElementCreator("div")
+                .with("class", "inputFields")
+                .append(new ElementCreator("p")
+                    .text("Enter your old password:")
+                )
+                .append(new ElementCreator("input")
+                    .id("inputOld")
+                    .with("class", "inputField")
+                    .with("type", "password")
+                    .with("placeholder", "old password")
+                    .with("required")
+                )
+                .append(new ElementCreator("p")
+                    .id("secondPar")
+                    .text("Enter your new password:")
+                )
+                .append(new ElementCreator("input")
+                    .id("inputNew")
+                    .with("class", "inputField")
+                    .with("type", "password")
+                    .with("placeholder", "new password")
+                    .with("required")
+                )
+                .append(new ElementCreator("button")
+                    .text("Save")
+                    .listener('click', () => {
+                            let oldPassword = document.getElementById("inputOld").value;
+                            let newPassword = document.getElementById("inputNew").value;
+                            changePassword(oldPassword, newPassword).then();
+                        }
+                    )
                 )
             )
-        )
-        .appendTo(document.querySelector(".content")
-        )
+            .appendTo(document.querySelector(".content")
+            )
+    }
 }
 
 function generateDeleteAccountField() {
 
     let element = document.querySelector(".rightContainer");
-    element ? element.remove() : null;
 
-    new ElementCreator("div")
-        .with("class", "rightInputContainer rightContainer")
-        .append(new ElementCreator("h2")
-            .id("deleteHeading")
-            .with("class", "profileChangeHeading")
-            .text("Delete account")
-        )
-        .append(new ElementCreator("div")
-            .with("class", "deleteItemsContainer")
-            .append(new ElementCreator("p")
-                .text("Once you delete your account, there is no going back. Please be certain.")
-            )
-            .append(new ElementCreator("button")
+    if (!element.className.includes("rightDeleteContainer")) {
+        element ? element.remove() : null;
+
+        new ElementCreator("div")
+            .with("class", "rightInputContainer rightContainer rightDeleteContainer")
+            .append(new ElementCreator("h2")
+                .id("deleteHeading")
+                .with("class", "profileChangeHeading")
                 .text("Delete account")
-                .listener('click', () => {
-                        deleteAccount().then();
-                    }
+            )
+            .append(new ElementCreator("div")
+                .with("class", "deleteItemsContainer")
+                .append(new ElementCreator("p")
+                    .text("Once you delete your account, there is no going back. Please be certain.")
+                )
+                .append(new ElementCreator("button")
+                    .text("Delete account")
+                    .listener('click', () => {
+                            deleteAccount().then();
+                        }
+                    )
                 )
             )
-        )
-        .appendTo(document.querySelector(".content")
-        )
+            .appendTo(document.querySelector(".content")
+            )
+    }
 }
 
 async function deleteAccount() {
@@ -623,6 +642,101 @@ function uploadPhoto() {
     }
 }
 
+function generateDataContainer() {
+
+    fetch("/api/user/get")
+        .then(res => res.json())
+        .then(data => {
+
+            let user = data.user;
+            let shipping = data.user.shippingInfo;
+
+            if (user === null) return displayPopUpInfo("An error occurred while fetching user information.");
+
+            let element = document.querySelector(".rightContainer");
+
+            if (!element || !element.className.includes(`rightDataContainer`)) {
+                element ? element.remove() : null;
+
+                new ElementCreator("div")
+                    .with("class", "rightProductsContainer rightDataContainer rightContainer")
+                    .append(new ElementCreator("h2")
+                        .with("class", "profileChangeHeading")
+                        .text("Account")
+                    )
+                    .append(new ElementCreator("ul")
+                        .with("class", "informationContainer")
+                    )
+                    .append(new ElementCreator("ul")
+                        .with("class", "shippingContainer")
+                    )
+                    .append(new ElementCreator("ul")
+                        .with("class", "paymentContainer")
+                    )
+                    .appendTo(document.querySelector(".content")
+                    )
+
+                let list = document.querySelector(".informationContainer");
+                createListItem(list, "Name", "fullName", `${shipping.firstname} ${shipping.lastname}`);
+                createListItem(list, "Email", "email", `${user.email}`);
+                createListItem(list, "Phone", "phone", `${shipping.phone}`);
+
+                list = document.querySelector(".shippingContainer");
+                createListItem(list, "Street", "street", `${shipping.street}`);
+                createListItem(list, "Address", "address", `${shipping.postal} ${shipping.city}, ${shipping.state}`);
+
+                list = document.querySelector(".paymentContainer");
+                let cardNumber = `${data.user.paymentInfo.cardNumber}`;
+
+                if (cardNumber !== "null") {
+                    cardNumber = "**** **** **** " + data.user.paymentInfo.cardNumber.slice(12);
+                }
+                createListItem(list, "Card", "cardNumber", `${cardNumber}`);
+            }
+        })
+}
+
+function createListItem(parent, heading, id, textContent) {
+
+    if (textContent.includes("null")) textContent = "Not set";
+
+    new ElementCreator("li")
+        .id(id)
+        .listener("mouseover", () => editIconHover(id))
+        .listener("mouseleave", () => editIconLeft(id))
+        .append(new ElementCreator("p")
+            .with("class", "smallHeading")
+            .text(`${heading}:`)
+        )
+        .append(new ElementCreator("p")
+            .text(textContent)
+            .append(new ElementCreator("span")
+                .append(new ElementCreator("i")
+                    .with("class", "fa-solid fa-pencil")
+                )
+                .listener("click", () => test())
+            )
+        )
+        .appendTo(parent)
+}
+
+function test() {
+
+    console.log("editIcon clicked");
+}
+
+function editIconHover(id) {
+
+    document.querySelector(`#${id} p`).style.textDecoration = "underline";
+    document.querySelector(`#${id} span`).style.visibility = "visible";
+}
+
+function editIconLeft(id) {
+
+    document.querySelector(`#${id} p`).style.textDecoration = "none";
+    document.querySelector(`#${id} span`).style.visibility = "hidden";
+}
+
 let allowToggle;
 let lastPhoto;
 
@@ -635,4 +749,5 @@ document.addEventListener("DOMContentLoaded", function (event) {
         profilePicturesMap.set("Your picture", localStorage.getItem("upload"));
     }
     importNavBar();
+    generateDataContainer();
 });

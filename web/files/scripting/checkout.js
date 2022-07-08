@@ -10,17 +10,35 @@ function checkShippingAddress(event) {
         localStorage.setItem("email", "null")
         localStorage.setItem("phone", "null")
 
+        orderProgress = "2";
+        updateProgressContainer();
+
     } else {
         event.preventDefault();
 
         const form = event.currentTarget;
+        const formData = new URLSearchParams(new FormData(form));
+
+        fetch("/api/user/shipping/setAddress", {
+            method: "post",
+            body: formData
+        }).then(res => res.json())
+            .then(data => {
+
+                if (data.bo) {
+                    orderProgress = "2";
+                    updateProgressContainer();
+
+                } else {
+                    displayPopUpInfo("An error occurred during the purchase process.")
+                }
+            })
 
         for (let i = 0; form[i].name !== ""; i++) {
             localStorage.setItem(`${form[i].name}`, form[i].value);
         }
     }
-    orderProgress = "2";
-    updateProgressContainer();
+
 }
 
 function updateShippingSummaryValues() {
@@ -138,43 +156,57 @@ function processOrder(event) {
 
         event.preventDefault();
         const form = event.currentTarget;
+        let formData = new URLSearchParams(new FormData(form));
 
-        /*
-        let cardNumber = form.creditCardNumber.value;
-        let expireMonth = form.expireMonth.value;
-        let expireYear = form.expireYear.value;
-        let cvv = form.cvv.value;
-         */
+        if (form.cardNumber.value.replaceAll(" ", "").length === 16) {
+
+            fetch("/api/user/payment/setPayment", {
+                method: "post",
+                body: formData
+            }).then(res => res.json())
+                .then(data => {
+
+                    if (data.bo) {
+
+                        console.log("finished first")
+
+                        fetch(`/api/wheelchairs/${localStorage.getItem("productID")}/buy`, {
+                            method: 'post',
+                            headers: {'Content-Type': 'application/json'}
+                        }).then(res => res.json())
+                            .then(data => {
+
+                                if (data.bo) {
+
+                                    fetch(`/api/user/orders/${localStorage.getItem("productID")}/add`, {
+                                        method: 'post',
+                                        headers: {'Content-Type': 'application/json'}
+                                    }).then(res => res.json())
+                                        .then(data => {
+
+                                            if (data.bo) {
+                                                localStorage.clear();
+                                                displayPopUpInfo(`Successfully ordered ${wheelchairName}. Redirecting to shop page..`)
+                                                setTimeout(() => {
+                                                    window.location.href = "shop.html"
+                                                }, 1500)
+                                            } else {
+                                                displayPopUpInfo("An error occurred during the purchase process.")
+                                            }
+                                        })
+                                } else {
+                                    displayPopUpInfo("An error occurred during the purchase process.")
+                                }
+                            })
+
+                    } else {
+                        displayPopUpInfo("An error occurred during the purchase process.")
+                    }
+                })
+        } else {
+            displayPopUpInfo("Invalid credit card number.")
+        }
     }
-
-    fetch(`/api/wheelchairs/${localStorage.getItem("productID")}/buy`, {
-        method: 'post',
-        headers: {'Content-Type': 'application/json'}
-    }).then(res => res.json())
-        .then(data => {
-
-            if (data.bo) {
-
-                fetch(`/api/user/orders/${localStorage.getItem("productID")}/add`, {
-                    method: 'post',
-                    headers: {'Content-Type': 'application/json'}
-                }).then(res => res.json())
-                    .then(data => {
-
-                        if (data.bo) {
-                            localStorage.clear();
-                            displayPopUpInfo(`Successfully ordered ${wheelchairName}. Redirecting to shop page..`)
-                            setTimeout(() => {
-                                window.location.href = "shop.html"
-                            }, 1500)
-                        } else {
-                            displayPopUpInfo("An error occurred during the purchase process.")
-                        }
-                    })
-            } else {
-                displayPopUpInfo("An error occurred during the purchase process.")
-            }
-        })
 }
 
 function placeOrderButtonClicked() {
