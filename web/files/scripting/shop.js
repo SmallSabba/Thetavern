@@ -20,8 +20,5 @@ function getAllWheelchairs() {
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    currentPage = document.location.pathname.replace("/", "").replace(".html", "");
-    localStorage.setItem("page", document.location.pathname.replace("/", ""));
-
     importNavBar();
 });

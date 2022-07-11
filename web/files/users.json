@@ -3,7 +3,7 @@
     "username": "Kilian",
     "password": "pw1",
     "email": "kilian@h3.com",
-    "profilePicture": "No avatar",
+    "profilePicture": "/uploads/noAvatar.png",
     "authorized": true,
     "orderedItems": [],
     "savedItems": [],
@@ -27,7 +27,7 @@
     "username": "Max",
     "password": "pw3",
     "email": "max@h3.com",
-    "profilePicture": "No avatar",
+    "profilePicture": "/wheelchairs/background/BGmountain.png",
     "authorized": true,
     "orderedItems": [
       8,
@@ -54,7 +54,7 @@
     "username": "Olli",
     "password": "pw2",
     "email": "olli@h3.com",
-    "profilePicture": "Snow",
+    "profilePicture": "/uploads/noAvatar.png",
     "authorized": true,
     "orderedItems": [],
     "savedItems": [
@@ -80,7 +80,7 @@
     "username": "Niklas",
     "password": "pw4",
     "email": "max@kilian.oliver",
-    "profilePicture": "No avatar",
+    "profilePicture": "/uploads/noAvatar.png",
     "authorized": false,
     "orderedItems": [],
     "savedItems": [],
@@ -104,7 +104,7 @@
     "username": "Test",
     "password": "test",
     "email": "tested@test.com",
-    "profilePicture": "No avatar",
+    "profilePicture": "/uploads/noAvatar.png",
     "authorized": false,
     "orderedItems": [
       9
@@ -130,7 +130,7 @@
     "username": "Chrisi",
     "password": "pw4",
     "email": "tested@test.com",
-    "profilePicture": "Your picture",
+    "profilePicture": "/wheelchairs/background/BGbeach.png",
     "authorized": false,
     "orderedItems": [
       3,
@@ -155,34 +155,6 @@
       "expireMonth": null,
       "expireYear": null,
       "cvv": null
-    }
-  },
-  {
-    "username": "Domi",
-    "password": "ww",
-    "email": "tested@tested.com",
-    "profilePicture": "Your picture",
-    "authorized": false,
-    "orderedItems": [
-      9
-    ],
-    "savedItems": [
-      3
-    ],
-    "shippingInfo": {
-      "firstname": "Dominik",
-      "lastname": "H",
-      "street": "Gansgasse 41",
-      "city": "Wien",
-      "state": "Österreich",
-      "postal": "1150",
-      "phone": "066075418951"
-    },
-    "paymentInfo": {
-      "cardNumber": "1234567890004312",
-      "expireMonth": "April",
-      "expireYear": "2024",
-      "cvv": "531"
     }
   }
 ]

@@ -56,6 +56,17 @@ let allowDeactivation;
 
 function importNavBar() {
 
+    currentPage = document.location.pathname.replace("/", "").replace(".html", "");
+
+    if (!currentPage.includes("profile") && !currentPage.includes("checkout")) {
+        localStorage.setItem("page", document.location.pathname.replace("/", ""));
+    }
+
+    if (!currentPage) {
+        currentPage = "index";
+        localStorage.setItem("page", "index.html");
+    }
+
     fetch('navBar.html')
         .then(res => res.text())
         .then(text => {
@@ -208,7 +219,7 @@ function updateNavBarIcons() {
 
             currentUser = null;
             isAdmin = false;
-            profilePicture = "noAvatar";
+            profilePicture = "noAvatar.png";
 
             if (data.user) {
                 currentUser = data.user.username;
@@ -227,13 +238,6 @@ function updateNavBarIcons() {
             else if (currentPage === "index") {
                 findTopProduct("electric", 1);
                 findTopProduct("manual", 2);
-            }
-
-            for (const item in data.user.orderedItems) {
-                //console.log(data.user.orderedItems[item])
-            }
-            for (const item in data.user.savedItems) {
-                //console.log(item)
             }
 
             if (currentUser != null) {

@@ -91,7 +91,7 @@ class AccountController {
                     username: username,
                     password: password,
                     email: email,
-                    profilePicture: "No avatar",
+                    profilePicture: "noAvatar.png",
                     authorized: false,
                     orderedItems: [],
                     savedItems: [],

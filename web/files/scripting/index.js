@@ -78,9 +78,6 @@ function findTopProduct(category, number) {
 
 document.addEventListener("DOMContentLoaded",  () => {
 
-    currentPage = document.location.pathname.replace("/", "").replace(".html", "");
-    localStorage.setItem("page", document.location.pathname.replace("/", ""));
-
     importNavBar();
     changeImage(0);
 });

@@ -388,6 +388,9 @@ html body main .content .rightUsersContainer .userContainer {
 html body main .content .rightUsersContainer .userContainer ul {
   width: 220px;
 }
+html body main .content .saves article {
+  cursor: pointer;
+}
 html body main .content .rightProductsContainer {
   display: flex;
   flex-direction: column;

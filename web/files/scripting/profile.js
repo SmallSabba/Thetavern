@@ -1,21 +1,3 @@
-const profilePicturesMap = new Map();
-
-profilePicturesMap.set("No avatar", "/randomPictures/noAvatar.png");
-
-profilePicturesMap.set("Beach", "/wheelchairs/background/BGbeach.png");
-profilePicturesMap.set("Grass", "/wheelchairs/background/BGgrass.png");
-profilePicturesMap.set("Mountain", "/wheelchairs/background/BGmountain.png");
-profilePicturesMap.set("Snow", "/wheelchairs/background/BGsnow.png");
-profilePicturesMap.set("Stone", "/wheelchairs/background/BGstone.png");
-
-profilePicturesMap.set("iChair", "/wheelchairs/electric/iCHAIR_MC2.png");
-profilePicturesMap.set("Meyra", "/wheelchairs/electric/MEYRA_1.611.png");
-profilePicturesMap.set("Optimus", "/wheelchairs/electric/Optimus_2_S.png");
-profilePicturesMap.set("Format", "/wheelchairs/manual/Format.png");
-profilePicturesMap.set("Mo", "/wheelchairs/manual/MO_951B_60.png");
-profilePicturesMap.set("CRI", "/wheelchairs/manual/CRI.png");
-profilePicturesMap.set("Water Wheels", "/wheelchairs/manual/WaterWheels.png");
-
 function generateAllUsersContainer() {
 
     fetch("/api/user/getAll")
@@ -58,7 +40,7 @@ function generateAllUsersContainer() {
                         new ElementCreator("div")
                             .with("class", `${user}`)
                             .append(new ElementCreator("img")
-                                .with("src", `${profilePicturesMap.get(users[i].profilePicture)}`)
+                                .with("src", `${array.indexOf(users[i].profilePicture)}`)
                             )
                             .append(new ElementCreator("ul")
                                 .append(new ElementCreator("li")
@@ -86,23 +68,23 @@ function generateAllUsersContainer() {
 
 function generateImgContainer() {
 
+    console.log(imgName);
+
     let element = document.querySelector(".rightContainer");
 
     if (!element.className.includes("rightImgContainer")) {
         element ? element.remove() : null;
-
-        const profileArray = Array.from(profilePicturesMap);
 
         new ElementCreator("div")
             .with("class", "rightImgContainer rightContainer")
             .append(new ElementCreator("div")
                 .with("class", "currentImg")
                 .append(new ElementCreator("img")
-                    .with("src", `${profilePicturesMap.get(profilePicture)}`)
-                    .with("alt", `${profilePicture}`)
+                    .with("src", profilePicture.replace(":", ""))
+                    .with("alt", profilePicture.replace(":", ""))
                 )
                 .append(new ElementCreator("p")
-                    .text(`${profilePicture}`)
+                    .text(imgName)
                 )
                 .append(new ElementCreator("div")
                     .with("class", "editIconContainer")
@@ -123,7 +105,9 @@ function generateImgContainer() {
                             .id("removePhoto")
                             .text("Remove photo")
                             .listener("click", () => {
-                                changeProfilePicture("No avatar").then();
+
+                                removeUploadedImg();
+                                changeProfilePicture("/uploads/:noAvatar.png").then();
                             })
                         )
                         .append(new ElementCreator("a")
@@ -161,15 +145,15 @@ function generateImgContainer() {
         let terrainDiv = document.createElement("div");
         let wheelchairDiv = document.createElement("div");
 
-        for (let i = 1; i < profileArray.length; i++) {
+        for (let i = 1; i < imgLibrary.length; i++) {
 
-            if (profileArray[i][0] !== "Your picture") {
+            if (!imgLibrary[i].includes("user") && !imgLibrary[i].includes("noAvatar")) {
 
                 let img = document.createElement("img");
-                img.src = `${profileArray[i][1]}`;
-                img.alt = `${profileArray[i][0]}`;
+                img.src = `${imgLibrary[i].replace(":", "")}`;
+                img.alt = `${imgLibrary[i].replace(":", "")}`;
 
-                if (!isAdmin && profileArray[i][0] === "CRI" || !isAdmin && profileArray[i][0] === "Water Wheels") {
+                if (!isAdmin && imgLibrary[i].includes("CRI") || !isAdmin && imgLibrary[i].includes("WaterWheels")) {
                     img.style.opacity = ".5";
                     img.style.cursor = "not-allowed";
 
@@ -178,11 +162,11 @@ function generateImgContainer() {
                     })
                 } else {
                     img.addEventListener("click", () => {
-                        changeProfilePicture(profileArray[i][0]).then();
+                        changeProfilePicture(imgLibrary[i]).then();
                     })
                 }
 
-                if (i <= 5) terrainDiv.append(img);
+                if (imgLibrary[i].includes("background")) terrainDiv.append(img);
                 else wheelchairDiv.append(img);
             }
         }
@@ -195,6 +179,10 @@ function generateImgContainer() {
 function generateSavedItems(wheelchair) {
 
     new ElementCreator("article")
+        .listener("click", () => {
+            localStorage.setItem("productID", wheelchair.id);
+            window.location.href = 'product.html';
+        })
         .append(new ElementCreator("img")
             .with("src", `${wheelchair.image}`)
         )
@@ -570,40 +558,94 @@ async function changeEmail(newEmail) {
         })
 }
 
-async function changeProfilePicture(pictureKey) {
+async function changeProfilePicture(picture) {
 
-    fetch("/api/user/changeProfilePicture", {
-        method: "post",
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            profilePicture: pictureKey
-        })
-    }).then(res => res.json())
-        .then(data => {
+    if (lastPhoto !== picture) {
 
-            if (data.bo) {
-                profilePicture = pictureKey;
+        if (lastPhoto.includes(`user${currentUser}`)) {
+            removeUploadedImg();
+        }
 
-                document.querySelector(".currentImg img").setAttribute("src", `${profilePicturesMap.get(profilePicture)}`);
-                document.querySelector(".currentImg p").textContent = profilePicture;
-                updateProfilePicture();
+        fetch("/api/user/changeProfilePicture", {
+            method: "post",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                profilePicture: picture.replace(":", "")
+            })
+        }).then(res => res.json())
+            .then(data => {
 
-            } else {
-                displayPopUpInfo("An error occurred while changing your profile picture.");
-            }
-        })
+                if (data.bo) {
+                    profilePicture = picture;
+
+                    if (profilePicture.includes("user")) {
+                        imgName = `${currentUser}'s photo`;
+
+                    } else {
+                        imgName = picture.split(":")[1]
+                        imgName = imgName.replace("BG", "").split(".")[0];
+                        imgName = imgName.charAt(0).toUpperCase() + imgName.slice(1);
+
+                        if (imgName === "NoAvatar") {
+                            imgName = `${imgName.split("A")[0]} ${imgName.split("o")[1]}`
+                        }
+                    }
+
+                    document.querySelector(".currentImg img").setAttribute("src", profilePicture.replace(":", ""));
+                    document.querySelector(".currentImg p").textContent = imgName;
+
+                    updateProfilePicture();
+
+                } else {
+                    displayPopUpInfo("An error occurred while changing your profile picture.");
+                }
+            })
+    }
 }
 
 function updateProfilePicture() {
 
     let img = document.querySelector(".topContainer img");
 
-    img.setAttribute("src", `${profilePicturesMap.get(profilePicture)}`);
-    img.setAttribute("alt", `${profilePicture}`);
-    img.addEventListener("click", () => changeProfilePicture(profilePicture));
+    img.setAttribute("src", profilePicture.replace(":", ""));
+    img.setAttribute("alt", profilePicture.replace(":", ""));
+    img.addEventListener("click", () => generateImgContainer());
 
     document.querySelector(".topContainer h3").textContent = currentUser;
 
+    imgLibrary.forEach(item => {
+        if (item.replace(":", "").includes(profilePicture)) {
+            imgName = imgLibrary.at(imgLibrary.indexOf(item)).split(":")[1];
+        }
+    })
+
+    lastPhoto = profilePicture;
+
+    if (imgName) {
+        imgName = imgName.replace("BG", "").split(".")[0];
+        imgName = imgName.charAt(0).toUpperCase() + imgName.slice(1);
+    }
+
+    if (imgName === "NoAvatar") {
+        imgName = `${imgName.split("A")[0]} ${imgName.split("o")[1]}`
+    }
+
+    if (profilePicture.includes("user")) {
+        imgName = `${currentUser}'s photo`;
+    }
+}
+
+function removeUploadedImg() {
+
+    fetch("/deleteUserFile", {
+        method: "delete"
+    }).then(res => res.json())
+        .then(data => {
+
+            if (!data.bo) {
+                displayPopUpInfo("An error occurred while deleting your profile picture.");
+            }
+        })
 }
 
 function toggleEditContainer(source) {
@@ -622,22 +664,24 @@ function uploadPhoto() {
 
     const file = document.getElementById("uploadPhoto");
 
-    if (file.files[0].name !== lastPhoto) {
+    if (file.files[0].name !== uploadedPhoto) {
+
+        console.log(file.files[0].name)
+
+        uploadedPhoto = file.files[0].name;
 
         const formData = new FormData();
         formData.append("file", file.files[0]);
-        lastPhoto = file.files[0].name;
 
-        fetch("/uploadFiles", {
+        fetch("/uploadFiles/", {
             method: "post",
             body: formData
         })
             .then(res => res.json())
             .then(data => {
 
-                localStorage.setItem("upload", data.url);
-                profilePicturesMap.set("Your picture", data.url);
-                changeProfilePicture("Your picture").then();
+                imgLibrary.push(data.url);
+                changeProfilePicture(data.url).then();
             })
     }
 }
@@ -737,17 +781,28 @@ function editIconLeft(id) {
     document.querySelector(`#${id} span`).style.visibility = "hidden";
 }
 
-let allowToggle;
+function initImgLibrary() {
+
+    fetch("readLibrary")
+        .then(res => res.json())
+        .then(data => {
+
+            imgLibrary = data.array;
+            importNavBar();
+        })
+}
+
+let imgLibrary;
+let imgName;
 let lastPhoto;
+let uploadedPhoto;
+
+let allowToggle;
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    currentPage = document.location.pathname.replace("/", "").replace(".html", "");
     document.querySelector("body").addEventListener("click", () => toggleEditContainer("body"));
 
-    if (localStorage.getItem("upload")) {
-        profilePicturesMap.set("Your picture", localStorage.getItem("upload"));
-    }
-    importNavBar();
+    initImgLibrary();
     generateDataContainer();
 });
