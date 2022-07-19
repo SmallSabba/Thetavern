@@ -80,6 +80,7 @@ html {
 
 
           img {
+            cursor: pointer;
             border-radius: 4rem;
             width: 98px;
             height: 98px;
@@ -93,7 +94,8 @@ html {
             justify-content: space-evenly;
             row-gap: .1rem;
 
-            padding: 1rem;
+            margin: 0 1rem;
+            padding: 1rem 0;
             min-width: 150px;
             height: 100%;
 

@@ -211,18 +211,35 @@ function initProductPage() {
             } else {
                 document.getElementById("saveProductIcon").style.color = "#277db0";
             }
+
+            fetch(`api/categories/${wheelchair.category}/wheelchairs`)
+                .then(res => res.json())
+                .then(wheelchairs => {
+
+                    for (const wheelchairsKey in wheelchairs) {
+                        if (wheelchairs[wheelchairsKey].id === wheelchair.id) {
+                            wheelchairs.splice(wheelchairsKey, 1);
+                        }
+                    }
+
+                    let random = Math.floor(Math.random() * wheelchairs.length);
+                    let usedNumbers = [random], lastNum = 2;
+
+                    if (wheelchairs.length <= 2) lastNum = 1;
+
+                    for (let num = 0; num < lastNum; num++) {
+
+                        while (usedNumbers.includes(random)) {
+                            random = Math.floor(Math.random() * wheelchairs.length);
+                        }
+                        usedNumbers.push(random);
+                    }
+
+                    usedNumbers.forEach(product => {
+                        addWheelchairToDOM(document.querySelector(".articles"), wheelchairs[product]);
+                    })
+                })
         })
-
-    for (let num = 0; num < 3; num++) {
-
-        let random = Math.floor(Math.random() * 9) + 1;
-
-        fetch(`api/wheelchairs/${random}`)
-            .then(response => response.json())
-            .then(wheelchair => {
-                addWheelchairToDOM(document.querySelector(".articles"), wheelchair);
-            })
-    }
 }
 
 let infoButtons;

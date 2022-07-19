@@ -3,10 +3,15 @@
     "username": "Kilian",
     "password": "pw1",
     "email": "kilian@h3.com",
-    "profilePicture": "/uploads/noAvatar.png",
+    "profilePicture": "/wheelchairs/manual/WaterWheels.png",
     "authorized": true,
-    "orderedItems": [],
-    "savedItems": [],
+    "orderedItems": [
+      7,
+      4
+    ],
+    "savedItems": [
+      9
+    ],
     "shippingInfo": {
       "firstname": null,
       "lastname": null,
@@ -54,7 +59,7 @@
     "username": "Olli",
     "password": "pw2",
     "email": "olli@h3.com",
-    "profilePicture": "/uploads/noAvatar.png",
+    "profilePicture": "/wheelchairs/background/BGsnow.png",
     "authorized": true,
     "orderedItems": [],
     "savedItems": [
@@ -82,7 +87,9 @@
     "email": "max@kilian.oliver",
     "profilePicture": "/uploads/noAvatar.png",
     "authorized": false,
-    "orderedItems": [],
+    "orderedItems": [
+      2
+    ],
     "savedItems": [],
     "shippingInfo": {
       "firstname": null,
@@ -94,10 +101,10 @@
       "phone": null
     },
     "paymentInfo": {
-      "cardNumber": null,
-      "expireMonth": null,
-      "expireYear": null,
-      "cvv": null
+      "cardNumber": "1234567890004321",
+      "expireMonth": "04-April",
+      "expireYear": "2025",
+      "cvv": "123"
     }
   },
   {
@@ -121,15 +128,15 @@
     },
     "paymentInfo": {
       "cardNumber": "1234567890004321",
-      "expireMonth": "April",
+      "expireMonth": "05-May",
       "expireYear": "2000",
       "cvv": "543"
     }
   },
   {
     "username": "Chrisi",
-    "password": "pw4",
-    "email": "tested@test.com",
+    "password": "pw5",
+    "email": "test@test.com",
     "profilePicture": "/wheelchairs/background/BGbeach.png",
     "authorized": false,
     "orderedItems": [

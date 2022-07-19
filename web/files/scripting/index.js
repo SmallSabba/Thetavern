@@ -4,17 +4,13 @@ const backgroundImg =
         "/slidePictures/slidePicture2.jpg",
         "/slidePictures/slidePicture3.jpg",
         "/slidePictures/slidePicture4.jpg"
-    ];
-
-const headerHeading =
+    ], headerHeading =
     [
         "Travel the World",
         "No Restrictions",
         "Enjoy life to the fullest",
         "Retake freedom"
-    ];
-
-const headerSubheading =
+    ], headerSubheading =
     [
         "There are no obstacles anymore",
         "Roam like you want",
@@ -22,29 +18,19 @@ const headerSubheading =
         "It's in your hands"
     ];
 
+function changeImage(headingIndex) {
 
-function changeImage(currentNum) {
+    document.getElementById("containerHeader").style.backgroundImage = `url("${backgroundImg[headingIndex]}")`;
+    document.getElementById("headerHeading").innerText = headerHeading[headingIndex];
+    document.getElementById("headerSubheading").innerText = headerSubheading[headingIndex];
 
-    document.getElementById("containerHeader").style.backgroundImage = `url("${backgroundImg[currentNum]}")`;
-    document.getElementById("headerHeading").innerText = headerHeading[currentNum];
-    document.getElementById("headerSubheading").innerText = headerSubheading[currentNum];
-
-
-    let nextNum = Math.floor((Math.random() * 3) + 1);
-
-    //while (currentNum === nextNum) {
-
-    //    nextNum = Math.floor((Math.random() * 3) + 1);
-    //}
+    headingIndex === 3 ? headingIndex = 0 : headingIndex++;
 
     //two equal approaches to call a function with parameters in setInterval
 
-    setInterval(changeImage, 5000, nextNum);
+    setTimeout(changeImage, 5000, headingIndex);
     //setInterval(() => { changeImage(nextNum) }, 5000);
 }
-
-
-//--------------------------------------------------------------------------------------------------\\
 
 function findTopProduct(category, number) {
 
@@ -68,8 +54,6 @@ function findTopProduct(category, number) {
 
             let container = document.querySelector(`#article${number}`);
             container ? container.remove() : null;
-
-            console.log("in find top: " + topProduct);
 
             addWheelchairToDOM(document.querySelector(`.articleContainer${number}`), topProduct);
 

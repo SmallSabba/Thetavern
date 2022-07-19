@@ -175,7 +175,7 @@ class AccountController {
                 for (let i = 0; i < users.length; i++) {
 
                     if (currentUser === users[i].username) {
-                        users.splice(i, 5)
+                        users.splice(i, 9)
 
                         const usersAsString = JSON.stringify(users, null, 2);
                         fs.writeFile('././files/users.json', usersAsString, err => {
@@ -197,6 +197,7 @@ class AccountController {
     async verifyPassword(req, res) {
 
         let currentUser = req.session.user;
+        let form = req.body;
 
         jsonReader("././files/users.json", (err, users) => {
 
@@ -208,7 +209,7 @@ class AccountController {
 
                     if (currentUser === users[i].username) {
 
-                        if (req.body.oldPassword === users[i].password) {
+                        if (form.oldPassword === users[i].password) {
                             return res.status(200).send({bo: true});
 
                         } else {
@@ -223,6 +224,7 @@ class AccountController {
     changePassword = async (req, res) => {
 
         let currentUser = req.session.user;
+        let form = req.body;
 
         jsonReader("././files/users.json", (err, users) => {
 
@@ -235,7 +237,11 @@ class AccountController {
 
                     if (currentUser === users[i].username) {
 
-                        users[i].password = req.body.newPassword;
+                        if (form.oldPassword === form.newPassword) {
+                            return res.status(400).send({bo: false});
+                        }
+
+                        users[i].password = form.newPassword;
 
                         const usersAsString = JSON.stringify(users, null, 2);
                         fs.writeFile('././files/users.json', usersAsString, err => {
@@ -255,10 +261,10 @@ class AccountController {
     async changeUsername(req, res) {
 
         let currentUsername = req.session.user;
-        let newUsername = req.body.newUsername;
+        let form = req.body;
 
         //just for now till method call is fixed
-        let index;
+        let userIndex;
 
         //couldn't get to work because of asynchronicity..
         //if (checkDuplicateUsername(newUsername)) {
@@ -272,15 +278,16 @@ class AccountController {
 
                 for (let i = 0; i < users.length; i++) {
 
-                    if (currentUsername === users[i].username) index = i;
+                    if (currentUsername === users[i].username) userIndex = i;
 
-                    if (newUsername.toLowerCase() === users[i].username.toLowerCase()) {
+                    if (form.value.toLowerCase() === users[i].username.toLowerCase() && userIndex !== i) {
 
                         return res.send({bo: false});
                     }
                 }
-                users[index].username = newUsername;
-                req.session.user = newUsername;
+
+                users[userIndex].username = form.value;
+                req.session.user = form.value;
 
                 const usersAsString = JSON.stringify(users, null, 2);
                 fs.writeFile('././files/users.json', usersAsString, err => {
@@ -298,7 +305,8 @@ class AccountController {
     changeEmail = async (req, res) => {
 
         let currentUser = req.session.user;
-        let newEmail = req.body.newEmail;
+        let form = req.body;
+        let userIndex;
 
         jsonReader("././files/users.json", (err, users) => {
 
@@ -309,27 +317,28 @@ class AccountController {
 
                 for (let i = 0; i < users.length; i++) {
 
+                    //same email as a different user already has
+                    if (form.value.toLowerCase() === users[i].email.toLowerCase()) {
+
+                        return res.status(400).send({bo: false});
+                    }
+
                     if (currentUser === users[i].username) {
-
-                        //same email as user already has
-                        if (newEmail.toLowerCase() === users[i].email.toLowerCase()) {
-                            return res.send({bo: false});
-
-                        } else {
-                            users[i].email = newEmail;
-                        }
-
-                        const usersAsString = JSON.stringify(users, null, 2);
-                        fs.writeFile('././files/users.json', usersAsString, err => {
-
-                            if (err) {
-                                return res.status(500).send({bo: null});
-                            } else {
-                                return res.status(200).send({bo: true});
-                            }
-                        })
+                        userIndex = i;
                     }
                 }
+
+                users[userIndex].email = form.value;
+
+                const usersAsString = JSON.stringify(users, null, 2);
+                fs.writeFile('././files/users.json', usersAsString, err => {
+
+                    if (err) {
+                        return res.status(500).send({bo: null});
+                    } else {
+                        return res.status(200).send({bo: true});
+                    }
+                })
             }
         })
     }

@@ -40,7 +40,7 @@ function generateAllUsersContainer() {
                         new ElementCreator("div")
                             .with("class", `${user}`)
                             .append(new ElementCreator("img")
-                                .with("src", `${array.indexOf(users[i].profilePicture)}`)
+                                .with("src", users[i].profilePicture)
                             )
                             .append(new ElementCreator("ul")
                                 .append(new ElementCreator("li")
@@ -57,12 +57,10 @@ function generateAllUsersContainer() {
                             )
                             .appendTo(container)
                     }
-
                 }
             } else {
                 return displayPopUpInfo("An error occurred while loading user profiles.");
             }
-
         })
 }
 
@@ -320,7 +318,9 @@ function generateOneInputField(message) {
 
                 new ElementCreator("form")
                     .with("class", `rightInputContainer rightContainer right${message}Container`)
-                    .with("action", "javascript: if (message === 'username') {changeUsername(document.getElementById('input').value).then()} else {changeEmail(document.getElementById('input'').value).then();}"
+                    .listener("submit", () => {
+                            message === "username" ? changeUsername(this.event) : changeEmail(this.event);
+                        }
                     )
                     .append(new ElementCreator("h2")
                         .with("class", "profileChangeHeading")
@@ -345,19 +345,12 @@ function generateOneInputField(message) {
                             .id("input")
                             .with("class", "inputField")
                             .with("type", `${type}`)
+                            .with("name", "value")
                             .with("placeholder", `${message}`)
                             .with("required")
                         )
                         .append(new ElementCreator("button")
                             .text("Save")
-                            .listener("click", () => {
-
-                                if (message === "username") {
-                                    changeUsername(document.getElementById("input").value).then();
-                                } else {
-                                    changeEmail(document.getElementById("input").value).then();
-                                }
-                            })
                         )
                     )
                     .appendTo(document.querySelector(".content"))
@@ -378,8 +371,11 @@ function generateChangePasswordField() {
                 .with("class", "profileChangeHeading")
                 .text("Change password")
             )
-            .append(new ElementCreator("div")
+            .append(new ElementCreator("form")
                 .with("class", "inputFields")
+                .listener("submit", () => {
+                    changePassword(this.event).then();
+                })
                 .append(new ElementCreator("p")
                     .text("Enter your old password:")
                 )
@@ -387,6 +383,7 @@ function generateChangePasswordField() {
                     .id("inputOld")
                     .with("class", "inputField")
                     .with("type", "password")
+                    .with("name", "oldPassword")
                     .with("placeholder", "old password")
                     .with("required")
                 )
@@ -398,17 +395,12 @@ function generateChangePasswordField() {
                     .id("inputNew")
                     .with("class", "inputField")
                     .with("type", "password")
+                    .with("name", "newPassword")
                     .with("placeholder", "new password")
                     .with("required")
                 )
                 .append(new ElementCreator("button")
                     .text("Save")
-                    .listener('click', () => {
-                            let oldPassword = document.getElementById("inputOld").value;
-                            let newPassword = document.getElementById("inputNew").value;
-                            changePassword(oldPassword, newPassword).then();
-                        }
-                    )
                 )
             )
             .appendTo(document.querySelector(".content")
@@ -469,29 +461,31 @@ async function deleteAccount() {
         })
 }
 
-async function changePassword(oldPassword, newPassword) {
+async function changePassword(event) {
+
+    event.preventDefault();
+    const form = event.currentTarget;
+    let formData = new URLSearchParams(new FormData(form));
 
     fetch('/api/user/verifyPassword', {
         method: 'post',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            oldPassword: oldPassword
-        })
+        body: formData
     }).then(res => res.json())
         .then(data => {
 
             if (data.bo) {
                 fetch('/api/user/changePassword', {
                     method: 'post',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        newPassword: newPassword
-                    })
+                    body: formData
                 }).then(res => res.json())
                     .then(data => {
 
                         if (data.bo) {
                             displayPopUpInfo("Successfully changed your password.");
+
+                        } else if (data.bo === false) {
+                            displayPopUpInfo("Enter a different password.");
+
                         } else {
                             displayPopUpInfo("An error occurred while changing your password.");
                         }
@@ -504,21 +498,22 @@ async function changePassword(oldPassword, newPassword) {
         })
 }
 
-async function changeUsername(newUsername) {
+async function changeUsername(event) {
 
-    if (newUsername !== currentUser) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    let formData = new URLSearchParams(new FormData(form));
+
+    if (form[0].value !== currentUser) {
 
         fetch('/api/user/changeUsername', {
             method: 'post',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                newUsername: newUsername
-            })
+            body: formData
         }).then(res => res.json())
             .then(data => {
 
                 if (data.bo) {
-                    currentUser = newUsername;
+                    currentUser = form[0].value;
                     document.querySelector("#value").innerHTML = currentUser;
                     document.querySelector(".topContainer h3").textContent = currentUser;
 
@@ -534,19 +529,22 @@ async function changeUsername(newUsername) {
     }
 }
 
-async function changeEmail(newEmail) {
+async function changeEmail(event) {
+
+    event.preventDefault();
+    const form = event.currentTarget;
+    let formData = new URLSearchParams(new FormData(form));
+
+    console.log(formData);
 
     fetch('/api/user/changeEmail', {
         method: 'post',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            newEmail: newEmail
-        })
+        body: formData
     }).then(res => res.json())
         .then(data => {
 
             if (data.bo) {
-                document.querySelector("#value").innerHTML = newEmail;
+                document.querySelector("#value").innerHTML = form[0].value;
                 displayPopUpInfo("Successfully changed your email address.");
 
             } else if (data.bo === false) {
@@ -799,10 +797,11 @@ let uploadedPhoto;
 
 let allowToggle;
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMContentLoaded",  () => {
 
     document.querySelector("body").addEventListener("click", () => toggleEditContainer("body"));
 
+    //localStorage.clear();
     initImgLibrary();
     generateDataContainer();
 });

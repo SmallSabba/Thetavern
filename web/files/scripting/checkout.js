@@ -60,9 +60,9 @@ function updateProgressContainer() {
 
         document.querySelector(".firstForm h1").style.backgroundColor = "#0e6191";
         document.querySelector(".firstForm h1").style.color = "#fff";
+        document.querySelector(".firstForm h1").setAttribute("data-after", "");
         document.querySelector(".secondForm h1").style.backgroundColor = "#DCE6EA7F";
         document.querySelector(".secondForm h1").style.color = "rgba(45,127,164,0.6)";
-        document.querySelector(".secondForm h1").setAttribute("data-after", "");
 
         document.querySelector(".shippingContainer").style.display = "flex";
         document.querySelector(".paymentContainer").style.display = "none";
@@ -146,11 +146,40 @@ function checkPayment(checkBox) {
 
 function processOrder(event) {
 
-    if (event === null) {
+    if (!event) {
 
         /*
         let payment = "cash";
-         */
+        */
+
+        fetch(`/api/wheelchairs/${localStorage.getItem("productID")}/buy`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'}
+        }).then(res => res.json())
+            .then(data => {
+
+                if (data.bo) {
+
+                    fetch(`/api/user/orders/${localStorage.getItem("productID")}/add`, {
+                        method: 'post',
+                        headers: {'Content-Type': 'application/json'}
+                    }).then(res => res.json())
+                        .then(data => {
+
+                            if (data.bo) {
+                                localStorage.clear();
+                                displayPopUpInfo(`Successfully ordered ${wheelchairName}. Redirecting to shop page..`)
+                                setTimeout(() => {
+                                    window.location.href = "shop.html"
+                                }, 1500)
+                            } else {
+                                displayPopUpInfo("An error occurred during the purchase process.")
+                            }
+                        })
+                } else {
+                    displayPopUpInfo("An error occurred during the purchase process.")
+                }
+            })
 
     } else {
 
@@ -158,7 +187,21 @@ function processOrder(event) {
         const form = event.currentTarget;
         let formData = new URLSearchParams(new FormData(form));
 
-        if (form.cardNumber.value.replaceAll(" ", "").length === 16) {
+        if (form.cardNumber.value.replaceAll(" ", "").length !== 16) {
+            displayPopUpInfo("Invalid credit card number.");
+
+        } else if (form.expireMonth.value.includes("Expiration")
+            || form.expireYear.value.includes("Expiration")) {
+
+            displayPopUpInfo("Please fill out all required fields.")
+
+            document.querySelectorAll("#form2 select").forEach(elem => {
+
+                if (elem.value.includes("Expiration")) {
+                    elem.style.color = "red";
+                }
+            })
+        } else {
 
             fetch("/api/user/payment/setPayment", {
                 method: "post",
@@ -167,8 +210,6 @@ function processOrder(event) {
                 .then(data => {
 
                     if (data.bo) {
-
-                        console.log("finished first")
 
                         fetch(`/api/wheelchairs/${localStorage.getItem("productID")}/buy`, {
                             method: 'post',
@@ -203,17 +244,19 @@ function processOrder(event) {
                         displayPopUpInfo("An error occurred during the purchase process.")
                     }
                 })
-        } else {
-            displayPopUpInfo("Invalid credit card number.")
         }
     }
 }
 
 function placeOrderButtonClicked() {
 
-    document.getElementById("cashCheckBox").checked
-        ? processOrder(null) : document.getElementById("hiddenButton2").click();
-
+    if (document.getElementById("cashCheckBox").checked) {
+        processOrder(null);
+    } else if (document.getElementById("payPalCheckBox").checked) {
+        displayPopUpInfo("Choose an available payment method.");
+    } else {
+        document.getElementById("hiddenButton2").click();
+    }
 }
 
 function initCheckoutPage() {
@@ -226,6 +269,20 @@ function initCheckoutPage() {
 
             if (wheelchair) {
                 wheelchairName = wheelchair.name;
+
+                new ElementCreator("div")
+                    .with("class", "wheelchairInfo")
+                    .append(new ElementCreator("img")
+                        .with("src", wheelchair.image)
+                    )
+                    .append(new ElementCreator("h2")
+                        .text(wheelchair.name)
+                    )
+                    .append(new ElementCreator("p")
+                        .text(`${wheelchair.price}€ / day`)
+                    )
+                    .prependTo(document.querySelector(".itemContainer")
+                    )
 
             } else {
                 displayPopUpInfo("An error occurred while fetching information.")
@@ -242,6 +299,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("form").addEventListener("submit", checkShippingAddress);
     document.getElementById("form2").addEventListener("submit", processOrder);
     document.getElementById(`${checkBoxID}`).checked = "true";
+
+    document.querySelectorAll("#form2 select").forEach(elem => {
+        elem.addEventListener("change", () => elem.style.color = "black")
+    })
 
     importNavBar();
     initCheckoutPage();

@@ -26,7 +26,7 @@ function generateLoginField() {
         .append(new ElementCreator("input")
             .with("type", "text")
             .with("name", "username")
-            .with("placeholder", "username / e-mail")
+            .with("placeholder", "username / email")
             .with("required")
         )
         .append(new ElementCreator("input")

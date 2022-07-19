@@ -19,16 +19,11 @@
 
 <div class="itemContainer">
 
-    <div class="wheelchairInfo">
-        <img src="/wheelchairs/electric/iCHAIR_MC2.png">
-        <h2>iChair_MC2</h2>
-        <p>7€ / day</p>
-    </div>
-
     <div class="rightContainer">
 
         <div class="firstForm">
-            <h1>1. Shipping address<span class="editFormSpan" onclick="editFormClicked()">edit<i class="fa-solid fa-pencil"></i></span></h1>
+            <h1>1. Shipping address<span class="editFormSpan" onclick="editFormClicked()">edit<i
+                    class="fa-solid fa-pencil"></i></span></h1>
             <div class="shippingContainer">
                 <div>
                     <label for="takeAwayCheckBox">Pick up directly from store and skip this step?</label>
@@ -117,8 +112,35 @@
                             <input type="text" name="cardNumber" placeholder="Credit Card Number*" required>
                         </li>
                         <li>
-                            <input type="text" name="expireMonth" placeholder="Expiration Month*" required>
-                            <input type="text" name="expireYear" placeholder="Expiration Year*" required>
+                            <select name="expireMonth">
+                                <option>Expiration Month*</option>
+                                <option>01 - January</option>
+                                <option>02 - February</option>
+                                <option>03 - March</option>
+                                <option>04 - April</option>
+                                <option>05 - May</option>
+                                <option>06 - June</option>
+                                <option>07 - July</option>
+                                <option>08 - August</option>
+                                <option>09 - September</option>
+                                <option>10 - October</option>
+                                <option>11 - November</option>
+                                <option>12 - December</option>
+                            </select>
+                            <select name="expireYear">
+                                <option>Expiration Year*</option>
+                                <option>2022</option>
+                                <option>2023</option>
+                                <option>2024</option>
+                                <option>2025</option>
+                                <option>2026</option>
+                                <option>2027</option>
+                                <option>2028</option>
+                                <option>2029</option>
+                                <option>2030</option>
+                                <option>2031</option>
+                                <option>2032</option>
+                            </select>
                         </li>
                         <li>
                             <input type="text" name="cvv" placeholder="CVV*" required>

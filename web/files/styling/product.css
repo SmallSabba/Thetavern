@@ -168,34 +168,6 @@
   font-weight: bold;
   margin-top: 0.5rem;
 }
-.itemContainer .productSelection .quantity {
-  display: flex;
-  align-items: center;
-}
-.itemContainer .productSelection .quantity .quantityLabel {
-  font-size: 110%;
-  margin-left: 20px;
-}
-.itemContainer .productSelection .quantity .quantitySelector {
-  cursor: pointer;
-  background-image: url("/randomPictures/downArrow.png");
-  background-size: 30%;
-  background-position: right;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border-right: none;
-  border-top: none;
-  border-left: 2px solid #084057;
-  border-bottom: 3px solid #084057;
-  border-radius: 0.5rem;
-  padding: 4px 14px 4px 8px;
-  margin-left: 8px;
-  margin-right: 10px;
-  font-size: 120%;
-}
 .itemContainer .productSelection .buttons {
   width: 100%;
   flex-direction: column;
