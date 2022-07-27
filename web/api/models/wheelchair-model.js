@@ -141,10 +141,43 @@ class WheelchairModel {
         return this.getWheelchair(WheelchairModel.WHEELCHAIR_ID - 1);
     }
 
-    updateWheelchair(id, wheelchair) {
-        wheelchair.id = parseInt(wheelchair.id);
-        wheelchair.price = parseInt(wheelchair.price);
-        Object.assign(this.getWheelchair(id), wheelchair);      /** changes all params not only differences */
+    updateWheelchair(req, res) {
+        console.log("here")
+
+        let wheelchairID = parseInt(req.params.id);
+        Object.assign(this.getWheelchair(wheelchairID), req.body);      /** changes all params not only differences */
+
+        jsonReader("././files/wheelchairs.json", (err, wheelchairs) => {
+
+            if (err) {
+                console.log(err)
+                res.status(500).send({bo: null});
+            } else {
+
+                const wheelchair = req.body;
+
+                for (let i = 0; i < wheelchairs.length; i++) {
+
+                    if (wheelchairs[i].id === wheelchairID) {
+
+                        wheelchairs[i].name = wheelchair.name;
+                        wheelchairs[i].manufacturer = wheelchair.manufacturer;
+                        wheelchairs[i].description = wheelchair.description;
+                        wheelchairs[i].price = parseInt(wheelchair.price);
+
+                        const wheelchairsAsString = JSON.stringify(wheelchairs, null, 2);
+                        fs.writeFile('././files/wheelchairs.json', wheelchairsAsString, err => {
+
+                            if (err) {
+                                res.status(500).send({bo: null});
+                            } else {
+                                res.status(200).send({bo: true});
+                            }
+                        })
+                    }
+                }
+            }
+        })
     }
 
     deleteWheelchair(id) {
@@ -160,7 +193,7 @@ class WheelchairModel {
 
             if (err) {
                 console.log(err)
-                res.status(400).send({bo: null});
+                res.status(500).send({bo: null});
             } else {
 
                 for (let i = 0; i < wheelchairs.length; i++) {
@@ -173,7 +206,7 @@ class WheelchairModel {
                         fs.writeFile('././files/wheelchairs.json', wheelchairsAsString, err => {
 
                             if (err) {
-                                res.status(400).send({bo: null});
+                                res.status(500).send({bo: null});
                             } else {
                                 res.status(200).send({bo: true});
                             }

@@ -1,5 +1,3 @@
-
-
 @media screen {
 
   .itemContainer {
@@ -16,6 +14,13 @@
 
       min-width: 280px;
       max-width: 30%;
+    }
+
+    .productInfoEdit {
+
+      justify-content: space-evenly;
+      min-width: 280px;
+      width: 60%;
     }
 
     .productSelection {
@@ -156,7 +161,7 @@
     }
   }
 
-  .productInfo {
+  .productInfo, .productInfoEdit {
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
@@ -183,6 +188,24 @@
 
       color: #084057;
       font-size: 190%;
+    }
+
+    textarea, input {
+      font-family: Arial, serif;
+      scrollbar-width: none;
+      border: none;
+      resize: none;
+
+    }
+    textarea {
+      min-height: 80px;
+    }
+
+    #errorMessage {
+      color: red;
+      display: none;
+      margin-top: -1rem;
+      padding: 0 0 1rem 1rem;
     }
   }
 
@@ -249,11 +272,11 @@
 
       row-gap: 1rem;
 
-      #cartButton, #purchaseButton {
+      #purchaseButton {
         cursor: pointer;
 
         box-shadow: 0 0 1px 0 rgba(8, 64, 87, 0.5);
-        background-color: rgb(146, 194, 214);
+        background-color: #cde6f8;
         color: #084057;
 
         border: none;
@@ -380,6 +403,53 @@
 
     font-size: 20px;
     line-height: 32px;
+  }
+}
+
+.applyButtonContainer {
+
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  column-gap: .5rem;
+  margin: 3rem 4rem 3rem 0;
+
+  #saveChangesButton, #resetChangesButton {
+
+    cursor: pointer;
+    border: none;
+
+    box-shadow: 0 0 1px 0 rgba(8, 64, 87, 0.5);
+    background-color: #cde6f8;
+    color: #084057;
+
+    width: 50%;
+    min-width: 150px;
+    max-width: 200px;
+
+    padding: 10px;
+    border-radius: 1.5rem;
+    font-size: 120%;
+
+    transition: .3s;
+
+    &:hover {
+
+      background-color: #084057;
+      color: #c1e3f3;
+    }
+  }
+
+  #saveChangesButton {
+
+    background-color: seagreen;
+    color: #c1e3f3;
+
+    &:hover {
+
+      background-color: #165232;
+      color: #c1e3f3;
+    }
   }
 }
 
@@ -529,34 +599,6 @@
       }
     }
   }
-}
-
-.toTop {
-  position: fixed;
-  right: 3rem;
-  bottom: 10rem;
-
-  opacity: 0;
-  transition: .8s;
-}
-
-.toTopIcon {
-  background-color: rgb(186, 219, 234);
-  box-shadow: 0 0 2px 1px rgba(8, 64, 87, 0.3);
-  color: #084057;
-
-  border-radius: 2rem;
-  padding: 20px;
-  rotate: 90deg;
-  font-size: 160%;
-
-  transition: .25s;
-}
-
-.toTopIcon:hover {
-  background-color: rgb(8, 64, 87);
-  color: rgb(186, 219, 234);
-
 }
 
 footer {

@@ -57,6 +57,7 @@ let allowDeactivation;
 function importNavBar() {
 
     currentPage = document.location.pathname.replace("/", "").replace(".html", "");
+    localStorage.removeItem("editProduct");
 
     if (!currentPage.includes("profile") && !currentPage.includes("checkout")) {
         localStorage.setItem("page", document.location.pathname.replace("/", ""));
@@ -230,7 +231,6 @@ function updateNavBarIcons() {
                 return displayPopUpInfo("An error occurred while fetching user information.");
             }
 
-            console.log(localStorage)
             updateSavedProducts();
 
             if (currentPage === "profile") updateProfilePicture();
@@ -313,6 +313,7 @@ function addWheelchairToDOM(parent, wheelchair) {
             .listener('click', () => {
 
                 localStorage.setItem("productID", wheelchair.id);
+                localStorage.setItem("editProduct", "true");
                 window.location.href = 'product.html';
             })
         )
@@ -373,8 +374,6 @@ function updateSavedProducts() {
 
     if (path !== undefined) {
 
-        console.log(currentPage)
-
         fetch(`/api/user/saves/${localStorage.getItem("productID")}/${path}`, {
             method: "post",
             headers: {'Content-Type': 'application/json'}
@@ -382,18 +381,15 @@ function updateSavedProducts() {
             .then(data => {
 
                 if (data.bo) {
-                    console.log("did it")
                     localStorage.removeItem("saveProduct");
                 } else {
                     displayPopUpInfo("An error occurred during the purchase process.")
                 }
 
-                console.log("even here")
                 if (currentPage === "product") checkProductIsSaved();
             })
     } else {
         if (currentPage === "product") {
-            console.log("down here");
             checkProductIsSaved();
         }
     }

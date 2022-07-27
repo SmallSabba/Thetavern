@@ -1,7 +1,7 @@
 const model = require("../models/wheelchair-model");
 
 class WheelchairController {
-    static MANDATORY = ["name", "manufacturer", "image", "price"];
+    static MANDATORY = ["name", "manufacturer", "description", "price"];
 
     getCategories(req, res) {
         // here is async not necessary
@@ -34,33 +34,22 @@ class WheelchairController {
         }
     }
 
-    checkWheelchairProperties(res, wheelchair, id) {
+    checkWheelchairProperties(res, wheelchair) {
         let result = true;
 
         const mandatoryNames = [...WheelchairController.MANDATORY];
         // ... dot dot dot -> zero or more string objects may be passed as the arguments
         // "varargs"
 
-        if (id) {
-            mandatoryNames.push("id");
-            // .push() adds item into array
-        }
-
         const containedNames = mandatoryNames.filter(c => c in wheelchair);
         if (containedNames.length < mandatoryNames.length) {
+            console.log("error")
             const necessary = mandatoryNames.join(", ");
             const contained = containedNames.length === 0 ? "none of those" : "only " + containedNames.join(", ");
             res.status(400).send(`Wheelchair data must include ${necessary}, but ${contained} present.`);
             result = false;
         }
 
-        // If id given, check if it matches the one in the wheelchair
-        if (id && result) {
-            if (parseInt(wheelchair.id) !== id) {
-                res.status(400).send(`Wheelchair data can only be updated if the id in the path (${id}) and the id in the body (${wheelchair.id}) match.`);
-                result = false;
-            }
-        }
         return result;
     }
 
@@ -73,20 +62,18 @@ class WheelchairController {
             }
 
         } catch (e) {
-            //console.log(e);
             res.status(400).send(req.params.category + " does not exist. Wheelchair cannot be created.")
         }
-
     }
 
     updateWheelchair = async (req, res) => {
+
         let wheelchairID = parseInt(req.params.id);
+
         if (await model.getWheelchair(wheelchairID)) {
-            let wheelchair = req.body;
-            if (this.checkWheelchairProperties(res, wheelchair, wheelchairID)) {
-                // non-promise type thus no await
-                await model.updateWheelchair(wheelchairID, wheelchair);
-                res.send(200);
+
+            if (this.checkWheelchairProperties(res, req.body, wheelchairID)) {
+                model.updateWheelchair(req, res);
             }
         } else {
             res.status(404).send(`Wheelchair with id ${wheelchairID} does not exist. Wheelchair cannot be updated.`)
@@ -94,6 +81,7 @@ class WheelchairController {
     }
 
     deleteWheelchair = async (req, res) => {
+
         let wheelchairID = parseInt(req.params.id);
         if (await model.getWheelchair(wheelchairID)) {
             await model.deleteWheelchair(wheelchairID);

@@ -10,6 +10,11 @@
     min-width: 280px;
     max-width: 30%;
   }
+  .itemContainer .productInfoEdit {
+    justify-content: space-evenly;
+    min-width: 280px;
+    width: 60%;
+  }
   .itemContainer .productSelection {
     border-left: 2px solid #084057;
     min-width: 280px;
@@ -105,26 +110,41 @@
   max-width: 500px;
   width: 100%;
 }
-.itemContainer .productInfo {
+.itemContainer .productInfo, .itemContainer .productInfoEdit {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
 }
-.itemContainer .productInfo * {
+.itemContainer .productInfo *, .itemContainer .productInfoEdit * {
   padding: 1rem;
 }
-.itemContainer .productInfo #productName {
+.itemContainer .productInfo #productName, .itemContainer .productInfoEdit #productName {
   font-size: 32px;
 }
-.itemContainer .productInfo #manufacturerName {
+.itemContainer .productInfo #manufacturerName, .itemContainer .productInfoEdit #manufacturerName {
   font-size: 1.5rem;
 }
-.itemContainer .productInfo #shortDescription {
+.itemContainer .productInfo #shortDescription, .itemContainer .productInfoEdit #shortDescription {
   font-size: 1.1rem;
 }
-.itemContainer .productInfo .productPrice {
+.itemContainer .productInfo .productPrice, .itemContainer .productInfoEdit .productPrice {
   color: #084057;
   font-size: 190%;
+}
+.itemContainer .productInfo textarea, .itemContainer .productInfo input, .itemContainer .productInfoEdit textarea, .itemContainer .productInfoEdit input {
+  font-family: Arial, serif;
+  scrollbar-width: none;
+  border: none;
+  resize: none;
+}
+.itemContainer .productInfo textarea, .itemContainer .productInfoEdit textarea {
+  min-height: 80px;
+}
+.itemContainer .productInfo #errorMessage, .itemContainer .productInfoEdit #errorMessage {
+  color: red;
+  display: none;
+  margin-top: -1rem;
+  padding: 0 0 1rem 1rem;
 }
 .itemContainer .productSelection {
   display: flex;
@@ -174,10 +194,10 @@
   align-items: center;
   row-gap: 1rem;
 }
-.itemContainer .productSelection .buttons #cartButton, .itemContainer .productSelection .buttons #purchaseButton {
+.itemContainer .productSelection .buttons #purchaseButton {
   cursor: pointer;
   box-shadow: 0 0 1px 0 rgba(8, 64, 87, 0.5);
-  background-color: rgb(146, 194, 214);
+  background-color: #cde6f8;
   color: #084057;
   border: none;
   width: 50%;
@@ -262,6 +282,40 @@
 .productDescriptionContainer .sectionText {
   font-size: 20px;
   line-height: 32px;
+}
+
+.applyButtonContainer {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  column-gap: 0.5rem;
+  margin: 3rem 4rem 3rem 0;
+}
+.applyButtonContainer #saveChangesButton, .applyButtonContainer #resetChangesButton {
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 1px 0 rgba(8, 64, 87, 0.5);
+  background-color: #cde6f8;
+  color: #084057;
+  width: 50%;
+  min-width: 150px;
+  max-width: 200px;
+  padding: 10px;
+  border-radius: 1.5rem;
+  font-size: 120%;
+  transition: 0.3s;
+}
+.applyButtonContainer #saveChangesButton:hover, .applyButtonContainer #resetChangesButton:hover {
+  background-color: #084057;
+  color: #c1e3f3;
+}
+.applyButtonContainer #saveChangesButton {
+  background-color: seagreen;
+  color: #c1e3f3;
+}
+.applyButtonContainer #saveChangesButton:hover {
+  background-color: #165232;
+  color: #c1e3f3;
 }
 
 .relatedProducts {
@@ -369,30 +423,6 @@
   background-color: #084057;
   color: white;
   padding: 1rem 2rem;
-}
-
-.toTop {
-  position: fixed;
-  right: 3rem;
-  bottom: 10rem;
-  opacity: 0;
-  transition: 0.8s;
-}
-
-.toTopIcon {
-  background-color: rgb(186, 219, 234);
-  box-shadow: 0 0 2px 1px rgba(8, 64, 87, 0.3);
-  color: #084057;
-  border-radius: 2rem;
-  padding: 20px;
-  rotate: 90deg;
-  font-size: 160%;
-  transition: 0.25s;
-}
-
-.toTopIcon:hover {
-  background-color: rgb(8, 64, 87);
-  color: rgb(186, 219, 234);
 }
 
 footer {

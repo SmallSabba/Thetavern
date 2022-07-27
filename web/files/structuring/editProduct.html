@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebProject</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="product.css">
+  <link rel="stylesheet" href="sharedStyles.css">
+
+  <script src="product.js"></script>
+  <script src="sharedMethods.js"></script>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<div class="itemContainer">
+
+  <div class="productImage">
+    <img src="/wheelchairs/electric/iCHAIR_MC2.png">
+  </div>
+  <div class="productInfo">
+    <input id="productName" value="iChair MC2" autocomplete="off" style="border: none; font-weight: bold">
+
+    <input id="manufacturerName" value="Some Guy" autocomplete="off" style="border: none">
+    <textarea id="shortDescription" autocomplete="off" style="border: none; overflow: hidden; resize: none">This is a brief description of the displayed wheelchair.</textarea>
+    <input class="productPrice" value="10€ / day" style="border: none">
+  </div>
+
+</div>
+
+<div class="infoButtons">
+  <ul>
+    <li>
+      <input type="radio" id="techInf" name="infoButtons" value="true" checked="checked" autocomplete="off">
+      <label for="techInf" id="technicalInformationLabel">Technical information</label>
+
+    </li>
+    <li>
+      <input type="radio" id="prodDesc" name="infoButtons" value="false" autocomplete="off">
+      <label for="prodDesc" id="productDescriptionLabel">Product description</label>
+    </li>
+  </ul>
+</div>
+
+<div class="technicalInfoContainer">
+
+  <table>
+    <tr>
+      <th>Max weight:</th>
+      <td>some value</td>
+    </tr>
+    <tr>
+      <th>Height:</th>
+      <td>some value</td>
+    </tr>
+    <tr>
+      <th>Size:</th>
+      <td>some value</td>
+    </tr>
+    <tr>
+      <th>Another value:</th>
+      <td>some value</td>
+    </tr>
+    <tr>
+      <th>Another value:</th>
+      <td>some value</td>
+    </tr>
+    <tr>
+      <th>Another value:</th>
+      <td>some value</td>
+    </tr>
+    <tr>
+      <th>Another value:</th>
+      <td>some value</td>
+    </tr>
+  </table>
+
+</div>
+
+<div class="productDescriptionContainer">
+
+  <div class="firstRow">
+    <div class="leftContainer">
+      <h1 id="section1Heading" class="sectionHeading">Profitability </h1>
+      <p id="section1Text" class="sectionText">
+        Effektivität durch einfache Wartung und ein hohes Maß an Servicefreundlichkeit<br>
+        Geringer Reparaturbedarf durch den Einsatz hochwertiger und langlebiger Bauteile<br>
+        Modularer Aufbau der iChair-Familie ermöglicht Kompatibilität von Bauteilen<br>
+        Zahlreiche Verstellmöglichkeiten ermöglichen individuelle Anpassung<br>
+        Vereinfachter Wiedereinsatz durch optimale Benutzergrenzmaße, wie beispielsweise ein standardmäßiges
+        Benutzergewicht von 160kg
+      </p>
+    </div>
+    <div class="rightContainer">
+      <h1 id="section2Heading" class="sectionHeading">Therapeutic use</h1>
+      <p id="section2Text" class="sectionText">
+        Ideal zur Mobilitätserhaltung zu Hause, am Arbeitsplatz und im Büro<br>
+        Effektive Druckentlastung und entspannte Positionierung für das Langzeitsitzen durch große elektrische
+        Verstellbereiche<br>
+        Verschiedene Sitzsysteme entsprechend der individuellen Bedürfnissen
+      </p>
+    </div>
+  </div>
+
+  <div class="secondRow">
+    <div class="leftContainer">
+      <h1 id="section3Heading" class="sectionHeading">Range of use</h1>
+      <p id="section3Text" class="sectionText">
+        Für den Innen- und Außenbereich<br>
+        Für den dauerhaften und ganztägigen Gebrauch zur selbständigen Mobilität, auch bei stärkeren
+        Funktionsstörungen<br>
+        Berufstätige und aktive Personen, die einen Rollstuhl für verschiedene Alltagssituationen benötigen<br>
+        Geeignet für den Außenbereich durch serienmäßig große Bereifung und optional erhältliche 10km/h-
+        Variante<br>
+        Innenräume lassen sich durch die kompakten Abmessungen und die hohe Wendigkeit mit Leichtigkeit meistern
+      </p>
+    </div>
+
+    <div class="rightContainer">
+      <h1 id="section4Heading" class="sectionHeading">Options</h1>
+      <p id="section4Text" class="sectionText">
+        Rückspiegel Rechts oder Links<br>
+        Heckmarkierungsfolie nur i.V.m. ErgoSeat<br>
+        Heckmarkierungstafel<br>
+        Gepäckablage mit Metallstäben<br>
+        Gehhilfenhalter<br>
+        Wegfahrsperre, Schlüssel nur i.V.m. R-Net<br>
+        Haltegurt mit Schloss<br>
+        Therapietisch seitlich abschwenkbar<br>
+        Abduktionskeil , nur in Verbindung mit Sitzplatte CODE 4276 oder ErgoSeat CODE 948<br>
+        Stufenüberwinder<br>
+        Memory-Funktion für Kopfstütze<br>
+        starre Pelotten (Paar)<br>
+        abschwenkbare Pelotten (Paar), nicht i.V.m. Code 24<br>
+        USB-Ladebuchse<br>
+        Aufnahme für Handy-Halterung
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<div class="toTop">
+  <p><a href="#top"><i class="fa-solid fa-angle-left toTopIcon"></i></a></p>
+</div>
+
+<footer class="containerFooter">
+  <address>
+    Written by <a href="mailto:janedoe@example.com?subject=Email">Oliver Hieke, Kilian Hnidek and Max Hartl</a><br>
+    Visit us at: FH Campus Vienna<br>
+    1100 Vienna, Austria
+  </address>
+</footer>
+
+</body>
+</html>
