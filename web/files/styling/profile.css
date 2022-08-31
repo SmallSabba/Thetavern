@@ -19,17 +19,113 @@
   --fc-black: black;
 }
 
+@media screen {
+  .leftContainer {
+    margin: 1rem 0 0 2rem;
+  }
+  .leftContainer .topContainer {
+    width: 320px;
+    height: 130px;
+  }
+  .leftContainer .menuContainer {
+    max-width: 350px;
+    min-height: 433px;
+    max-height: 433px;
+  }
+
+  .content {
+    width: 100%;
+    margin-top: 11rem;
+  }
+  .content .rightContainer {
+    width: 100%;
+    min-height: 433px;
+    margin-left: 2.5rem;
+    padding: 0 5rem;
+  }
+  .content .adminContainer, .content .userContainer {
+    padding: 0 2rem;
+  }
+}
+@media screen and (max-width: 1070px) {
+  .content .rightUsersContainer .adminContainer {
+    padding: 0;
+  }
+}
+@media screen and (max-width: 1034px) {
+  .content .rightUsersContainer .userContainer {
+    padding: 0;
+  }
+}
+@media screen and (max-width: 1034px) and (max-width: 970px) {
+  .content .rightUsersContainer .userContainer {
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 848px) {
+  .content .rightProductsContainer, .content .rightContainer {
+    padding: 0 2.5rem;
+  }
+}
+@media screen and (max-width: 780px) {
+  .content .rightContainer {
+    padding: 0 2.5rem;
+  }
+}
+@media screen and (max-width: 780px) and (max-width: 760px) {
+  .leftContainer {
+    margin-top: 7rem;
+  }
+  .leftContainer .topContainer, .leftContainer .menuContainer {
+    max-width: 285px;
+  }
+
+  .content {
+    margin-top: 17rem;
+  }
+  .content .rightContainer {
+    margin-left: 1rem;
+  }
+}
+@media screen and (max-width: 780px) and (max-width: 690px) {
+  main {
+    flex-direction: column;
+  }
+
+  .leftContainer {
+    min-width: 285px;
+    margin-right: 2rem;
+  }
+  .leftContainer .topContainer {
+    max-width: 100%;
+  }
+  .leftContainer .menuContainer {
+    max-width: 100%;
+  }
+
+  .content {
+    margin-top: 1rem;
+    margin-left: 0;
+    width: 100%;
+  }
+  .content .rightContainer {
+    margin-left: 0;
+    padding: 0 5rem;
+  }
+}
+@media screen and (max-width: 780px) and (max-width: 690px) and (max-width: 450px) {
+  .content .rightContainer {
+    padding: 0 2.5rem;
+  }
+}
 html body main {
   display: flex;
-  flex-direction: column;
   row-gap: 0.5rem;
-  padding: 1rem 2rem;
 }
 html body main * {
   list-style: none;
 }
 html body main .leftContainer {
-  position: fixed;
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
@@ -37,9 +133,6 @@ html body main .leftContainer {
 html body main .leftContainer .topContainer {
   display: flex;
   align-items: center;
-  width: 320px;
-  max-width: 350px;
-  height: 130px;
   background-color: white;
   padding: 1rem;
   border-radius: 2rem;
@@ -76,10 +169,6 @@ html body main .leftContainer .menuContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-width: 320px;
-  max-width: 320px;
-  min-height: 433px;
-  max-height: 433px;
   padding: 1rem;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
 }
@@ -125,8 +214,6 @@ html body main .leftContainer .menuContainer .profileOptions li #bookMarkIcon, h
 }
 html body main .content {
   display: flex;
-  margin-top: 9.5rem;
-  margin-left: 320px;
 }
 html body main .content #deleteHeading {
   color: #d50303;
@@ -136,12 +223,6 @@ html body main .content .profileChangeHeading {
   margin-bottom: 1.7rem;
   width: 100%;
   border-bottom: 1px solid rgb(201, 201, 201);
-}
-html body main .content .rightContainer {
-  margin-left: 2rem;
-}
-html body main .content .rightDataContainer {
-  row-gap: 1rem !important;
 }
 html body main .content .rightDataContainer ul {
   display: flex;
@@ -153,7 +234,6 @@ html body main .content .rightDataContainer ul li {
 }
 html body main .content .rightDataContainer ul li :first-child:not(span, i) {
   font-size: 1.2rem;
-  width: 30%;
 }
 html body main .content .rightDataContainer ul p {
   width: 50%;
@@ -168,9 +248,6 @@ html body main .content .rightInputContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
-  min-height: 433px;
-  padding: 0 5rem;
   row-gap: 0.3rem;
 }
 html body main .content .rightInputContainer .deleteItemsContainer {
@@ -192,9 +269,9 @@ html body main .content .rightInputContainer .deleteItemsContainer button:hover 
 html body main .content .rightInputContainer .userSettingValue {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  min-width: 400px;
-  max-width: 40%;
+  padding: 1rem 0 1rem 1rem;
+  min-width: 200px;
+  width: 40%;
   row-gap: 0.8rem;
 }
 html body main .content .rightInputContainer .userSettingValue p:first-child {
@@ -204,8 +281,8 @@ html body main .content .rightInputContainer .inputFields {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
-  padding: 1rem;
-  min-width: 400px;
+  padding: 1rem 0 1rem 1rem;
+  min-width: 230px;
   max-width: 40%;
   height: fit-content;
 }
@@ -238,8 +315,7 @@ html body main .content .rightImgContainer {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-left: 5rem;
-  padding: 2rem;
+  padding-top: 2rem;
   row-gap: 2rem;
 }
 html body main .content .rightImgContainer .currentImg {
@@ -338,7 +414,6 @@ html body main .content .rightUsersContainer {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-left: 3rem;
   padding: 2rem;
   row-gap: 60px;
 }
@@ -350,7 +425,6 @@ html body main .content .rightUsersContainer img {
 html body main .content .rightUsersContainer .adminContainer, html body main .content .rightUsersContainer .userContainer {
   display: flex;
   flex-flow: row wrap;
-  padding: 0 2rem;
   column-gap: 60px;
   row-gap: 50px;
 }
@@ -385,7 +459,6 @@ html body main .content .rightUsersContainer .adminContainer ul {
 }
 html body main .content .rightUsersContainer .userContainer {
   column-gap: 75px;
-  padding: 0 2rem;
 }
 html body main .content .rightUsersContainer .userContainer ul {
   width: 220px;
@@ -397,10 +470,13 @@ html body main .content .rightProductsContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 5rem;
-  width: 100%;
-  min-height: 433px;
-  row-gap: 2rem;
+}
+html body main .content .rightProductsContainer ul {
+  padding: 1rem 0 1rem 1rem;
+}
+html body main .content .rightProductsContainer ul li p {
+  min-width: 6rem;
+  max-height: 23.7px;
 }
 html body main .content .rightProductsContainer article {
   display: flex;

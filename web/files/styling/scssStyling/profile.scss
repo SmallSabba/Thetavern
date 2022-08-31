@@ -38,8 +38,178 @@
 $mainColor: #fff;
 $secondaryColor: #0a4a65;
 $tertiaryColor: #c1e3f3;
-
 $textFontSize: 18px;
+
+
+@media screen {
+
+  .leftContainer {
+
+    margin: 1rem 0 0 2rem;
+
+    .topContainer {
+      width: 320px;
+      height: 130px;
+    }
+
+    .menuContainer {
+
+      max-width: 350px;
+      min-height: 433px;
+      max-height: 433px;
+    }
+
+  }
+
+  .content {
+
+    width: 100%;
+    margin-top: 11rem;
+
+    .rightContainer {
+
+      //border: 1px solid red;
+      width: 100%;
+      min-height: 433px;
+
+      margin-left: 2.5rem;
+      padding: 0 5rem;
+    }
+    .adminContainer, .userContainer {
+      padding: 0 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1070px) {
+
+  .content {
+    .rightUsersContainer {
+
+      .adminContainer {
+
+        padding: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1034px) {
+
+  .content {
+    .rightUsersContainer {
+
+      .userContainer {
+
+        padding: 0;
+      }
+    }
+  }
+
+  @media screen and (max-width: 970px) {
+
+    .content {
+      .rightUsersContainer {
+
+        .userContainer {
+
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 848px) {
+
+  .content {
+    .rightProductsContainer, .rightContainer {
+
+      padding: 0 2.5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 780px) {
+
+  .content {
+
+    .rightContainer {
+
+      padding: 0 2.5rem;
+    }
+  }
+
+  @media screen and (max-width: 760px) {
+
+    .leftContainer {
+
+      margin-top: 7rem;
+
+      .topContainer, .menuContainer {
+
+        max-width: 285px;
+      }
+    }
+
+    .content {
+
+      margin-top: 17rem;
+
+      .rightContainer {
+
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 690px) {
+
+
+    main {
+      flex-direction: column;
+    }
+
+    .leftContainer {
+
+      min-width: 285px;
+      margin-right: 2rem;
+
+      .topContainer {
+        max-width: 100%;
+      }
+
+      .menuContainer {
+
+        max-width: 100%;
+      }
+    }
+    .content {
+
+      margin-top: 1rem;
+      margin-left: 0;
+
+      width: 100%;
+
+      .rightContainer {
+
+        margin-left: 0;
+        padding: 0 5rem;
+      }
+    }
+
+    @media screen and (max-width: 450px) {
+
+      .content {
+
+        .rightContainer {
+
+          padding: 0 2.5rem;
+        }
+      }
+    }
+  }
+}
 
 
 html {
@@ -47,10 +217,9 @@ html {
     main {
 
       display: flex;
-      flex-direction: column;
+      //flex-direction: column;
 
       row-gap: .5rem;
-      padding: 1rem 2rem;
 
       * {
         list-style: none;
@@ -58,7 +227,6 @@ html {
 
       .leftContainer {
 
-        position: fixed;
         display: flex;
         flex-direction: column;
 
@@ -69,9 +237,6 @@ html {
           display: flex;
           align-items: center;
 
-          width: 320px;
-          max-width: 350px;
-          height: 130px;
 
           background-color: white;
           padding: 1rem;
@@ -121,10 +286,6 @@ html {
           flex-direction: column;
           justify-content: center;
 
-          min-width: 320px;
-          max-width: 320px;
-          min-height: 433px;
-          max-height: 433px;
 
           padding: 1rem;
 
@@ -191,10 +352,6 @@ html {
 
         display: flex;
 
-        margin-top: 9.5rem;
-        margin-left: 320px;
-
-
         #deleteHeading {
           color: #d50303;
         }
@@ -208,14 +365,9 @@ html {
           border-bottom: 1px solid rgb(201, 201, 201);
         }
 
-        .rightContainer {
-
-          margin-left: 2rem;
-        }
-
         .rightDataContainer {
 
-          row-gap: 1rem !important;
+
           ul {
             display: flex;
             flex-direction: column;
@@ -226,13 +378,14 @@ html {
 
               :first-child:not(span, i) {
                 font-size: 1.2rem;
-                width: 30%;
               }
             }
+
             p {
               width: 50%;
 
             }
+
             span {
               visibility: hidden;
               float: right;
@@ -246,15 +399,8 @@ html {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          //align-items: start;
 
-          width: 100%;
-          min-height: 433px;
-
-          padding: 0 5rem;
           row-gap: .3rem;
-
-          //@include shadow(inside);
 
           .deleteItemsContainer {
 
@@ -281,9 +427,9 @@ html {
 
             display: flex;
             flex-direction: column;
-            padding: 1rem;
-            min-width: 400px;
-            max-width: 40%;
+            padding: 1rem 0 1rem 1rem;
+            min-width: 200px;
+            width: 40%;
             row-gap: .8rem;
 
 
@@ -299,8 +445,8 @@ html {
             flex-direction: column;
 
             row-gap: 1rem;
-            padding: 1rem;
-            min-width: 400px;
+            padding: 1rem 0 1rem 1rem;
+            min-width: 230px;
             max-width: 40%;
             height: fit-content;
 
@@ -347,8 +493,7 @@ html {
           flex-direction: column;
 
           width: 100%;
-          margin-left: 5rem;
-          padding: 2rem;
+          padding-top: 2rem;
           row-gap: 2rem;
 
           .currentImg {
@@ -405,14 +550,14 @@ html {
                 &:after {
 
                   background-color: #F2F2F2;
-                  box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
+                  box-shadow: -2px 2px 2px 0 rgba(178, 178, 178, .4);
                   content: "\00a0";
-                  width:  15px;
+                  width: 15px;
                   height: 15px;
                   left: 20px;
                   position: absolute;
                   top: -5px;
-                  transform: rotate( 135deg );
+                  transform: rotate(135deg);
                 }
 
                 input {
@@ -476,7 +621,6 @@ html {
           flex-direction: column;
 
           width: 100%;
-          margin-left: 3rem;
           padding: 2rem;
           row-gap: 60px;
 
@@ -494,7 +638,6 @@ html {
             display: flex;
             flex-flow: row wrap;
 
-            padding: 0 2rem;
             column-gap: 60px;
             row-gap: 50px;
 
@@ -545,7 +688,6 @@ html {
           .userContainer {
 
             column-gap: 75px;
-            padding: 0 2rem;
 
             ul {
               width: 220px;
@@ -565,10 +707,17 @@ html {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          padding: 0 5rem;
-          width: 100%;
-          min-height: 433px;
-          row-gap: 2rem;
+
+          ul {
+            padding: 1rem 0 1rem 1rem;
+
+            li {
+              p {
+                min-width: 6rem;
+                max-height: 23.7px;
+              }
+            }
+          }
 
           article {
 
@@ -592,12 +741,10 @@ html {
                 font-size: 1.3rem;
 
               }
+
               :nth-child(even) {
                 margin-top: .6rem;
                 font-size: 1.1rem;
-              }
-              .deliveredParagraph {
-
               }
             }
           }
