@@ -81,7 +81,7 @@
     "name": "MWstone",
     "category": "manual",
     "manufacturer": "Some guy",
-    "price": 7,
+    "price": 8,
     "sold": 2,
     "image": "/wheelchairs/manual/MWstone.png",
     "terrain": "/wheelchairs/background/BGstone.png",
@@ -104,7 +104,7 @@
     "category": "manual",
     "manufacturer": "Some guy",
     "price": 10,
-    "sold": 35,
+    "sold": 36,
     "image": "/wheelchairs/manual/WaterWheels.png",
     "terrain": "/wheelchairs/background/BGbeach.png",
     "description": "The WaterWheels wheelchair offers the pediatric user versatility, functionality and maneuverability. These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "

@@ -32,7 +32,7 @@
     "username": "Max",
     "password": "pw3",
     "email": "max@h3.com",
-    "profilePicture": "/wheelchairs/background/BGmountain.png",
+    "profilePicture": "/uploads/noAvatar.png",
     "authorized": true,
     "orderedItems": [
       8,
@@ -61,10 +61,10 @@
     "email": "olli@h3.com",
     "profilePicture": "/wheelchairs/background/BGsnow.png",
     "authorized": true,
-    "orderedItems": [],
-    "savedItems": [
+    "orderedItems": [
       10
     ],
+    "savedItems": [],
     "shippingInfo": {
       "firstname": null,
       "lastname": null,
