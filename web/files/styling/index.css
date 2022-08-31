@@ -9,6 +9,15 @@
   }
 }
 
+@media screen and (max-width: 639px) {
+  .aboutArticles {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    row-gap: 6rem;
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -18,7 +27,6 @@
 }
 
 html body {
-  font-family: var(--ff-body);
   height: 100%;
   width: 100%;
 }
