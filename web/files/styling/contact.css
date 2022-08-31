@@ -21,19 +21,22 @@
 }
 
 .image1 {
-  width: 10vw;
-  height: 10vw;
+  min-width: 150px;
+  min-height: 150px;
+  width: 150px;
+  height: 150px;
 }
 .image1 img {
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
 }
 
 .text1 {
-  width: 20%;
-  height: 10%;
+  width: 50rem;
+  height: 5rem;
 }
 
 .employeefield {
+  min-width: 470px;
   box-shadow: inset 0 2px 5px 0 rgba(50, 50, 50, 0.3);
   margin: 0 1rem;
 }
@@ -43,10 +46,11 @@
   margin: 0 1rem;
   padding: 2rem;
   font-family: Poppins;
-  font-size: 1vw;
+  font-size: 15px;
+  min-width: 520px;
 }
 .employee .p2 {
-  margin-left: 1rem;
+  margin-left: 1vw;
 }
 .employee .p1 {
   margin-left: 1vw;
