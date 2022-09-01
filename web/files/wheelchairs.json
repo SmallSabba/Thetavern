@@ -60,7 +60,7 @@
     "category": "manual",
     "manufacturer": "Some guy",
     "price": 8,
-    "sold": 0,
+    "sold": 1,
     "image": "/wheelchairs/manual/MO_951B_60.png",
     "terrain": "/wheelchairs/background/BGgrass.png",
     "description": "The MO_951B_60 wheelchair offers the pediatric user versatility, functionality and maneuverability. These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "
@@ -104,7 +104,7 @@
     "category": "manual",
     "manufacturer": "Some guy",
     "price": 10,
-    "sold": 36,
+    "sold": 52,
     "image": "/wheelchairs/manual/WaterWheels.png",
     "terrain": "/wheelchairs/background/BGbeach.png",
     "description": "The WaterWheels wheelchair offers the pediatric user versatility, functionality and maneuverability. These chairs are specifically designed to suit the needs of smaller users and offer a variety of outstanding features. "

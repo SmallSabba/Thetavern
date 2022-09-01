@@ -16,7 +16,7 @@ function jsonReader(filePath, cb) {
     });
 }
 
-
+/*
 class Category {
 
     constructor(title, name) {
@@ -25,6 +25,7 @@ class Category {
         this.title = title;
     }
 }
+ */
 
 class Wheelchair {
 
@@ -142,7 +143,6 @@ class WheelchairModel {
     }
 
     updateWheelchair(req, res) {
-        console.log("here")
 
         let wheelchairID = parseInt(req.params.id);
         Object.assign(this.getWheelchair(wheelchairID), req.body);      /** changes all params not only differences */

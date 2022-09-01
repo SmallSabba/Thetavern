@@ -66,8 +66,6 @@ function generateAllUsersContainer() {
 
 function generateImgContainer() {
 
-    console.log(imgName);
-
     let element = document.querySelector(".rightContainer");
 
     if (!element.className.includes("rightImgContainer")) {
@@ -535,8 +533,6 @@ async function changeEmail(event) {
     const form = event.currentTarget;
     let formData = new URLSearchParams(new FormData(form));
 
-    console.log(formData);
-
     fetch('/api/user/changeEmail', {
         method: 'post',
         body: formData
@@ -664,8 +660,6 @@ function uploadPhoto() {
 
     if (file.files[0].name !== uploadedPhoto) {
 
-        console.log(file.files[0].name)
-
         uploadedPhoto = file.files[0].name;
 
         const formData = new FormData();
@@ -764,7 +758,7 @@ function createListItem(parent, heading, id, textContent) {
 
 function test() {
 
-    console.log("editIcon clicked");
+    //console.log("editIcon clicked");
 }
 
 function editIconHover(id) {

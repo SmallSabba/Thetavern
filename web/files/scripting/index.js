@@ -52,7 +52,8 @@ function findTopProduct(category, number) {
                 }
             } else topProduct = null;
 
-            let container = document.querySelector(`#article${number}`);
+            let container = document.querySelector(`.articleContainer${number} article`);
+
             container ? container.remove() : null;
 
             addWheelchairToDOM(document.querySelector(`.articleContainer${number}`), topProduct);

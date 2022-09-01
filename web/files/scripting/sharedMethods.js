@@ -294,6 +294,7 @@ function updateNavBarIcons() {
 
 function addWheelchairToDOM(parent, wheelchair) {
 
+    console.log(parent)
     if (!wheelchair) {
         return parent.style.display = "none";
     }

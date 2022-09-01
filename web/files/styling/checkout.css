@@ -1,3 +1,100 @@
+@media screen {
+  .newsletterLabelContainer, .orderButtonContainer {
+    justify-content: space-between;
+  }
+
+  .orderButtonContainer div:first-child {
+    text-align: left;
+  }
+  .orderButtonContainer div {
+    text-align: center;
+    max-width: 40%;
+  }
+
+  .itemContainer {
+    column-gap: 3rem;
+    padding: 0 4rem;
+  }
+  .itemContainer .wheelchairInfo {
+    width: 40%;
+  }
+  .itemContainer .wheelchairInfo h2 {
+    font-size: 2rem;
+  }
+  .itemContainer .wheelchairInfo p {
+    font-size: 1.6rem;
+  }
+  .itemContainer .rightContainer {
+    width: 60%;
+  }
+  .itemContainer .rightContainer .firstForm, .itemContainer .rightContainer .secondForm {
+    max-width: 900px;
+  }
+}
+@media screen and (max-width: 1130px) {
+  .itemContainer {
+    column-gap: 1rem;
+  }
+  .itemContainer .wheelchairInfo h2 {
+    font-size: 1.8rem;
+  }
+  .itemContainer .wheelchairInfo p {
+    font-size: 1.4rem;
+  }
+}
+@media screen and (max-width: 1080px) {
+  .itemContainer {
+    padding: 0 2rem;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .itemContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .itemContainer .wheelchairInfo {
+    width: 100%;
+  }
+  .itemContainer .wheelchairInfo h2 {
+    font-size: 2rem;
+  }
+  .itemContainer .wheelchairInfo p {
+    font-size: 1.6rem;
+  }
+  .itemContainer .rightContainer {
+    align-items: center;
+    width: 100%;
+    row-gap: 3rem;
+  }
+  .itemContainer .rightContainer .firstForm, .itemContainer .rightContainer .secondForm {
+    margin: 0;
+    max-width: 640px;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 574px) {
+  .newsletterLabelContainer {
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 514px) {
+  .orderButtonContainer {
+    justify-content: center;
+  }
+  .orderButtonContainer div:first-child {
+    text-align: center;
+  }
+  .orderButtonContainer div {
+    max-width: 100%;
+  }
+
+  .itemContainer .wheelchairInfo h2 {
+    font-size: 1.8rem;
+  }
+  .itemContainer .wheelchairInfo p {
+    font-size: 1.4rem;
+  }
+}
 body {
   display: flex;
   justify-content: center;
@@ -7,15 +104,14 @@ body {
   display: flex;
   width: 100%;
   margin-top: 6rem;
-  padding: 0 3rem;
-  column-gap: 3rem;
+  row-gap: 2rem;
 }
 
 .wheelchairInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 40%;
+  height: fit-content;
   max-width: 640px;
   max-height: 680px;
   row-gap: 2rem;
@@ -32,24 +128,18 @@ body {
 .wheelchairInfo h2, .wheelchairInfo p {
   align-self: start;
   margin-left: 2rem;
-  font-size: 2rem;
-}
-.wheelchairInfo p {
-  font-size: 1.6rem;
 }
 
 .rightContainer {
   display: flex;
   flex-direction: column;
-  width: 60%;
-  padding: 1rem;
+  padding: 1rem 0;
 }
 .rightContainer .firstForm, .rightContainer .secondForm {
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(7, 59, 77, 0.4);
   border-radius: 1rem;
-  max-width: 900px;
   row-gap: 1.5rem;
   margin: 2rem 0 2rem 2rem;
 }
@@ -83,10 +173,10 @@ body {
 .rightContainer button {
   cursor: pointer;
   border: none;
+  white-space: nowrap;
   font-size: 1.2rem;
   padding: 0.8rem 1.2rem;
   border-radius: 1.5rem;
-  width: 220px;
   background-color: #0d506c;
   color: #d2e4ee;
   transition-duration: 0.2s;
@@ -103,7 +193,6 @@ body {
 .rightContainer .shippingContainer, .rightContainer .paymentContainer {
   display: flex;
   flex-direction: column;
-  min-width: 450px;
   padding: 0 2rem 1.5rem 2rem;
   row-gap: 2rem;
 }
@@ -117,6 +206,7 @@ body {
   display: flex;
   flex-direction: column;
   row-gap: 1.5rem;
+  margin-bottom: -1rem;
 }
 .rightContainer .shippingContainer ul li, .rightContainer .paymentContainer ul li {
   display: flex;
@@ -141,6 +231,11 @@ body {
 .rightContainer .newsletterLabelContainer {
   display: flex;
   align-items: center;
+  flex-flow: row wrap;
+  column-gap: 1.5rem;
+  row-gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #084057;
 }
 .rightContainer .newsletterLabelContainer label {
   width: 100%;
@@ -149,23 +244,30 @@ body {
 .rightContainer .newsletterLabelContainer div:first-child {
   text-align: left;
   column-gap: 0;
-  width: 60%;
+  min-width: 201px;
 }
 .rightContainer .newsletterLabelContainer div {
   text-align: center;
   width: 40%;
+  min-width: 220px;
+}
+.rightContainer .newsletterLabelContainer div button {
+  min-width: 220px;
+  max-width: 220px;
 }
 .rightContainer .paymentContainer .paymentMethods {
-  flex-direction: row;
-  width: fit-content;
+  flex-flow: row wrap;
   column-gap: 1rem;
+  row-gap: 1rem;
+  width: 100%;
 }
 .rightContainer .paymentContainer .paymentMethods li {
-  width: 180px;
+  min-width: 120px;
+  max-width: 180px;
+  width: 100%;
 }
 .rightContainer .paymentContainer .paymentMethods li div {
   display: flex;
-  justify-content: left;
   align-items: center;
 }
 .rightContainer .paymentContainer .paymentMethods li div label {
@@ -178,27 +280,30 @@ body {
   display: none;
 }
 .rightContainer .paymentContainer #payPalContainer p, .rightContainer .paymentContainer #cashContainer p {
-  margin-top: 1rem;
   font-size: 1.2rem;
 }
 .rightContainer .paymentContainer .orderButtonContainer {
   display: flex;
   align-items: center;
-  column-gap: 1rem;
-  margin-top: 1rem;
+  column-gap: 1.5rem;
+  row-gap: 1.5rem;
+  padding-top: 1.5rem;
+  flex-flow: row wrap;
+  border-top: 1px solid #084057;
 }
 .rightContainer .paymentContainer .orderButtonContainer div:first-child {
-  width: 60%;
+  min-width: 201px;
 }
 .rightContainer .paymentContainer .orderButtonContainer div:first-child p {
   color: #073b4d;
+  width: 100%;
 }
-.rightContainer .paymentContainer .orderButtonContainer div:not(:first-child) {
-  width: 40%;
-  text-align: center;
+.rightContainer .paymentContainer .orderButtonContainer div {
+  min-width: 160px;
 }
-.rightContainer .paymentContainer .orderButtonContainer div:not(:first-child) button {
-  width: 160px;
+.rightContainer .paymentContainer .orderButtonContainer div button {
+  min-width: 160px;
+  max-width: 200px;
 }
 
 /*# sourceMappingURL=checkout.css.map */

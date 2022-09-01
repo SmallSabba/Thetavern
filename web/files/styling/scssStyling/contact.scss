@@ -16,7 +16,6 @@ $media: (
   }
 }
 
-
 @mixin paddingContent {
   padding: 1rem 2rem;
 }
@@ -34,9 +33,35 @@ $media: (
 $mainColor: #fff;
 $secondaryColor: #0a4a65;
 $tertiaryColor: #c1e3f3;
-
 $textFontSize: 18px;
 
+@media screen {
+
+  .employee {
+
+    .text1 {
+      margin-top: 1rem;
+      margin-left: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+
+  .employee {
+    flex-flow: row wrap;
+    min-width: 360px;
+
+    .text1 {
+      margin-top: 1rem;
+      margin-left: 0;
+    }
+
+  }
+  .employeefield {
+    min-height: 360px;
+  }
+}
 
 #firstSection {
 
@@ -64,8 +89,10 @@ $textFontSize: 18px;
 }
 
 .image1 {
-  width: 10vw;
-  height: 10vw;
+  min-width: 150px;
+  min-height: 150px;
+  width: 150px;
+  height: 150px;
 
   img {
     @include shadow(outside);
@@ -73,8 +100,8 @@ $textFontSize: 18px;
 }
 
 .text1 {
-  width: 20%;
-  height: 10%;
+  width: 50rem;
+  height: 5rem;
 }
 
 .employeefield {
@@ -88,10 +115,11 @@ $textFontSize: 18px;
   margin: 0 1rem;
   padding: 2rem;
   font-family: Poppins;
-  font-size: 1vw;
+  font-size: 15px;
+  min-width: 360px;
 
   .p2 {
-    margin-left: 1rem;
+    margin-left: 1vw;
   }
 
   .p1 {
@@ -109,6 +137,7 @@ footer {
   @include shadow(inside);
   background-color: $secondaryColor;
 
+  margin-top: 1rem;
   padding: 1rem 2rem;
   min-height: 120px;
   max-height: 120px;
@@ -119,7 +148,6 @@ footer {
     text-decoration: none;
     line-height: 1.6rem;
   }
-
 }
 
 

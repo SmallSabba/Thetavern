@@ -9,15 +9,6 @@
   }
 }
 
-@media screen and (max-width: 639px) {
-  .aboutArticles {
-    display: flex;
-    flex-flow: column wrap;
-    align-items: center;
-    row-gap: 6rem;
-  }
-}
-
 *,
 *::before,
 *::after {
@@ -27,6 +18,7 @@
 }
 
 html body {
+  font-family: var(--ff-body);
   height: 100%;
   width: 100%;
 }
@@ -99,6 +91,7 @@ html main .about {
   background-color: #c1e3f3;
 }
 html main .about .aboutArticles article {
+  color: white;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -107,28 +100,136 @@ html main .about .aboutArticles article {
   min-height: 300px;
   max-width: 250px;
   max-height: 300px;
-  background-color: #eee;
   border-radius: 1.75rem;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
-  text-shadow: 0 0 5px #FFFFFF;
+  text-shadow: 0 0 10px #000;
+  transition-duration: 0.8s;
+}
+html main .about .aboutArticles article:hover {
+  transform: scale(1.11);
+}
+html main .about .aboutArticles article:hover ul li:first-child {
+  animation-name: quoteMoveUp;
+}
+html main .about .aboutArticles article:hover ul .messageAbout {
+  display: block;
+  animation-name: messageAppear;
+}
+html main .about .aboutArticles article:not(:hover) ul li:first-child {
+  animation-name: quoteMoveDown;
 }
 html main .about .aboutArticles article ul {
+  border-radius: 1.75rem;
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  background-size: cover;
   height: 100%;
-  padding: 1rem 0;
-  margin: 1rem 0;
   text-align: center;
   list-style: none;
 }
+html main .about .aboutArticles article ul li:first-child {
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 15rem;
+}
 html main .about .aboutArticles article ul .author {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   font-size: 15px;
 }
 html main .about .aboutArticles article ul .messageAbout {
-  margin-top: 2rem;
+  border-radius: 2rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  margin-top: 11.9rem;
+  padding: 0.5rem 2rem;
+}
+html main .about .aboutArticles article ul .messageAbout {
+  animation-duration: 1.4s;
+  animation-fill-mode: both;
+  display: none;
+}
+
+@keyframes messageAppear {
+  0% {
+    opacity: 0;
+  }
+  55% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes quoteMoveUp {
+  from {
+    margin-top: 15rem;
+  }
+  to {
+    margin-top: 0.5rem;
+  }
+}
+@keyframes quoteMoveDown {
+  from {
+    margin-top: 0.5rem;
+    transform: rotate3d(1, 1, 1, 0);
+  }
+  to {
+    margin-top: 15rem;
+    transform: rotate3d(1, 1, 1, 360deg);
+  }
+}
+.glow-on-hover {
+  border: none;
+  outline: none;
+}
+
+.glow-on-hover:before {
+  z-index: -1;
+  content: "";
+  background: linear-gradient(45deg, #0a4a65, #c1e3f3, #ffffff, #084057, mediumseagreen, #084057, #ffffff);
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+  border-radius: 2rem;
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  left: 0;
+  top: 0;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
 
 /*# sourceMappingURL=index.css.map */

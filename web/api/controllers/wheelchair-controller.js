@@ -12,17 +12,12 @@ class WheelchairController {
     }
 
     getAllWheelchairs(req, res) {
-        // here is async not necessary
-        // because it is a non-promise type
+
         res.send(model.getAllWheelchairs());
-        // no object thus no multithreading
     }
 
     getCategoryWheelchairs(req, res) {
-        // here is async not necessary
-        // because it is a non-promise type
         res.send(model.getWheelchairs(req.params.category));
-        // no object thus no multithreading
     }
 
     getWheelchair = async (req, res) => {
@@ -43,7 +38,6 @@ class WheelchairController {
 
         const containedNames = mandatoryNames.filter(c => c in wheelchair);
         if (containedNames.length < mandatoryNames.length) {
-            console.log("error")
             const necessary = mandatoryNames.join(", ");
             const contained = containedNames.length === 0 ? "none of those" : "only " + containedNames.join(", ");
             res.status(400).send(`Wheelchair data must include ${necessary}, but ${contained} present.`);
@@ -97,5 +91,4 @@ class WheelchairController {
     }
 }
 
-module
-    .exports = new WheelchairController();
+module.exports = new WheelchairController();

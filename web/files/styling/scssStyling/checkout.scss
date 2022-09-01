@@ -1,3 +1,151 @@
+@media screen {
+
+  .newsletterLabelContainer, .orderButtonContainer {
+
+    justify-content: space-between;
+
+  }
+
+  .orderButtonContainer {
+
+    div:first-child {
+
+      text-align: left;
+    }
+
+    div {
+     text-align: center;
+      max-width: 40%;
+    }
+  }
+
+  .itemContainer {
+
+    column-gap: 3rem;
+    padding: 0 4rem;
+
+    .wheelchairInfo {
+
+      width: 40%;
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1.6rem;
+      }
+    }
+
+    .rightContainer {
+      width: 60%;
+
+      .firstForm, .secondForm {
+
+        max-width: 900px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1130px) {
+
+  .itemContainer {
+
+    column-gap: 1rem;
+
+    .wheelchairInfo {
+
+      h2 {
+        font-size: 1.8rem;
+      }
+      p {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1080px) {
+
+  .itemContainer {
+
+    padding: 0 2rem;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+
+  .itemContainer {
+
+    flex-direction: column;
+    align-items: center;
+
+    .wheelchairInfo {
+      width: 100%;
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1.6rem;
+      }
+    }
+
+    .rightContainer {
+      align-items: center;
+      width: 100%;
+      row-gap: 3rem;
+
+      .firstForm, .secondForm {
+
+        margin: 0;
+        max-width: 640px;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 574px) {
+
+  .newsletterLabelContainer {
+
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 514px) {
+
+  .orderButtonContainer {
+
+    justify-content: center;
+
+    div:first-child {
+
+      text-align: center;
+    }
+
+    div {
+      max-width: 100%;
+    }
+  }
+
+  .itemContainer {
+
+    .wheelchairInfo {
+
+      h2 {
+        font-size: 1.8rem;
+      }
+      p {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -6,12 +154,9 @@ body {
 .itemContainer {
 
   display: flex;
-
   width: 100%;
   margin-top: 6rem;
-  padding: 0 3rem;
-  column-gap: 3rem;
-
+  row-gap: 2rem;
 }
 
 .wheelchairInfo {
@@ -20,7 +165,7 @@ body {
   flex-direction: column;
   align-items: center;
 
-  width: 40%;
+  height: fit-content;
   max-width: 640px;
   max-height: 680px;
   row-gap: 2rem;
@@ -40,11 +185,6 @@ body {
   h2, p {
     align-self: start;
     margin-left: 2rem;
-    font-size: 2rem;
-  }
-
-  p {
-    font-size: 1.6rem;
   }
 }
 
@@ -52,8 +192,7 @@ body {
 
   display: flex;
   flex-direction: column;
-  width: 60%;
-  padding: 1rem;
+  padding: 1rem 0;
 
   .firstForm, .secondForm {
 
@@ -62,7 +201,6 @@ body {
 
     border: 1px solid rgba(7, 59, 77, 0.4);
     border-radius: 1rem;
-    max-width: 900px;
 
     row-gap: 1.5rem;
     margin: 2rem 0 2rem 2rem;
@@ -80,13 +218,13 @@ body {
 
     h1 {
       border-radius: 1rem;
-      background-color: rgba(220, 230, 234, 0.5);  //#073b4d
+      background-color: rgba(220, 230, 234, 0.5); //#073b4d
 
       padding: 1rem;
 
       &::after {
         font-family: FontAwesome, serif;
-        content: attr(data-after);       //"\f00c";
+        content: attr(data-after); //"\f00c";
         float: right;
       }
 
@@ -106,10 +244,11 @@ body {
   button {
     cursor: pointer;
     border: none;
+    white-space: nowrap;
+
     font-size: 1.2rem;
     padding: .8rem 1.2rem;
     border-radius: 1.5rem;
-    width: 220px;
 
     background-color: #0d506c;
     color: #d2e4ee;
@@ -133,7 +272,6 @@ body {
     display: flex;
     flex-direction: column;
 
-    min-width: 450px;
     padding: 0 2rem 1.5rem 2rem;
     row-gap: 2rem;
 
@@ -152,6 +290,7 @@ body {
       display: flex;
       flex-direction: column;
       row-gap: 1.5rem;
+      margin-bottom: -1rem;
 
       li {
 
@@ -183,6 +322,12 @@ body {
 
     display: flex;
     align-items: center;
+    flex-flow: row wrap;
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
+    padding-top: 1.5rem;
+
+    border-top: 1px solid #084057;
 
     label {
       width: 100%;
@@ -192,30 +337,39 @@ body {
     div:first-child {
       text-align: left;
       column-gap: 0;
-      width: 60%;
+      min-width: 201px;
     }
 
     div {
 
       text-align: center;
       width: 40%;
+      min-width: 220px;
 
+      button {
+
+        min-width: 220px;
+        max-width: 220px;
+      }
     }
   }
 
   .paymentContainer {
     .paymentMethods {
 
-      flex-direction: row;
-      width: fit-content;
+      flex-flow: row wrap;
       column-gap: 1rem;
+      row-gap: 1rem;
+      width: 100%;
 
       li {
-        width: 180px;
+
+        min-width: 120px;
+        max-width: 180px;
+        width: 100%;
 
         div {
           display: flex;
-          justify-content: left;
           align-items: center;
 
           label {
@@ -233,7 +387,6 @@ body {
       display: none;
 
       p {
-        margin-top: 1rem;
         font-size: 1.2rem;
       }
     }
@@ -241,24 +394,29 @@ body {
     .orderButtonContainer {
       display: flex;
       align-items: center;
-      column-gap: 1rem;
-      margin-top: 1rem;
+      column-gap: 1.5rem;
+      row-gap: 1.5rem;
+      padding-top: 1.5rem;
+      flex-flow: row wrap;
+
+      border-top: 1px solid #084057;
 
       div:first-child {
-        width: 60%;
+        min-width: 201px;
 
         p {
           color: #073b4d;
+          width: 100%;
         }
       }
 
-      div:not(:first-child) {
-        width: 40%;
-        text-align: center;
+      div {
+        min-width: 160px;
 
         button {
 
-          width: 160px;
+          min-width: 160px;
+          max-width: 200px;
         }
       }
     }

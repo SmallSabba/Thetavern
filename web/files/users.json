@@ -62,9 +62,13 @@
     "profilePicture": "/wheelchairs/background/BGsnow.png",
     "authorized": true,
     "orderedItems": [
-      10
+      10,
+      6
     ],
-    "savedItems": [],
+    "savedItems": [
+      4,
+      8
+    ],
     "shippingInfo": {
       "firstname": null,
       "lastname": null,

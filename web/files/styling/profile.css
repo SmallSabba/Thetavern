@@ -470,6 +470,7 @@ html body main .content .rightProductsContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  row-gap: 1.5rem;
 }
 html body main .content .rightProductsContainer ul {
   padding: 1rem 0 1rem 1rem;
