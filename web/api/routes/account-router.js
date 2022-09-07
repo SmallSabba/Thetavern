@@ -11,7 +11,6 @@ router.get('/user/get', controller.getUser);
 router.get('/user/getAll', controller.getAllUsers);
 router.delete('/user/delete', controller.deleteUser);
 
-//router.post('/user/checkDuplicateUsername', controller.checkDuplicateUsername);
 router.post('/user/changeUsername', controller.changeUsername);
 
 router.post('/user/changePassword', controller.changePassword);

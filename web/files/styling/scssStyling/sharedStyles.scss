@@ -531,7 +531,8 @@ svg {
 
   border-radius: 2rem;
   padding: 20px;
-  rotate: 90deg;
+  //rotate: 90deg;
+  transform: rotate(90deg);
   font-size: 160%;
 
   transition: .25s;

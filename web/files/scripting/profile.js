@@ -527,14 +527,14 @@ async function changeUsername(event) {
     }
 }
 
-async function changeEmail(event) {
+function changeEmail(event) {
 
     event.preventDefault();
     const form = event.currentTarget;
     let formData = new URLSearchParams(new FormData(form));
 
     fetch('/api/user/changeEmail', {
-        method: 'post',
+        method: "post",
         body: formData
     }).then(res => res.json())
         .then(data => {

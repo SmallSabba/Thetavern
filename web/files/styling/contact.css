@@ -47,6 +47,7 @@
   height: 150px;
 }
 .image1 img {
+  width: 100%;
   box-shadow: 0 2px 5px 0 rgba(50, 50, 50, 0.3);
 }
 

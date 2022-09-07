@@ -16,17 +16,6 @@ function jsonReader(filePath, cb) {
     });
 }
 
-/*
-class Category {
-
-    constructor(title, name) {
-
-        this.name = name;
-        this.title = title;
-    }
-}
- */
-
 class Wheelchair {
 
     constructor(id, name, category, manufacturer, price, sold, image, terrain, description) {
