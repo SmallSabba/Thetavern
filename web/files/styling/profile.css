@@ -32,7 +32,6 @@
     min-height: 433px;
     max-height: 433px;
   }
-
   .content {
     width: 100%;
     margin-top: 11rem;
@@ -79,7 +78,6 @@
   .leftContainer .topContainer, .leftContainer .menuContainer {
     max-width: 285px;
   }
-
   .content {
     margin-top: 17rem;
   }
@@ -91,7 +89,6 @@
   main {
     flex-direction: column;
   }
-
   .leftContainer {
     min-width: 285px;
     margin-right: 2rem;
@@ -102,7 +99,6 @@
   .leftContainer .menuContainer {
     max-width: 100%;
   }
-
   .content {
     margin-top: 1rem;
     margin-left: 0;
